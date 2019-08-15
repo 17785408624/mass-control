@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.AcidAndProductMapper">
+
+ <select id="selectAcidAndProductByAProductEntity" resultType="com.example.entity.AcidAndProductEntity">
+        select * from acid_and_product 
+        where 
+        acid_p2o5 = #{acidAndProductEntity.acid_p2o5} 
+        and 
+        acid_contain_solid=#{acidAndProductEntity.acid_contain_solid}
+        and 
+        acid_sulfate_radical=#{acidAndProductEntity.acid_sulfate_radical}  
+    </select>
+    
+
+    
+    <select id="selectAcidAndProductByAProductRange" resultType="com.example.entity.AcidAndProductEntity">
+        select * from acid_and_product 
+        where 
+        (acid_p2o5 <![CDATA[ >= ]]>  #{minAcid_p2o5} and acid_p2o5 <![CDATA[ <= ]]>  #{maxAcid_p2o5})
+        and 
+        (acid_contain_solid <![CDATA[ >= ]]>  #{minAcid_contain_solid} and acid_contain_solid <![CDATA[ <= ]]>  #{maxAcid_contain_solid})
+        and 
+        (acid_sulfate_radical <![CDATA[ >= ]]>  #{minAcid_sulfate_radical} and acid_sulfate_radical <![CDATA[ <= ]]>  #{maxAcid_sulfate_radical})
+    </select>
+    <select id="selectMaxAcid_p2o5" resultType="java.lang.Double">
+        select Max(acid_p2o5) from acid_and_product 
+       
+    </select>
+    <select id="selectMinAcid_p2o5" resultType="java.lang.Double">
+        select Min(acid_p2o5) from acid_and_product 
+     </select>
+      <select id="selectMaxAcid_contain_solid" resultType="java.lang.Double">
+        select Max(acid_contain_solid) from acid_and_product 
+     </select>
+     <select id="selectMinAcid_contain_solid" resultType="java.lang.Double">
+        select Min(acid_contain_solid) from acid_and_product 
+     </select>
+     
+     <select id="selectMinAcid_sulfate_radical" resultType="java.lang.Double">
+        select Min(acid_sulfate_radical) from acid_and_product 
+     </select>
+     
+     <select id="selectMaxAcid_sulfate_radical" resultType="java.lang.Double">
+        select Max(acid_sulfate_radical) from acid_and_product 
+     </select>
+     
+     <select id="selectAcidAndProductByAcid_p2o5"  resultType="com.example.entity.AcidAndProductEntity">
+        select * from acid_and_product where acid_p2o5 = #{acid_p2o5}
+     </select>
+     <select id="selectAcidAndProduct1"  resultType="com.example.entity.AcidAndProductEntity">
+        select * from acid_and_product limit 0,1 
+     </select>
+
+   
+</mapper>

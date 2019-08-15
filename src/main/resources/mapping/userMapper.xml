@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserMapper">
+
+    <!--  <resultMap id="BaseResultMap" type="com.example.entity.User">
+         <result column="id" jdbcType="INTEGER" property="id" />
+         <result column="userName" jdbcType="VARCHAR" property="userName" />
+         <result column="passWord" jdbcType="VARCHAR" property="passWord" />
+         <result column="realName" jdbcType="VARCHAR" property="realName" />
+     </resultMap>
+
+     <select id="Sel" resultType="com.example.entity.User">
+         select * from login_user where id = #{id}
+     </select> -->
+    <!--
+        <insert id="insert" parameterType="com.example.entity.User">
+            insert into login_user (userId, userName, phone,
+            sex)
+            values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+            #{sex,jdbcType=VARCHAR})
+        </insert>
+
+        <insert id="insertSelective" parameterType="com.example.entity.User">
+            insert into login_user
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="userid != null">
+                    userId,
+                </if>
+                <if test="username != null">
+                    userName,
+                </if>
+                <if test="phone != null">
+                    phone,
+                </if>
+                <if test="sex != null">
+                    sex,
+                </if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="userid != null">
+                    #{userid,jdbcType=INTEGER},
+                </if>
+                <if test="username != null">
+                    #{username,jdbcType=VARCHAR},
+                </if>
+                <if test="phone != null">
+                    #{phone,jdbcType=VARCHAR},
+                </if>
+                <if test="sex != null">
+                    #{sex,jdbcType=VARCHAR},
+                </if>
+            </trim>
+        </insert>
+     -->
+    <sql id="user_sql_param">
+      user_id,
+      user_mobile_phone,
+      user_register_time,
+      user_password,
+      user_role,
+      info_id,
+      user_state
+    </sql>
+    <!-- 插入用户数据 -->
+    <!-- Integer addnew(User user) -->
+    <insert id="insertUserEntity" parameterType="UserEntity" keyProperty="user_id" keyColumn="user_id"
+            useGeneratedKeys="true">
+        INSERT INTO user (
+       user_mobile_phone,
+      user_register_time,
+      user_password,
+      user_role
+
+        ) VALUES (
+
+        #{user_mobile_phone},
+        #{user_register_time},
+        #{user_password},
+        #{user_role}
+
+        )
+    </insert>
+    <select id="selectUserEntityByMobilePhone" resultType="UserEntity">
+        SELECT
+        <include refid="user_sql_param"></include>
+
+        from
+        user
+        where
+        user_mobile_phone=#{user_mobile_phone}
+    </select>
+
+    <insert id="insertOrganizationInfoEntity" parameterType="OrganizationInfoEntity" keyProperty="organization_info_id"
+            keyColumn="organization_info_id" useGeneratedKeys="true">
+    insert into organization_info (
+    organization_name,
+    organization_code,
+    organization_area,
+    organization_site,
+    organization_postcode,
+    organization_telephone,
+    organization_mail,
+    organization_principal_name,
+    organization_principal_mobilephone,
+    organization_performance_content,
+    organization_license_imagepath,
+    organization_adjunct_name,
+    organization_adjunct_path,
+    organization_adjunct_type
+
+    )values (
+    #{organization_name},
+    #{organization_code},
+    #{organization_area},
+    #{organization_site},
+    #{organization_postcode},
+    #{organization_telephone},
+    #{organization_mail},
+    #{organization_principal_name},
+    #{organization_principal_mobilephone},
+    #{organization_performance_content},
+    #{organization_license_imagepath},
+    #{organization_adjunct_name},
+    #{organization_adjunct_path},
+    #{organization_adjunct_type}
+    )
+
+    </insert>
+    <insert id="insertBatchOrganizationInfoCareermanEntity" parameterType="java.util.List" useGeneratedKeys="false">
+        insert into organization_info_careerman
+        (
+        organization_info_id,
+        organization_careerman_name,
+        organization_profession,
+        organization_performance
+        )
+        values
+        (
+        <foreach collection="list" item="oice" separator=",">
+            #{organization_info_id},
+            #{organization_careerman_name},
+            #{organization_profession},
+            #{organization_performance},
+        </foreach>
+        )
+
+    </insert>
+    <insert id="insertUserInfoAuditEntity" parameterType="UserInfoAuditEntity" keyProperty="user_info_audit_id" useGeneratedKeys="true">
+    insert into user_info_audit
+    (
+    user_info_audit_state,
+    user_info_audit_describe,
+    user_info_audit_addtime,
+    user_info_audit_updatetime,
+    user_info_audit_type,
+    user_info_audit_content,
+    info_id,
+    user_id_add,
+    user_id_edit
+    )
+    values
+    (
+    #{user_info_audit_state},
+    #{user_info_audit_describe},
+    #{user_info_audit_addtime},
+    #{user_info_audit_updatetime},
+    #{user_info_audit_type},
+    #{user_info_audit_content},
+    #{info_id},
+    #{user_id_add},
+    #{user_id_edit}
+    )
+
+    </insert>
+    <select id="selectUserEntityByMobilePhone_Password" resultType="UserEntity">
+     select
+     <include refid="user_sql_param"></include>
+     FROM user
+     where user_mobile_phone=#{user_mobile_phone} AND user_password=#{user_password}
+
+    </select>
+
+
+</mapper>

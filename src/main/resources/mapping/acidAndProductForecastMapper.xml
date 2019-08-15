@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.AcidAndProductForecastMapper">
+<insert id="insertAcidAndProductForecast" parameterType="acidAndProductForecastEntity" useGeneratedKeys="true" keyProperty="acid_andProduct_forecast_id">
+  INSERT INTO acid_and_product_forecast 
+  (forecast_time,
+  forecast_type,
+  forecast_acid_p2o5,
+  forecast_acid_contain_solid,
+  forecast_acid_sulfate_radical,
+  forecast_product_total_nitrogen,
+  forecast_product_available_phosphate,
+  forecast_product_total_nutrient
+  )VALUES
+  (
+  #{acidAndProductForecastEntity.forecast_time},
+  #{acidAndProductForecastEntity.forecast_type},
+  #{acidAndProductForecastEntity.forecast_acid_p2o5},
+  #{acidAndProductForecastEntity.forecast_acid_contain_solid},
+  #{acidAndProductForecastEntity.forecast_acid_sulfate_radical},
+  #{acidAndProductForecastEntity.forecast_product_total_nitrogen},
+  #{acidAndProductForecastEntity.forecast_product_available_phosphate},
+  #{acidAndProductForecastEntity.forecast_product_total_nutrient}
+  )
+
+</insert>
+<!-- 查询的属性sql模板 -->
+<sql id="selectParame">
+  acid_and_product_forecast_id,
+  forecast_time,
+  forecast_type,
+  forecast_acid_p2o5,
+  forecast_acid_contain_solid,
+  forecast_acid_sulfate_radical,
+  forecast_product_total_nitrogen,
+  forecast_product_available_phosphate,
+  forecast_product_total_nutrient
+</sql>
+<select id="selectAcidAndProductForecast" resultType="acidAndProductForecastEntity">
+select  <include refid="selectParame"></include> from acid_and_product_forecast
+where 1=1 
+<if test="forecasType!=null and forecasType!=0">
+and forecast_type=#{forecasType}
+</if>
+<if test="forecastTimeStart!=null and forecastTimeStart!=0">
+and forecast_time<![CDATA[ >= ]]>#{forecastTimeStart}
+</if>
+<if test="forecastTimeEnd!=null and forecastTimeEnd!=0">
+and forecast_time<![CDATA[ <= ]]>#{forecastTimeEnd}
+</if>
+
+</select>
+
+</mapper>
