@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 打印SQL语句到控制台 -->
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+	<typeAliases>
+		<!-- 浓酸与产品关系记录  -->
+		<typeAlias type="com.example.entity.AcidAndProductEntity" alias="acidAndProductEntity"/>
+		<!-- 浓酸与产品预测记录  -->
+		<typeAlias type="com.example.entity.AcidAndProductForecastEntity" alias="acidAndProductForecastEntity"/>
+		<!--用户类-->
+		<typeAlias type="com.example.entity.user.UserEntity" alias="UserEntity"/>
+		<!--第三方机构信息类-->
+		<typeAlias type="com.example.entity.user.OrganizationInfoEntity" alias="OrganizationInfoEntity"/>
+		<!--第三方机构专业人员类-->
+		<typeAlias type="com.example.entity.user.OrganizationInfoCareermanEntity" alias="organizationInfoCareermanEntity"/>
+		<!--第三方机构专业人员类-->
+		<typeAlias type="com.example.entity.user.UserInfoAuditEntity" alias="UserInfoAuditEntity"/>
+	</typeAliases>
+	<mappers>
+	 <mapper resource="mapping/acidAndProductForecastMapper.xml"/>
+	 <mapper resource="mapping/acidAndProductMapper.xml"/> 
+	 <mapper resource="mapping/UserMapper.xml"/>
+	 <mapper resource="mapping/testMapper.xml"/>
+	</mappers>
+
+</configuration>
