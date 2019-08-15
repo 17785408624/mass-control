@@ -65,7 +65,7 @@ public class LoadUtils {
         FileInfoeEntity fileInfoeEntity=new FileInfoeEntity();
         fileInfoeEntity.setFile_name(originalFilename);//文件名
         fileInfoeEntity.setFile_info_path(fullPath);//文件路径
-        fileInfoeEntity.setFile_url(uploadFileType.getAccessUlr()+"/"+getMarkDirPath()+"/"+fileName);//文件访问路径
+        fileInfoeEntity.setFile_url(uploadFileType.getAccessUlr()+getMarkDirPath()+fileName);//文件访问路径
         fileInfoeEntity.setFile_type(fileTypeJudge(suffix));//文件类型
 
         return fileInfoeEntity;//返回文件夹名以及文件名

@@ -1,5 +1,6 @@
 server:
   port: 80
+
    #context-path: /mass
 spring:
   datasource:
@@ -11,6 +12,10 @@ spring:
     #static-path-pattern: /**
   #resources:
     #static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/itstyle/
+  servlet:
+    multipart:
+      max-file-size: 100Mb
+      maxRequestSize: 100Mb
 
 mybatis:
   config-location: classpath:/mybatis-config.xml

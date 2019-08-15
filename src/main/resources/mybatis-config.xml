@@ -24,7 +24,7 @@
 	<mappers>
 	 <mapper resource="mapping/acidAndProductForecastMapper.xml"/>
 	 <mapper resource="mapping/acidAndProductMapper.xml"/> 
-	 <mapper resource="mapping/UserMapper.xml"/>
+	 <mapper resource="mapping/userMapper.xml"/>
 	 <mapper resource="mapping/testMapper.xml"/>
 	 <mapper resource="mapping/fileMapper.xml"/>
 	</mappers>

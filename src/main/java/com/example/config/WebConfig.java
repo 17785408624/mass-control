@@ -14,10 +14,9 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // 自定义拦截器，添加拦截路径和排除拦截路径
         registry.addInterceptor(loginInterceptor).
-                addPathPatterns("a/**").
+                addPathPatterns("/**").
                 excludePathPatterns("/user/reg").
-                excludePathPatterns("/user/login/**").
-                excludePathPatterns("/file/**");
+                excludePathPatterns("/user/login/**");
 
     }
     //新增加一个类用来添加虚拟路径映射
