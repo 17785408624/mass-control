@@ -39,7 +39,8 @@ public interface UserMapper {
 	 * @param oiceList
 	 * @return
 	 */
-	Integer insertBatchOrganizationInfoCareermanEntity(List<OrganizationInfoCareermanEntity> oiceList);
+	void insertBatchOrganizationInfoCareermanEntity(@Param("oiceList") List<OrganizationInfoCareermanEntity> oiceList,
+													   @Param("organization_info_id")int organization_info_id);
 
 	/**
 	 * 添加审核信息申请信息

@@ -131,14 +131,16 @@
         organization_performance
         )
         values
-        (
-        <foreach collection="list" item="oice" separator=",">
+
+        <foreach collection="oiceList" item="oice" separator=",">
+            (
             #{organization_info_id},
-            #{organization_careerman_name},
-            #{organization_profession},
-            #{organization_performance},
+            #{oice.organization_careerman_name},
+            #{oice.organization_profession},
+            #{oice.organization_performance}
+            )
         </foreach>
-        )
+
 
     </insert>
     <insert id="insertUserInfoAuditEntity" parameterType="UserInfoAuditEntity" keyProperty="user_info_audit_id" useGeneratedKeys="true">

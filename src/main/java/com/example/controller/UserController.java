@@ -2,12 +2,14 @@ package com.example.controller;
 
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.RegException;
+import com.example.config.LonginConf;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.AddOrganizationInfoAudit;
 import com.example.entity.user.OrganizationInfoCareermanEntity;
 import com.example.entity.user.OrganizationInfoEntity;
 import com.example.entity.user.UserEntity;
+import com.example.entity.user.UserInfoLoginSession;
 import com.example.service.UserService;
 
 
@@ -85,18 +87,30 @@ public class UserController {
 
     /**
      *
-     * @param organizationInfoEntity 添加第三方机构资料审核信息
+     * @param addOia 第三方机构资料审核信息
      * @return
      */
     @PostMapping("/addOrganizationInfoAudit")
-    public VisitConsequenceParent addOrganizationInfoAudit(@RequestBody AddOrganizationInfoAudit map,
+    public VisitConsequenceParent addOrganizationInfoAudit(@RequestBody AddOrganizationInfoAudit addOia,
                                                            HttpSession session){
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
+        UserInfoLoginSession uIls = null;
+        try {
+            uIls=new UserInfoLoginSession(session);
+        } catch (LoginException e) {
+            e.printStackTrace();
+        }
+        int user_info_audit_id=userService.addOrganizationInfoAudit(
+                addOia.getOrganizationInfo(),
+                addOia.getOceList(),
+                uIls.getUser_id(),
+                uIls.getUser_state());
+        //userService.addOrganizationInfoAudit(addOia);
 
         //map.put("user_info_audit_id","100003");
         vcp.setMessage("请求成功");
         vcp.setState(0);
-        vcp.setObject(map);
+        vcp.setObject(user_info_audit_id);
         return vcp;
     }
 
