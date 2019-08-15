@@ -15,15 +15,18 @@
 		<!--第三方机构信息类-->
 		<typeAlias type="com.example.entity.user.OrganizationInfoEntity" alias="OrganizationInfoEntity"/>
 		<!--第三方机构专业人员类-->
-		<typeAlias type="com.example.entity.user.OrganizationInfoCareermanEntity" alias="organizationInfoCareermanEntity"/>
-		<!--第三方机构专业人员类-->
+		<typeAlias type="com.example.entity.user.OrganizationInfoCareermanEntity" alias="OrganizationInfoCareermanEntity"/>
+		<!--用户信息审核申请-->
 		<typeAlias type="com.example.entity.user.UserInfoAuditEntity" alias="UserInfoAuditEntity"/>
+		<!--  -->
+		<typeAlias type="com.example.entity.common.FileInfoeEntity" alias="FileInfoeEntity"/>
 	</typeAliases>
 	<mappers>
 	 <mapper resource="mapping/acidAndProductForecastMapper.xml"/>
 	 <mapper resource="mapping/acidAndProductMapper.xml"/> 
 	 <mapper resource="mapping/UserMapper.xml"/>
 	 <mapper resource="mapping/testMapper.xml"/>
+	 <mapper resource="mapping/fileMapper.xml"/>
 	</mappers>
 
 </configuration>

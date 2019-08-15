@@ -4,6 +4,7 @@ import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.RegException;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
+import com.example.entity.requstparam.AddOrganizationInfoAudit;
 import com.example.entity.user.OrganizationInfoCareermanEntity;
 import com.example.entity.user.OrganizationInfoEntity;
 import com.example.entity.user.UserEntity;
@@ -88,14 +89,11 @@ public class UserController {
      * @return
      */
     @PostMapping("/addOrganizationInfoAudit")
-    public VisitConsequenceParent addOrganizationInfoAudit(@RequestParam("organization_adjunct")
-                                                                       MultipartFile organization_adjunct,
-                                                           @RequestParam(value = "organization_careerman_name",required = false) String[] organization_names,
-                                                           OrganizationInfoEntity organizationInfoEntity,
+    public VisitConsequenceParent addOrganizationInfoAudit(@RequestBody AddOrganizationInfoAudit map,
                                                            HttpSession session){
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
-        Map map=new HashMap();
-        map.put("user_info_audit_id","100003");
+
+        //map.put("user_info_audit_id","100003");
         vcp.setMessage("请求成功");
         vcp.setState(0);
         vcp.setObject(map);

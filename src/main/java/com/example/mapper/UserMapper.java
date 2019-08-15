@@ -48,6 +48,14 @@ public interface UserMapper {
 	 */
 	Integer insertUserInfoAuditEntity(UserInfoAuditEntity userInfoAuditEntity);
 
+	/**
+	 * 查询用户信息 通过用户手机号
+	 * @param user_mobile_phone
+	 * @param user_password
+	 * @return
+	 */
 	UserEntity selectUserEntityByMobilePhone_Password(String user_mobile_phone,String user_password);
+
+
 
 }

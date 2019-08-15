@@ -103,10 +103,8 @@
     organization_principal_name,
     organization_principal_mobilephone,
     organization_performance_content,
-    organization_license_imagepath,
-    organization_adjunct_name,
-    organization_adjunct_path,
-    organization_adjunct_type
+    organization_license_file_info_id,
+    organization_adjunct_file_info_id
 
     )values (
     #{organization_name},
@@ -119,10 +117,8 @@
     #{organization_principal_name},
     #{organization_principal_mobilephone},
     #{organization_performance_content},
-    #{organization_license_imagepath},
-    #{organization_adjunct_name},
-    #{organization_adjunct_path},
-    #{organization_adjunct_type}
+    #{organization_license_file_info_id},
+    #{organization_adjunct_file_info_id}
     )
 
     </insert>

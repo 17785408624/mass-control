@@ -2,106 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ce62e10-29df-4ecc-9f08-a6e73ab85f92" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/application-dev.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/banner.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/Application.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/Test.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/common/annotation/NeedLogin.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/common/exceptiondefine/LoginException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/common/exceptiondefine/RegException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/common/interceptor/LoginInterceptor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/config/LonginConf.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/config/MyConfiguration$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/config/MyConfiguration.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/config/ProjectConf.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/config/UploadFileType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/config/WebConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/controller/CommonController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/controller/TestController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/entity/AcidAndProductEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/entity/AcidAndProductForecastEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/entity/TestEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/entity/common/PageRequest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/entity/common/PageResult.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/entity/common/VisitConsequenceParent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/entity/common/VisitConsequenceParentImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/entity/user/OrganizationInfoCareermanEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/entity/user/OrganizationInfoEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/entity/user/UserEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/entity/user/UserInfoAuditEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/entity/user/UserInfoLoginEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/mapper/AcidAndProductForecastMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/mapper/AcidAndProductMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/mapper/TestMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/mapper/UserMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/service/AcidAndProductForecastService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/service/AcidAndProductForecastServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/service/TestService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/service/TestServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/service/UserService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/service/impl/UserServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/util/LoadUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/util/MyMD5Util.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/util/MyStringUril.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/util/PageUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapping/acidAndProductForecastMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapping/acidAndProductMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapping/testMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapping/userMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mybatis-config.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-14/681438ef-07b3-42d7-9a94-44882b720888.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-14/77c749a5-d66b-4f27-be36-c307cc8289b3.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/13acae45-6524-46a9-aa3a-7fc995835d2c.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/20a783fa-6235-4a88-92b1-c24f5ae97a47.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/250411a2-bf51-4b86-9d64-622201d88c91.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/2c0a28b2-6c5b-497b-afe3-0728ac7cb8f6.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/2e05cd65-e51f-403a-96fb-11910bba79c3.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/3304ba1a-de59-4f40-ae26-b6cf1994a249.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/33d808c8-ad61-4e19-b360-7e7cc45d228e.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/4bb1788d-4a1e-4478-9f8b-8dd07f86a183.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/4c029664-3d14-4776-a084-10cb848a1c72.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/4e612f03-ffb7-4bdc-ac6c-d8d258488b65.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/55cdfc0c-07df-459b-b441-64a8e2188a04.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/569eb48e-fbf0-4c4c-89ba-68335ba61b5c.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/6127b700-6a56-465e-bb5d-4aae6a400e02.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/75786b08-389d-4d1d-b2d4-ac1e6c484d2c.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/76b6f17b-9ad0-4477-82d7-ce63ed5e519f.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/79594668-2dc2-40bd-9551-00a6faba5ef7.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/7d5fa898-fbb9-43fb-899f-0917e04d2083.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/b989a93f-6f0a-454e-a4c0-71e582785c87.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/c0d6ea0c-828b-47db-9093-194acd1eb246.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/d874a469-ca3c-448b-9a08-a909f425915e.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/temporary/2019-8-15/ede11798-f8d6-43b2-863c-7c33f2a204d5.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/userinfo/2019-8-14/176ec1a0-d3d1-4767-b76b-1e7921d975b5.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/userinfo/2019-8-14/9f5e9986-2223-464c-a2a5-30d3eb60d852.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/userinfo/2019-8-14/d0aef2ec-e720-4106-aa54-6a3f0612bb0c.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/userinfo/2019-8/4d959ba1-cad9-47ea-9126-fa3e9964a5c6.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/userinfo/2019-8/68d4bd73-9663-4ac0-9d40-640d3a8736ae.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/userinfo/2019-8/69f0208a-bf30-4215-a90b-9cb0f3ed8d57.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/userinfo/2019-8/754e357a-139b-473f-a94c-34030e1cc1a4.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/userinfo/2019-8/787befb0-2ec7-4de3-bc8f-e5318c7f4cf9.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/userinfo/2019-8/f4dc9077-fd29-4293-a29d-2042f83f4915.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/userinfo/2019/b2d0cc68-8a14-40d7-9e6b-e100054f8460.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/userinfo/20198/58c4bc57-edd0-48b5-8672-3677016f3536.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/static/file/upload/userinfo/20198/dd8b8a11-84cd-411b-91bf-41dc7fdf090e.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/mass-control-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/mass-control-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/2019-07-17T15-02-37_624-jvmRun1.dump" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.example.demo.DemoApplicationTests.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.example.demo.mapper.UserApplicationCreatTest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/com.example.demo.DemoApplicationTests.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/com.example.demo.mapper.UserApplicationCreatTest.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/example/demo/DemoApplicationTests.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/example/demo/mapper/UserApplicationCreatTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/entity/common/FileInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/entity/common/FileInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/entity/common/FileInfoeEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/entity/requstparam/AddOrganizationInfoAudit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/service/CommonService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/service/impl/CommonServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapping/fileMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/config/UploadFileType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/config/UploadFileType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controller/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/CommonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/entity/common/FileInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/util/LoadUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/util/LoadUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/userMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapping/userMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/config/UploadFileType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/config/UploadFileType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/controller/CommonController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/controller/CommonController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/controller/TestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/controller/TestController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/entity/user/OrganizationInfoEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/entity/user/OrganizationInfoEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/util/LoadUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/util/LoadUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapping/userMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapping/userMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis-config.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -117,91 +41,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/service/impl/UserServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="42" selection-start-line="42" selection-end-line="42" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="92" column="109" selection-start-line="92" selection-start-column="109" selection-end-line="92" selection-end-column="109" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoCareermanEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="39" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="39" />
-              <folding>
-                <element signature="e#440#441#0" expanded="true" />
-                <element signature="e#493#494#0" expanded="true" />
-                <element signature="e#710#711#0" expanded="true" />
-                <element signature="e#753#754#0" expanded="true" />
-                <element signature="e#822#823#0" expanded="true" />
-                <element signature="e#886#887#0" expanded="true" />
-                <element signature="e#1141#1142#0" expanded="true" />
-                <element signature="e#1187#1188#0" expanded="true" />
-                <element signature="e#1383#1384#0" expanded="true" />
-                <element signature="e#1430#1431#0" expanded="true" />
-                <element signature="e#1443#1444#0" expanded="true" />
-                <element signature="e#1493#1494#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mapping/userMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="139" column="34" selection-start-line="139" selection-start-column="34" selection-end-line="139" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/TestController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="37" column="86" selection-start-line="37" selection-start-column="73" selection-end-line="37" selection-end-column="86" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" column="44" lean-forward="true" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
-              <folding>
-                <element signature="e#4325#4326#0" expanded="true" />
-                <element signature="e#4373#4374#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/CommonController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            <state relative-caret-position="60">
+              <caret line="91" column="96" selection-start-line="91" selection-start-column="72" selection-end-line="91" selection-end-column="96" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -210,10 +53,43 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/common/FileInfo.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/requstparam/AddOrganizationInfoAudit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+            <state relative-caret-position="154">
+              <caret line="16" column="31" lean-forward="true" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#384#385#0" expanded="true" />
+                <element signature="e#414#415#0" expanded="true" />
+                <element signature="e#491#492#0" expanded="true" />
+                <element signature="e#529#530#0" expanded="true" />
+                <element signature="e#588#589#0" expanded="true" />
+                <element signature="e#627#628#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoCareermanEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="5" column="44" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="44">
+              <caret line="5" column="35" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="35" />
+              <folding>
+                <element signature="e#3430#3431#0" expanded="true" />
+                <element signature="e#3486#3487#0" expanded="true" />
+                <element signature="e#3736#3737#0" expanded="true" />
+                <element signature="e#3792#3793#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -239,17 +115,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/example/entity/PageRequest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/entity/user/PageResult.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/entity/PageResult.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/mapper/TestMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapping/testMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/Application.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/util/upload.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/config/ProjectPath.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/config/project_conf.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/util/UploadUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/config/UploadFileType.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/util/MyMD5Util.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/config/MyConfiguration.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapping/UserMapper.xml" />
@@ -259,19 +127,15 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoConstituteEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/entity/user/UserInfoLoginEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/entity/user/UserEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/entity/Test.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/entity/TestEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/entity/user/UserInfoAuditEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/config/LonginConf.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/common/exceptiondefine/LogException.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/common/exceptiondefine/RegException.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/common/exceptiondefine/LoginException.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/service/UserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/util/LoadUtils.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application-dev.yml" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/config/WebConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/config/ProjectConf.java" />
@@ -286,10 +150,22 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/common/interceptor/LoginInterceptor.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/service/impl/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoCareermanEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoEntity.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapping/userMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/controller/UserController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/controller/CommonController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/entity/common/FileInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/mapper/FileMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/mapper/UserMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/service/CommonService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/service/impl/CommonServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/controller/CommonController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapping/fileMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/entity/common/FileInfoeEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/config/UploadFileType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/util/LoadUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/entity/requstparam/addOrganizationInfoAudit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/entity/requstparam/AddOrganizationInfoAudit.java" />
       </list>
     </option>
   </component>
@@ -540,7 +416,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/example/entity/common" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Fav" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -620,7 +496,7 @@
       <workItem from="1565696377440" duration="6596000" />
       <workItem from="1565744783512" duration="43187000" />
       <workItem from="1565831828472" duration="4847000" />
-      <workItem from="1565837571316" duration="11949000" />
+      <workItem from="1565837571316" duration="24074000" />
     </task>
     <task id="LOCAL-00001" summary="123">
       <created>1565853781868</created>
@@ -629,11 +505,18 @@
       <option name="project" value="LOCAL" />
       <updated>1565853781868</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="123">
+      <created>1565853807453</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1565853807453</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91978000" />
+    <option name="totallyTimeSpent" value="104103000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -648,7 +531,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21785174" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21785174" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -660,11 +543,11 @@
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3289689" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.37315875" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.37213114" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
-      <window_info anchor="bottom" id="Debug" order="7" sideWeight="0.49924356" visible="true" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="7" sideWeight="0.49924356" weight="0.4" />
       <window_info anchor="bottom" id="Spring" order="8" weight="0.3289689" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.3289689" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
@@ -692,58 +575,11 @@
     <MESSAGE value="123" />
     <option name="LAST_COMMIT_MESSAGE" value="123" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/util/LoadUtils.java</url>
-          <line>74</line>
-          <properties />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/controller/UserController.java</url>
-          <line>96</line>
-          <properties />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/User.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/example/demo/mapper/UserApplicationCreatTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/user/UserInfoLoginEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="34" lean-forward="true" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/common/annotation/NeedLogin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapping/testMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/service/AcidAndProductForecastService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-110">
@@ -758,13 +594,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis-config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="17" column="80" selection-start-line="17" selection-start-column="80" selection-end-line="17" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -776,16 +605,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/config/UploadFileType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="46" column="43" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -835,13 +654,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/user/UserInfoAuditEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/user/UserEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -859,16 +671,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/util/LoadUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="74" column="67" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -880,16 +682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="26" column="82" selection-start-line="26" selection-start-column="58" selection-end-line="26" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/config/ProjectConf.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="17" column="39" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -989,13 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/mapper/UserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="50" column="53" selection-start-line="50" selection-start-column="15" selection-end-line="50" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/util/PageUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -1030,48 +815,144 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/TestController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/user/UserInfoAuditEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="37" column="86" selection-start-line="37" selection-start-column="73" selection-end-line="37" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/service/impl/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="44" lean-forward="true" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
-          <folding>
-            <element signature="e#4325#4326#0" expanded="true" />
-            <element signature="e#4373#4374#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="66">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapping/userMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="139" column="34" selection-start-line="139" selection-start-column="34" selection-end-line="139" selection-end-column="34" />
+        <state relative-caret-position="-462">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/UserController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis-config.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="92" column="109" selection-start-line="92" selection-start-column="109" selection-end-line="92" selection-end-column="109" />
+        <state relative-caret-position="220">
+          <caret line="28" column="48" lean-forward="true" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="18" selection-start-line="18" selection-end-line="19" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/TestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="22" column="36" selection-start-line="21" selection-start-column="4" selection-end-line="22" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/mapper/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/service/CommonService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/CommonController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="38" column="59" selection-start-line="38" selection-start-column="59" selection-end-line="38" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/service/impl/CommonServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="18" column="49" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/mapper/FileMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-132">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapping/fileMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/common/FileInfoeEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+          <folding>
+            <element signature="e#964#965#0" expanded="true" />
+            <element signature="e#1001#1002#0" expanded="true" />
+            <element signature="e#1061#1062#0" expanded="true" />
+            <element signature="e#1113#1114#0" expanded="true" />
+            <element signature="e#992#993#0" expanded="true" />
+            <element signature="e#1024#1025#0" expanded="true" />
+            <element signature="e#1075#1076#0" expanded="true" />
+            <element signature="e#1117#1118#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/config/ProjectConf.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="14" column="78" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="78" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/config/UploadFileType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="59" column="5" selection-start-line="56" selection-start-column="32" selection-end-line="59" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1082#1083#0" expanded="true" />
+            <element signature="e#1138#1139#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/util/LoadUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="84" column="14" lean-forward="true" selection-start-line="84" selection-start-column="14" selection-end-line="84" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1080,39 +961,47 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoCareermanEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="39" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="39" />
+        <state relative-caret-position="110">
+          <caret line="5" column="44" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/user/OrganizationInfoEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="5" column="35" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="35" />
           <folding>
-            <element signature="e#440#441#0" expanded="true" />
-            <element signature="e#493#494#0" expanded="true" />
-            <element signature="e#710#711#0" expanded="true" />
-            <element signature="e#753#754#0" expanded="true" />
-            <element signature="e#822#823#0" expanded="true" />
-            <element signature="e#886#887#0" expanded="true" />
-            <element signature="e#1141#1142#0" expanded="true" />
-            <element signature="e#1187#1188#0" expanded="true" />
-            <element signature="e#1383#1384#0" expanded="true" />
-            <element signature="e#1430#1431#0" expanded="true" />
-            <element signature="e#1443#1444#0" expanded="true" />
-            <element signature="e#1493#1494#0" expanded="true" />
+            <element signature="e#3430#3431#0" expanded="true" />
+            <element signature="e#3486#3487#0" expanded="true" />
+            <element signature="e#3736#3737#0" expanded="true" />
+            <element signature="e#3792#3793#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/CommonController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        <state relative-caret-position="60">
+          <caret line="91" column="96" selection-start-line="91" selection-start-column="72" selection-end-line="91" selection-end-column="96" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/common/FileInfo.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/entity/requstparam/AddOrganizationInfoAudit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+        <state relative-caret-position="154">
+          <caret line="16" column="31" lean-forward="true" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
+            <element signature="e#491#492#0" expanded="true" />
+            <element signature="e#529#530#0" expanded="true" />
+            <element signature="e#588#589#0" expanded="true" />
+            <element signature="e#627#628#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

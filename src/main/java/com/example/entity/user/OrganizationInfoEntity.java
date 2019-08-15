@@ -15,10 +15,8 @@ public class OrganizationInfoEntity {
     private String organization_principal_name;//法定代表人名字
     private String organization_principal_mobilephone;//法定代表人移动电话
     private String organization_performance_content;//组织业绩文本内容
-    private String organization_license_imagepath;//营业执照图片存储路径
-    private String organization_adjunct_name;//附件名
-    private String organization_adjunct_path;//附件存储路径
-    private Integer organization_adjunct_type;//附件类型 1图片 2文档 3其它
+    private Integer organization_license_file_info_id;//营业执照文件id
+    private Integer organization_adjunct_file_info_id;//附件文件id
 
     public int getOrganization_info_id() {
         return organization_info_id;
@@ -108,36 +106,20 @@ public class OrganizationInfoEntity {
         this.organization_performance_content = organization_performance_content;
     }
 
-    public String getOrganization_license_imagepath() {
-        return organization_license_imagepath;
+
+    public Integer getOrganization_license_file_info_id() {
+        return organization_license_file_info_id;
     }
 
-    public void setOrganization_license_imagepath(String organization_license_imagepath) {
-        this.organization_license_imagepath = organization_license_imagepath;
+    public void setOrganization_license_file_info_id(Integer organization_license_file_info_id) {
+        this.organization_license_file_info_id = organization_license_file_info_id;
     }
 
-    public String getOrganization_adjunct_name() {
-        return organization_adjunct_name;
+    public Integer getOrganization_adjunct_file_info_id() {
+        return organization_adjunct_file_info_id;
     }
 
-    public void setOrganization_adjunct_name(String organization_adjunct_name) {
-        this.organization_adjunct_name = organization_adjunct_name;
-    }
-
-    public String getOrganization_adjunct_path() {
-        return organization_adjunct_path;
-    }
-
-    public void setOrganization_adjunct_path(String organization_adjunct_path) {
-        this.organization_adjunct_path = organization_adjunct_path;
-    }
-
-
-    public Integer getOrganization_adjunct_type() {
-        return organization_adjunct_type;
-    }
-
-    public void setOrganization_adjunct_type(Integer organization_adjunct_type) {
-        this.organization_adjunct_type = organization_adjunct_type;
+    public void setOrganization_adjunct_file_info_id(Integer organization_adjunct_file_info_id) {
+        this.organization_adjunct_file_info_id = organization_adjunct_file_info_id;
     }
 }
