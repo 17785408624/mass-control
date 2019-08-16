@@ -1,7 +1,7 @@
 server:
   port: 80
-
-   #context-path: /mass
+  servlet:
+    context-path: /api
 spring:
   datasource:
     username: root
@@ -27,6 +27,7 @@ pagehelper:
   params: count=countSql
 #mapper-locations: classpath:mapping/*Mapper.xml
 type-aliases-package: com.example.entity
+access_url: localhost #项目访问地址
 
 #showSql
 #logging:

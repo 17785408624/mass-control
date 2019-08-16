@@ -3,10 +3,7 @@ package com.example.service.impl;
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.RegException;
 import com.example.config.LonginConf;
-import com.example.entity.user.OrganizationInfoCareermanEntity;
-import com.example.entity.user.OrganizationInfoEntity;
-import com.example.entity.user.UserEntity;
-import com.example.entity.user.UserInfoAuditEntity;
+import com.example.entity.user.*;
 import com.example.mapper.UserMapper;
 import com.example.service.UserService;
 import com.util.EncryptUtil;
@@ -85,6 +82,31 @@ public class UserServiceImpl implements UserService {
         ue.setUser_password(EncryptUtil.encrypt(ue.getUser_password()));
         ue.setUser_id(Integer.parseInt(EncryptUtil.encrypt(String.valueOf(ue.getUser_id()))));
         return ue;
+    }
+    //添加专家审核信息申请
+    @Override
+    public int addExpertInfoAudit(ExpertInfoEntity expertInfoEntity, int user_id, int user_state) {
+        userMapper.insertExpertInfoEntity(expertInfoEntity);
+        UserInfoAuditEntity userInfoAuditEntity = new UserInfoAuditEntity();//用户信息审核类
+        userInfoAuditEntity.setUser_id_add(user_id);//申请人id
+        userInfoAuditEntity.setUser_info_audit_addtime(new Date().getTime());//添加时间
+        userInfoAuditEntity.setInfo_id(expertInfoEntity.getExpert_info_id());//审核的资料信息id
+        userInfoAuditEntity.setUser_info_audit_content(1);//审核内容为第三方机构信息
+        switch (user_state) {//判断用户状态
+            case 1://用户未认证审核
+                userInfoAuditEntity.setUser_info_audit_type(1);//审核类型设置为初审
+                break;
+            case 2://用户已认证审核
+                userInfoAuditEntity.setUser_info_audit_type(2);//审核类型设置为变更
+                break;
+            default://解聘、其它
+                userInfoAuditEntity.setUser_info_audit_type(2);//审核类型设置为变更
+                break;
+        }
+        userInfoAuditEntity.setUser_id_add(user_id);//添加人id
+        userInfoAuditEntity.setUser_info_audit_state(1);//审核状态 为未审核
+        userMapper.insertUserInfoAuditEntity(userInfoAuditEntity);//添加用户审核信息
+        return userInfoAuditEntity.getUser_info_audit_id();
     }
 
 

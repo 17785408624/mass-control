@@ -1,9 +1,6 @@
 package com.example.mapper;
 
-import com.example.entity.user.OrganizationInfoCareermanEntity;
-import com.example.entity.user.OrganizationInfoEntity;
-import com.example.entity.user.UserEntity;
-import com.example.entity.user.UserInfoAuditEntity;
+import com.example.entity.user.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -57,6 +54,12 @@ public interface UserMapper {
 	 */
 	UserEntity selectUserEntityByMobilePhone_Password(String user_mobile_phone,String user_password);
 
+	/**
+	 * 添加专家信息
+	 * @param expertInfoEntity
+	 * @return
+	 */
+	Integer insertExpertInfoEntity(ExpertInfoEntity expertInfoEntity);
 
 
 }

@@ -18,8 +18,11 @@
 		<typeAlias type="com.example.entity.user.OrganizationInfoCareermanEntity" alias="OrganizationInfoCareermanEntity"/>
 		<!--用户信息审核申请-->
 		<typeAlias type="com.example.entity.user.UserInfoAuditEntity" alias="UserInfoAuditEntity"/>
-		<!--  -->
+		<!-- 文件信息  -->
 		<typeAlias type="com.example.entity.common.FileInfoeEntity" alias="FileInfoeEntity"/>
+		<!--审核信息关联结果反回-->
+		<typeAlias type="com.example.entity.resultsparam.OrganizationAuditResults" alias="OrganizationAuditResults"/>
+
 	</typeAliases>
 	<mappers>
 	 <mapper resource="mapping/acidAndProductForecastMapper.xml"/>
@@ -27,6 +30,7 @@
 	 <mapper resource="mapping/userMapper.xml"/>
 	 <mapper resource="mapping/testMapper.xml"/>
 	 <mapper resource="mapping/fileMapper.xml"/>
+	 <mapper resource="mapping/userInfoAuditMapper.xml"/>
 	</mappers>
 
 </configuration>

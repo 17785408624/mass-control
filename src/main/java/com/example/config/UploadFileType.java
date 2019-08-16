@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * 文件上传配置枚举
  */
 public enum  UploadFileType {
-    USERINFO("userinfo/","jpg,png")//用户上传信息
+    USERINFO("/userinfo","jpg,png")//用户上传信息
     ;
 
     private String file_path;//上传文件路径

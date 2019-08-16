@@ -6,10 +6,7 @@ import com.example.config.LonginConf;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.AddOrganizationInfoAudit;
-import com.example.entity.user.OrganizationInfoCareermanEntity;
-import com.example.entity.user.OrganizationInfoEntity;
-import com.example.entity.user.UserEntity;
-import com.example.entity.user.UserInfoLoginSession;
+import com.example.entity.user.*;
 import com.example.service.UserService;
 
 
@@ -112,6 +109,20 @@ public class UserController {
         vcp.setState(0);
         vcp.setObject(user_info_audit_id);
         return vcp;
+    }
+    public VisitConsequenceParent addOrganizationInfoAudit(@RequestBody ExpertInfoEntity eie,
+                                                           HttpSession session){
+        VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
+        UserInfoLoginSession uIls = null;
+        try {
+            uIls=new UserInfoLoginSession(session);
+        } catch (LoginException e) {
+            e.printStackTrace();
+        }
+        userService.addExpertInfoAudit(eie,uIls.getUser_id(),
+                uIls.getUser_state());
+        return vcp;
+
     }
 
 

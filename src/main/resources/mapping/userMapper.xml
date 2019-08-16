@@ -178,5 +178,66 @@
 
     </select>
 
+    <insert id="insertExpertInfoEntity" >
+     insert into
+     (
+     expert_info_name,
+     expert_info_gender,
+     expert_info_mobilephone,
+     expert_info_worktelephone,
+     expert_info_idcard,
+     expert_info_workstate,
+     expert_info_companyname,
+     expert_info_companysite,
+     expert_info_postcode,
+     expert_info_department,
+     expert_info_duty,
+     expert_info_companyphone,
+     expert_info_companyfax,
+     expert_info_mail,
+     expert_info_school,
+     expert_info_education,
+     expert_info_qualification,
+     expert_info_learnmajor,
+     expert_info_workmajor,
+     expert_info_declaredesign_design,
+     expert_info_declaredesign_safety,
+     expert_info_jobresume,
+     expert_info_composition,
+     expert_info_awardrecord,
+     expert_info_researchachievement,
+     expert_info_jadjunct_file_info_id
+     )
+     values
+     (
+     #{expert_info_name},
+     #{expert_info_gender},
+     #{expert_info_mobilephone},
+     #{expert_info_worktelephone},
+     #{expert_info_workstate},
+     #{expert_info_companyname},
+     #{expert_info_companysite},
+     #{expert_info_postcode},
+     #{expert_info_department},
+     #{expert_info_duty},
+     #{expert_info_companyphone},
+     #{expert_info_companyfax},
+     #{expert_info_mail},
+     #{expert_info_school},
+     #{expert_info_education},
+     #{expert_info_qualification},
+     #{expert_info_learnmajor},
+     #{expert_info_workmajor},
+     #{expert_info_declaredesign_design},
+     #{expert_info_declaredesign_safety},
+     #{expert_info_jobresume},
+     #{expert_info_composition},
+     #{expert_info_awardrecord},
+     #{expert_info_researchachievement},
+     #{expert_info_jadjunct_file_info_id}
+     )
+
+    </insert>
+
 
 </mapper>

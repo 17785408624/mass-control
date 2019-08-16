@@ -42,7 +42,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         UserEntity userInfoLoginEntity = (UserEntity) request.getSession()
                 .getAttribute(LonginConf.LONGIN_SESSION_KEY);
         //如果session中没有，表示没登录
-        if (null == userInfoLoginEntity) {
+        if (null == userInfoLoginEntity&&response.getStatus()==200) {
             response.setHeader("Content-type", "text/html;charset=UTF-8");
             response.setCharacterEncoding("utf-8");
             VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();

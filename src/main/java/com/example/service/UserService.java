@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.RegException;
+import com.example.entity.user.ExpertInfoEntity;
 import com.example.entity.user.OrganizationInfoCareermanEntity;
 import com.example.entity.user.OrganizationInfoEntity;
 import com.example.entity.user.UserEntity;
@@ -12,7 +13,12 @@ import java.util.List;
 
 public interface UserService {
 
-
+	/**
+	 * y用户注册
+	 * @param userEntity
+	 * @return
+	 * @throws RegException
+	 */
 	boolean regUser(UserEntity userEntity) throws RegException;//用户注册
 
 	/**
@@ -29,8 +35,22 @@ public interface UserService {
 								 int user_state
 	);//添加第三方机构信息审核
 
+	/**
+	 *  用户通过手机号登录
+	 * @param user_mobile_phone
+	 * @param user_password
+	 * @param session
+	 * @return
+	 * @throws LoginException
+	 */
 	UserEntity userLoginByMobilePhone(String user_mobile_phone,
 									  String user_password,
 									  HttpSession session) throws LoginException;
+
+	int addExpertInfoAudit (
+			ExpertInfoEntity expertInfoEntity,
+			int user_id,
+			int user_state
+	);
 
 }
