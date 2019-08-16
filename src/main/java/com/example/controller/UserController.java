@@ -84,7 +84,7 @@ public class UserController {
 
     /**
      *
-     * @param addOia 第三方机构资料审核信息
+     * @param addOia 添加第三方机构资料审核信息
      * @return
      */
     @PostMapping("/addOrganizationInfoAudit")
@@ -110,7 +110,15 @@ public class UserController {
         vcp.setObject(user_info_audit_id);
         return vcp;
     }
-    public VisitConsequenceParent addOrganizationInfoAudit(@RequestBody ExpertInfoEntity eie,
+
+    /**
+     * 添加专家信息审核申请
+     * @param eie
+     * @param session
+     * @return
+     */
+    @PostMapping("/addExpertInfoAudit")
+    public VisitConsequenceParent addExpertInfoAudit(@RequestBody ExpertInfoEntity eie,
                                                            HttpSession session){
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
         UserInfoLoginSession uIls = null;
@@ -118,9 +126,17 @@ public class UserController {
             uIls=new UserInfoLoginSession(session);
         } catch (LoginException e) {
             e.printStackTrace();
+            vcp.setMessage("请求失败"+e.getMessage());
+            vcp.setState(0);
+            return vcp;
         }
-        userService.addExpertInfoAudit(eie,uIls.getUser_id(),
-                uIls.getUser_state());
+        int user_info_audit_id=userService.addExpertInfoAudit(eie,
+                uIls.getUser_id(),
+                uIls.getUser_state());//添加审核信息与需要被审核的资料信息返回审核编号
+        String user_info_audit_state ="1";//状态。。。。。
+        vcp.setMessage("请求成功");
+        vcp.setState(0);
+        vcp.setObject(user_info_audit_state);
         return vcp;
 
     }

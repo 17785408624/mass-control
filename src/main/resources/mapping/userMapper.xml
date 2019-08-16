@@ -178,8 +178,8 @@
 
     </select>
 
-    <insert id="insertExpertInfoEntity" >
-     insert into
+    <insert id="insertExpertInfoEntity" parameterType="ExpertInfoEntity">
+     insert into expert_info
      (
      expert_info_name,
      expert_info_gender,
@@ -214,6 +214,7 @@
      #{expert_info_gender},
      #{expert_info_mobilephone},
      #{expert_info_worktelephone},
+     #{expert_info_idcard},
      #{expert_info_workstate},
      #{expert_info_companyname},
      #{expert_info_companysite},

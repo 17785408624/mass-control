@@ -1,9 +1,12 @@
 package com.example.entity.user;
 
+/**
+ * 专家信息
+ */
 public class ExpertInfoEntity {
     Integer expert_info_id;//专家信息id
     String expert_info_name;//专家名
-    Integer expert_info_gender;//性别
+    Integer expert_info_gender;//性别 1男 2女
     String expert_info_mobilephone;//手机
     String expert_info_worktelephone;//工作电话
     String expert_info_idcard;//身份证号
