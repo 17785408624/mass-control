@@ -242,5 +242,20 @@
 
     </insert>
 
-
+    <update id="updateUserInfoIdAUserStateByinfo_id">
+        update
+        user
+        set
+        <if test="user_state != '0' and user_state != null ">
+            user_state=#{user_state},
+        </if>
+         info_id =#{info_id}
+        WHERE
+        user_id in
+        (
+        select user_id_add
+        from user_info_audit
+        where info_id =#{info_id}
+        )
+    </update>
 </mapper>

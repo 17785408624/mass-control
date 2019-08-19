@@ -24,6 +24,7 @@ public class ProjectConf {
     //public static String PROJECT_ROOT_PATH_exploit;//
     static {
         ACCESS_URL= ACCESS_PROTOCOL+String.valueOf(PropertiesUitls.getCommonYml("access_url"))+
+                ":"+PropertiesUitls.getCommonYml("server.port")+
                 PropertiesUitls.getCommonYml("server.servlet.context-path")+"/";
         PROJECT_STATIC_URL_FULL=ACCESS_URL+PROJECT_STATIC_URL;
         try {

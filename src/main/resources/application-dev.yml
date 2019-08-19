@@ -28,7 +28,9 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
-
+logging:
+  path: log/
+  #file: springboot.log
 access_url: localhost #项目访问地址
 #showSql
 #logging:

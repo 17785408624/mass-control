@@ -61,6 +61,17 @@ public interface UserMapper {
 	 */
 	Integer insertExpertInfoEntity(ExpertInfoEntity expertInfoEntity);
 
+	/**
+	 * 通过用户的信息id修改用户的状态和现存信息
+	 * @param info_id 信息id
+	 * @param user_state 用户状态
+	 * @return
+	 */
+	Integer updateUserInfoIdAUserStateByinfo_id(
+			@Param("info_id") Integer info_id,
+			@Param("user_state")Integer user_state
+	);
+
 
 
 

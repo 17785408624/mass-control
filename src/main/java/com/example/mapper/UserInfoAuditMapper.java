@@ -76,4 +76,16 @@ public interface UserInfoAuditMapper {
             @Param("user_info_audit_state") int user_info_audit_state,
             @Param("user_info_audit_type") int user_info_audit_type);
 
+    /**
+     * 参数为空则不改变
+     * 通过审核的咨询信息id 改变审核状态和用户的现存信息
+     * @param user_info_audit_state
+     * @param info_id
+     * @return
+     */
+    int updateUserInfoAuditStateByinfoId(
+            @Param("user_info_audit_state") int user_info_audit_state,
+            @Param("info_id")int info_id);
+
+
 }

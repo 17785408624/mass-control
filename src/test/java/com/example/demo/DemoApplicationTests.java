@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.mapper.UserInfoAuditMapper;
+import com.example.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import java.util.List;
 public class DemoApplicationTests {
     @Autowired
     UserInfoAuditMapper UserInfoAuditMapper;
+    @Autowired
+    UserMapper userMapper;
 
     @Test
     public void contextLoads() {
@@ -27,6 +30,7 @@ public class DemoApplicationTests {
 //        List<sys_role> li = sys_roleMapper.selectByExample(sys_roleExample);
 //        //FileInfoeEntity f=UserInfoAuditMapper.selectFileInfoeEntityFullByFileId(3);
 //        System.out.println();
+        userMapper.updateUserInfoIdAUserStateByinfo_id(5,2);
 
 
     }

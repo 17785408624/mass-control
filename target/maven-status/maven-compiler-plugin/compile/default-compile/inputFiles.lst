@@ -1,53 +1,56 @@
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\Application.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\resultsparam\OrganizationAuditResults.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\common\FileInfoeEntity.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\Test.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\common\interceptor\LoginInterceptor.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\service\AcidAndProductForecastServiceImpl.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\config\WebConfig.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\mapper\FileMapper.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\mapper\TestMapper.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\user\ExpertInfoEntity.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\util\EncryptUtil.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\service\impl\UserServiceImpl.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\util\LoadUtils.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\service\UserService.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\util\PropertiesUitls.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\user\UserInfoLoginSession.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\config\LonginConf.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\config\ProjectConf.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\common\VisitConsequenceParentImpl.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\user\OrganizationInfoCareermanEntity.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\mapper\UserMapper.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\mapper\UserInfoAuditMapper.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\user\UserInfoAuditEntity.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\user\OrganizationInfoEntity.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\common\exceptiondefine\RegException.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\common\exceptiondefine\LoginException.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\AcidAndProductEntity.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\controller\CommonController.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\util\MyMD5Util.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\service\impl\CommonServiceImpl.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\common\VisitConsequenceParent.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\TestEntity.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\config\MyConfiguration.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\AcidAndProductForecastEntity.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\common\PageResult.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\mapper\AcidAndProductMapper.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\common\PageRequest.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\service\TestServiceImpl.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\config\UploadFileType.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\util\PageUtils.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\service\UserInfoAuditOrganizationService.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\common\annotation\NeedLogin.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\service\impl\UserInfoAuditOrganizationServiceImpl.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\controller\UserController.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\controller\UserInfoAuditOrganizationController.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\requstparam\AddOrganizationInfoAudit.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\util\MyStringUril.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\entity\user\UserEntity.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\mapper\AcidAndProductForecastMapper.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\service\CommonService.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\controller\TestController.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\service\TestService.java
-D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java\com\example\service\AcidAndProductForecastService.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\Test.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\util\PageUtils.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\user\UserInfoLoginSession.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\service\impl\CommonServiceImpl.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\util\MyStringUril.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\util\MyMD5Util.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\common\PageResult.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\common\PageRequest.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\common\VisitConsequenceParent.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\common\exceptiondefine\LoginException.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\TestEntity.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\StartUpMBG.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\util\LoadUtils.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\controller\UserController.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\config\UploadFileType.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\service\TestService.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\util\PropertiesUitls.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\controller\UserInfoAuditController.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\service\CommonService.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\MyCommentGenerator.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\config\WebConfig.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\requstparam\AddOrganizationInfoAudit.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\SysRole.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\common\annotation\NeedLogin.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\mapper\AcidAndProductMapper.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\service\AcidAndProductForecastService.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\user\UserEntity.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\mapper\FileMapper.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\service\UserInfoService.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\common\VisitConsequenceParentImpl.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\AcidAndProductEntity.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\controller\CommonController.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\service\impl\UserServiceImpl.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\config\LonginConf.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\common\interceptor\LoginInterceptor.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\service\AcidAndProductForecastServiceImpl.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\service\impl\UserInfoAuditServiceImpl.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\mapper\AcidAndProductForecastMapper.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\common\FileInfoeEntity.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\user\OrganizationInfoEntity.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\resultsparam\OrganizationAuditResults.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\mapper\TestMapper.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\user\ExpertInfoEntity.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\user\UserInfoAuditEntity.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\service\TestServiceImpl.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\Application.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\mapper\UserMapper.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\common\exceptiondefine\RegException.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\mapper\UserInfoAuditMapper.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\config\ProjectConf.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\config\MyConfiguration.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\controller\TestController.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\util\EncryptUtil.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\user\OrganizationInfoCareermanEntity.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\AcidAndProductForecastEntity.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\service\UserService.java

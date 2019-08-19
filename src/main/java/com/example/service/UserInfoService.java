@@ -52,5 +52,29 @@ public interface UserInfoService {
     List<Map<String,Object>> findUserInfoAuditExpert(int user_info_audit_state,
                                                            int user_info_audit_type);
 
-
+    /**
+     *
+     * @return
+     */
+    /**
+     * 审核用户初次提交的信息
+     * 1将审核状态改变
+     * 2将用户的咨询信息改变
+     * 3如果是初审用户将用户改为已审核
+     * @param user_info_audit_state
+     * @return
+     */
+    /**
+     * 审核用户初次提交的信息
+     * 1审核状态改变
+     * 2用户的信息改变
+     * 3用户改为已审核
+     * @param info_id 审核的信息id
+     * @param user_info_audit_state 审核状态 2通过 3拒绝
+     * @return
+     */
+    boolean operationUserInfoAuditFirst(
+            int info_id,
+            int user_info_audit_state
+    );
 }

@@ -9,7 +9,7 @@ public class UserEntity {
     private Long user_register_time;//注册时间
     private String user_password;//用户密码
     private int user_role;//用户角色： 1专家 2第三方机构 3煤监局 4能源局 5超级管理员
-    private String info_id;//用户信息
+    private Integer info_id;//用户信息
     private Integer user_state;//用户状态  1未认证审核 2已认证审核  3解聘
 
     public int getUser_id() {
@@ -62,11 +62,12 @@ public class UserEntity {
         this.user_state = user_state;
     }
 
-    public String getInfo_id() {
+
+    public Integer getInfo_id() {
         return info_id;
     }
 
-    public void setInfo_id(String info_id) {
+    public void setInfo_id(Integer info_id) {
         this.info_id = info_id;
     }
 }

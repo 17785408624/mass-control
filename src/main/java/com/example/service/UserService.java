@@ -47,6 +47,13 @@ public interface UserService {
 									  String user_password,
 									  HttpSession session) throws LoginException;
 
+	/**
+	 * 用户添加专家审核信息
+	 * @param expertInfoEntity
+	 * @param user_id
+	 * @param user_state
+	 * @return
+	 */
 	int addExpertInfoAudit (
 			ExpertInfoEntity expertInfoEntity,
 			int user_id,

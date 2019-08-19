@@ -84,4 +84,13 @@ public class UserInfoAuditServiceImpl implements UserInfoService {
     public List<Map<String, Object>> findUserInfoAuditExpert(int user_info_audit_state, int user_info_audit_type) {
         return userInfoAuditMapper.selectUserInfoAuditExpertByStateAType(user_info_audit_state,user_info_audit_type);
     }
+
+    //审核用户初次提交的信息
+    @Override
+    public boolean operationUserInfoAuditFirst(int info_id, int user_info_audit_state) {
+        userInfoAuditMapper.updateUserInfoAuditStateByinfoId(
+                info_id,user_info_audit_state);//改变审核的状态
+
+        return false;
+    }
 }
