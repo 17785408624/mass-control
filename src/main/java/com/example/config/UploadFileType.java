@@ -55,7 +55,7 @@ public enum  UploadFileType {
         return this.getSupportTypes().split(",");
     }
     public String getAccessUlr(){//返回文件访问路径
-        return ProjectConf.PROJECT_STATIC_URL_FULL+ProjectConf.UPLOAD_PATH+this.file_path;
+        return ProjectConf.ACCESS_URL+ProjectConf.PROJECT_STATIC_URL+this.file_path;
 
     }
 

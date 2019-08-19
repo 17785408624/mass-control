@@ -109,5 +109,12 @@ public class UserServiceImpl implements UserService {
         return userInfoAuditEntity.getUser_info_audit_id();
     }
 
+    @Override
+    public boolean userLoginOut(HttpSession httpSession) {
+        httpSession.setAttribute(
+                LonginConf.LONGIN_SESSION_KEY, null);//将登录信息session清空
+        return true;
+    }
+
 
 }

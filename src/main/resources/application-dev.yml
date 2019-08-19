@@ -19,16 +19,17 @@ spring:
 
 mybatis:
   config-location: classpath:/mybatis-config.xml
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.example.entity
 # pagehelper
 pagehelper:
   helperDialect: mysql
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
-#mapper-locations: classpath:mapping/*Mapper.xml
-type-aliases-package: com.example.entity
-access_url: localhost #项目访问地址
 
+
+access_url: localhost #项目访问地址
 #showSql
 #logging:
   #level:

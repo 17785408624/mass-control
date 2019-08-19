@@ -26,13 +26,13 @@
 		<typeAlias type="com.example.entity.user.ExpertInfoEntity" alias="ExpertInfoEntity"/>
 
 	</typeAliases>
-	<mappers>
+	<!--<mappers>
 	 <mapper resource="mapping/acidAndProductForecastMapper.xml"/>
 	 <mapper resource="mapping/acidAndProductMapper.xml"/> 
 	 <mapper resource="mapping/userMapper.xml"/>
 	 <mapper resource="mapping/testMapper.xml"/>
 	 <mapper resource="mapping/fileMapper.xml"/>
 	 <mapper resource="mapping/userInfoAuditMapper.xml"/>
-	</mappers>
+	</mappers>-->
 
 </configuration>

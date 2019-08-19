@@ -6,4 +6,5 @@ import java.util.Map;
 public interface TestMapper {
     List<Map> selectAll();
     List<Map> selectPage();
+
 }

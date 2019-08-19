@@ -53,4 +53,11 @@ public interface UserService {
 			int user_state
 	);
 
+	/**
+	 * 用户注销登录
+	 * @param httpSession
+	 * @return
+	 */
+	boolean userLoginOut(HttpSession httpSession);
+
 }

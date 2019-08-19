@@ -141,5 +141,17 @@ public class UserController {
 
     }
 
+    /**
+     *  用户注销登录
+     * @param httpSession
+     * @return
+     */
+    public VisitConsequenceParent userLoginOut(HttpSession httpSession) {//用户登录
+        VisitConsequenceParent vcp=new VisitConsequenceParentImpl();
+        userService.userLoginOut(httpSession);
+        vcp.setMessage("请求成功");
+        vcp.setState(0);
+        return  vcp;
+    }
 
 }

@@ -206,6 +206,7 @@
      expert_info_composition,
      expert_info_awardrecord,
      expert_info_researchachievement,
+     expert_info_picture_file_info_id,
      expert_info_jadjunct_file_info_id
      )
      values
@@ -235,6 +236,7 @@
      #{expert_info_composition},
      #{expert_info_awardrecord},
      #{expert_info_researchachievement},
+     #{expert_info_picture_file_info_id},
      #{expert_info_jadjunct_file_info_id}
      )
 

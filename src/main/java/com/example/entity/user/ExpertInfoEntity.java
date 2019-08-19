@@ -4,33 +4,34 @@ package com.example.entity.user;
  * 专家信息
  */
 public class ExpertInfoEntity {
-    Integer expert_info_id;//专家信息id
-    String expert_info_name;//专家名
-    Integer expert_info_gender;//性别 1男 2女
-    String expert_info_mobilephone;//手机
-    String expert_info_worktelephone;//工作电话
-    String expert_info_idcard;//身份证号
-    Integer expert_info_workstate;//在岗情况 1在岗 2离职 3兼职
-    String expert_info_companyname;//单位全称
-    String expert_info_companysite;//单位地址
-    String expert_info_postcode;//邮编
-    String expert_info_department;//所在部门
-    String expert_info_duty;//职务
-    String expert_info_companyphone;//单位电话
-    String expert_info_companyfax;//传真号
-    String expert_info_mail;//个人信箱
-    String expert_info_school;//毕业学校
-    Integer expert_info_education;//学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
-    String expert_info_qualification;//职业资格
-    Integer expert_info_learnmajor;//所学专业 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
-    Integer expert_info_workmajor;//从事专业  1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
-    Integer expert_info_declaredesign_design;//申报专业 设计等技术报告咨询审查类 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
-    Integer expert_info_declaredesign_safety;//申报专业 安全生产检查类 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
-    String expert_info_jobresume;//工作简历
-    String expert_info_composition;//发明著作学术论文情况（出版或发表）
-    String expert_info_awardrecord;//受奖励情况
-    String expert_info_researchachievement;//安全生产相关工作主要业绩及研究成果
-    Integer expert_info_jadjunct_file_info_id;//附件id
+    private Integer expert_info_id;//专家信息id
+    private String expert_info_name;//专家名
+    private Integer expert_info_gender;//性别 1男 2女
+    private String expert_info_mobilephone;//手机
+    private String expert_info_worktelephone;//工作电话
+    private String expert_info_idcard;//身份证号
+    private Integer expert_info_workstate;//在岗情况 1在岗 2离职 3兼职
+    private String expert_info_companyname;//单位全称
+    private String expert_info_companysite;//单位地址
+    private String expert_info_postcode;//邮编
+    private String expert_info_department;//所在部门
+    private String expert_info_duty;//职务
+    private String expert_info_companyphone;//单位电话
+    private String expert_info_companyfax;//传真号
+    private String expert_info_mail;//个人信箱
+    private String expert_info_school;//毕业学校
+    private Integer expert_info_education;//学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
+    private String expert_info_qualification;//职业资格
+    private Integer expert_info_learnmajor;//所学专业 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+    private Integer expert_info_workmajor;//从事专业  1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+    private Integer expert_info_declaredesign_design;//申报专业 设计等技术报告咨询审查类 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+    private Integer expert_info_declaredesign_safety;//申报专业 安全生产检查类 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+    private String expert_info_jobresume;//工作简历
+    private String expert_info_composition;//发明著作学术论文情况（出版或发表）
+    private String expert_info_awardrecord;//受奖励情况
+    private String expert_info_researchachievement;//安全生产相关工作主要业绩及研究成果
+    private Integer expert_info_picture_file_info_id;//照片文件id
+    private Integer expert_info_jadjunct_file_info_id;//附件id
 
     public Integer getExpert_info_id() {
         return expert_info_id;
@@ -246,5 +247,13 @@ public class ExpertInfoEntity {
 
     public void setExpert_info_jadjunct_file_info_id(Integer expert_info_jadjunct_file_info_id) {
         this.expert_info_jadjunct_file_info_id = expert_info_jadjunct_file_info_id;
+    }
+
+    public Integer getExpert_info_picture_file_info_id() {
+        return expert_info_picture_file_info_id;
+    }
+
+    public void setExpert_info_picture_file_info_id(Integer expert_info_picture_file_info_id) {
+        this.expert_info_picture_file_info_id = expert_info_picture_file_info_id;
     }
 }
