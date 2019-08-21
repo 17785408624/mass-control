@@ -71,7 +71,7 @@ public class UserInfoAuditServiceImpl implements UserInfoService {
     public boolean findUserInfoAuditSubmitState(int user_id_add) {
         List<UserInfoAuditEntity> list=userInfoAuditMapper.
                 selectUserInfoAuditByUid(user_id_add);//查询用户提交的审核信息
-        if(list==null&&list.size()<1){
+        if(list==null||list.size()<1){
             return false;
         }else{
             return true;
@@ -123,6 +123,7 @@ public class UserInfoAuditServiceImpl implements UserInfoService {
         ExpertInfoResults eir=new ExpertInfoResults();
         ExpertInfoEntity eie=
                 userInfoAuditMapper.selectExpertInfoFull(expert_info_id);
+        eir.setExpertInfoEntity(eie);
         //照片id
         Integer expert_info_picture_file_info_id=eie.getExpert_info_picture_file_info_id();
 

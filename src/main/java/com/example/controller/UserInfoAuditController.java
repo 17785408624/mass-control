@@ -277,16 +277,17 @@ public class UserInfoAuditController {
     @RequestMapping("findUserInfoExpertInfoResultsFull")
     public VisitConsequenceParent findUserInfoExpertInfoResultsFull(@RequestBody Map param) {
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
-        int expert_info_id = (int) param.get("info_id");
+        int expert_info_id = Integer.parseInt(param.get("info_id").toString());
+        //int expert_info_id = (int) param.get("info_id");
         ExpertInfoResults eir = userInfoService.findExpertInfoFull(expert_info_id);
         vcp.setState(0);
         vcp.setMessage("请求成功");
-        vcp.setObject(expert_info_id);
+        vcp.setObject(eir);
         return vcp;
     }
 
     /**
-     * 查询用户提交时间最近的第一条审核信息
+     * 查询用户提交时间最近的一条审核信息
      *
      * @param
      * @param httpSession

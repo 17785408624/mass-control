@@ -26,8 +26,10 @@ public class ExpertInfoEntity {
     private String expert_info_qualification;//职业资格
     private Integer expert_info_learnmajor;//所学专业 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
     private Integer expert_info_workmajor;//从事专业  1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
-    private Integer expert_info_declaredesign_design;//申报专业 设计等技术报告咨询审查类 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
-    private Integer expert_info_declaredesign_safety;//申报专业 安全生产检查类 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+    private String expert_info_declaredesign_design;//申报专业 设计等技术报告咨询审查类 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+    private String []expert_info_declaredesign_designArray;//申报专业 设计类 数组形式
+    private String expert_info_declaredesign_safety;//申报专业 安全生产检查类 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+    private String []expert_info_declaredesign_safetyArray;//申报专业。安全生产检查类 数组形式
     private String expert_info_jobresume;//工作简历
     private String expert_info_composition;//发明著作学术论文情况（出版或发表）
     private String expert_info_awardrecord;//受奖励情况
@@ -195,20 +197,25 @@ public class ExpertInfoEntity {
         this.expert_info_workmajor = expert_info_workmajor;
     }
 
-    public Integer getExpert_info_declaredesign_design() {
+    public String getExpert_info_declaredesign_design() {
         return expert_info_declaredesign_design;
     }
 
-    public void setExpert_info_declaredesign_design(Integer expert_info_declaredesign_design) {
+    public void setExpert_info_declaredesign_design(String expert_info_declaredesign_design) {
         this.expert_info_declaredesign_design = expert_info_declaredesign_design;
+        this.expert_info_declaredesign_designArray=expert_info_declaredesign_design.split(",");
     }
 
-    public Integer getExpert_info_declaredesign_safety() {
+    public String getExpert_info_declaredesign_safety() {
         return expert_info_declaredesign_safety;
     }
 
-    public void setExpert_info_declaredesign_safety(Integer expert_info_declaredesign_safety) {
+    public void setExpert_info_declaredesign_safety(String expert_info_declaredesign_safety) {
         this.expert_info_declaredesign_safety = expert_info_declaredesign_safety;
+        if(expert_info_declaredesign_safety==null){
+            return;
+        }
+      this.expert_info_declaredesign_safetyArray=expert_info_declaredesign_safety.split(",");
     }
 
     public String getExpert_info_jobresume() {
@@ -274,4 +281,6 @@ public class ExpertInfoEntity {
     public void setExpert_info_birthday(String expert_info_birthday) {
         this.expert_info_birthday = expert_info_birthday;
     }
+
+
 }

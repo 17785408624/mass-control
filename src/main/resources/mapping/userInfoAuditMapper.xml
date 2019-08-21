@@ -98,7 +98,7 @@
         user_info_audit_state=#{user_info_audit_state}
         where  info_id=#{info_id}
     </update>
-    <select id="selectExpertInfoFull">
+    <select id="selectExpertInfoFull" resultType="ExpertInfoEntity">
         select * from  expert_info
         where expert_info_id=#{expert_info_id}
     </select>
