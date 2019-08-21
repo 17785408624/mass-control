@@ -5,6 +5,8 @@ package com.example.entity.user;
  */
 public class ExpertInfoEntity {
     private Integer expert_info_id;//专家信息id
+    private String expert_info_area;//地区
+    private String expert_info_birthday;//生日
     private String expert_info_name;//专家名
     private Integer expert_info_gender;//性别 1男 2女
     private String expert_info_mobilephone;//手机
@@ -255,5 +257,21 @@ public class ExpertInfoEntity {
 
     public void setExpert_info_picture_file_info_id(Integer expert_info_picture_file_info_id) {
         this.expert_info_picture_file_info_id = expert_info_picture_file_info_id;
+    }
+
+    public String getExpert_info_area() {
+        return expert_info_area;
+    }
+
+    public void setExpert_info_area(String expert_info_area) {
+        this.expert_info_area = expert_info_area;
+    }
+
+    public String getExpert_info_birthday() {
+        return expert_info_birthday;
+    }
+
+    public void setExpert_info_birthday(String expert_info_birthday) {
+        this.expert_info_birthday = expert_info_birthday;
     }
 }

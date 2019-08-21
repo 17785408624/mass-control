@@ -9,8 +9,8 @@ package com.example.entity.common;
 
 
 public abstract class VisitConsequenceParent {
-	protected String message="请求异常";//返回的信息
-	protected int state=1;//返回的状态 3为登录信息异常,0正常，1返回数据错误
+	protected String message="请求成功";//返回的信息
+	protected int state=0;//返回的状态 3为登录信息异常,0正常，1返回数据错误
 	protected Object object;//返回的前端数据
 	protected Integer amount;//返回对象的记录总数
 	

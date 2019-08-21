@@ -34,6 +34,7 @@ com\example\entity\common\PageResult.class
 com\example\service\AcidAndProductForecastServiceImpl.class
 com\example\config\MyConfiguration$1.class
 com\example\service\TestServiceImpl.class
+com\example\entity\resultsparam\ExpertInfoResults.class
 com\example\common\interceptor\LoginInterceptor.class
 com\example\entity\user\UserInfoLoginSession.class
 com\example\controller\TestController.class

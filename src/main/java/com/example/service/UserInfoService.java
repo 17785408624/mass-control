@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.entity.resultsparam.ExpertInfoResults;
 import com.example.entity.resultsparam.OrganizationAuditResults;
 import com.example.entity.user.UserInfoAuditEntity;
 
@@ -42,9 +43,15 @@ public interface UserInfoService {
      * @return
      */
     UserInfoAuditEntity findUserInfoAuditSubmitFirst(int user_id_add);
+    /**
+     *  查询用户最近提交的一条审核信息
+     * @param user_id_add
+     * @return
+     */
+    UserInfoAuditEntity findUserInfoAuditRecentlyByUid(int user_id_add);
 
     /**
-     * 查询审核专家信息申请列表
+     * 查询审核专家信息列表
      * @param user_info_audit_state //审核状态 1未审核 2拒绝 3 通过
      * @param user_info_audit_type //审核类型 1初审 2变更审核
      * @return
@@ -77,4 +84,23 @@ public interface UserInfoService {
             int info_id,
             int user_info_audit_state
     );
+    /**
+     * 审核用户提交的信息
+     * 1审核状态改变
+     * 2用户的信息改变
+     * @param info_id 审核的信息id
+     * @param user_info_audit_state 审核状态 2通过 3拒绝
+     * @return
+     */
+    boolean operationUserInfoAudit(
+            int info_id,
+            int user_info_audit_state
+    );
+
+    /**
+     * 查询专家完整信息
+     * @param expert_info_id
+     * @return
+     */
+    ExpertInfoResults findExpertInfoFull(int expert_info_id);
 }

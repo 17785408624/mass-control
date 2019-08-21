@@ -31,7 +31,7 @@ pagehelper:
 logging:
   path: log/
   #file: springboot.log
-access_url: localhost #项目访问地址
+access_url: 192.168.30.220 #项目访问地址
 #showSql
 #logging:
   #level:

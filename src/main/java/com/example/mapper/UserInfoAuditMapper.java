@@ -2,6 +2,7 @@ package com.example.mapper;
 
 import com.example.entity.common.FileInfoeEntity;
 import com.example.entity.resultsparam.OrganizationAuditResults;
+import com.example.entity.user.ExpertInfoEntity;
 import com.example.entity.user.OrganizationInfoCareermanEntity;
 import com.example.entity.user.OrganizationInfoEntity;
 import com.example.entity.user.UserInfoAuditEntity;
@@ -77,8 +78,7 @@ public interface UserInfoAuditMapper {
             @Param("user_info_audit_type") int user_info_audit_type);
 
     /**
-     * 参数为空则不改变
-     * 通过审核的咨询信息id 改变审核状态和用户的现存信息
+     * 根据审核id改变审核状态
      * @param user_info_audit_state
      * @param info_id
      * @return
@@ -86,6 +86,20 @@ public interface UserInfoAuditMapper {
     int updateUserInfoAuditStateByinfoId(
             @Param("user_info_audit_state") int user_info_audit_state,
             @Param("info_id")int info_id);
+
+    /**
+     *
+     * @param expert_info_id
+     * @return
+     */
+    ExpertInfoEntity selectExpertInfoFull(int expert_info_id);
+
+    /**
+     * 查询用户提交时间最近的一条信息审核信息
+     * @param user_id_idd
+     * @return
+     */
+    UserInfoAuditEntity selectUserInfoAuditRecentlyByUid(int user_id_idd);
 
 
 }

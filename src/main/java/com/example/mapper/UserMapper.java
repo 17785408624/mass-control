@@ -72,7 +72,4 @@ public interface UserMapper {
 			@Param("user_state")Integer user_state
 	);
 
-
-
-
 }

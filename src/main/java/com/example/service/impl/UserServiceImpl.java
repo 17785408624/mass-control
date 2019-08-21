@@ -62,8 +62,7 @@ public class UserServiceImpl implements UserService {
                 userInfoAuditEntity.setUser_info_audit_type(2);//审核类型设置为变更
                 break;
         }
-        userInfoAuditEntity.setUser_id_add(user_id);//添加人id
-        userInfoAuditEntity.setUser_info_audit_state(1);//审核状态 为未审核
+        userInfoAuditEntity.setUser_info_audit_state(user_state);//审核状态 1为未审核
         userMapper.insertUserInfoAuditEntity(userInfoAuditEntity);//添加审核申请
         return userInfoAuditEntity.getUser_info_audit_id();//返回申请信息id 申请编号
     }
@@ -79,6 +78,7 @@ public class UserServiceImpl implements UserService {
             throw new LoginException("账号/密码错误");
         }
         session.setAttribute(LonginConf.LONGIN_SESSION_KEY, ue);//将登录信息保存session
+        session.setMaxInactiveInterval(15*60*1000);//登录保存时间
         ue.setUser_password(EncryptUtil.encrypt(ue.getUser_password()));
         ue.setUser_id(Integer.parseInt(EncryptUtil.encrypt(String.valueOf(ue.getUser_id()))));
         return ue;
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
         userInfoAuditEntity.setUser_id_add(user_id);//申请人id
         userInfoAuditEntity.setUser_info_audit_addtime(new Date().getTime());//添加时间
         userInfoAuditEntity.setInfo_id(expertInfoEntity.getExpert_info_id());//审核的资料信息id
-        userInfoAuditEntity.setUser_info_audit_content(1);//审核内容为第三方机构信息
+        userInfoAuditEntity.setUser_info_audit_content(2);//审核内容为专家信息
         switch (user_state) {//判断用户状态
             case 1://用户未认证审核
                 userInfoAuditEntity.setUser_info_audit_type(1);//审核类型设置为初审
@@ -103,8 +103,7 @@ public class UserServiceImpl implements UserService {
                 userInfoAuditEntity.setUser_info_audit_type(2);//审核类型设置为变更
                 break;
         }
-        userInfoAuditEntity.setUser_id_add(user_id);//添加人id
-        userInfoAuditEntity.setUser_info_audit_state(1);//审核状态 为未审核
+        userInfoAuditEntity.setUser_info_audit_state(user_state);//审核状态 1为未审核
         userMapper.insertUserInfoAuditEntity(userInfoAuditEntity);//添加用户审核信息
         return userInfoAuditEntity.getUser_info_audit_id();
     }

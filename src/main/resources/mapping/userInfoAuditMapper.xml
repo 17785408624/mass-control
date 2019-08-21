@@ -52,8 +52,15 @@
     </select>
 
     <select id="selectUserInfoAuditFirstByUid" resultType="UserInfoAuditEntity">
-    SELECT * FROM user_info_audit
-    WHERE user_id_add =#{user_id_add} ORDER BY ASC LIMT 0,1
+    SELECT
+	*
+     FROM
+	user_info_audit
+    WHERE
+	user_id_add =#{user_id_idd}
+    ORDER BY user_info_audit_addtime
+	ASC
+    LIMIT  0,1
     </select>
 
     <select id="selectUserInfoAuditExpertByStateAType" resultType="java.util.Map">
@@ -91,6 +98,21 @@
         user_info_audit_state=#{user_info_audit_state}
         where  info_id=#{info_id}
     </update>
+    <select id="selectExpertInfoFull">
+        select * from  expert_info
+        where expert_info_id=#{expert_info_id}
+    </select>
+    <select id="selectUserInfoAuditRecentlyByUid" resultType="UserInfoAuditEntity">
+    SELECT
+	*
+     FROM
+	user_info_audit
+    WHERE
+	user_id_add =#{user_id_idd}
+    ORDER BY user_info_audit_addtime
+	DESC
+    LIMIT  0,1
+    </select>
 
 
 </mapper>
