@@ -30,18 +30,18 @@
         </javaTypeResolver>
 
         <!-- java实体类路径 -->
-        <javaModelGenerator targetPackage="com.example.entity" targetProject="D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java" >
+        <javaModelGenerator targetPackage="com.example.entity" targetProject="D:\Java\idea-workspace\mass-control\src\main\java" >
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!-- sqlmap xml -->
-        <sqlMapGenerator targetPackage="mapping"  targetProject="D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\resources">
+        <sqlMapGenerator targetPackage="mapping"  targetProject="D:\Java\idea-workspace\mass-control\src\main\java">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.mapper"  targetProject="D:\我的资料库\Documents\WeChat Files\wxid_29l4xskq65ws21\FileStorage\File\2019-08\mass-control\src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.mapper"  targetProject="D:\Java\idea-workspace\mass-control\src\main\java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 

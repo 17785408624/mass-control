@@ -11,10 +11,15 @@ D:\Java\idea-workspace\mass-control\src\main\java\com\example\common\exceptionde
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\TestEntity.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\StartUpMBG.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\util\LoadUtils.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\test1.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\controller\UserController.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\project\ProjectInfoEntity.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\config\UploadFileType.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\service\TestService.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\mapper\test1Mapper.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\sys_roleExample.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\util\PropertiesUitls.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\mapper\sys_roleMapper.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\resultsparam\ExpertInfoResults.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\controller\UserInfoAuditController.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\service\CommonService.java
@@ -48,6 +53,7 @@ D:\Java\idea-workspace\mass-control\src\main\java\com\example\Application.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\mapper\UserMapper.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\common\exceptiondefine\RegException.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\mapper\UserInfoAuditMapper.java
+D:\Java\idea-workspace\mass-control\src\main\java\com\example\entity\sys_role.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\config\ProjectConf.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\config\MyConfiguration.java
 D:\Java\idea-workspace\mass-control\src\main\java\com\example\controller\TestController.java

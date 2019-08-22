@@ -69,7 +69,7 @@ public class MyCommentGenerator implements CommentGenerator {
         StringBuilder sb = new StringBuilder();
         sb.append(" * ");
         //sb.append(MergeConstants.NEW_ELEMENT_TAG);
-        sb.append("@ https://blog.csdn.net/caiqing116");
+        //sb.append("@ https://blog.csdn.net/caiqing116");
         if (markAsDoNotDelete) {
             sb.append(" do_not_delete_during_merge");
         }
