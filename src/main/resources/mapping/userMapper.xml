@@ -262,5 +262,18 @@
         where info_id =#{info_id}
         )
     </update>
+    <select id="selectUserEntityByUId"
+            resultType="UserEntity"
+            parameterType="java.lang.Integer">
+      SELECT
+      user_id,
+      user_mobile_phone,
+      user_register_time,
+      user_password,
+      user_role,
+      info_id,
+      user_state
+      FROM USER WHERE user_id=#{user_id}
+    </select>
 
 </mapper>

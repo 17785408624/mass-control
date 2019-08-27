@@ -72,4 +72,11 @@ public interface UserMapper {
 			@Param("user_state")Integer user_state
 	);
 
+	/**
+	 * 通过用户id查询用户信息
+	 * @param user_id
+	 * @return
+	 */
+	UserEntity selectUserEntityByUId(Integer user_id);
+
 }

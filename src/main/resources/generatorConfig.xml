@@ -36,7 +36,7 @@
         </javaModelGenerator>
 
         <!-- sqlmap xml -->
-        <sqlMapGenerator targetPackage="mapping"  targetProject="D:\Java\idea-workspace\mass-control\src\main\java">
+        <sqlMapGenerator targetPackage="mapping"  targetProject="D:\Java\idea-workspace\mass-control\src\main\resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
@@ -46,16 +46,12 @@
         </javaClientGenerator>
 
         <!-- 要逆向生成Dao的所有表 -->
-        <table schema="sys_role" tableName="sys_role"
-               domainObjectName="sys_role" enableCountByExample="false"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table schema="test1" tableName="test1"
-               domainObjectName="test1" enableCountByExample="false"
+        <table schema="ProjectInfoEntity" tableName="project_info"
+               domainObjectName="ProjectInfoEntity" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>
+
 
 
     </context>

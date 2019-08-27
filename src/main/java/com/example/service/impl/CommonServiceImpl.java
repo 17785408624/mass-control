@@ -14,9 +14,18 @@ import org.springframework.web.multipart.MultipartFile;
 public class CommonServiceImpl implements CommonService {
     @Autowired
     FileMapper fileMapper;
+    //上传用户信息文件
     @Override
     public FileInfoeEntity userUploadFile(MultipartFile file) {
         FileInfoeEntity fileInfoeEntity=LoadUtils.uploadFile(file, UploadFileType.USERINFO);
+        fileMapper.insertFileInfo(fileInfoeEntity);
+
+        return fileInfoeEntity;
+    }
+    //上传项目信息文件
+    @Override
+    public FileInfoeEntity projectUploadFile(MultipartFile file) {
+        FileInfoeEntity fileInfoeEntity=LoadUtils.uploadFile(file, UploadFileType.PROJECT_INFO);
         fileMapper.insertFileInfo(fileInfoeEntity);
 
         return fileInfoeEntity;

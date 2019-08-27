@@ -6,7 +6,10 @@ import com.example.config.LonginConf;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.AddOrganizationInfoAudit;
+import com.example.entity.resultsparam.ExpertInfoResults;
+import com.example.entity.resultsparam.OrganizationAuditResults;
 import com.example.entity.user.*;
+import com.example.service.UserInfoService;
 import com.example.service.UserService;
 
 
@@ -31,11 +34,14 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private UserInfoService userInfoService;
     /**
      * 用户注册
      */
-    @Autowired
-    private UserService userService;
     @RequestMapping("/reg")
     public VisitConsequenceParent reg(@RequestBody UserEntity user) {//用户注册
     	VisitConsequenceParentImpl visitConsequenceParent = new VisitConsequenceParentImpl();
@@ -146,12 +152,66 @@ public class UserController {
      * @param httpSession
      * @return
      */
+    @GetMapping("userLoginOut")
     public VisitConsequenceParent userLoginOut(HttpSession httpSession) {//用户登录
         VisitConsequenceParent vcp=new VisitConsequenceParentImpl();
         userService.userLoginOut(httpSession);
         vcp.setMessage("请求成功");
         vcp.setState(0);
         return  vcp;
+    }
+    /**
+     * 查询用户完整信息(专家)
+     *
+     * @param
+     * @return
+     */
+    @GetMapping("findUserInfoFullExpert")
+    public VisitConsequenceParent findUserInfoFullExpert(HttpSession httpSession) {
+        VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
+        UserInfoLoginSession userInfoLoginSession = null;
+        try {
+             userInfoLoginSession=
+                    new UserInfoLoginSession(httpSession);
+        } catch (LoginException e) {
+            vcp.setState(1);
+            vcp.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+
+        ExpertInfoResults eir= userInfoService.findExpertInfoFullNowsave(userInfoLoginSession.getUser_id());
+
+        vcp.setState(0);
+        vcp.setMessage("请求成功");
+        vcp.setObject(eir);
+        return vcp;
+    }
+    /**
+     * 查询用户完整信息(第三方机构)
+     *
+     * @param
+     * @return
+     */
+    @GetMapping("findUserInfoFullOrganization")
+    public VisitConsequenceParent findUserInfoFullOrganization(HttpSession httpSession) {
+        VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
+        UserInfoLoginSession userInfoLoginSession = null;
+        try {
+            userInfoLoginSession=
+                    new UserInfoLoginSession(httpSession);
+        } catch (LoginException e) {
+            vcp.setState(1);
+            vcp.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        OrganizationAuditResults oar =
+                userInfoService.findOrganizationInfoFullNowsave(
+                        userInfoLoginSession.getUser_id()
+                );
+        vcp.setState(0);
+        vcp.setMessage("请求成功");
+        vcp.setObject(oar);
+        return vcp;
     }
 
 }

@@ -1,7 +1,7 @@
 package com.example.service;
 
-import com.example.entity.common.PageRequest;
 import com.example.entity.common.PageResult;
+import com.example.entity.requstparam.PageRequest;
 
 import java.util.List;
 import java.util.Map;

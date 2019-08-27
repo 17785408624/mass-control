@@ -8,7 +8,8 @@ import java.time.LocalDate;
  * 文件上传配置枚举
  */
 public enum  UploadFileType {
-    USERINFO("/userinfo","jpg,png")//用户上传信息
+    USERINFO("/userinfo","jpg,png"),//上传用户信息
+    PROJECT_INFO("/projectinfo","jpg,png")//上传用户信息
     ;
 
     private String file_path;//上传文件路径
@@ -54,6 +55,11 @@ public enum  UploadFileType {
     public String[]getsupportType(){
         return this.getSupportTypes().split(",");
     }
+
+    /**
+     * 返回文件访问路径
+     * @return
+     */
     public String getAccessUlr(){//返回文件访问路径
         return ProjectConf.ACCESS_URL+ProjectConf.PROJECT_STATIC_URL+this.file_path;
 

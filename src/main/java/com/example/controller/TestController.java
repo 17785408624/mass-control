@@ -3,9 +3,9 @@ package com.example.controller;
 
 import com.example.config.UploadFileType;
 import com.example.entity.TestEntity;
-import com.example.entity.common.PageRequest;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
+import com.example.entity.requstparam.PageRequest;
 import com.example.service.TestService;
 import com.util.LoadUtils;
 import org.slf4j.Logger;

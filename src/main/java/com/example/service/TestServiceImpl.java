@@ -1,8 +1,8 @@
 package com.example.service;
 
-import com.example.entity.common.PageRequest;
 import com.example.entity.common.PageResult;
 
+import com.example.entity.requstparam.PageRequest;
 import com.example.mapper.TestMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -38,7 +38,8 @@ public class TestServiceImpl implements TestService {
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);//调用分页
         List<Map> sysMenus = testMapper.selectPage();
-        return PageUtils.getPageResult(pageRequest, new PageInfo<Map>(sysMenus));
+        PageInfo a=new PageInfo<Map>(sysMenus);
+        return PageUtils.getPageResult(pageRequest, a);
     }
 
 

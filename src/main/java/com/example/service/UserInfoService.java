@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.entity.requstparam.PageRequest;
 import com.example.entity.resultsparam.ExpertInfoResults;
 import com.example.entity.resultsparam.OrganizationAuditResults;
 import com.example.entity.user.UserInfoAuditEntity;
@@ -60,17 +61,20 @@ public interface UserInfoService {
                                                            int user_info_audit_type);
 
     /**
+     * 分页查询审核专家信息列表
+     * @param pageRequest 分页信息
+     * @param user_info_audit_state
+     * @param user_info_audit_type
+     * @return
+     */
+    List<Map<String,Object>> findUserInfoAuditExpert(PageRequest pageRequest, int user_info_audit_state,
+                                                     int user_info_audit_type);
+
+    /**
      *
      * @return
      */
-    /**
-     * 审核用户初次提交的信息
-     * 1将审核状态改变
-     * 2将用户的咨询信息改变
-     * 3如果是初审用户将用户改为已审核
-     * @param user_info_audit_state
-     * @return
-     */
+
     /**
      * 审核用户初次提交的信息
      * 1审核状态改变
@@ -103,4 +107,19 @@ public interface UserInfoService {
      * @return
      */
     ExpertInfoResults findExpertInfoFull(int expert_info_id);
+
+    /**
+     * 查询第三方机构现存完整信息
+     * @return
+     */
+    OrganizationAuditResults findOrganizationInfoFullNowsave(int user_id);
+
+    /**
+     * 查询专家现存完整信息
+     * @param
+     * @return
+     */
+    ExpertInfoResults findExpertInfoFullNowsave(int user_id);
+
+
 }

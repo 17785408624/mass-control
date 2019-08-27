@@ -18,7 +18,7 @@ public interface UserInfoAuditMapper {
      * 参数设置为0则视为不添加条件
      * @param user_info_audit_state //审核状态 1未审核 2拒绝 3 通过
      * @param user_info_audit_type  //审核类型 1初审 2变更审核
-     * @return user_info_audit_id审核编号id  user_info_audit_state审核状态
+     * @return user_info_audit_id审核编号id  user_info_audit_state审核状态 1未审核 2拒绝 3 通过
      * user_info_audit_addtime 添加时间 user_info_audit_type审核类型
      * organization_name机构名 organization_code 机构社会信用代码
      * info_id 审核的资料信息id
@@ -100,6 +100,8 @@ public interface UserInfoAuditMapper {
      * @return
      */
     UserInfoAuditEntity selectUserInfoAuditRecentlyByUid(int user_id_idd);
+
+
 
 
 }

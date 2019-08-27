@@ -3,11 +3,15 @@ package com.example.controller;
 import com.example.common.exceptiondefine.LoginException;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
+import com.example.entity.requstparam.OrderRequest;
+import com.example.entity.requstparam.PageOderRequest;
+import com.example.entity.requstparam.PageRequest;
 import com.example.entity.resultsparam.ExpertInfoResults;
 import com.example.entity.resultsparam.OrganizationAuditResults;
 import com.example.entity.user.UserInfoAuditEntity;
 import com.example.entity.user.UserInfoLoginSession;
 import com.example.service.UserInfoService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -311,6 +315,27 @@ public class UserInfoAuditController {
         vcp.setObject(map);
         vcp.setState(0);
         vcp.setMessage("请求成功");
+        return vcp;
+    }
+    /**
+     * 分页查询初次未审核的专家信息列表
+     *
+     * @param
+     * @return
+     */
+    @PostMapping("findAuditExpertInfoNonePage")
+    public VisitConsequenceParent findAuditExpertInfoNonePage(
+            @RequestBody PageOderRequest pageOderRequest) {
+        VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
+        vcp.setMessage("请求成功");
+        vcp.setState(0);
+        int user_info_audit_state = 1;
+        int user_info_audit_type = 1;
+        List<Map<String,Object>> uiae=  userInfoService.
+                findUserInfoAuditExpert(null,user_info_audit_state,
+                        user_info_audit_type);
+        PageInfo a=new PageInfo<Map<String,Object>>(uiae);
+        vcp.setObject(uiae);
         return vcp;
     }
 

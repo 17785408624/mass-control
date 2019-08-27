@@ -24,8 +24,11 @@ public class ExpertInfoEntity {
     private String expert_info_school;//毕业学校
     private Integer expert_info_education;//学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
     private String expert_info_qualification;//职业资格
-    private Integer expert_info_learnmajor;//所学专业 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
-    private Integer expert_info_workmajor;//从事专业  1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+    private String expert_info_learnmajor;//所学专业 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+    private String[]expert_info_learnmajorArray;//所学专业 数组形式
+    private String expert_info_workmajor;//从事专业  1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+    private String[] expert_info_workmajorArray;//所学专业 数组形式
+
     private String expert_info_declaredesign_design;//申报专业 设计等技术报告咨询审查类 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
     private String []expert_info_declaredesign_designArray;//申报专业 设计类 数组形式
     private String expert_info_declaredesign_safety;//申报专业 安全生产检查类 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
@@ -181,20 +184,28 @@ public class ExpertInfoEntity {
         this.expert_info_qualification = expert_info_qualification;
     }
 
-    public Integer getExpert_info_learnmajor() {
+    public String getExpert_info_learnmajor() {
         return expert_info_learnmajor;
     }
 
-    public void setExpert_info_learnmajor(Integer expert_info_learnmajor) {
+    public void setExpert_info_learnmajor(String expert_info_learnmajor) {
         this.expert_info_learnmajor = expert_info_learnmajor;
+        if(expert_info_learnmajor==null){
+            return;
+        }
+        this.expert_info_learnmajorArray=expert_info_learnmajor.split(",");
     }
 
-    public Integer getExpert_info_workmajor() {
+    public String getExpert_info_workmajor() {
         return expert_info_workmajor;
     }
 
-    public void setExpert_info_workmajor(Integer expert_info_workmajor) {
+    public void setExpert_info_workmajor(String expert_info_workmajor) {
         this.expert_info_workmajor = expert_info_workmajor;
+        if(expert_info_workmajor==null){
+            return;
+        }
+        expert_info_workmajorArray=expert_info_workmajor.split(",");
     }
 
     public String getExpert_info_declaredesign_design() {

@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import com.example.entity.ProjectInfoEntityWithBLOBs;
+import com.example.entity.requstparam.OrderRequest;
+import com.example.mapper.ProjectInfoEntityMapper;
 import com.example.mapper.UserInfoAuditMapper;
 import com.example.mapper.UserMapper;
 import org.junit.Test;
@@ -14,7 +17,7 @@ import java.util.List;
 @SpringBootTest
 public class DemoApplicationTests {
     @Autowired
-    UserInfoAuditMapper UserInfoAuditMapper;
+    ProjectInfoEntityMapper projectInfoEntityMapper;
     @Autowired
     UserMapper userMapper;
 
@@ -30,7 +33,18 @@ public class DemoApplicationTests {
 //        List<sys_role> li = sys_roleMapper.selectByExample(sys_roleExample);
 //        //FileInfoeEntity f=UserInfoAuditMapper.selectFileInfoeEntityFullByFileId(3);
 //        System.out.println();
-        userMapper.updateUserInfoIdAUserStateByinfo_id(5,2);
+        int []i={1,2};
+        OrderRequest o=new OrderRequest();
+        o.setOrderName("project_info_id");
+        o.setOrderRule("ASC");
+        OrderRequest o1=new OrderRequest();
+        o1.setOrderName("project_info_invest");
+        o1.setOrderRule("DESC");
+
+        OrderRequest[]ii={o,o1};
+        List<ProjectInfoEntityWithBLOBs>l=
+                projectInfoEntityMapper.selectListByPiProgress(i,ii);
+        System.out.println();
 
 
     }

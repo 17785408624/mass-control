@@ -1,7 +1,8 @@
 package com.util;
 
-import com.example.entity.common.PageRequest;
 import com.example.entity.common.PageResult;
+import com.example.entity.common.VisitConsequencePage;
+import com.example.entity.requstparam.PageRequest;
 import com.github.pagehelper.PageInfo;
 
 public class PageUtils {
@@ -20,4 +21,14 @@ public class PageUtils {
         pageResult.setContent(pageInfo.getList());
         return pageResult;
     }
+    public static VisitConsequencePage getVisitConsequencePage( PageInfo<?> pageInfo) {
+        VisitConsequencePage pageResult=new VisitConsequencePage();
+        pageResult.setPageNum(pageInfo.getPageNum());
+        pageResult.setPageSize(pageInfo.getPageSize());
+        pageResult.setTotalSize(pageInfo.getTotal());
+        pageResult.setTotalPages(pageInfo.getPages());
+        pageResult.setObject(pageInfo.getList());
+        return pageResult;
+    }
+
 }

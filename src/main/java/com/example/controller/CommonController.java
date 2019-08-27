@@ -27,17 +27,28 @@ public class CommonController {
     @Autowired
     private CommonService commonService;
     /**
-     * 用户文件上传
+     * 上传用户信息文件
      * @param file 上传文件
      * @return
      * @throws IOException
      */
     @ResponseBody
     @RequestMapping("/uploadFileTemporary")
-    public VisitConsequenceParent uploadFileByFrom(@RequestParam("file") MultipartFile file) throws IOException {
+    public VisitConsequenceParent uploadFileUser(@RequestParam("file") MultipartFile file) throws IOException {
         //logger.info("upload file by form");
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
         FileInfoeEntity fileInfoeEntity=commonService.userUploadFile(file);
+        vcp.setObject(fileInfoeEntity);
+        vcp.setState(0);
+        vcp.setMessage("请求成功");
+        return vcp;
+    }
+    @ResponseBody
+    @RequestMapping("/uploadFileProject")
+    public VisitConsequenceParent uploadFileProject(@RequestParam("file") MultipartFile file) throws IOException {
+        //logger.info("upload file by form");
+        VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
+        FileInfoeEntity fileInfoeEntity=commonService.projectUploadFile(file);
         vcp.setObject(fileInfoeEntity);
         vcp.setState(0);
         vcp.setMessage("请求成功");
