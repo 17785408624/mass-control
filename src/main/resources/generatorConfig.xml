@@ -46,8 +46,8 @@
         </javaClientGenerator>
 
         <!-- 要逆向生成Dao的所有表 -->
-        <table schema="ProjectInfoEntity" tableName="project_info"
-               domainObjectName="ProjectInfoEntity" enableCountByExample="false"
+        <table schema="ProjectauditOrganizationInvite" tableName="projectaudit_organization_invite"
+               domainObjectName="ProjectauditOrganizationInvite" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>

@@ -214,4 +214,18 @@ public class UserController {
         return vcp;
     }
 
+    /**
+     * 查询第三方机构id和名字信息列表
+     * @return
+     */
+    @GetMapping("findOrganizationInfoNameIdList")
+    public VisitConsequenceParent findOrganizationInfoNameIdList() {
+        VisitConsequenceParent vcp=new VisitConsequenceParentImpl();
+        List<Map> listM=userService.findOrganizationInfoNameIdList();
+        vcp.setMessage("请求成功");
+        vcp.setState(0);
+        vcp.setObject(listM);
+        return  vcp;
+    }
+
 }

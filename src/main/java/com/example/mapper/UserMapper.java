@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author:0xOO
@@ -78,5 +79,35 @@ public interface UserMapper {
 	 * @return
 	 */
 	UserEntity selectUserEntityByUId(Integer user_id);
+
+	/**
+	 * 查询第三方机构id和名字信息列表
+	 * @return organization_name, 机构名
+	 * 	 organization_info_id, 机构id
+	 * 	 user_id 用户id
+	 */
+	List<Map> selectOrganizationInfoNameIdList();
+
+	/**
+	 * 查询用户数量
+	 * @param user_role 用户角色  1专家 2第三方机构 3煤监局 4能源局 5超级管理员
+	 * @param user_state 用户状态  1未认证审核 2已认证审核  3解聘
+	 * @return
+	 */
+	Integer selectUserNum(Integer user_role,
+									  Integer user_state);
+
+	/**
+	 * 范围查询第三方机构信息列表
+	 * @param user_state 用户状态  1未认证审核 2已认证审核  3解聘
+	 * @param begin 范围开始索引
+	 * @param end 结束
+	 * @param excludeUids 排除的用户id
+	 * @return
+	 */
+	List<Map>selectOrganizationInfoLimit(@Param("user_state") Integer user_state,
+										 @Param("begin")Integer begin,@Param("end")Integer end,
+										 @Param("excludeUids")Integer[]excludeUids);
+
 
 }

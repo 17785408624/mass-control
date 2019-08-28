@@ -19,6 +19,8 @@ com\example\service\impl\CommonServiceImpl.class
 com\example\mapper\UserMapper.class
 com\example\config\ProjectConf.class
 com\example\entity\user\OrganizationInfoCareermanEntity.class
+com\example\service\impl\ProjectInfoServiceImpl.class
+com\example\controller\ProjectController.class
 com\example\common\annotation\NeedLogin.class
 com\example\Test.class
 com\example\entity\MyCommentGenerator.class
@@ -27,6 +29,7 @@ com\example\Application.class
 com\example\common\exceptiondefine\LoginException.class
 com\example\config\UploadFileType.class
 com\example\service\impl\UserServiceImpl.class
+com\example\service\ProjectInfoService.class
 com\example\entity\AcidAndProductForecastEntity.class
 com\example\entity\common\VisitConsequencePage.class
 com\example\mapper\FileMapper.class

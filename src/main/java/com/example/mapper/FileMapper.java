@@ -11,9 +11,10 @@ public interface FileMapper {
     int insertFileInfo(FileInfoeEntity fileInfo);
 
     /**
-     * 通过数据主键查询文件信息
+     * 通过数据主键查询文件全部信息
      * @param file_info_id
      * @return
      */
-    FileInfoeEntity selectFileInfoById(int file_info_id);
+    FileInfoeEntity selectFileInfoAllById(int file_info_id);
+
 }

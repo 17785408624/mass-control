@@ -17,4 +17,10 @@ public interface CommonService {
      * @return
      */
     FileInfoeEntity projectUploadFile(MultipartFile file);
+
+    /**
+     * 查询文件全部信息
+     * @return
+     */
+    FileInfoeEntity findFileInfoAllById(Integer file_info_id);
 }

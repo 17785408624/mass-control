@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Transactional(rollbackFor = Exception.class)
 @Service
@@ -113,6 +114,11 @@ public class UserServiceImpl implements UserService {
         httpSession.setAttribute(
                 LonginConf.LONGIN_SESSION_KEY, null);//将登录信息session清空
         return true;
+    }
+    //查询第三方机构id和名字信息列表
+    @Override
+    public List<Map> findOrganizationInfoNameIdList() {
+        return userMapper.selectOrganizationInfoNameIdList();
     }
 
 

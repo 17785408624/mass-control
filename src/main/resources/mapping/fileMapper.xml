@@ -27,5 +27,8 @@
      from file_info
      where file_info_id=#{file_info_id}
     </select>
+    <select id="selectFileInfoAllById" resultType="FileInfoeEntity">
+        select * from  file_info where file_info_id=#{file_info_id};
+    </select>
 
 </mapper>

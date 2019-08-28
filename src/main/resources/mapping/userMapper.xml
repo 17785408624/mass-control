@@ -143,7 +143,8 @@
 
 
     </insert>
-    <insert id="insertUserInfoAuditEntity" parameterType="UserInfoAuditEntity" keyProperty="user_info_audit_id" useGeneratedKeys="true">
+    <insert id="insertUserInfoAuditEntity" parameterType="UserInfoAuditEntity" keyProperty="user_info_audit_id"
+            useGeneratedKeys="true">
     insert into user_info_audit
     (
     user_info_audit_state,
@@ -171,14 +172,15 @@
 
     </insert>
     <select id="selectUserEntityByMobilePhone_Password" resultType="UserEntity">
-     select
-     <include refid="user_sql_param"></include>
-     FROM user
-     where user_mobile_phone=#{user_mobile_phone} AND user_password=#{user_password}
+        select
+        <include refid="user_sql_param"></include>
+        FROM user
+        where user_mobile_phone=#{user_mobile_phone} AND user_password=#{user_password}
 
     </select>
 
-    <insert id="insertExpertInfoEntity" parameterType="ExpertInfoEntity" keyProperty="expert_info_id" useGeneratedKeys="true">
+    <insert id="insertExpertInfoEntity" parameterType="ExpertInfoEntity" keyProperty="expert_info_id"
+            useGeneratedKeys="true">
      insert into expert_info
      (
      expert_info_name,
@@ -253,7 +255,7 @@
         <if test="user_state != '0' and user_state != null ">
             user_state=#{user_state},
         </if>
-         info_id =#{info_id}
+        info_id =#{info_id}
         WHERE
         user_id in
         (
@@ -275,5 +277,40 @@
       user_state
       FROM USER WHERE user_id=#{user_id}
     </select>
-
+    <select id="selectOrganizationInfoNameIdList" resultType="java.util.Map">
+     SELECT
+	oi.organization_name,
+	oi.organization_info_id,
+	u.user_id
+    FROM
+	organization_info oi
+    LEFT JOIN USER u ON (
+	oi.organization_info_id = u.info_id
+    )
+    </select>
+    <select id="selectUserNum" resultType="java.lang.Integer">
+        select count(*) from user
+        where user_role=#{user_role}
+        AND user_state=#{user_state}
+    </select>
+    <select id="selectOrganizationInfoLimit" resultType="java.util.Map">
+        select u.user_id,
+        oi.organization_name,
+        oi.organization_info_id
+        from  user u
+        left join organization_info oi
+        on(u.info_id=oi.organization_info_id)
+        where
+        user_role=2
+        AND
+        u.user_state=#{user_state}
+        <if test="excludeUids != null">
+            <foreach collection="excludeUids" item="excludeUid">
+                and user_id
+                <![CDATA[ <> ]]>
+                #{excludeUid}
+            </foreach>
+        </if>
+        limit ${begin},${end}
+    </select>
 </mapper>

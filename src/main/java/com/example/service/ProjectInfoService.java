@@ -4,6 +4,7 @@ import com.example.entity.ProjectInfoEntityWithBLOBs;
 import com.example.entity.requstparam.PageOderRequest;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProjectInfoService {
     /**
@@ -25,4 +26,19 @@ public interface ProjectInfoService {
      * @return
      */
     List<ProjectInfoEntityWithBLOBs>findProjectInfoChooseByProgressOE(PageOderRequest pageOderRequest);
+
+    /**
+     * 通过项目id查询项目全部信息
+     * @return
+     */
+    ProjectInfoEntityWithBLOBs findProjectInfoFullByPid(
+            Integer project_info_id);
+
+    /**
+     * 抽取审核项目的第三方机构
+     * @param excludeUids 回避的单位用户id
+     * @return
+     */
+    Map extractionProjectOrganization(Integer[]excludeUids);
+
 }

@@ -2,11 +2,9 @@ package com.example.controller;
 
 import com.example.common.exceptiondefine.LoginException;
 import com.example.entity.ProjectInfoEntityWithBLOBs;
-import com.example.entity.common.VisitConsequencePage;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.PageOderRequest;
-import com.example.entity.requstparam.PageRequest;
 import com.example.entity.user.UserInfoLoginSession;
 import com.example.service.ProjectInfoService;
 import com.github.pagehelper.PageInfo;
@@ -64,4 +62,43 @@ public class ProjectController {
         VisitConsequenceParent vcp=PageUtils.getVisitConsequencePage(a);
         return vcp;
     };
+    /**
+     *  通过项目id查询项目全部信息
+     * @param param projectInfoId:
+     * @return
+     */
+    @PostMapping("findProjectInfoFullByPid")
+    public VisitConsequenceParent findProjectInfoFullByPid(
+            @RequestBody Map param){
+        Integer projectInfoId=Integer.parseInt(
+                String.valueOf(param.get("projectInfoId")));
+        ProjectInfoEntityWithBLOBs pe=projectInfoService.findProjectInfoFullByPid(projectInfoId);
+        VisitConsequenceParent vcp= new VisitConsequenceParentImpl();
+        vcp.setObject(pe);
+        return vcp;
+    };
+
+    /**
+     * 抽取审核项目的第三方机构
+     * @param param
+     * @return
+     */
+    @PostMapping("extractionProjectOrganization")
+    public VisitConsequenceParent extractionProjectOrganization(
+            @RequestBody Map param){
+        VisitConsequenceParent vcp= new VisitConsequenceParentImpl();
+        Integer[]excludeUids=null;//排除回避的单位，单位用户id数组
+        if(param.containsKey("excludeUids")&&param.get("excludeUids")!=null&&!param.get("excludeUids").equals("")){
+            List<Integer> list=(List)param.get("excludeUids");
+            excludeUids= new Integer[list.size()];
+            for(int i=0;i<list.size();i++){
+                excludeUids[i]=list.get(i);
+            }
+        }
+        Map map=projectInfoService.extractionProjectOrganization(excludeUids);
+        vcp.setObject(map);
+        return vcp;
+    };
+
+
 }

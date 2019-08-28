@@ -30,4 +30,9 @@ public class CommonServiceImpl implements CommonService {
 
         return fileInfoeEntity;
     }
+
+    @Override
+    public FileInfoeEntity findFileInfoAllById(Integer file_info_id) {
+        return fileMapper.selectFileInfoAllById(file_info_id);
+    }
 }

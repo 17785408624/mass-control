@@ -9,6 +9,7 @@ import com.example.entity.user.UserEntity;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 
 public interface UserService {
@@ -66,5 +67,11 @@ public interface UserService {
 	 * @return
 	 */
 	boolean userLoginOut(HttpSession httpSession);
+
+	/**
+	 * 查询第三方机构id和名字信息列表
+	 * @return
+	 */
+	List<Map>  findOrganizationInfoNameIdList();
 
 }

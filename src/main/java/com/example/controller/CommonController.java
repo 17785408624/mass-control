@@ -8,10 +8,7 @@ import com.example.service.CommonService;
 import com.example.service.TestService;
 import com.util.LoadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -55,4 +52,22 @@ public class CommonController {
         return vcp;
     }
 
+    /**
+     * 通过文件id查询文件全部信息
+     */
+    @ResponseBody
+    @PostMapping("/findFileInfoAll")
+    public VisitConsequenceParent findFileInfoAll(
+            @RequestBody Map param) throws IOException {
+        //logger.info("upload file by form");
+        Integer file_info_id=Integer.
+                parseInt(String.valueOf(param.get("file_info_id")));//文件id
+        VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
+        FileInfoeEntity fileInfoeEntity=
+                commonService.findFileInfoAllById(file_info_id);//查询文件全部信息
+        vcp.setObject(fileInfoeEntity);
+        vcp.setState(0);
+        vcp.setMessage("请求成功");
+        return vcp;
+    }
 }
