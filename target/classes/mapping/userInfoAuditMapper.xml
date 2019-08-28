@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.UserInfoAuditMapper">
+
+    <select id="selectUserInfoAuditOrganizationByStateAType" resultType="java.util.Map">
+        SELECT
+        uia.user_info_audit_id,
+        uia.user_info_audit_state,
+        uia.user_info_audit_addtime,
+        uia.user_info_audit_type,
+        oi.organization_name,
+        oi.organization_code,
+        uia.info_id
+        FROM
+        user_info_audit AS uia
+        LEFT JOIN organization_info oi ON (
+        uia.info_id = oi.organization_info_id
+        )
+        <choose>
+            <when test="user_info_audit_state !=null and user_info_audit_state != '0'.toString()">
+                where uia.user_info_audit_state =#{user_info_audit_state}
+                <if test="user_info_audit_type !=null and user_info_audit_type !='0'.toString()">
+                    and uia.user_info_audit_type=#{user_info_audit_type}
+                </if>
+            </when>
+            <otherwise>
+                <if test="user_info_audit_type !=null and user_info_audit_type !='0'.toString()">
+                    where uia.user_info_audit_type=#{user_info_audit_type}
+                </if>
+            </otherwise>
+        </choose>
+    </select>
+    <select id="selectOrganizationInfoEntityFull" resultType="OrganizationInfoEntity">
+      select * from organization_info
+      where organization_info_id=#{organization_info_id}
+    </select>
+
+    <select id="selectOrganizationInfoCareermanFullByOrgInfoId" resultType="OrganizationInfoCareermanEntity">
+    select * from organization_info_careerman
+    where organization_info_id =#{organization_info_id}
+
+    </select>
+    <select id="selectFileInfoeEntityFullByFileId" resultType="FileInfoeEntity">
+    select *from file_info
+    where file_info_id =#{file_info_id}
+    </select>
+    <select id="selectUserInfoAuditByUid" resultType="UserInfoAuditEntity">
+    SELECT * FROM user_info_audit
+    WHERE user_id_add =#{user_id_add}
+
+    </select>
+
+    <select id="selectUserInfoAuditFirstByUid" resultType="UserInfoAuditEntity">
+    SELECT
+	*
+     FROM
+	user_info_audit
+    WHERE
+	user_id_add =#{user_id_idd}
+    ORDER BY user_info_audit_addtime
+	ASC
+    LIMIT  0,1
+    </select>
+
+    <select id="selectUserInfoAuditExpertByStateAType" resultType="java.util.Map">
+        SELECT
+        uia.user_info_audit_id,
+        uia.user_info_audit_state,
+        uia.user_info_audit_addtime,
+        uia.user_info_audit_type,
+        ei.expert_info_name,
+        ei.expert_info_idcard,
+        ei.expert_info_companyname,
+        uia.info_id
+        FROM
+        user_info_audit AS uia
+        LEFT JOIN expert_info ei ON (
+        uia.info_id = ei.expert_info_id
+        )
+        <choose>
+            <when test="user_info_audit_state !=null and user_info_audit_state != '0'.toString()">
+                where uia.user_info_audit_state =#{user_info_audit_state}
+                <if test="user_info_audit_type !=null and user_info_audit_type !='0'.toString()">
+                    and uia.user_info_audit_type=#{user_info_audit_type}
+                </if>
+            </when>
+            <otherwise>
+                <if test="user_info_audit_type !=null and user_info_audit_type !='0'.toString()">
+                    where uia.user_info_audit_type=#{user_info_audit_type}
+                </if>
+            </otherwise>
+        </choose>
+    </select>
+    <update id="updateUserInfoAuditStateByinfoId">
+        update  user_info_audit
+        set
+        user_info_audit_state=#{user_info_audit_state}
+        where  info_id=#{info_id}
+    </update>
+    <select id="selectExpertInfoFull" resultType="ExpertInfoEntity">
+        select * from  expert_info
+        where expert_info_id=#{expert_info_id}
+    </select>
+    <select id="selectUserInfoAuditRecentlyByUid" resultType="UserInfoAuditEntity">
+    SELECT
+	*
+     FROM
+	user_info_audit
+    WHERE
+	user_id_add =#{user_id_idd}
+    ORDER BY user_info_audit_addtime
+	DESC
+    LIMIT  0,1
+    </select>
+
+
+</mapper>

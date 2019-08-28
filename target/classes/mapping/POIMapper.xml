@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.POIMapper" >
+  <resultMap id="BaseResultMap" type="com.example.entity.POI" >
+    <result column="projectaudit_organization_invite_id" property="projectauditOrganizationInviteId" jdbcType="INTEGER" />
+    <result column="invite_state" property="inviteState" jdbcType="INTEGER" />
+    <result column="invite_user_id" property="inviteUserId" jdbcType="INTEGER" />
+    <result column="invite_organization_name" property="inviteOrganizationName" jdbcType="VARCHAR" />
+    <result column="invite_addtime" property="inviteAddtime" jdbcType="BIGINT" />
+    <result column="invite_edittime" property="inviteEdittime" jdbcType="BIGINT" />
+    <result column="invite_adduser_id" property="inviteAdduserId" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.entity.POI" >
+    insert into projectaudit_organization_invite (projectaudit_organization_invite_id, invite_state, 
+      invite_user_id, invite_organization_name, invite_addtime, 
+      invite_edittime, invite_adduser_id)
+    values (#{projectauditOrganizationInviteId,jdbcType=INTEGER}, #{inviteState,jdbcType=INTEGER}, 
+      #{inviteUserId,jdbcType=INTEGER}, #{inviteOrganizationName,jdbcType=VARCHAR}, #{inviteAddtime,jdbcType=BIGINT}, 
+      #{inviteEdittime,jdbcType=BIGINT}, #{inviteAdduserId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.entity.POI" >
+    insert into projectaudit_organization_invite
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectauditOrganizationInviteId != null" >
+        projectaudit_organization_invite_id,
+      </if>
+      <if test="inviteState != null" >
+        invite_state,
+      </if>
+      <if test="inviteUserId != null" >
+        invite_user_id,
+      </if>
+      <if test="inviteOrganizationName != null" >
+        invite_organization_name,
+      </if>
+      <if test="inviteAddtime != null" >
+        invite_addtime,
+      </if>
+      <if test="inviteEdittime != null" >
+        invite_edittime,
+      </if>
+      <if test="inviteAdduserId != null" >
+        invite_adduser_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectauditOrganizationInviteId != null" >
+        #{projectauditOrganizationInviteId,jdbcType=INTEGER},
+      </if>
+      <if test="inviteState != null" >
+        #{inviteState,jdbcType=INTEGER},
+      </if>
+      <if test="inviteUserId != null" >
+        #{inviteUserId,jdbcType=INTEGER},
+      </if>
+      <if test="inviteOrganizationName != null" >
+        #{inviteOrganizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteAddtime != null" >
+        #{inviteAddtime,jdbcType=BIGINT},
+      </if>
+      <if test="inviteEdittime != null" >
+        #{inviteEdittime,jdbcType=BIGINT},
+      </if>
+      <if test="inviteAdduserId != null" >
+        #{inviteAdduserId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
