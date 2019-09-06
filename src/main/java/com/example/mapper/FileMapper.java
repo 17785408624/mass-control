@@ -1,7 +1,9 @@
 package com.example.mapper;
 
 import com.example.entity.common.FileInfoeEntity;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FileMapper {
     /**
      * 添加文件信息

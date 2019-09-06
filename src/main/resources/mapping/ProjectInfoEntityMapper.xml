@@ -253,48 +253,48 @@
       project_info_adduserid
       )
       values(
-        #{projectInfo.projectInfoName,jdbcType=VARCHAR},
-        #{projectInfo.projectInfoArea,jdbcType=VARCHAR},
-        #{projectInfo.projectInfoNature,jdbcType=INTEGER},
-        #{projectInfo.projectInfoInvest,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoScale,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoDuration,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoServe,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoReservesquantity,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoUsequantity,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoGas,jdbcType=INTEGER},
-        #{projectInfo.projectInfoDatalocal,jdbcType=INTEGER},
-        #{projectInfo.projectInfoDataurl,jdbcType=VARCHAR},
-        #{projectInfo.projectInfoDatedescribe,jdbcType=VARCHAR},
+        #{projectInfoName,jdbcType=VARCHAR},
+        #{projectInfoArea,jdbcType=VARCHAR},
+        #{projectInfoNature,jdbcType=INTEGER},
+        #{projectInfoInvest,jdbcType=DOUBLE},
+        #{projectInfoScale,jdbcType=DOUBLE},
+        #{projectInfoDuration,jdbcType=DOUBLE},
+        #{projectInfoServe,jdbcType=DOUBLE},
+        #{projectInfoReservesquantity,jdbcType=DOUBLE},
+        #{projectInfoUsequantity,jdbcType=DOUBLE},
+        #{projectInfoGas,jdbcType=INTEGER},
+        #{projectInfoDatalocal,jdbcType=INTEGER},
+        #{projectInfoDataurl,jdbcType=VARCHAR},
+        #{projectInfoDatedescribe,jdbcType=VARCHAR},
         ${1},
-        #{projectInfo.projectInfoProgressmessage,jdbcType=VARCHAR},
+        #{projectInfoProgressmessage,jdbcType=VARCHAR},
         ${1},
-        #{projectInfo.projectInfoSynopsis,jdbcType=LONGVARCHAR},
-        #{projectInfo.projectInfoContent,jdbcType=LONGVARCHAR},
-        #{projectInfo.projectInfoAddtime,jdbcType=BIGINT},
-        #{projectInfo.projectInfoAdduserid,jdbcType=INTEGER}
+        #{projectInfoSynopsis,jdbcType=LONGVARCHAR},
+        #{projectInfoContent,jdbcType=LONGVARCHAR},
+        #{projectInfoAddtime,jdbcType=BIGINT},
+        #{projectInfoAdduserid,jdbcType=INTEGER}
         ),
         (
-        #{projectInfo.projectInfoName,jdbcType=VARCHAR},
-        #{projectInfo.projectInfoArea,jdbcType=VARCHAR},
-        #{projectInfo.projectInfoNature,jdbcType=INTEGER},
-        #{projectInfo.projectInfoInvest,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoScale,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoDuration,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoServe,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoReservesquantity,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoUsequantity,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoGas,jdbcType=INTEGER},
-        #{projectInfo.projectInfoDatalocal,jdbcType=INTEGER},
-        #{projectInfo.projectInfoDataurl,jdbcType=VARCHAR},
-        #{projectInfo.projectInfoDatedescribe,jdbcType=VARCHAR},
+        #{projectInfoName,jdbcType=VARCHAR},
+        #{projectInfoArea,jdbcType=VARCHAR},
+        #{projectInfoNature,jdbcType=INTEGER},
+        #{projectInfoInvest,jdbcType=DOUBLE},
+        #{projectInfoScale,jdbcType=DOUBLE},
+        #{projectInfoDuration,jdbcType=DOUBLE},
+        #{projectInfoServe,jdbcType=DOUBLE},
+        #{projectInfoReservesquantity,jdbcType=DOUBLE},
+        #{projectInfoUsequantity,jdbcType=DOUBLE},
+        #{projectInfoGas,jdbcType=INTEGER},
+        #{projectInfoDatalocal,jdbcType=INTEGER},
+        #{projectInfoDataurl,jdbcType=VARCHAR},
+        #{projectInfoDatedescribe,jdbcType=VARCHAR},
         ${1},
-        #{projectInfo.projectInfoProgressmessage,jdbcType=VARCHAR},
+        #{projectInfoProgressmessage,jdbcType=VARCHAR},
         ${2},
-        #{projectInfo.projectInfoSynopsis,jdbcType=LONGVARCHAR},
-        #{projectInfo.projectInfoContent,jdbcType=LONGVARCHAR},
-        #{projectInfo.projectInfoAddtime,jdbcType=BIGINT},
-        #{projectInfo.projectInfoAdduserid,jdbcType=INTEGER}
+        #{projectInfoSynopsis,jdbcType=LONGVARCHAR},
+        #{projectInfoContent,jdbcType=LONGVARCHAR},
+        #{projectInfoAddtime,jdbcType=BIGINT},
+        #{projectInfoAdduserid,jdbcType=INTEGER}
         )
 
   </insert>
@@ -333,4 +333,11 @@
     where
     project_info_id =#{project_info_id}
   </select>
+  <update id="updateProjectInfoProgressByPIid">
+    update project_info
+    set
+    project_info_progress=#{projectInfoProgress}
+    where
+    project_info_id=#{projectInfoId}
+  </update>
 </mapper>

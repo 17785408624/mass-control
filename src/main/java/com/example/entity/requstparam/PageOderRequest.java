@@ -1,5 +1,7 @@
 package com.example.entity.requstparam;
 
+import com.util.EncryptUtil;
+
 import java.util.List;
 
 public class PageOderRequest {
@@ -8,7 +10,8 @@ public class PageOderRequest {
     PageRequest pageRequest;
 
     public com.example.entity.requstparam.OrderRequest[] getOrderRequests() {
-        return orderRequests;
+
+        return EncryptUtil.decodeOrderField(orderRequests);//解密排序字段
     }
 
     public void setOrderRequests(com.example.entity.requstparam.OrderRequest[] orderRequests) {

@@ -1,5 +1,6 @@
 package com.example.mapper;
 
+import com.example.entity.requstparam.OrderRequest;
 import com.example.entity.user.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -82,11 +83,13 @@ public interface UserMapper {
 
 	/**
 	 * 查询第三方机构id和名字信息列表
+	 * @param user_state 用户状态  1未认证审核 2已认证审核  3解聘
 	 * @return organization_name, 机构名
 	 * 	 organization_info_id, 机构id
 	 * 	 user_id 用户id
 	 */
-	List<Map> selectOrganizationInfoNameIdList();
+	List<Map> selectOrganizationInfoNameIdListByState(
+			@Param("user_state") Integer user_state);
 
 	/**
 	 * 查询用户数量
@@ -108,6 +111,12 @@ public interface UserMapper {
 	List<Map>selectOrganizationInfoLimit(@Param("user_state") Integer user_state,
 										 @Param("begin")Integer begin,@Param("end")Integer end,
 										 @Param("excludeUids")Integer[]excludeUids);
+
+	/**
+	 * 查询专家信息列表
+	 * @return
+	 */
+	List<Map>selectExpertInfoList(@Param("orderRequests") OrderRequest[] orderRequest);
 
 
 }

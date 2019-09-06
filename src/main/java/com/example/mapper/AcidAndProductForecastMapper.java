@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Param;
 
 import com.example.entity.AcidAndProductEntity;
 import com.example.entity.AcidAndProductForecastEntity;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AcidAndProductForecastMapper {
 	/**
 	 * 

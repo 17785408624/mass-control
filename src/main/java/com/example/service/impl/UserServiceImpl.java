@@ -3,9 +3,12 @@ package com.example.service.impl;
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.RegException;
 import com.example.config.LonginConf;
+import com.example.entity.requstparam.PageOderRequest;
+import com.example.entity.requstparam.PageRequest;
 import com.example.entity.user.*;
 import com.example.mapper.UserMapper;
 import com.example.service.UserService;
+import com.github.pagehelper.PageHelper;
 import com.util.EncryptUtil;
 import com.util.MyMD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,10 +118,26 @@ public class UserServiceImpl implements UserService {
                 LonginConf.LONGIN_SESSION_KEY, null);//将登录信息session清空
         return true;
     }
-    //查询第三方机构id和名字信息列表
+    //查询已审核认证的第三方机构id和名字信息列表
     @Override
-    public List<Map> findOrganizationInfoNameIdList() {
-        return userMapper.selectOrganizationInfoNameIdList();
+    public List<Map> findOINameIdListCertified() {
+        return userMapper.selectOrganizationInfoNameIdListByState(2);
+    }
+
+    //分页查询专家信息列表
+    @Override
+    public List<Map> findExpertInfoListPage(PageOderRequest pageOderRequest) {
+        PageRequest pageRequest=pageOderRequest.getPageRequest();
+        int pageNum = pageRequest.getPageNum();//当前页面
+        int pageSize = pageRequest.getPageSize();//每页长度
+        PageHelper.startPage(pageNum, pageSize);//调用分页
+        return userMapper.selectExpertInfoList(pageOderRequest.getOrderRequests());
+
+    }
+    //查询专家信息列表
+    @Override
+    public List<Map> findExpertInfoList() {
+        return userMapper.selectExpertInfoList(null);
     }
 
 

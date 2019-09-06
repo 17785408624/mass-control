@@ -5,8 +5,6 @@ import com.example.entity.common.FileInfoeEntity;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.service.CommonService;
-import com.example.service.TestService;
-import com.util.LoadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,6 +38,13 @@ public class CommonController {
         vcp.setMessage("请求成功");
         return vcp;
     }
+
+    /**
+     * 上传项目信息文件
+     * @param file
+     * @return
+     * @throws IOException
+     */
     @ResponseBody
     @RequestMapping("/uploadFileProject")
     public VisitConsequenceParent uploadFileProject(@RequestParam("file") MultipartFile file) throws IOException {

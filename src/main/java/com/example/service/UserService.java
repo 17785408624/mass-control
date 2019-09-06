@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.RegException;
+import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.user.ExpertInfoEntity;
 import com.example.entity.user.OrganizationInfoCareermanEntity;
 import com.example.entity.user.OrganizationInfoEntity;
@@ -72,6 +73,17 @@ public interface UserService {
 	 * 查询第三方机构id和名字信息列表
 	 * @return
 	 */
-	List<Map>  findOrganizationInfoNameIdList();
+	List<Map>  findOINameIdListCertified();
+
+	/**
+	 *分页查询专家信息列表
+	 */
+	List<Map>findExpertInfoListPage(PageOderRequest pageOderRequest);
+
+	/**
+	 * 查询专家信息列表
+	 * @return
+	 */
+	List<Map>findExpertInfoList();
 
 }

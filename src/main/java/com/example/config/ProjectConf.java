@@ -9,8 +9,9 @@ import java.time.LocalDate;
 public class ProjectConf {
     public static String PROPERTY_NAME = "application-dev.yml";//yml文件名
     public static String ACCESS_PROTOCOL="http://";//访问协议
+    public static String CONTEXT_PATH;//访问路径文件名
     public static String PROJECT_STATIC_PATH="static/";//静态资源路径
-    public static String PROJECT_STATIC_URL="static/";//静态资源访问路径
+    public static String PROJECT_STATIC_URL="/static/";//静态资源访问路径
     public static String UPLOAD_PATH="file/upload/";//文件上传路径
     public static String TEMPORARY_PATH="temporary/";//临时文件上传路径
 
@@ -26,6 +27,7 @@ public class ProjectConf {
         ACCESS_URL= ACCESS_PROTOCOL+String.valueOf(PropertiesUitls.getCommonYml("access_url"))+
                 ":"+PropertiesUitls.getCommonYml("server.port")+
                 PropertiesUitls.getCommonYml("server.servlet.context-path")+"/";
+        CONTEXT_PATH= String.valueOf(PropertiesUitls.getCommonYml("server.servlet.context-path"));
         PROJECT_STATIC_URL_FULL=ACCESS_URL+PROJECT_STATIC_URL;
         try {
             PROJECT_ROOT_PATH= new File("").getCanonicalPath().replace("\\","/")+"/";

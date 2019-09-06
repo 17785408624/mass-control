@@ -43,7 +43,7 @@ public class ProjectController {
             e.printStackTrace();
             return vcp;
         }
-        projectInfoService.addProjectInfo(uils.getUser_id(),projectInfoEntityWithBLOBs);
+        projectInfoService.addProjectInfo(uils.getUser_id(),uils.getUser_role(),projectInfoEntityWithBLOBs);
         //vcp.setObject(projectInfoEntityWithBLOBs.getProjectInfoId());//项目信息主键id 项目编号
         return vcp;
     };
@@ -99,6 +99,24 @@ public class ProjectController {
         vcp.setObject(map);
         return vcp;
     };
+
+    /**
+     * 分页查询 进程为选择专家组组长的项目信息列表
+     * @param pageOderRequest
+     * @return
+     */
+    @PostMapping("findProjectInfoProgressLeader_page")
+    public VisitConsequenceParent findProjectInfoProgressLeader_page(
+            @RequestBody PageOderRequest pageOderRequest){
+        List<ProjectInfoEntityWithBLOBs> listP=
+                projectInfoService.findProjectInfoProgressLeader(pageOderRequest);
+        PageInfo a=new PageInfo<ProjectInfoEntityWithBLOBs>(listP);
+        VisitConsequenceParent vcp=PageUtils.getVisitConsequencePage(a);
+        return vcp;
+    };
+
+
+
 
 
 }

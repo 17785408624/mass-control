@@ -294,4 +294,35 @@ public class ExpertInfoEntity {
     }
 
 
+    public String[] getExpert_info_learnmajorArray() {
+        return expert_info_learnmajorArray;
+    }
+
+    public void setExpert_info_learnmajorArray(String[] expert_info_learnmajorArray) {
+        this.expert_info_learnmajorArray = expert_info_learnmajorArray;
+    }
+
+    public String[] getExpert_info_workmajorArray() {
+        return expert_info_workmajorArray;
+    }
+
+    public void setExpert_info_workmajorArray(String[] expert_info_workmajorArray) {
+        this.expert_info_workmajorArray = expert_info_workmajorArray;
+    }
+
+    public String[] getExpert_info_declaredesign_designArray() {
+        return expert_info_declaredesign_designArray;
+    }
+
+    public void setExpert_info_declaredesign_designArray(String[] expert_info_declaredesign_designArray) {
+        this.expert_info_declaredesign_designArray = expert_info_declaredesign_designArray;
+    }
+
+    public String[] getExpert_info_declaredesign_safetyArray() {
+        return expert_info_declaredesign_safetyArray;
+    }
+
+    public void setExpert_info_declaredesign_safetyArray(String[] expert_info_declaredesign_safetyArray) {
+        this.expert_info_declaredesign_safetyArray = expert_info_declaredesign_safetyArray;
+    }
 }

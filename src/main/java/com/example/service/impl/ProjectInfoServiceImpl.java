@@ -1,6 +1,7 @@
 package com.example.service.impl;
 
 import com.example.entity.ProjectInfoEntityWithBLOBs;
+import com.example.entity.ProjectParticipant;
 import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.requstparam.PageRequest;
 import com.example.mapper.ProjectInfoEntityMapper;
@@ -23,10 +24,13 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
     UserMapper userMapper;
     //添加项目信息
     @Override
-    public int addProjectInfo(int user_id,ProjectInfoEntityWithBLOBs projectInfoEntityWithBLOBs) {
+    public int addProjectInfo(int user_id,int user_role,ProjectInfoEntityWithBLOBs projectInfoEntityWithBLOBs) {
         projectInfoEntityWithBLOBs.setProjectInfoAddtime(new Date().getTime());
         projectInfoEntityWithBLOBs.setProjectInfoAdduserid(user_id);
-        return projectInfoEntityMapper.inserBatchAC(projectInfoEntityWithBLOBs);
+        int addNum=projectInfoEntityMapper.inserBatchAC(projectInfoEntityWithBLOBs);
+        ProjectParticipant p=new ProjectParticipant();
+        ProjectParticipant p2=new ProjectParticipant();
+        return 2;
     }
     //查询项目信息列表
     @Override
@@ -40,7 +44,7 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);//调用分页
-        return projectInfoEntityMapper.selectListByPiProgress(new int[]{1,2}, EncryptUtil.decodeOrderField(pageOderRequest.getOrderRequests()));
+        return projectInfoEntityMapper.selectListByPiProgress(new int[]{1,2}, pageOderRequest.getOrderRequests());
 
     }
 
@@ -68,6 +72,15 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
         int random= (int) ((Math.random()*userNum))+1;//随机选择机构
         Map map=userMapper.selectOrganizationInfoLimit(2,random-1,1,excludeUids).get(0);
         return map;
+    }
+    //分页查询 进程为选择专家组组长的项目信息列表
+    @Override
+    public List<ProjectInfoEntityWithBLOBs> findProjectInfoProgressLeader(PageOderRequest pageOderRequest) {
+        PageRequest pageRequest=pageOderRequest.getPageRequest();
+        int pageNum = pageRequest.getPageNum();
+        int pageSize = pageRequest.getPageSize();
+        PageHelper.startPage(pageNum, pageSize);//调用分页
+        return projectInfoEntityMapper.selectListByPiProgress(new int[]{3}, pageOderRequest.getOrderRequests());
     }
 
 

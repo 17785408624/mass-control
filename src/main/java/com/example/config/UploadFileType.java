@@ -61,7 +61,8 @@ public enum  UploadFileType {
      * @return
      */
     public String getAccessUlr(){//返回文件访问路径
-        return ProjectConf.ACCESS_URL+ProjectConf.PROJECT_STATIC_URL+this.file_path;
+        //return ProjectConf.ACCESS_URL+ProjectConf.PROJECT_STATIC_URL+this.file_path;
+        return ProjectConf.CONTEXT_PATH+ProjectConf.PROJECT_STATIC_URL+this.file_path;
 
     }
 

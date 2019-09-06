@@ -3,9 +3,12 @@ package com.example.controller;
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.RegException;
 import com.example.config.LonginConf;
+import com.example.entity.ProjectInfoEntityWithBLOBs;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.AddOrganizationInfoAudit;
+import com.example.entity.requstparam.PageOderRequest;
+import com.example.entity.requstparam.PageRequest;
 import com.example.entity.resultsparam.ExpertInfoResults;
 import com.example.entity.resultsparam.OrganizationAuditResults;
 import com.example.entity.user.*;
@@ -16,6 +19,8 @@ import com.example.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.github.pagehelper.PageInfo;
+import com.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -215,17 +220,43 @@ public class UserController {
     }
 
     /**
-     * 查询第三方机构id和名字信息列表
+     * 查询已审核第三方机构id和名字信息列表
      * @return
      */
-    @GetMapping("findOrganizationInfoNameIdList")
-    public VisitConsequenceParent findOrganizationInfoNameIdList() {
+    @GetMapping("findOINameIdListCertified")
+    public VisitConsequenceParent findOINameIdListCertified() {
         VisitConsequenceParent vcp=new VisitConsequenceParentImpl();
-        List<Map> listM=userService.findOrganizationInfoNameIdList();
+        List<Map> listM=userService.findOINameIdListCertified();
         vcp.setMessage("请求成功");
         vcp.setState(0);
         vcp.setObject(listM);
         return  vcp;
     }
+    /**
+     * 分页查询专家信息列表
+     * @param pageOderRequest
+     * @return
+     */
+    @PostMapping("findExpertInfoListPage")
+    public VisitConsequenceParent findExpertInfoListPage(
+            @RequestBody PageOderRequest pageOderRequest){
+        List<Map>listMap=userService.findExpertInfoListPage(pageOderRequest);
+        PageInfo a=new PageInfo<Map>(listMap);
+        VisitConsequenceParent vcp= PageUtils.getVisitConsequencePage(a);
+        return vcp;
+    };
+
+    /**
+     * 查询专家信息列表
+     * @param
+     * @return
+     */
+    @GetMapping("findExpertInfoList")
+    public VisitConsequenceParent findExpertInfoListPage(){
+        VisitConsequenceParent vcp =new VisitConsequenceParentImpl();
+        List<Map>listMap=userService.findExpertInfoList();
+        vcp.setObject(listMap);
+        return vcp;
+    };
 
 }

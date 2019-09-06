@@ -9,10 +9,11 @@ import java.util.Map;
 public interface ProjectInfoService {
     /**
      *添加项目信息 项目入库
-     * @param projectInfoEntityWithBLOBs
+     * @param projectInfoEntityWithBLOBs 项目信息
+     * @param  user_role 1专家 2第三方机构 3煤监局 4能源局 5超级管理员
      * @return
      */
-    int addProjectInfo(int user_id,
+    int addProjectInfo(int user_id,int user_role,
             ProjectInfoEntityWithBLOBs projectInfoEntityWithBLOBs);
 
     /**
@@ -40,5 +41,14 @@ public interface ProjectInfoService {
      * @return
      */
     Map extractionProjectOrganization(Integer[]excludeUids);
+
+    /**
+     * 分页查询 进程为选择专家组组长的项目信息列表
+     * @param pageOderRequest
+     * @return
+     */
+    List<ProjectInfoEntityWithBLOBs> findProjectInfoProgressLeader(PageOderRequest pageOderRequest);
+
+
 
 }
