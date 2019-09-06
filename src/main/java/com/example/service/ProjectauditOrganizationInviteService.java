@@ -22,7 +22,7 @@ public interface ProjectauditOrganizationInviteService {
     * @return
     */
     /**
-     * 分页查询用户项目审核邀请信息列表
+     * 分页查询用户项目审核邀请信息列表(第三方机构)
      * @param inviteUserId 邀请对象的用户id
      * @param inviteExpiration 是否包含过期记录 true包含 false不包含
      * @param pageRequest 分页信息

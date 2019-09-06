@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
                 userInfoAuditEntity.setUser_info_audit_type(2);//审核类型设置为变更
                 break;
         }
-        userInfoAuditEntity.setUser_info_audit_state(user_state);//审核状态 1为未审核
+        userInfoAuditEntity.setUser_info_audit_state(1);//审核状态 1为未审核
         userMapper.insertUserInfoAuditEntity(userInfoAuditEntity);//添加审核申请
         return userInfoAuditEntity.getUser_info_audit_id();//返回申请信息id 申请编号
     }
@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
                 userInfoAuditEntity.setUser_info_audit_type(2);//审核类型设置为变更
                 break;
         }
-        userInfoAuditEntity.setUser_info_audit_state(user_state);//审核状态 1为未审核
+        userInfoAuditEntity.setUser_info_audit_state(1);//审核状态 1为未审核
         userMapper.insertUserInfoAuditEntity(userInfoAuditEntity);//添加用户审核信息
         return userInfoAuditEntity.getUser_info_audit_id();
     }
