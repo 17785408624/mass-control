@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.entity.ProjectauditExpertInvite;
 import com.example.entity.requstparam.PageRequest;
 
@@ -22,5 +23,24 @@ public interface ProjectauditExpertInviteService {
      * @param pageRequest 分页信息
      * @return
      */
-    List<ProjectauditExpertInvite> findPEInviteListByUserIdPage(Integer inviteUserId, boolean inviteExpiration, PageRequest pageRequest);
+    List<ProjectauditExpertInvite> findPEInviteListByUserIdPage(Integer inviteUserId,
+                                                                boolean inviteExpiration, PageRequest pageRequest);
+
+    /**
+     * 用户操作项目审核邀请 (专家)
+     * @param projectInfoId 邀请审核的审核的项目id
+     * @param projectauditOrganizationInviteId 项目审核邀请信息数据id
+     * @param inviteEdituserId 修改人id
+     * @param inviteState 修改状态
+     * @param userRole 修改人角色
+     * @param inviteType 邀请类型(1组长 2组员)
+     * @return
+     * @throws OperationProjectauditOInviteException
+     */
+    Boolean operationUserPEInvite(Integer projectInfoId,
+                              Integer projectauditOrganizationInviteId,
+                              Integer inviteEdituserId,
+                              Integer inviteState,
+                              Integer userRole,
+                              Integer inviteType) throws OperationProjectauditOInviteException;
 }

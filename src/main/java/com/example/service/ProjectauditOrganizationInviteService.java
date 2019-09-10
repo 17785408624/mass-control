@@ -39,7 +39,12 @@ public interface ProjectauditOrganizationInviteService {
      * @param userRole 修改人角色
      * @return
      */
-  boolean operationUserProjectauditOInvite(Integer projectInfoId,Integer projectauditOrganizationInviteId,Integer inviteEdituserId,Integer inviteState,Integer userRole) throws OperationProjectauditOInviteException;
+  boolean operationUserProjectauditOInvite(
+          Integer projectInfoId,
+          Integer projectauditOrganizationInviteId,
+          Integer inviteEdituserId,
+          Integer inviteState,
+          Integer userRole) throws OperationProjectauditOInviteException;
 
     /**
      *判断用户是否能进行审核邀请操作

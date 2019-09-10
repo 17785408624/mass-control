@@ -1,6 +1,5 @@
 com\example\mapper\ProjectInfoEntityMapper.class
 com\example\mapper\ProjectParticipantMapper.class
-com\example\service\TestService.class
 com\example\common\exceptiondefine\RegException.class
 com\example\entity\common\VisitConsequenceParentImpl.class
 com\example\config\MyConfiguration.class
@@ -18,6 +17,7 @@ com\util\PageUtils.class
 com\example\mapper\AcidAndProductMapper.class
 com\util\MyStringUril.class
 com\example\service\impl\ProjectauditOrganizationInviteServiceImpl.class
+com\example\service\impl\ProjectauditExpertInviteServiceImpl.class
 com\util\PropertiesUitls.class
 com\example\entity\user\ExpertInfoEntity.class
 com\example\service\impl\CommonServiceImpl.class
@@ -35,6 +35,7 @@ com\example\entity\ProjectauditOrganizationInvite.class
 com\example\controller\ProjectauditOInviteController.class
 com\example\Application.class
 com\example\common\exceptiondefine\LoginException.class
+com\example\common\exceptiondefine\OperationProjectauditOInviteException.class
 com\example\config\UploadFileType.class
 com\example\service\impl\UserServiceImpl.class
 com\example\service\ProjectInfoService.class
@@ -43,15 +44,12 @@ com\example\entity\common\VisitConsequencePage.class
 com\example\mapper\FileMapper.class
 com\example\entity\ProjectInfoEntity.class
 com\example\entity\user\UserEntity.class
-com\example\entity\common\PageResult.class
 com\example\service\AcidAndProductForecastServiceImpl.class
 com\example\config\MyConfiguration$1.class
-com\example\service\TestServiceImpl.class
 com\example\entity\resultsparam\ExpertInfoResults.class
 com\example\entity\requstparam\PageOderRequest.class
 com\example\common\interceptor\LoginInterceptor.class
 com\example\entity\user\UserInfoLoginSession.class
-com\example\controller\TestController.class
 com\example\entity\AcidAndProductEntity.class
 com\example\service\CommonService.class
 com\example\service\UserService.class
@@ -59,6 +57,7 @@ com\example\mapper\TestMapper.class
 com\example\service\UserInfoService.class
 com\example\service\impl\UserInfoAuditServiceImpl.class
 com\example\controller\UserController.class
+com\example\service\ProjectauditExpertInviteService.class
 com\example\service\AcidAndProductForecastService.class
 com\example\entity\user\OrganizationInfoEntity.class
 com\example\entity\requstparam\PageRequest.class
@@ -68,7 +67,10 @@ com\example\entity\user\UserInfoAuditEntity.class
 com\example\config\LonginConf.class
 com\example\entity\common\FileInfoeEntity.class
 com\example\config\WebConfig.class
+com\example\controller\ProjectauditEInviteController.class
 com\example\entity\ProjectInfoEntityWithBLOBs.class
 com\example\entity\requstparam\OrderRequest.class
 com\example\entity\TestEntity.class
+com\example\mapper\ProjectauditExpertInviteMapper.class
+com\example\entity\ProjectauditExpertInvite.class
 com\util\LoadUtils.class

@@ -36,7 +36,7 @@ public class UserInfoLoginSession {
 
     }
 
-
+    //获取当前用户id
     public Integer getUser_id() {
         return Integer.valueOf(EncryptUtil.decode(String.valueOf(ue.getUser_id())));
     }
@@ -52,9 +52,9 @@ public class UserInfoLoginSession {
     public String getUser_password() {
         return user_password;
     }
-
+    //获取当前用户角色
     public int getUser_role() {
-        return user_role;
+        return ue.getUser_role();
     }
 
     public String getInfo_id() {

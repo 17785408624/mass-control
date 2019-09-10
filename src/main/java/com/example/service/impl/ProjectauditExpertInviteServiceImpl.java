@@ -1,8 +1,12 @@
 package com.example.service.impl;
 
+import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.config.ServiceConfig;
+import com.example.entity.ProjectParticipant;
 import com.example.entity.ProjectauditExpertInvite;
 import com.example.entity.requstparam.PageRequest;
+import com.example.mapper.ProjectInfoEntityMapper;
+import com.example.mapper.ProjectParticipantMapper;
 import com.example.mapper.ProjectauditExpertInviteMapper;
 import com.example.service.ProjectauditExpertInviteService;
 import com.github.pagehelper.PageHelper;
@@ -18,6 +22,10 @@ import java.util.List;
 public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertInviteService {
     @Autowired
     ProjectauditExpertInviteMapper projectauditExpertInviteMapper;
+    @Autowired
+    ProjectParticipantMapper projectParticipantMapper;
+    @Autowired
+    ProjectInfoEntityMapper projectInfoEntityMapper;
     //添加项目审核邀请
     @Override
     public int addPEInvite(ProjectauditExpertInvite pei, Integer inviteAdduserId) {
@@ -40,5 +48,50 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
         }else{
             return projectauditExpertInviteMapper.selectPEInviteListByinviteUserIdExpirationNot(inviteUserId,null);
         }
+    }
+    // 用户操作项目审核邀请 (专家)
+    @Override
+    public Boolean operationUserPEInvite(Integer projectInfoId,
+                                     Integer projectauditOrganizationInviteId,
+                                     Integer inviteEdituserId,
+                                     Integer inviteState,
+                                     Integer userRole,
+                                     Integer inviteType) throws OperationProjectauditOInviteException {
+        ProjectauditExpertInvite pei =new ProjectauditExpertInvite();
+        pei.setInviteEdittime(new Date().getTime());//修改时间
+        pei.setInviteEdituserId(inviteEdituserId);//修改人
+        pei.setInviteState(inviteState);//修改状态
+        pei.setProjectauditExpertInviteId(
+                projectauditOrganizationInviteId);//审核信息id
+        switch (inviteState){
+            case 2://接受
+                Integer projectinfoProgress = null;//邀请审核的项目进程
+                switch (inviteType){//邀请类型
+                    case 1://组长
+                        projectinfoProgress=3;//项目进程为选择专家组组员
+                        break;
+                    case 2://组员
+                        projectinfoProgress=4;//项目进程为项目评审
+                        break;
+                }
+                ProjectParticipant pP=new ProjectParticipant();//项目参与者信息
+                pP.setProjectInfoId(projectInfoId);//参与项目
+                pP.setUserId(inviteEdituserId);//参与者userid
+                pP.setUserRole(userRole);//参与者角色
+                projectParticipantMapper.insertSelective(pP);//添加项目参与者信息
+                projectInfoEntityMapper.updateProjectInfoProgressByPIid(
+                        projectInfoId,projectinfoProgress);//改变邀请审核的项目进程为下一步
+                projectauditExpertInviteMapper.updatePEInviteStateById(pei);//修改审核邀请信息
+                break;
+            case 3://拒绝
+                projectauditExpertInviteMapper.updatePEInviteStateById(pei);
+                break;
+            case 4://取消邀请
+                break;
+            default:
+                break;
+        }
+
+        return true;
     }
 }

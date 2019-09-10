@@ -17,16 +17,17 @@
         LEFT JOIN organization_info oi ON (
         uia.info_id = oi.organization_info_id
         )
+        where uia.user_info_audit_content =1
         <choose>
             <when test="user_info_audit_state !=null and user_info_audit_state != '0'.toString()">
-                where uia.user_info_audit_state =#{user_info_audit_state}
+                and uia.user_info_audit_state =#{user_info_audit_state}
                 <if test="user_info_audit_type !=null and user_info_audit_type !='0'.toString()">
                     and uia.user_info_audit_type=#{user_info_audit_type}
                 </if>
             </when>
             <otherwise>
                 <if test="user_info_audit_type !=null and user_info_audit_type !='0'.toString()">
-                    where uia.user_info_audit_type=#{user_info_audit_type}
+                  and   uia.user_info_audit_type=#{user_info_audit_type}
                 </if>
             </otherwise>
         </choose>
@@ -78,16 +79,17 @@
         LEFT JOIN expert_info ei ON (
         uia.info_id = ei.expert_info_id
         )
+        where uia.user_info_audit_content =2
         <choose>
             <when test="user_info_audit_state !=null and user_info_audit_state != '0'.toString()">
-                where uia.user_info_audit_state =#{user_info_audit_state}
+                and uia.user_info_audit_state =#{user_info_audit_state}
                 <if test="user_info_audit_type !=null and user_info_audit_type !='0'.toString()">
                     and uia.user_info_audit_type=#{user_info_audit_type}
                 </if>
             </when>
             <otherwise>
                 <if test="user_info_audit_type !=null and user_info_audit_type !='0'.toString()">
-                    where uia.user_info_audit_type=#{user_info_audit_type}
+                    and uia.user_info_audit_type=#{user_info_audit_type}
                 </if>
             </otherwise>
         </choose>

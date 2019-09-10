@@ -118,5 +118,16 @@ public interface UserMapper {
 	 */
 	List<Map>selectExpertInfoList(@Param("orderRequests") OrderRequest[] orderRequest);
 
-
+	/**
+	 * 通过用户角色和状态查询用户Id
+	 * @param user_role 用户角色  1专家 2第三方机构 3煤监局 4能源局 5超级管理员
+	 * @param user_state 用户状态  1未认证审核 2已认证审核  3解聘
+	 * @param expert_info_educations 专家学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
+	 * @param expert_info_workmajors 专家从事专业  1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+	 * @return
+	 */
+	Integer[] selectUserIdArrayByUrUs(@Param("user_role") Integer user_role,
+									  @Param("user_state") Integer user_state,
+									  @Param("expert_info_educations") Integer[]expert_info_educations,
+									  @Param("expert_info_workmajors") Integer[]expert_info_workmajors);
 }

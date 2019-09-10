@@ -332,4 +332,16 @@
             </foreach>
         </if>
     </select>
+    <select id="selectUserIdArrayByUrUs">
+        select user_id from
+        <trim prefix="where" suffix="" suffixOverrides="and" >
+          <if test="user_role != null">
+              user_role=#{user_role}
+          </if>
+          <if test="user_state != null">
+              user_state=#{user_state}
+          </if>
+
+        </trim>
+    </select>
 </mapper>
