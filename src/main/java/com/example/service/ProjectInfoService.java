@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.common.exceptiondefine.OperationServiceException;
 import com.example.entity.ProjectInfoEntityWithBLOBs;
 import com.example.entity.requstparam.PageOderRequest;
 
@@ -51,11 +52,12 @@ public interface ProjectInfoService {
 
     /**
      * 抽取审核项目的专家组
+     * @param extractNum 抽取人数
      * @param expert_info_educations 专家学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
      * @param expert_info_workmajors 专家从事专业  1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
      * @return
      */
-    List<Map> extractionProjectExpert(Integer[]expert_info_educations,
-                                Integer[]expert_info_workmajors);
+    List<Map> extractionProjectExpert(Integer extractNum,Integer[]expert_info_educations,
+                                Integer[]expert_info_workmajors) throws OperationServiceException;
 
 }

@@ -130,4 +130,7 @@ public interface UserMapper {
 									  @Param("user_state") Integer user_state,
 									  @Param("expert_info_educations") Integer[]expert_info_educations,
 									  @Param("expert_info_workmajors") Integer[]expert_info_workmajors);
+
+	//查询专家id和名字信息列表
+	List<Map> selectExpertInfoListById(@Param("Uids") Integer[]Uids);
 }

@@ -8,9 +8,12 @@ com\example\service\ProjectauditOrganizationInviteService.class
 com\example\controller\CommonController.class
 com\example\entity\ProjectParticipant.class
 com\util\MyMD5Util.class
+com\example\entity\requstparam\ExtractionPERequest.class
 com\example\entity\requstparam\AddOrganizationInfoAudit.class
 com\example\entity\common\VisitConsequenceParent.class
+com\example\common\exceptiondefine\OperationServiceException.class
 com\example\mapper\UserInfoAuditMapper.class
+com\example\entity\requstparam\InsertPEinviteBatch.class
 com\example\mapper\ProjectauditOrganizationInviteMapper.class
 com\example\StartUpMBG.class
 com\util\PageUtils.class

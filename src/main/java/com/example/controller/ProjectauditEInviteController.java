@@ -3,12 +3,11 @@ package com.example.controller;
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.entity.ProjectauditExpertInvite;
-import com.example.entity.ProjectauditOrganizationInvite;
 import com.example.entity.common.VisitConsequencePage;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
+import com.example.entity.requstparam.InsertPEinviteBatch;
 import com.example.entity.requstparam.PageOderRequest;
-import com.example.entity.requstparam.PageRequest;
 import com.example.entity.user.UserInfoLoginSession;
 import com.example.service.ProjectauditExpertInviteService;
 import com.github.pagehelper.PageInfo;
@@ -145,6 +144,30 @@ public class ProjectauditEInviteController {
             vc.setState(1);
             return vc;
         }
+        return vc;
+    }
+
+    /**
+     *  添加项目审核邀请(专家组组员)
+     * @param httpSession
+     * @param insertPEinviteBatch
+     * @return
+     */
+    @PostMapping("addPEInvite")
+    public VisitConsequenceParent addPEInvite(HttpSession httpSession,
+                                              @RequestBody InsertPEinviteBatch insertPEinviteBatch){
+        VisitConsequenceParent vc=new VisitConsequenceParentImpl();
+        UserInfoLoginSession us;
+        try {
+            us=new UserInfoLoginSession(httpSession);
+        } catch (LoginException e) {
+            vc.setMessage(e.getMessage());
+            vc.setState(1);
+            e.printStackTrace();
+            return  vc;
+        }
+        Integer i=projectauditExpertInviteService.addPEInvite(insertPEinviteBatch,us.getUser_id());
+        vc.setObject(i);
         return vc;
     }
 

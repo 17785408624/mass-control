@@ -4,6 +4,7 @@ import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.config.ServiceConfig;
 import com.example.entity.ProjectParticipant;
 import com.example.entity.ProjectauditExpertInvite;
+import com.example.entity.requstparam.InsertPEinviteBatch;
 import com.example.entity.requstparam.PageRequest;
 import com.example.mapper.ProjectInfoEntityMapper;
 import com.example.mapper.ProjectParticipantMapper;
@@ -93,5 +94,20 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
         }
 
         return true;
+    }
+    //添加项目审核邀请(专家组组员)
+    @Override
+    public Integer addPEInvite(InsertPEinviteBatch insertPEinviteBatch, Integer inviteAdduserId) {
+        Long nowDate=new Date().getTime();
+        insertPEinviteBatch.setInviteAddtime(nowDate);//添加时间
+        insertPEinviteBatch.setInviteAdduserId(inviteAdduserId);//添加人id
+        insertPEinviteBatch.setInviteState(1);//状态 (1等待操作 2接受 3拒绝 4取消邀请)
+        insertPEinviteBatch.setInviteType(2);// 邀请类型(1组长 2组员)
+        insertPEinviteBatch.setInviteExpiration(
+                ServiceConfig.getAUDIT_ORGANIZATION_INVITE_EXPIRATION()+nowDate);//邀请过期时间
+        projectInfoEntityMapper.updateProjectInfoProgressByPIid(
+                insertPEinviteBatch.getProjectInfoId(),
+                4);//将项目进程改为项目评审
+        return projectauditExpertInviteMapper.insertPEinviteBatch(insertPEinviteBatch,insertPEinviteBatch.getExperInfos());
     }
 }

@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import com.example.common.exceptiondefine.OperationServiceException;
 import com.example.entity.ProjectInfoEntityWithBLOBs;
 import com.example.entity.ProjectParticipant;
 import com.example.entity.requstparam.PageOderRequest;
@@ -81,6 +82,42 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);//调用分页
         return projectInfoEntityMapper.selectListByPiProgress(new int[]{3}, pageOderRequest.getOrderRequests());
+    }
+    //抽取审核项目的专家组
+    @Override
+    public List<Map> extractionProjectExpert(Integer extractNum, Integer[] expert_info_educations, Integer[] expert_info_workmajors) throws OperationServiceException {
+        Integer[]userIds=userMapper.selectUserIdArrayByUrUs(
+                1,
+                2,
+                expert_info_educations,
+                expert_info_workmajors);//查询符合条件的用户id
+        List<Map> resultList=new ArrayList<>();//抽取后的用户信息
+        if(userIds==null||userIds.length<1){
+            throw new OperationServiceException("没有符合条件的专家");
+        }
+        List<Map>listMap=userMapper.selectExpertInfoListById(userIds);//符合条件的用户信息
+        if(extractNum>listMap.size()){
+            return listMap;
+        }else{
+            return randomExtractionExpert(
+                    listMap,extractNum);//返回随机抽取的专家信息
+
+        }
+    }
+    /**
+     *
+     * @param listMap 源数据集合
+     * @param extractNum 返回的数据集合
+     * @return
+     */
+    private List<Map>randomExtractionExpert(List<Map> listMap,int extractNum){
+        List<Map> resultList=new ArrayList<>();
+        for(int i=0;i<extractNum;i++){
+            int random= (int) (Math.random()*(listMap.size()));//返回一个0—list长度的随机数
+            resultList.add(listMap.get(random));
+            listMap.remove(i);
+        }
+        return resultList;
     }
 
 

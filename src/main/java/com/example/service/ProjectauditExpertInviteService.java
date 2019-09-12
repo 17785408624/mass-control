@@ -2,13 +2,14 @@ package com.example.service;
 
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.entity.ProjectauditExpertInvite;
+import com.example.entity.requstparam.InsertPEinviteBatch;
 import com.example.entity.requstparam.PageRequest;
 
 import java.util.List;
 
 public interface ProjectauditExpertInviteService {
     /**
-     * 添加项目审核邀请 专家
+     * 添加项目审核邀请 专家组长
      * @param pei 邀请信息
      * @param inviteAdduserId 添加人id
      * @return
@@ -43,4 +44,12 @@ public interface ProjectauditExpertInviteService {
                               Integer inviteState,
                               Integer userRole,
                               Integer inviteType) throws OperationProjectauditOInviteException;
+
+    /**
+     * 添加项目审核邀请(专家组组员)
+     * @param insertPEinviteBatch
+     * @param inviteAdduserId
+     * @return
+     */
+    Integer addPEInvite(InsertPEinviteBatch insertPEinviteBatch,Integer inviteAdduserId);
 }

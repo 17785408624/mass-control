@@ -278,18 +278,18 @@
       FROM USER WHERE user_id=#{user_id}
     </select>
     <select id="selectOrganizationInfoNameIdListByState" resultType="java.util.Map">
-     SELECT
-	oi.organization_name,
-	oi.organization_info_id,
-	u.user_id
-    FROM
-	organization_info oi
-    LEFT JOIN USER u ON (
-	oi.organization_info_id = u.info_id
-    )
-    <if test="user_state !=null">
-        where u.user_state=#{user_state}
-    </if>
+        SELECT
+        oi.organization_name,
+        oi.organization_info_id,
+        u.user_id
+        FROM
+        organization_info oi
+        LEFT JOIN USER u ON (
+        oi.organization_info_id = u.info_id
+        )
+        <if test="user_state !=null">
+            where u.user_state=#{user_state}
+        </if>
 
     </select>
     <select id="selectUserNum" resultType="java.lang.Integer">
@@ -301,7 +301,7 @@
         select u.user_id,
         oi.organization_name,
         oi.organization_info_id
-        from  user u
+        from user u
         left join organization_info oi
         on(u.info_id=oi.organization_info_id)
         where
@@ -318,7 +318,7 @@
         limit ${begin},${end}
     </select>
     <select id="selectExpertInfoList" resultType="java.util.Map">
-        SELECT  ei.expert_info_id,
+        SELECT ei.expert_info_id,
         u.user_id,
         ei.expert_info_name,
         ei.expert_info_learnmajor,
@@ -331,5 +331,46 @@
                 ${orderRequest.orderName} ${orderRequest.orderRule}
             </foreach>
         </if>
+    </select>
+    <select id="selectUserIdArrayByUrUs" resultType="java.lang.Integer">
+        select u.user_id from
+        user u
+        <if test="expert_info_educations != null or expert_info_workmajors != null">
+            left join expert_info ei
+            on u.info_id=ei.expert_info_id
+        </if>
+        <trim prefix="where" suffix="" prefixOverrides="and">
+            <if test="user_role != null">
+                and user_role=#{user_role}
+            </if>
+            <if test="user_state != null">
+                and user_state=#{user_state}
+            </if>
+            <if test="expert_info_educations != null">
+                and
+                <foreach collection="expert_info_educations" open=" (" close=")" item="item" separator="or">
+                    ei.expert_info_education=#{item}
+                </foreach>
+            </if>
+            <if test="expert_info_workmajors != null">
+                and
+                <foreach collection="expert_info_workmajors" open="(" close=")" item="item" separator="or">
+                    ei.expert_info_workmajor=#{item}
+                </foreach>
+            </if>
+        </trim>
+    </select>
+    <select id="selectExpertInfoListById" resultType="java.util.Map">
+        select u.user_id,ei.expert_info_name from
+        user u
+        left join expert_info ei
+        on(u.info_id=ei.expert_info_id)
+        <trim prefix="where">
+            <if test="Uids!=null">
+                <foreach collection="Uids" item="item" separator="or">
+                    u.user_id=${item}
+                </foreach>
+            </if>
+        </trim>
     </select>
 </mapper>
