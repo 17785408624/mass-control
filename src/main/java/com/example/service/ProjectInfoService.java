@@ -48,7 +48,7 @@ public interface ProjectInfoService {
      * @param pageOderRequest
      * @return
      */
-    List<ProjectInfoEntityWithBLOBs> findProjectInfoProgressLeader(PageOderRequest pageOderRequest);
+    List<ProjectInfoEntityWithBLOBs> findProjectInfoProgressLeader(PageOderRequest pageOderRequest,Integer Uid);
 
     /**
      * 抽取审核项目的专家组

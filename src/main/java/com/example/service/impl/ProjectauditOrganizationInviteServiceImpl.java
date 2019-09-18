@@ -2,9 +2,11 @@ package com.example.service.impl;
 
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.config.ServiceConfig;
+import com.example.entity.ProjectAudit;
 import com.example.entity.ProjectParticipant;
 import com.example.entity.ProjectauditOrganizationInvite;
 import com.example.entity.requstparam.PageRequest;
+import com.example.mapper.ProjectAuditMapper;
 import com.example.mapper.ProjectInfoEntityMapper;
 import com.example.mapper.ProjectParticipantMapper;
 import com.example.mapper.ProjectauditOrganizationInviteMapper;
@@ -26,13 +28,15 @@ public class ProjectauditOrganizationInviteServiceImpl implements ProjectauditOr
     ProjectInfoEntityMapper projectInfoEntityMapper;
     @Autowired
     ProjectParticipantMapper projectParticipantMapper;
+    @Autowired
+    ProjectAuditMapper projectAuditMapper;
     //添加第三方机构项目审核邀请
     @Override
     public int addProjectauditInvite(Integer inviteAdduserId, ProjectauditOrganizationInvite projectauditOrganizationInvite) {
         projectauditOrganizationInvite.setInviteState(1);//设置状态 待操作
         projectauditOrganizationInvite.setInviteAddtime(new Date().getTime());//设置添加时间
         projectauditOrganizationInvite.setInviteAdduserId(inviteAdduserId);//添加人用户id
-        Long inviteExpiration= ServiceConfig.getAUDIT_ORGANIZATION_INVITE_EXPIRATION()+new Date().getTime();//邀请过期时间
+        Long inviteExpiration= ServiceConfig.getAUDIT_INVITE_EXPIRATION(new Date().getTime());//邀请过期时间
         projectauditOrganizationInvite.setInviteExpiration(inviteExpiration);
         projectauditOrganizationInviteMapper.insertPoi(projectauditOrganizationInvite);
         return projectauditOrganizationInvite.getProjectauditOrganizationInviteId();
@@ -55,7 +59,8 @@ public class ProjectauditOrganizationInviteServiceImpl implements ProjectauditOr
     @Override
     public boolean operationUserProjectauditOInvite(Integer projectInfoId,Integer projectauditOrganizationInviteId,Integer inviteEdituserId, Integer inviteState,Integer userRole) throws OperationProjectauditOInviteException {
         ProjectauditOrganizationInvite poi=new ProjectauditOrganizationInvite();
-        poi.setInviteEdittime(new Date().getTime());//修改时间
+        Long nowDate=new Date().getTime();
+        poi.setInviteEdittime(nowDate);//修改时间
         poi.setInviteEdituserId(inviteEdituserId);//修改人
         poi.setInviteState(inviteState);//修改状态
         poi.setProjectauditOrganizationInviteId(
@@ -70,6 +75,12 @@ public class ProjectauditOrganizationInviteServiceImpl implements ProjectauditOr
                 projectInfoEntityMapper.updateProjectInfoProgressByPIid(
                         projectInfoId,2);//改变邀请审核的项目进程为选择组长
                 projectauditOrganizationInviteMapper.updatePOIStateByPOIId(poi);//修改审核邀请信息
+                ProjectAudit projectAudit=new ProjectAudit();//添加项目审核信息
+                projectAudit.setAddDatetime(nowDate);
+                projectAudit.setAuditUserId(inviteEdituserId);
+                projectAudit.setProjectInfoId(projectInfoId);
+                projectAudit.setAuditUserRole(userRole);
+                projectAuditMapper.insertSelective(projectAudit);//添加项目审核信息
                 break;
             case 3://拒绝
                 projectauditOrganizationInviteMapper.updatePOIStateByPOIId(poi);

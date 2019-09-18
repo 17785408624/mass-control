@@ -6,7 +6,7 @@ import com.github.pagehelper.PageInfo;
 
 public class PageUtils {
     /**
-     * 将分页信息封装到统一的接口
+     * 将分页信息封装到统一的对象
      * @param pageRequest
      * @param
      * @return

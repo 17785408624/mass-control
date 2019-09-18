@@ -31,6 +31,7 @@ public class UserInfoLoginSession {
         if (userEntity == null) {
             throw new LoginException("登录信息错误");
         }
+
         ue = userEntity;
 
 

@@ -100,6 +100,20 @@ public class ProjectInfoEntity {
      * 添加人id
      */
     private Integer projectInfoAdduserid;
+    /**
+     * 项目审核开始时间
+     */
+    private Long projectInfoAuditstartdate;
+    /**
+     * 项目审核过期时间
+     */
+    private Long projectInfoExpiration;
+
+
+
+
+
+
 
     /**
      * 数据主键
@@ -419,5 +433,21 @@ public class ProjectInfoEntity {
      */
     public void setProjectInfoAdduserid(Integer projectInfoAdduserid) {
         this.projectInfoAdduserid = projectInfoAdduserid;
+    }
+
+    public Long getProjectInfoAuditstartdate() {
+        return projectInfoAuditstartdate;
+    }
+
+    public void setProjectInfoAuditstartdate(Long projectInfoAuditstartdate) {
+        this.projectInfoAuditstartdate = projectInfoAuditstartdate;
+    }
+
+    public Long getProjectInfoExpiration() {
+        return projectInfoExpiration;
+    }
+
+    public void setProjectInfoExpiration(Long projectInfoExpiration) {
+        this.projectInfoExpiration = projectInfoExpiration;
     }
 }

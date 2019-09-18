@@ -1,8 +1,11 @@
 com\example\mapper\ProjectInfoEntityMapper.class
 com\example\mapper\ProjectParticipantMapper.class
+com\example\service\impl\ProjectAuditServiceImpl.class
 com\example\common\exceptiondefine\RegException.class
+com\example\entity\ProjectAudit.class
 com\example\entity\common\VisitConsequenceParentImpl.class
 com\example\config\MyConfiguration.class
+com\example\entity\ProjectAuditExample.class
 com\example\mapper\AcidAndProductForecastMapper.class
 com\example\service\ProjectauditOrganizationInviteService.class
 com\example\controller\CommonController.class
@@ -10,6 +13,8 @@ com\example\entity\ProjectParticipant.class
 com\util\MyMD5Util.class
 com\example\entity\requstparam\ExtractionPERequest.class
 com\example\entity\requstparam\AddOrganizationInfoAudit.class
+com\example\controller\ProjectAuditController.class
+com\example\service\ProjectAuditService.class
 com\example\entity\common\VisitConsequenceParent.class
 com\example\common\exceptiondefine\OperationServiceException.class
 com\example\mapper\UserInfoAuditMapper.class
@@ -17,6 +22,7 @@ com\example\entity\requstparam\InsertPEinviteBatch.class
 com\example\mapper\ProjectauditOrganizationInviteMapper.class
 com\example\StartUpMBG.class
 com\util\PageUtils.class
+com\example\entity\ProjectAuditExample$Criterion.class
 com\example\mapper\AcidAndProductMapper.class
 com\util\MyStringUril.class
 com\example\service\impl\ProjectauditOrganizationInviteServiceImpl.class
@@ -44,8 +50,10 @@ com\example\service\impl\UserServiceImpl.class
 com\example\service\ProjectInfoService.class
 com\example\entity\AcidAndProductForecastEntity.class
 com\example\entity\common\VisitConsequencePage.class
+com\example\entity\ProjectAuditExample$GeneratedCriteria.class
 com\example\mapper\FileMapper.class
 com\example\entity\ProjectInfoEntity.class
+com\example\entity\requstparam\PageOderRequestMap.class
 com\example\entity\user\UserEntity.class
 com\example\service\AcidAndProductForecastServiceImpl.class
 com\example\config\MyConfiguration$1.class
@@ -58,6 +66,7 @@ com\example\service\CommonService.class
 com\example\service\UserService.class
 com\example\mapper\TestMapper.class
 com\example\service\UserInfoService.class
+com\example\mapper\ProjectAuditMapper.class
 com\example\service\impl\UserInfoAuditServiceImpl.class
 com\example\controller\UserController.class
 com\example\service\ProjectauditExpertInviteService.class
@@ -68,6 +77,7 @@ com\util\EncryptUtil.class
 com\example\controller\UserInfoAuditController.class
 com\example\entity\user\UserInfoAuditEntity.class
 com\example\config\LonginConf.class
+com\example\entity\ProjectAuditExample$Criteria.class
 com\example\entity\common\FileInfoeEntity.class
 com\example\config\WebConfig.class
 com\example\controller\ProjectauditEInviteController.class

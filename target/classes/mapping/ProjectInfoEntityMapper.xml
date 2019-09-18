@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.ProjectInfoEntityMapper">
-  <resultMap id="BaseResultMap" type="com.example.entity.ProjectInfoEntity">
-    <result column="project_info_id" jdbcType="INTEGER" property="projectInfoId" />
-    <result column="project_info_name" jdbcType="VARCHAR" property="projectInfoName" />
-    <result column="project_info_area" jdbcType="VARCHAR" property="projectInfoArea" />
-    <result column="project_info_nature" jdbcType="INTEGER" property="projectInfoNature" />
-    <result column="project_info_invest" jdbcType="DOUBLE" property="projectInfoInvest" />
-    <result column="project_info_scale" jdbcType="DOUBLE" property="projectInfoScale" />
-    <result column="project_info_duration" jdbcType="DOUBLE" property="projectInfoDuration" />
-    <result column="project_info_serve" jdbcType="DOUBLE" property="projectInfoServe" />
-    <result column="project_info_reservesquantity" jdbcType="DOUBLE" property="projectInfoReservesquantity" />
-    <result column="project_info_usequantity" jdbcType="DOUBLE" property="projectInfoUsequantity" />
-    <result column="project_info_gas" jdbcType="INTEGER" property="projectInfoGas" />
-    <result column="project_info_datalocal" jdbcType="INTEGER" property="projectInfoDatalocal" />
-    <result column="project_info_dataurl" jdbcType="VARCHAR" property="projectInfoDataurl" />
-    <result column="project_info_datedescribe" jdbcType="VARCHAR" property="projectInfoDatedescribe" />
-    <result column="project_info_progress" jdbcType="INTEGER" property="projectInfoProgress" />
-    <result column="project_info_state" jdbcType="INTEGER" property="projectInfoState" />
-    <result column="project_info_progressmessage" jdbcType="VARCHAR" property="projectInfoProgressmessage" />
-    <result column="project_info_type" jdbcType="INTEGER" property="projectInfoType" />
-    <result column="project_info_addtime" jdbcType="BIGINT" property="projectInfoAddtime" />
-    <result column="project_info_adduserid" jdbcType="INTEGER" property="projectInfoAdduserid" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.entity.ProjectInfoEntityWithBLOBs">
-    <result column="project_info_synopsis" jdbcType="LONGVARCHAR" property="projectInfoSynopsis" />
-    <result column="project_info_content" jdbcType="LONGVARCHAR" property="projectInfoContent" />
-  </resultMap>
-  <sql id="Blob_Column_List">
+    <resultMap id="BaseResultMap" type="com.example.entity.ProjectInfoEntity">
+        <result column="project_info_id" jdbcType="INTEGER" property="projectInfoId"/>
+        <result column="project_info_name" jdbcType="VARCHAR" property="projectInfoName"/>
+        <result column="project_info_area" jdbcType="VARCHAR" property="projectInfoArea"/>
+        <result column="project_info_nature" jdbcType="INTEGER" property="projectInfoNature"/>
+        <result column="project_info_invest" jdbcType="DOUBLE" property="projectInfoInvest"/>
+        <result column="project_info_scale" jdbcType="DOUBLE" property="projectInfoScale"/>
+        <result column="project_info_duration" jdbcType="DOUBLE" property="projectInfoDuration"/>
+        <result column="project_info_serve" jdbcType="DOUBLE" property="projectInfoServe"/>
+        <result column="project_info_reservesquantity" jdbcType="DOUBLE" property="projectInfoReservesquantity"/>
+        <result column="project_info_usequantity" jdbcType="DOUBLE" property="projectInfoUsequantity"/>
+        <result column="project_info_gas" jdbcType="INTEGER" property="projectInfoGas"/>
+        <result column="project_info_datalocal" jdbcType="INTEGER" property="projectInfoDatalocal"/>
+        <result column="project_info_dataurl" jdbcType="VARCHAR" property="projectInfoDataurl"/>
+        <result column="project_info_datedescribe" jdbcType="VARCHAR" property="projectInfoDatedescribe"/>
+        <result column="project_info_progress" jdbcType="INTEGER" property="projectInfoProgress"/>
+        <result column="project_info_state" jdbcType="INTEGER" property="projectInfoState"/>
+        <result column="project_info_progressmessage" jdbcType="VARCHAR" property="projectInfoProgressmessage"/>
+        <result column="project_info_type" jdbcType="INTEGER" property="projectInfoType"/>
+        <result column="project_info_addtime" jdbcType="BIGINT" property="projectInfoAddtime"/>
+        <result column="project_info_adduserid" jdbcType="INTEGER" property="projectInfoAdduserid"/>
+        <result column="project_info_auditstartdate" jdbcType="BIGINT" property="projectInfoAuditstartdate"/>
+        <result column="project_info_expiration" jdbcType="BIGINT" property="projectInfoExpiration"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.entity.ProjectInfoEntityWithBLOBs">
+        <result column="project_info_synopsis" jdbcType="LONGVARCHAR" property="projectInfoSynopsis"/>
+        <result column="project_info_content" jdbcType="LONGVARCHAR" property="projectInfoContent"/>
+    </resultMap>
+    <sql id="Blob_Column_List">
     project_info_synopsis, project_info_content
   </sql>
-  <insert id="insert" parameterType="com.example.entity.ProjectInfoEntityWithBLOBs">
+    <insert id="insert" parameterType="com.example.entity.ProjectInfoEntityWithBLOBs">
     insert into project_info (project_info_id, project_info_name, project_info_area, 
       project_info_nature, project_info_invest, project_info_scale, 
       project_info_duration, project_info_serve, project_info_reservesquantity, 
@@ -52,183 +54,183 @@
       #{projectInfoSynopsis,jdbcType=LONGVARCHAR}, #{projectInfoContent,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.entity.ProjectInfoEntityWithBLOBs">
-    insert into project_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="projectInfoId != null">
-        project_info_id,
-      </if>
-      <if test="projectInfoName != null">
-        project_info_name,
-      </if>
-      <if test="projectInfoArea != null">
-        project_info_area,
-      </if>
-      <if test="projectInfoNature != null">
-        project_info_nature,
-      </if>
-      <if test="projectInfoInvest != null">
-        project_info_invest,
-      </if>
-      <if test="projectInfoScale != null">
-        project_info_scale,
-      </if>
-      <if test="projectInfoDuration != null">
-        project_info_duration,
-      </if>
-      <if test="projectInfoServe != null">
-        project_info_serve,
-      </if>
-      <if test="projectInfoReservesquantity != null">
-        project_info_reservesquantity,
-      </if>
-      <if test="projectInfoUsequantity != null">
-        project_info_usequantity,
-      </if>
-      <if test="projectInfoGas != null">
-        project_info_gas,
-      </if>
-      <if test="projectInfoDatalocal != null">
-        project_info_datalocal,
-      </if>
-      <if test="projectInfoDataurl != null">
-        project_info_dataurl,
-      </if>
-      <if test="projectInfoDatedescribe != null">
-        project_info_datedescribe,
-      </if>
-      <if test="projectInfoProgress != null">
-        project_info_progress,
-      </if>
-      <if test="projectInfoState != null">
-        project_info_state,
-      </if>
-      <if test="projectInfoProgressmessage != null">
+    <insert id="insertSelective" parameterType="com.example.entity.ProjectInfoEntityWithBLOBs">
+        insert into project_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectInfoId != null">
+                project_info_id,
+            </if>
+            <if test="projectInfoName != null">
+                project_info_name,
+            </if>
+            <if test="projectInfoArea != null">
+                project_info_area,
+            </if>
+            <if test="projectInfoNature != null">
+                project_info_nature,
+            </if>
+            <if test="projectInfoInvest != null">
+                project_info_invest,
+            </if>
+            <if test="projectInfoScale != null">
+                project_info_scale,
+            </if>
+            <if test="projectInfoDuration != null">
+                project_info_duration,
+            </if>
+            <if test="projectInfoServe != null">
+                project_info_serve,
+            </if>
+            <if test="projectInfoReservesquantity != null">
+                project_info_reservesquantity,
+            </if>
+            <if test="projectInfoUsequantity != null">
+                project_info_usequantity,
+            </if>
+            <if test="projectInfoGas != null">
+                project_info_gas,
+            </if>
+            <if test="projectInfoDatalocal != null">
+                project_info_datalocal,
+            </if>
+            <if test="projectInfoDataurl != null">
+                project_info_dataurl,
+            </if>
+            <if test="projectInfoDatedescribe != null">
+                project_info_datedescribe,
+            </if>
+            <if test="projectInfoProgress != null">
+                project_info_progress,
+            </if>
+            <if test="projectInfoState != null">
+                project_info_state,
+            </if>
+            <if test="projectInfoProgressmessage != null">
+                project_info_progressmessage,
+            </if>
+            <if test="projectInfoType != null">
+                project_info_type,
+            </if>
+            <if test="projectInfoAddtime != null">
+                project_info_addtime,
+            </if>
+            <if test="projectInfoAdduserid != null">
+                project_info_adduserid,
+            </if>
+            <if test="projectInfoSynopsis != null">
+                project_info_synopsis,
+            </if>
+            <if test="projectInfoContent != null">
+                project_info_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectInfoId != null">
+                #{projectInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="projectInfoName != null">
+                #{projectInfoName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectInfoArea != null">
+                #{projectInfoArea,jdbcType=VARCHAR},
+            </if>
+            <if test="projectInfoNature != null">
+                #{projectInfoNature,jdbcType=INTEGER},
+            </if>
+            <if test="projectInfoInvest != null">
+                #{projectInfoInvest,jdbcType=DOUBLE},
+            </if>
+            <if test="projectInfoScale != null">
+                #{projectInfoScale,jdbcType=DOUBLE},
+            </if>
+            <if test="projectInfoDuration != null">
+                #{projectInfoDuration,jdbcType=DOUBLE},
+            </if>
+            <if test="projectInfoServe != null">
+                #{projectInfoServe,jdbcType=DOUBLE},
+            </if>
+            <if test="projectInfoReservesquantity != null">
+                #{projectInfoReservesquantity,jdbcType=DOUBLE},
+            </if>
+            <if test="projectInfoUsequantity != null">
+                #{projectInfoUsequantity,jdbcType=DOUBLE},
+            </if>
+            <if test="projectInfoGas != null">
+                #{projectInfoGas,jdbcType=INTEGER},
+            </if>
+            <if test="projectInfoDatalocal != null">
+                #{projectInfoDatalocal,jdbcType=INTEGER},
+            </if>
+            <if test="projectInfoDataurl != null">
+                #{projectInfoDataurl,jdbcType=VARCHAR},
+            </if>
+            <if test="projectInfoDatedescribe != null">
+                #{projectInfoDatedescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="projectInfoProgress != null">
+                #{projectInfoProgress,jdbcType=INTEGER},
+            </if>
+            <if test="projectInfoState != null">
+                #{projectInfoState,jdbcType=INTEGER},
+            </if>
+            <if test="projectInfoProgressmessage != null">
+                #{projectInfoProgressmessage,jdbcType=VARCHAR},
+            </if>
+            <if test="projectInfoType != null">
+                #{projectInfoType,jdbcType=INTEGER},
+            </if>
+            <if test="projectInfoAddtime != null">
+                #{projectInfoAddtime,jdbcType=BIGINT},
+            </if>
+            <if test="projectInfoAdduserid != null">
+                #{projectInfoAdduserid,jdbcType=INTEGER},
+            </if>
+            <if test="projectInfoSynopsis != null">
+                #{projectInfoSynopsis,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="projectInfoContent != null">
+                #{projectInfoContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <insert id="inserBatch">
+        insert
+        into project_info ( project_info_name, project_info_area,
+        project_info_nature, project_info_invest, project_info_scale,
+        project_info_duration, project_info_serve,
+        project_info_reservesquantity, project_info_usequantity,
+        project_info_gas, project_info_datalocal, project_info_dataurl,
+        project_info_datedescribe, project_info_progress,
         project_info_progressmessage,
-      </if>
-      <if test="projectInfoType != null">
-        project_info_type,
-      </if>
-      <if test="projectInfoAddtime != null">
-        project_info_addtime,
-      </if>
-      <if test="projectInfoAdduserid != null">
-        project_info_adduserid,
-      </if>
-      <if test="projectInfoSynopsis != null">
-        project_info_synopsis,
-      </if>
-      <if test="projectInfoContent != null">
-        project_info_content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="projectInfoId != null">
-        #{projectInfoId,jdbcType=INTEGER},
-      </if>
-      <if test="projectInfoName != null">
-        #{projectInfoName,jdbcType=VARCHAR},
-      </if>
-      <if test="projectInfoArea != null">
-        #{projectInfoArea,jdbcType=VARCHAR},
-      </if>
-      <if test="projectInfoNature != null">
-        #{projectInfoNature,jdbcType=INTEGER},
-      </if>
-      <if test="projectInfoInvest != null">
-        #{projectInfoInvest,jdbcType=DOUBLE},
-      </if>
-      <if test="projectInfoScale != null">
-        #{projectInfoScale,jdbcType=DOUBLE},
-      </if>
-      <if test="projectInfoDuration != null">
-        #{projectInfoDuration,jdbcType=DOUBLE},
-      </if>
-      <if test="projectInfoServe != null">
-        #{projectInfoServe,jdbcType=DOUBLE},
-      </if>
-      <if test="projectInfoReservesquantity != null">
-        #{projectInfoReservesquantity,jdbcType=DOUBLE},
-      </if>
-      <if test="projectInfoUsequantity != null">
-        #{projectInfoUsequantity,jdbcType=DOUBLE},
-      </if>
-      <if test="projectInfoGas != null">
-        #{projectInfoGas,jdbcType=INTEGER},
-      </if>
-      <if test="projectInfoDatalocal != null">
-        #{projectInfoDatalocal,jdbcType=INTEGER},
-      </if>
-      <if test="projectInfoDataurl != null">
-        #{projectInfoDataurl,jdbcType=VARCHAR},
-      </if>
-      <if test="projectInfoDatedescribe != null">
-        #{projectInfoDatedescribe,jdbcType=VARCHAR},
-      </if>
-      <if test="projectInfoProgress != null">
-        #{projectInfoProgress,jdbcType=INTEGER},
-      </if>
-      <if test="projectInfoState != null">
-        #{projectInfoState,jdbcType=INTEGER},
-      </if>
-      <if test="projectInfoProgressmessage != null">
-        #{projectInfoProgressmessage,jdbcType=VARCHAR},
-      </if>
-      <if test="projectInfoType != null">
-        #{projectInfoType,jdbcType=INTEGER},
-      </if>
-      <if test="projectInfoAddtime != null">
-        #{projectInfoAddtime,jdbcType=BIGINT},
-      </if>
-      <if test="projectInfoAdduserid != null">
-        #{projectInfoAdduserid,jdbcType=INTEGER},
-      </if>
-      <if test="projectInfoSynopsis != null">
-        #{projectInfoSynopsis,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="projectInfoContent != null">
-        #{projectInfoContent,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <insert id="inserBatch">
-    insert
-    into project_info ( project_info_name, project_info_area,
-      project_info_nature, project_info_invest, project_info_scale,
-      project_info_duration, project_info_serve,
-      project_info_reservesquantity, project_info_usequantity,
-      project_info_gas, project_info_datalocal, project_info_dataurl,
-      project_info_datedescribe, project_info_progress,
-      project_info_progressmessage,
-      project_info_type, project_info_synopsis,
-      project_info_content)
-      values
-      <foreach collection="list" index="index" item="projectInfo" separator=",">
-         (
-        #{projectInfo.projectInfoName,jdbcType=VARCHAR},
-        #{projectInfo.projectInfoArea,jdbcType=VARCHAR},
-        #{projectInfo.projectInfoNature,jdbcType=INTEGER},
-        #{projectInfo.projectInfoInvest,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoScale,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoDuration,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoServe,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoReservesquantity,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoUsequantity,jdbcType=DOUBLE},
-        #{projectInfo.projectInfoGas,jdbcType=INTEGER},
-        #{projectInfo.projectInfoDatalocal,jdbcType=INTEGER},
-        #{projectInfo.projectInfoDataurl,jdbcType=VARCHAR},
-        #{projectInfo.projectInfoDatedescribe,jdbcType=VARCHAR},
-        #{projectInfo.projectInfoProgress,jdbcType=INTEGER},
-        #{projectInfo.projectInfoProgressmessage,jdbcType=VARCHAR},
-        #{projectInfo.projectInfoType,jdbcType=INTEGER},
-        #{projectInfo.projectInfoSynopsis,jdbcType=LONGVARCHAR},
-        #{projectInfo.projectInfoContent,jdbcType=LONGVARCHAR}
-        )
-      </foreach>
+        project_info_type, project_info_synopsis,
+        project_info_content)
+        values
+        <foreach collection="list" index="index" item="projectInfo" separator=",">
+            (
+            #{projectInfo.projectInfoName,jdbcType=VARCHAR},
+            #{projectInfo.projectInfoArea,jdbcType=VARCHAR},
+            #{projectInfo.projectInfoNature,jdbcType=INTEGER},
+            #{projectInfo.projectInfoInvest,jdbcType=DOUBLE},
+            #{projectInfo.projectInfoScale,jdbcType=DOUBLE},
+            #{projectInfo.projectInfoDuration,jdbcType=DOUBLE},
+            #{projectInfo.projectInfoServe,jdbcType=DOUBLE},
+            #{projectInfo.projectInfoReservesquantity,jdbcType=DOUBLE},
+            #{projectInfo.projectInfoUsequantity,jdbcType=DOUBLE},
+            #{projectInfo.projectInfoGas,jdbcType=INTEGER},
+            #{projectInfo.projectInfoDatalocal,jdbcType=INTEGER},
+            #{projectInfo.projectInfoDataurl,jdbcType=VARCHAR},
+            #{projectInfo.projectInfoDatedescribe,jdbcType=VARCHAR},
+            #{projectInfo.projectInfoProgress,jdbcType=INTEGER},
+            #{projectInfo.projectInfoProgressmessage,jdbcType=VARCHAR},
+            #{projectInfo.projectInfoType,jdbcType=INTEGER},
+            #{projectInfo.projectInfoSynopsis,jdbcType=LONGVARCHAR},
+            #{projectInfo.projectInfoContent,jdbcType=LONGVARCHAR}
+            )
+        </foreach>
 
-  </insert>
+    </insert>
 
-  <insert id="inserBatchAC" parameterType="com.example.entity.ProjectInfoEntityWithBLOBs">
+    <insert id="inserBatchAC" parameterType="com.example.entity.ProjectInfoEntityWithBLOBs">
     insert
     into project_info (
      project_info_name,
@@ -298,46 +300,115 @@
         )
 
   </insert>
-  <select id="selectListByPiProgress" resultType="java.util.Map">
-   SELECT
-   project_info_id,
-   project_info_name,
-   project_info_area,
-   project_info_nature,
-   project_info_invest,
-   project_info_scale,
-   project_info_duration,
-   project_info_addtime,
-   project_info_adduserid,
-   project_info_type,
-   project_info_progress,
-   project_info_state
-  FROM project_info
-  <if test="array != null">
-    where
-    <foreach collection="array" item="projectInfoProgress" separator="">
-      project_info_progress=#{projectInfoProgress} or
-    </foreach>
-    1=2
-  </if>
- <if test="orderRequests != null">
-    <foreach collection="orderRequests" item="orderRequest" open="ORDER BY" separator=",">
-       ${orderRequest.orderName} ${orderRequest.orderRule}
-    </foreach>
-  </if>
+    <select id="selectListByPiProgress" resultType="java.util.Map">
+        SELECT
+        project_info_id,
+        project_info_name,
+        project_info_area,
+        project_info_nature,
+        project_info_invest,
+        project_info_scale,
+        project_info_duration,
+        project_info_addtime,
+        project_info_adduserid,
+        project_info_type,
+        project_info_progress,
+        project_info_state
+        FROM project_info
+        <if test="array != null">
+            where
+            <foreach collection="array" item="projectInfoProgress" separator="">
+                project_info_progress=#{projectInfoProgress} or
+            </foreach>
+            1=2
+        </if>
+        <if test="orderRequests != null">
+            <foreach collection="orderRequests" item="orderRequest" open="ORDER BY" separator=",">
+                ${orderRequest.orderName} ${orderRequest.orderRule}
+            </foreach>
+        </if>
 
-  </select>
-  <select id="selectProjectInfoAll" resultMap="ResultMapWithBLOBs">
+    </select>
+    <select id="selectListByPiProgressPUid" resultType="java.util.Map">
+        SELECT
+        project_info_id,
+        project_info_name,
+        project_info_area,
+        project_info_nature,
+        project_info_invest,
+        project_info_scale,
+        project_info_duration,
+        project_info_addtime,
+        project_info_adduserid,
+        project_info_type,
+        project_info_progress,
+        project_info_state
+        FROM project_info
+        where project_info_id
+        in(select project_info_id from project_participant where user_id=#{PUid})
+        <if test="array != null">
+            AND(
+            <foreach collection="array" item="projectInfoProgress" separator="or">
+                project_info_progress=#{projectInfoProgress}
+            </foreach>
+            )
+        </if>
+        <if test="orderRequests != null">
+            <foreach collection="orderRequests" item="orderRequest" open="ORDER BY" separator=",">
+                ${orderRequest.orderName} ${orderRequest.orderRule}
+            </foreach>
+        </if>
+    </select>
+    <select id="selectProjectInfoAll" resultMap="ResultMapWithBLOBs">
    select * from
    project_info
     where
     project_info_id =#{project_info_id}
   </select>
-  <update id="updateProjectInfoProgressByPIid">
+    <update id="updateProjectInfoProgressByPIid">
     update project_info
     set
     project_info_progress=#{projectInfoProgress}
     where
     project_info_id=#{projectInfoId}
   </update>
+    <update id="updateProjectInfoDateByPIid">
+    update project_info
+    set
+    project_info_auditstartdate=#{projectInfoAuditstartdate},
+    project_info_expiration=#{projectInfoExpiration}
+    where
+    project_info_id=#{projectInfoId}
+  </update>
+    <select id="selectPIExpirationNotByStateParticipantUidUrole">
+    SELECT DISTINCT
+	pi.project_info_id,
+	pi.project_info_name,
+	pi.project_info_type,
+	pi.project_info_auditstartdate,
+    pi.project_info_expiration
+    FROM
+	   project_info pi
+    LEFT JOIN project_participant pp ON (
+	  pi.project_info_id = pp.project_info_id
+      )
+     WHERE
+     pi.project_info_expiration>(select (unix_timestamp(now())*1000))
+	AND pp.user_id = =#{Uid}
+    AND pp.user_role = #{Urole}
+    AND pi.project_info_progress = =#{projectInfoProgress}
+  </select>
+    <update id="updateProjectInfoState" >
+        update project_info
+        set project_info_state=#{projectInfoState}
+        where project_info_id
+         in
+            (
+             select
+             project_info_id
+             from project_audit
+             where project_audit_id=#{projectAuditId}
+             )
+    </update>
+
 </mapper>

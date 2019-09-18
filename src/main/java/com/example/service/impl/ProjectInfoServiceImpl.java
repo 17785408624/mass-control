@@ -76,12 +76,12 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
     }
     //分页查询 进程为选择专家组组长的项目信息列表
     @Override
-    public List<ProjectInfoEntityWithBLOBs> findProjectInfoProgressLeader(PageOderRequest pageOderRequest) {
+    public List<ProjectInfoEntityWithBLOBs> findProjectInfoProgressLeader(PageOderRequest pageOderRequest,Integer Uid) {
         PageRequest pageRequest=pageOderRequest.getPageRequest();
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);//调用分页
-        return projectInfoEntityMapper.selectListByPiProgress(new int[]{3}, pageOderRequest.getOrderRequests());
+        return projectInfoEntityMapper.selectListByPiProgressPUid(Uid,new int[]{2}, pageOderRequest.getOrderRequests());
     }
     //抽取审核项目的专家组
     @Override

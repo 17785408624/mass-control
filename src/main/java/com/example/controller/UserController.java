@@ -237,10 +237,10 @@ public class UserController {
      * @param pageOderRequest
      * @return
      */
-    @PostMapping("findExpertInfoListPage")
+    @PostMapping("findExpertInfoListPage_2")
     public VisitConsequenceParent findExpertInfoListPage(
             @RequestBody PageOderRequest pageOderRequest){
-        List<Map>listMap=userService.findExpertInfoListPage(pageOderRequest);
+        List<Map>listMap=userService.findExpertInfoListPage(pageOderRequest,2);
         PageInfo a=new PageInfo<Map>(listMap);
         VisitConsequenceParent vcp= PageUtils.getVisitConsequencePage(a);
         return vcp;
@@ -251,10 +251,10 @@ public class UserController {
      * @param
      * @return
      */
-    @GetMapping("findExpertInfoList")
+    @GetMapping("findExpertInfoList_2")
     public VisitConsequenceParent findExpertInfoListPage(){
         VisitConsequenceParent vcp =new VisitConsequenceParentImpl();
-        List<Map>listMap=userService.findExpertInfoList();
+        List<Map>listMap=userService.findExpertInfoList(2);
         vcp.setObject(listMap);
         return vcp;
     };

@@ -287,8 +287,9 @@
         LEFT JOIN USER u ON (
         oi.organization_info_id = u.info_id
         )
+        where u.user_role=2
         <if test="user_state !=null">
-            where u.user_state=#{user_state}
+            and u.user_state=#{user_state}
         </if>
 
     </select>
@@ -305,12 +306,12 @@
         left join organization_info oi
         on(u.info_id=oi.organization_info_id)
         where
-        user_role=2
+        u.user_role=2
         AND
         u.user_state=#{user_state}
         <if test="excludeUids != null">
             <foreach collection="excludeUids" item="excludeUid">
-                and user_id
+                and u.user_id
                 <![CDATA[ <> ]]>
                 #{excludeUid}
             </foreach>
@@ -323,9 +324,15 @@
         ei.expert_info_name,
         ei.expert_info_learnmajor,
         ei.expert_info_companysite,
-        ei.expert_info_area
+        ei.expert_info_area,
+        fi.file_url,
+        fi.file_name
         FROM user u LEFT JOIN expert_info ei
         on(u.info_id=ei.expert_info_id)
+        left join file_info fi
+        on(ei.expert_info_picture_file_info_id=fi.file_info_id)
+        where u.user_role=1
+        and u.user_state=#{user_state}
         <if test="orderRequests != null">
             <foreach collection="orderRequests" item="orderRequest" open="ORDER BY" separator=",">
                 ${orderRequest.orderName} ${orderRequest.orderRule}

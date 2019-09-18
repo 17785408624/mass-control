@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.OperationServiceException;
 import com.example.entity.ProjectInfoEntityWithBLOBs;
+import com.example.entity.common.VisitConsequencePage;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.ExtractionPERequest;
@@ -121,13 +122,22 @@ public class ProjectController {
      * @param pageOderRequest
      * @return
      */
-    @PostMapping("findProjectInfoProgressLeader_page")
-    public VisitConsequenceParent findProjectInfoProgressLeader_page(
+    @PostMapping("O_findProjectInfoProgressLeader_page")
+    public VisitConsequenceParent findProjectInfoProgressLeader_page(HttpSession session,
             @RequestBody PageOderRequest pageOderRequest) {
+        VisitConsequenceParent vcp=new VisitConsequencePage();
+        UserInfoLoginSession uils = null;
+        try {
+            uils = new UserInfoLoginSession(session);
+        } catch (LoginException e) {
+            vcp.setState(1);
+            vcp.setMessage(e.getMessage());
+            return vcp;
+        }
         List<ProjectInfoEntityWithBLOBs> listP =
-                projectInfoService.findProjectInfoProgressLeader(pageOderRequest);
+                projectInfoService.findProjectInfoProgressLeader(pageOderRequest,uils.getUser_id());
         PageInfo a = new PageInfo<ProjectInfoEntityWithBLOBs>(listP);
-        VisitConsequenceParent vcp = PageUtils.getVisitConsequencePage(a);
+        vcp = PageUtils.getVisitConsequencePage(a);
         return vcp;
     }
 

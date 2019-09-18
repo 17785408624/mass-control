@@ -112,11 +112,14 @@ public interface UserMapper {
 										 @Param("begin")Integer begin,@Param("end")Integer end,
 										 @Param("excludeUids")Integer[]excludeUids);
 
+
 	/**
 	 * 查询专家信息列表
+	 * @param orderRequest
+	 * @param user_state
 	 * @return
 	 */
-	List<Map>selectExpertInfoList(@Param("orderRequests") OrderRequest[] orderRequest);
+	List<Map>selectExpertInfoList(@Param("orderRequests") OrderRequest[] orderRequest,@Param("user_state") Integer user_state);
 
 	/**
 	 * 通过用户角色和状态查询用户Id

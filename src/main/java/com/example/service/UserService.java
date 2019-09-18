@@ -76,14 +76,20 @@ public interface UserService {
 	List<Map>  findOINameIdListCertified();
 
 	/**
-	 *分页查询专家信息列表
+	 *
 	 */
-	List<Map>findExpertInfoListPage(PageOderRequest pageOderRequest);
+	/**
+	 * 分页查询专家信息列表
+	 * @param pageOderRequest 分页排序信息
+	 * @param user_state 用户状态 1未认证 2已审核
+	 * @return
+	 */
+	List<Map>findExpertInfoListPage(PageOderRequest pageOderRequest,Integer user_state);
 
 	/**
 	 * 查询专家信息列表
 	 * @return
 	 */
-	List<Map>findExpertInfoList();
+	List<Map>findExpertInfoList(Integer user_state);
 
 }

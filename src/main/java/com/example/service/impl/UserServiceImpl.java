@@ -126,18 +126,18 @@ public class UserServiceImpl implements UserService {
 
     //分页查询专家信息列表
     @Override
-    public List<Map> findExpertInfoListPage(PageOderRequest pageOderRequest) {
+    public List<Map> findExpertInfoListPage(PageOderRequest pageOderRequest,Integer user_state) {
         PageRequest pageRequest=pageOderRequest.getPageRequest();
         int pageNum = pageRequest.getPageNum();//当前页面
         int pageSize = pageRequest.getPageSize();//每页长度
         PageHelper.startPage(pageNum, pageSize);//调用分页
-        return userMapper.selectExpertInfoList(pageOderRequest.getOrderRequests());
+        return userMapper.selectExpertInfoList(pageOderRequest.getOrderRequests(),user_state);
 
     }
     //查询专家信息列表
     @Override
-    public List<Map> findExpertInfoList() {
-        return userMapper.selectExpertInfoList(null);
+    public List<Map> findExpertInfoList(Integer user_state) {
+        return userMapper.selectExpertInfoList(null,user_state);
     }
 
 
