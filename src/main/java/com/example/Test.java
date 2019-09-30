@@ -6,16 +6,22 @@ import com.util.PropertiesUitls;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Test {
     public static void main(String[] args) throws IOException {
-        int i= (int) (Math.random()*3);
-        for(int i1=0;i1<1000;i1++){
-            System.out.print((int) (Math.random()*3)+"  |");
-            if (i1%20==0){
-                System.out.println();
-            }
+        DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+        Date date=null;
+        try {
+            date= dateFormat1.parse("1970-01-01");
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        System.out.println(date.getTime());
+        System.out.println(new Date(0));
 
     }
 }

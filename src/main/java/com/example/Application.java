@@ -3,12 +3,14 @@ package com.example;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.File;
 
 @MapperScan("com.example.mapper") //扫描的mapper
 @SpringBootApplication
+@EnableScheduling//解开启对定时任务的支持
 public class Application {
 
 	public static void main(String[] args) {

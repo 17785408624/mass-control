@@ -32,7 +32,14 @@ public interface ProjectauditOrganizationInviteService {
 
     /**
      * 用户操作项目审核邀请 (第三方机构)
-     * @param projectInfoId 邀请审核的审核的项目id
+     * 一、接受
+     * 1添加项目参与者信息
+     * 2改变邀请审核的项目进程为选择组长
+     * 3修改审核邀请信息
+     * 4添加项目审核信息
+     * 5添加专家评测信息数据
+     * 二、拒绝
+     * 修改审核邀请信息
      * @param projectauditOrganizationInviteId 项目审核邀请信息数据id
      * @param inviteEdituserId 修改人id
      * @param inviteState 修改状态
@@ -40,7 +47,6 @@ public interface ProjectauditOrganizationInviteService {
      * @return
      */
   boolean operationUserProjectauditOInvite(
-          Integer projectInfoId,
           Integer projectauditOrganizationInviteId,
           Integer inviteEdituserId,
           Integer inviteState,

@@ -8,6 +8,7 @@ import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.AddOrganizationInfoAudit;
 import com.example.entity.requstparam.PageOderRequest;
+import com.example.entity.requstparam.PageOderRequestMap;
 import com.example.entity.requstparam.PageRequest;
 import com.example.entity.resultsparam.ExpertInfoResults;
 import com.example.entity.resultsparam.OrganizationAuditResults;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpSession;
 
 import com.github.pagehelper.PageInfo;
 import com.util.PageUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -256,6 +258,35 @@ public class UserController {
         VisitConsequenceParent vcp =new VisitConsequenceParentImpl();
         List<Map>listMap=userService.findExpertInfoList(2);
         vcp.setObject(listMap);
+        return vcp;
+    };
+
+    /**
+     * 查询审核项目的第三方机构信息
+     * @param param
+     * @return
+     */
+    @PostMapping("findProjectAuditOi")
+    public VisitConsequenceParent findProjectAuditOi(@RequestBody Map param){
+        VisitConsequenceParent vcp =new VisitConsequenceParentImpl();
+        Integer projectInfoId=Integer.parseInt(String.valueOf(param.get("projectInfoId")));
+        Map map=userService.findProjectAuditOi(projectInfoId);
+        vcp.setObject(map);
+        return vcp;
+    };
+
+    /**
+     * 查询用户信息列表(专家)
+     * @param porm
+     * @return
+     */
+    @RequestMapping("findExperList")
+    public VisitConsequenceParent findExperList(@RequestBody PageOderRequestMap porm){
+        Map param=porm.getParam();
+        VisitConsequenceParent vcp =new VisitConsequenceParentImpl();
+
+        List<Map>listM=userService.findExperList(param,porm);
+        vcp.setObject(listM);
         return vcp;
     };
 

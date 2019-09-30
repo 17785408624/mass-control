@@ -69,7 +69,7 @@ public interface ProjectInfoEntityMapper {
 
     /**
      * 通过项目信息id改变项目审核开始时间和过期时间
-     * @param projectInfoId 项目开始时间
+     * @param projectInfoId 项目id
      * @param projectInfoAuditstartdate 项目审核开始时间
      * @param projectInfoExpiration 项目审核过期时间
      * @return
@@ -88,9 +88,13 @@ public interface ProjectInfoEntityMapper {
                                    @Param("projectInfoState") Integer projectInfoState);
 
     /**
-     *
+     * 通过项目id批量修改项目进程
+     * @param projectInfoIds
+     * @param projectInfoProgress
      * @return
      */
+    Integer updateProjectInfoStateByPIidBatch(@Param("projectInfoIds") Integer[] projectInfoIds,
+                                              @Param("projectInfoProgress") Integer projectInfoProgress);
     /**
      *  查询未过期的项目审核信息列表
      * @param projectInfoProgress
@@ -101,4 +105,11 @@ public interface ProjectInfoEntityMapper {
     Map selectPIExpirationNot(Integer projectInfoProgress,
                                                         Integer participantUid,
                                                         Integer participantUrole);
+
+    /**
+     * 查询待评审且已超过工作时间的项目id
+     * @return
+     */
+    Integer[] selectPidToReviewExpiration();
+
 }

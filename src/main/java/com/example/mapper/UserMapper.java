@@ -116,7 +116,7 @@ public interface UserMapper {
 	/**
 	 * 查询专家信息列表
 	 * @param orderRequest
-	 * @param user_state
+	 * @param user_state 用户状态是否审核 1未认证审核 2已认证审核  3解聘
 	 * @return
 	 */
 	List<Map>selectExpertInfoList(@Param("orderRequests") OrderRequest[] orderRequest,@Param("user_state") Integer user_state);
@@ -136,4 +136,22 @@ public interface UserMapper {
 
 	//查询专家id和名字信息列表
 	List<Map> selectExpertInfoListById(@Param("Uids") Integer[]Uids);
+
+	/**
+	 * 通过参与项目id查询第三方机构信息
+	 * @param ProjectInfoId 参与项目id
+	 * @return
+	 */
+	Map selectOieByPpProjectid(Integer ProjectInfoId);
+
+	/**
+	 * 查询用户列表(专家)
+	 * @param conditions 查询条件
+	 * @param orderRequests 排序规则
+	 * @return
+	 */
+	List<Map>selectExperList(@Param("conditions") Map conditions,
+							 @Param("orderRequests") OrderRequest[]orderRequests);
+
+
 }

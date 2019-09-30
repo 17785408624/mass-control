@@ -92,4 +92,18 @@ public interface UserService {
 	 */
 	List<Map>findExpertInfoList(Integer user_state);
 
+	/**
+	 * 查询审核项目的第三方机构信息
+	 * @param ProjectInfoId 项目信息id
+	 * @return
+	 */
+	Map findProjectAuditOi(Integer ProjectInfoId);
+
+	/**
+	 * 查询用户信息列表(专家)
+	 * @param conditions 查询条件
+	 * @return
+	 */
+	List<Map>findExperList(Map conditions,PageOderRequest por);
+
 }

@@ -2,15 +2,13 @@ package com.example.service.impl;
 
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.config.ServiceConfig;
+import com.example.entity.ExpertAudit;
 import com.example.entity.ProjectAudit;
 import com.example.entity.ProjectParticipant;
 import com.example.entity.ProjectauditExpertInvite;
 import com.example.entity.requstparam.InsertPEinviteBatch;
 import com.example.entity.requstparam.PageRequest;
-import com.example.mapper.ProjectAuditMapper;
-import com.example.mapper.ProjectInfoEntityMapper;
-import com.example.mapper.ProjectParticipantMapper;
-import com.example.mapper.ProjectauditExpertInviteMapper;
+import com.example.mapper.*;
 import com.example.service.ProjectauditExpertInviteService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +29,10 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
     ProjectInfoEntityMapper projectInfoEntityMapper;
     @Autowired
     ProjectAuditMapper projectAuditMapper;
+    @Autowired
+    ExpertAuditMapper expertAuditMapper;
+    @Autowired
+    ExpertAuditInfoMapper expertAuditInfoMapper;
     //添加项目审核邀请
     @Override
     public int addPEInvite(ProjectauditExpertInvite pei, Integer inviteAdduserId) {
@@ -56,19 +58,22 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
     }
     // 用户操作项目审核邀请 (专家)
     @Override
-    public Boolean operationUserPEInvite(Integer projectInfoId,
-                                     Integer projectauditOrganizationInviteId,
+    public Boolean operationUserPEInvite(Integer projectauditExpertInviteId,
                                      Integer inviteEdituserId,
                                      Integer inviteState,
                                      Integer userRole,
                                      Integer inviteType) throws OperationProjectauditOInviteException {
+        ProjectauditExpertInvite projectauditExpertInvite=
+                projectauditExpertInviteMapper.
+                        selectPEinviteById(projectauditExpertInviteId);//查询审核邀请信息
+        Integer projectInfoId=projectauditExpertInvite.getProjectInfoId();
         Long nowDate =new Date().getTime();
-        ProjectauditExpertInvite pei =new ProjectauditExpertInvite();
+        ProjectauditExpertInvite pei =new ProjectauditExpertInvite();//审核邀请信息（专家）
         pei.setInviteEdittime(nowDate);//修改时间
         pei.setInviteEdituserId(inviteEdituserId);//修改人
         pei.setInviteState(inviteState);//修改状态
         pei.setProjectauditExpertInviteId(
-                projectauditOrganizationInviteId);//审核信息id
+                projectauditExpertInviteId);//审核信息id
         switch (inviteState){
             case 2://接受
                 Integer projectinfoProgress = null;//邀请审核的项目进程
@@ -77,6 +82,7 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
                         projectinfoProgress=3;//项目进程为选择专家组组员
                         projectInfoEntityMapper.updateProjectInfoProgressByPIid(
                                 projectInfoId,projectinfoProgress);//改变邀请审核的项目进程为选择专家组组员
+                        userRole=6;//改变用户角色
                         break;
                     case 2://组员
                         projectinfoProgress=null;//项目进程为项目评审
@@ -93,11 +99,17 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
                 pP.setUserId(inviteEdituserId);//参与者userid
                 pP.setUserRole(userRole);//参与者角色
                 projectParticipantMapper.insertSelective(pP);//添加项目参与者信息
-
                 projectauditExpertInviteMapper.updatePEInviteStateById(pei);//修改审核邀请信息
+                ExpertAudit expertAudit=new ExpertAudit();//专家评测数据信息
+                expertAudit.setAddDatetime(nowDate);//数据添加时间
+                expertAudit.setByauditUserId(inviteEdituserId);//被评审人id
+                expertAudit.setAddUserId(inviteEdituserId);//添加人id
+                expertAudit.setProjectInfoId(projectInfoId);//关联项目id
+                expertAuditMapper.insertSelective(expertAudit);//添加专家评测数据
+                expertAuditInfoMapper.updateNotAuditNumByPid(projectInfoId,true,1);//改变未审核人数
                 break;
             case 3://拒绝
-                projectauditExpertInviteMapper.updatePEInviteStateById(pei);
+                projectauditExpertInviteMapper.updatePEInviteStateById(pei);//修改审核状态
                 break;
             case 4://取消邀请
                 break;

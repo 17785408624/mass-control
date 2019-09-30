@@ -30,6 +30,12 @@ public interface ProjectInfoService {
     List<ProjectInfoEntityWithBLOBs>findProjectInfoChooseByProgressOE(PageOderRequest pageOderRequest);
 
     /**
+     * 查询 进程为等待批复的项目信息
+     * @param pageOderRequest
+     * @return
+     */
+    List<ProjectInfoEntityWithBLOBs>findProjectInfoToProgress5(PageOderRequest pageOderRequest);
+    /**
      * 通过项目id查询项目全部信息
      * @return
      */

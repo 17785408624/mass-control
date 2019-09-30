@@ -29,8 +29,16 @@ public interface ProjectauditExpertInviteService {
 
     /**
      * 用户操作项目审核邀请 (专家)
-     * @param projectInfoId 邀请审核的审核的项目id
-     * @param projectauditOrganizationInviteId 项目审核邀请信息数据id
+     * 一 修改状态为通过
+     * 1 当角色为组长时 改变邀请审核的项目进程为选择专家组组员
+     * 2添加项目审核信息 每个参与的用户都有一条审核记录
+     * 3修改审核状态
+     * 4添加项目参与者信息
+     * 5添加专家评测审核信息
+     * 6改变未审核人数
+     *二 修改状态为拒绝
+     * 1修改审核状态
+     * @param projectauditExpertInviteId 项目审核邀请信息数据id
      * @param inviteEdituserId 修改人id
      * @param inviteState 修改状态
      * @param userRole 修改人角色
@@ -38,8 +46,7 @@ public interface ProjectauditExpertInviteService {
      * @return
      * @throws OperationProjectauditOInviteException
      */
-    Boolean operationUserPEInvite(Integer projectInfoId,
-                              Integer projectauditOrganizationInviteId,
+    Boolean operationUserPEInvite(Integer projectauditExpertInviteId,
                               Integer inviteEdituserId,
                               Integer inviteState,
                               Integer userRole,

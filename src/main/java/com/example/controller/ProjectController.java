@@ -177,5 +177,20 @@ public class ProjectController {
         return vcp;
     }
 
+    /**
+     * 分页查询 进程为等待批复的项目信息
+     * @param pageOderRequest
+     * @return
+     */
+    @PostMapping("findProjectInfoToProgress5_Page")
+    public VisitConsequenceParent findProjectInfoToProgress5_Page(
+            @RequestBody PageOderRequest pageOderRequest) {
+        List<ProjectInfoEntityWithBLOBs> listP =
+                projectInfoService.findProjectInfoToProgress5(pageOderRequest);
+        PageInfo a = new PageInfo<ProjectInfoEntityWithBLOBs>(listP);
+        VisitConsequenceParent vcp = PageUtils.getVisitConsequencePage(a);
+        return vcp;
+    }
+
 
 }

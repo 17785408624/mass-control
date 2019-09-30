@@ -12,7 +12,7 @@ public abstract class VisitConsequenceParent {
 	protected String message="请求成功";//返回的信息
 	protected int state=0;//返回的状态 3为登录信息异常,0正常，1返回数据错误
 	protected Object object;//返回的前端数据
-
+	protected int dialogue=0;//对话状态 0正常登陆 1未登录 2登陆超时 3重复登陆
 	
 	protected abstract void checkData();
 
@@ -40,5 +40,11 @@ public abstract class VisitConsequenceParent {
 		this.object = object;
 	}
 
+	public int getDialogue() {
+		return dialogue;
+	}
 
+	public void setDialogue(int dialogue) {
+		this.dialogue = dialogue;
+	}
 }

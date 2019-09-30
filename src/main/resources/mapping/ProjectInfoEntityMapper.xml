@@ -396,9 +396,9 @@
      pi.project_info_expiration>(select (unix_timestamp(now())*1000))
 	AND pp.user_id = =#{Uid}
     AND pp.user_role = #{Urole}
-    AND pi.project_info_progress = =#{projectInfoProgress}
+    AND pi.project_info_progress = =#{projectInfselectListByPiProgressoProgress}
   </select>
-    <update id="updateProjectInfoState" >
+    <update id="updateProjectInfoState">
         update project_info
         set project_info_state=#{projectInfoState}
         where project_info_id
@@ -410,5 +410,25 @@
              where project_audit_id=#{projectAuditId}
              )
     </update>
-
+    <select id="selectPidToReviewExpiration" resultType="java.lang.Integer">
+        SELECT
+	project_info_id
+    FROM
+	project_info
+    WHERE
+	project_info_expiration > (
+		SELECT
+			UNIX_TIMESTAMP(NOW()) * 1000
+	)
+    AND project_info_progress=4
+    </select>
+    <update id="updateProjectInfoStateByPIidBatch">
+        update project_info
+        set project_info_progress=#{projectInfoProgress}
+        where project_info_id in(
+        <foreach collection="projectInfoIds" open="" separator="," close="" item="projectInfoId">
+            projectInfoId
+        </foreach>
+        )
+    </update>
 </mapper>

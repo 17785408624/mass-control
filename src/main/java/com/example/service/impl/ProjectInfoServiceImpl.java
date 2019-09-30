@@ -28,7 +28,8 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
     public int addProjectInfo(int user_id,int user_role,ProjectInfoEntityWithBLOBs projectInfoEntityWithBLOBs) {
         projectInfoEntityWithBLOBs.setProjectInfoAddtime(new Date().getTime());
         projectInfoEntityWithBLOBs.setProjectInfoAdduserid(user_id);
-        int addNum=projectInfoEntityMapper.inserBatchAC(projectInfoEntityWithBLOBs);
+
+        int addNum=projectInfoEntityMapper.inserBatchAC(projectInfoEntityWithBLOBs);//添加项目信息
         ProjectParticipant p=new ProjectParticipant();
         ProjectParticipant p2=new ProjectParticipant();
         return 2;
@@ -36,17 +37,26 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
     //查询项目信息列表
     @Override
     public List<ProjectInfoEntityWithBLOBs> findProjectInfoChooseByProgressOE() {
-        return projectInfoEntityMapper.selectListByPiProgress(new int[]{1,2},null);
+        return projectInfoEntityMapper.selectListByPiProgress(new int[]{1,3},null);
     }
-    //分页查询项目信息列表
+    //查询 进程为选择机构和选择专家组 的项目列表
     @Override
     public List<ProjectInfoEntityWithBLOBs> findProjectInfoChooseByProgressOE(PageOderRequest pageOderRequest) {
         PageRequest pageRequest=pageOderRequest.getPageRequest();
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);//调用分页
-        return projectInfoEntityMapper.selectListByPiProgress(new int[]{1,2}, pageOderRequest.getOrderRequests());
+        return projectInfoEntityMapper.selectListByPiProgress(new int[]{1,3}, pageOderRequest.getOrderRequests());
 
+    }
+    //分页查询 进程为待批复的项目信息列表
+    @Override
+    public List<ProjectInfoEntityWithBLOBs> findProjectInfoToProgress5(PageOderRequest pageOderRequest) {
+        PageRequest pageRequest=pageOderRequest.getPageRequest();
+        int pageNum = pageRequest.getPageNum();
+        int pageSize = pageRequest.getPageSize();
+        PageHelper.startPage(pageNum, pageSize);//调用分页
+        return projectInfoEntityMapper.selectListByPiProgress(new int[]{5}, pageOderRequest.getOrderRequests());
     }
 
     //通过项目id查询项目全部信息

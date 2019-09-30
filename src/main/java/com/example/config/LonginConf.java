@@ -6,4 +6,6 @@ public class LonginConf {
     public static int LOGIN_VALID_TIME=60*30*1000;//登录有效时间
     public static int LOGIN_NOT=1;//未登录状态
     public static int LOGIN_RIGHT=0;//已登录
+    public static int LOGIN_OVERTIME;//超时
+    public static int LOGIN_REPETITION;//重复
 }

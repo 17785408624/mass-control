@@ -112,7 +112,6 @@ public class ProjectauditOInviteController {
         Integer inviteEdituserId;//修改人id
         Integer inviteState;//修改状态
         Integer userRole;//修改人角色
-        projectInfoId=Integer.parseInt(String.valueOf(pamar.get("projectInfoId")));
         projectauditOrganizationInviteId=Integer.parseInt(String.valueOf(pamar.get("projectauditOrganizationInviteId")));
         inviteState=Integer.parseInt(String.valueOf(pamar.get("inviteState")));
         try {
@@ -128,7 +127,7 @@ public class ProjectauditOInviteController {
         boolean results;
         try {
             results=projectauditOrganizationInviteService.operationUserProjectauditOInvite(
-                    projectInfoId,projectauditOrganizationInviteId,inviteEdituserId,inviteState,userRole);
+                    projectauditOrganizationInviteId,inviteEdituserId,inviteState,userRole);
         } catch (OperationProjectauditOInviteException e) {
             e.printStackTrace();
             vc.setMessage(e.getMessage());

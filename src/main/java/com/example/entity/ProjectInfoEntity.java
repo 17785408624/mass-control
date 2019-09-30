@@ -72,7 +72,7 @@ public class ProjectInfoEntity {
     private String projectInfoDatedescribe;
 
     /**
-     * 项目进程(1选择机构 2选择组长 3选择专家组 4项目评审 5批复 6完成)
+     * 项目进程(1等待选择机构 2等待选择组长 3等待选择专家组 4等待项目评审 5等待批复 6完成)
      */
     private Integer projectInfoProgress;
 

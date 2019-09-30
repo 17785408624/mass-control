@@ -2,14 +2,12 @@ package com.example.service.impl;
 
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.config.ServiceConfig;
+import com.example.entity.ExpertAuditInfo;
 import com.example.entity.ProjectAudit;
 import com.example.entity.ProjectParticipant;
 import com.example.entity.ProjectauditOrganizationInvite;
 import com.example.entity.requstparam.PageRequest;
-import com.example.mapper.ProjectAuditMapper;
-import com.example.mapper.ProjectInfoEntityMapper;
-import com.example.mapper.ProjectParticipantMapper;
-import com.example.mapper.ProjectauditOrganizationInviteMapper;
+import com.example.mapper.*;
 import com.example.service.ProjectauditOrganizationInviteService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,8 @@ public class ProjectauditOrganizationInviteServiceImpl implements ProjectauditOr
     ProjectParticipantMapper projectParticipantMapper;
     @Autowired
     ProjectAuditMapper projectAuditMapper;
+    @Autowired
+    ExpertAuditInfoMapper expertAuditInfoMapper;
     //添加第三方机构项目审核邀请
     @Override
     public int addProjectauditInvite(Integer inviteAdduserId, ProjectauditOrganizationInvite projectauditOrganizationInvite) {
@@ -57,7 +57,7 @@ public class ProjectauditOrganizationInviteServiceImpl implements ProjectauditOr
     }
     //用户操作项目审核邀请 (第三方机构)
     @Override
-    public boolean operationUserProjectauditOInvite(Integer projectInfoId,Integer projectauditOrganizationInviteId,Integer inviteEdituserId, Integer inviteState,Integer userRole) throws OperationProjectauditOInviteException {
+    public boolean operationUserProjectauditOInvite(Integer projectauditOrganizationInviteId,Integer inviteEdituserId, Integer inviteState,Integer userRole) throws OperationProjectauditOInviteException {
         ProjectauditOrganizationInvite poi=new ProjectauditOrganizationInvite();
         Long nowDate=new Date().getTime();
         poi.setInviteEdittime(nowDate);//修改时间
@@ -65,6 +65,7 @@ public class ProjectauditOrganizationInviteServiceImpl implements ProjectauditOr
         poi.setInviteState(inviteState);//修改状态
         poi.setProjectauditOrganizationInviteId(
                 projectauditOrganizationInviteId);//审核信息id
+        Integer projectInfoId=projectauditOrganizationInviteMapper.selectPoiByPoiId(projectauditOrganizationInviteId).getProjectInfoId();
         switch (inviteState){
             case 2://接受
                 ProjectParticipant pP=new ProjectParticipant();//项目参与者信息
@@ -81,6 +82,10 @@ public class ProjectauditOrganizationInviteServiceImpl implements ProjectauditOr
                 projectAudit.setProjectInfoId(projectInfoId);
                 projectAudit.setAuditUserRole(userRole);
                 projectAuditMapper.insertSelective(projectAudit);//添加项目审核信息
+                ExpertAuditInfo expertAuditInfo=new ExpertAuditInfo();//专家评测信息
+                expertAuditInfo.setProjectInfoId(projectInfoId);
+                expertAuditInfo.setAuditUserId(inviteEdituserId);
+                expertAuditInfoMapper.insertSelective(expertAuditInfo);//添加专家评测信息
                 break;
             case 3://拒绝
                 projectauditOrganizationInviteMapper.updatePOIStateByPOIId(poi);

@@ -47,7 +47,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.setCharacterEncoding("utf-8");
             VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
             vcp.setMessage("未登录");
-            vcp.setState(2);
+            vcp.setDialogue(LonginConf.LOGIN_NOT);
             //response.setHeader(LonginConf.LONGIN_TOKEN_NAME, String.valueOf(LonginConf.LOGIN_NOT));
             //response.getWriter().write("未登录！");
             PrintWriter out = response.getWriter();//获取响应浏览器打印输出流

@@ -113,14 +113,12 @@ public class ProjectauditEInviteController {
     public VisitConsequenceParent operationUserPEInvite(HttpSession httpSession,@RequestBody Map pamar){
         VisitConsequenceParent vc=new VisitConsequenceParentImpl();
         UserInfoLoginSession us;//用户登录信息
-        Integer projectInfoId;//审核项目id
         Integer projectauditExpertInviteId;//邀请信息数据id
         Integer inviteType;//邀请类型(1组长 2组员)
         Integer inviteState;//修改状态 (1等待操作 2接受 3拒绝 4取消邀请)
 
         Integer inviteEdituserId;//修改人id
         Integer userRole;//修改人角色
-        projectInfoId=Integer.parseInt(String.valueOf(pamar.get("projectInfoId")));
         projectauditExpertInviteId=Integer.parseInt(String.valueOf(pamar.get("projectauditExpertInviteId")));
         inviteState=Integer.parseInt(String.valueOf(pamar.get("inviteState")));
         inviteType=Integer.parseInt(String.valueOf(pamar.get("inviteType")));
@@ -136,8 +134,7 @@ public class ProjectauditEInviteController {
         inviteEdituserId=us.getUser_id();//用户id
         boolean results;
         try {
-            results=projectauditExpertInviteService.operationUserPEInvite(
-                    projectInfoId,projectauditExpertInviteId,inviteEdituserId,inviteState,userRole,inviteType);
+            results=projectauditExpertInviteService.operationUserPEInvite(projectauditExpertInviteId,inviteEdituserId,inviteState,userRole,inviteType);
         } catch (OperationProjectauditOInviteException e) {
             e.printStackTrace();
             vc.setMessage(e.getMessage());

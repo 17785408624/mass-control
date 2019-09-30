@@ -3,6 +3,7 @@ package com.example.service.impl;
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.RegException;
 import com.example.config.LonginConf;
+import com.example.entity.requstparam.OrderRequest;
 import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.requstparam.PageRequest;
 import com.example.entity.user.*;
@@ -138,6 +139,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Map> findExpertInfoList(Integer user_state) {
         return userMapper.selectExpertInfoList(null,user_state);
+    }
+    //查询审核项目的第三方机构信息
+    @Override
+    public Map findProjectAuditOi(Integer ProjectInfoId) {
+        return userMapper.selectOieByPpProjectid(ProjectInfoId);
+    }
+    //查询用户信息列表(专家)
+    @Override
+    public List<Map> findExperList(Map conditions, PageOderRequest por) {
+        PageRequest pageRequest=por.getPageRequest();//分页信息
+        OrderRequest[]orderRequests=por.getOrderRequests();
+        Integer pageNum=pageRequest.getPageNum();//当前页
+        Integer pageSize=pageRequest.getPageSize();//每页长度
+        PageHelper.startPage(pageNum, pageSize);//调用分页
+        List<Map>listM= userMapper.selectExperList(conditions,orderRequests);//查询系列表
+        return listM;
     }
 
 
