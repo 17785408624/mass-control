@@ -6,7 +6,7 @@ import java.util.Map;
  * 封装分页请求的数据。带map参数
  */
 public class PageOderRequestMap extends PageOderRequest{
-    private Map param;
+    private Map param;//前端传入除开分页的请求参数
 
     public Map getParam() {
         return param;

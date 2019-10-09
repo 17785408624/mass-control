@@ -78,6 +78,18 @@ public interface UserInfoAuditMapper {
             @Param("user_info_audit_type") int user_info_audit_type);
 
     /**
+     *
+     * @param user_info_audit_state
+     * @param user_info_audit_type
+     * @param condition 模糊查询条件
+     * @return
+     */
+    List<Map<String,Object>> selectLikeUserInfoAuditExpertByStateAType(
+            @Param("user_info_audit_state") int user_info_audit_state,
+            @Param("user_info_audit_type") int user_info_audit_type,
+            @Param("condition") String condition);
+
+    /**
      * 根据审核id改变审核状态
      * @param user_info_audit_state
      * @param info_id
@@ -88,7 +100,7 @@ public interface UserInfoAuditMapper {
             @Param("info_id")int info_id);
 
     /**
-     *
+     * 查询专家信息
      * @param expert_info_id
      * @return
      */

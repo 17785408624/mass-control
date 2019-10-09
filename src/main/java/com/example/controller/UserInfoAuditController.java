@@ -1,10 +1,12 @@
 package com.example.controller;
 
 import com.example.common.exceptiondefine.LoginException;
+import com.example.entity.common.VisitConsequencePage;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.OrderRequest;
 import com.example.entity.requstparam.PageOderRequest;
+import com.example.entity.requstparam.PageOderRequestMap;
 import com.example.entity.requstparam.PageRequest;
 import com.example.entity.resultsparam.ExpertInfoResults;
 import com.example.entity.resultsparam.OrganizationAuditResults;
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -318,25 +321,35 @@ public class UserInfoAuditController {
         return vcp;
     }
     /**
-     * 分页查询初次未审核的专家信息列表
+     * 分页查询未审批的专家认证信息列表
      *
      * @param
      * @return
      */
     @PostMapping("findAuditExpertInfoNonePage")
     public VisitConsequenceParent findAuditExpertInfoNonePage(
-            @RequestBody PageOderRequest pageOderRequest) {
+            @RequestBody PageOderRequestMap porm) {
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
-        vcp.setMessage("请求成功");
-        vcp.setState(0);
+        Map param=porm.getParam();//前端传入除开分页的请求参数
+        List<Map<String,Object>> uiae=new ArrayList<>();
         int user_info_audit_state = 1;
         int user_info_audit_type = 1;
-        List<Map<String,Object>> uiae=  userInfoService.
-                findUserInfoAuditExpert(null,user_info_audit_state,
-                        user_info_audit_type);
+        if(param!=null&&
+                param.containsKey("condition")&&
+                param.get("condition")!=null){//判断是否传入条件
+            String condition= String.valueOf(param.get("condition"));//查询条件
+            uiae =  userInfoService.
+                    findUserInfoAuditExpert(porm.getPageRequest(),user_info_audit_state,
+                            user_info_audit_type,condition);
+        }else{
+            uiae =  userInfoService.
+                    findUserInfoAuditExpert(porm.getPageRequest(),user_info_audit_state,
+                            user_info_audit_type);
+        }
         PageInfo a=new PageInfo<Map<String,Object>>(uiae);
         vcp.setObject(uiae);
         return vcp;
     }
+
 
 }

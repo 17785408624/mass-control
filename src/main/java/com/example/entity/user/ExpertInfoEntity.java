@@ -24,6 +24,7 @@ public class ExpertInfoEntity {
     private String expert_info_school;//毕业学校
     private Integer expert_info_education;//学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
     private String expert_info_qualification;//职业资格
+    private String expert_info_qualificationtype;//职业资格类型
     private String expert_info_learnmajor;//所学专业 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
     private String[]expert_info_learnmajorArray;//所学专业 数组形式
     private String expert_info_workmajor;//从事专业  1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
@@ -324,5 +325,13 @@ public class ExpertInfoEntity {
 
     public void setExpert_info_declaredesign_safetyArray(String[] expert_info_declaredesign_safetyArray) {
         this.expert_info_declaredesign_safetyArray = expert_info_declaredesign_safetyArray;
+    }
+
+    public String getExpert_info_qualificationtype() {
+        return expert_info_qualificationtype;
+    }
+
+    public void setExpert_info_qualificationtype(String expert_info_qualificationtype) {
+        this.expert_info_qualificationtype = expert_info_qualificationtype;
     }
 }

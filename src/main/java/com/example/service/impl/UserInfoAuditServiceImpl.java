@@ -94,12 +94,21 @@ public class UserInfoAuditServiceImpl implements UserInfoService {
                 selectUserInfoAuditRecentlyByUid(user_id_add);
     }
 
-    //查询审核专家信息申请列表
+    //查询专家审核信息申请列表
     @Override
     public List<Map<String, Object>> findUserInfoAuditExpert(int user_info_audit_state, int user_info_audit_type) {
         return userInfoAuditMapper.selectUserInfoAuditExpertByStateAType(user_info_audit_state,user_info_audit_type);
     }
-    //
+    //分页模糊条件查询专家审核信息列表
+    @Override
+    public List<Map<String, Object>> findUserInfoAuditExpert(PageRequest pageRequest,int user_info_audit_state, int user_info_audit_type, String condition) {
+        int pageNum = pageRequest.getPageNum();
+        int pageSize = pageRequest.getPageSize();
+        PageHelper.startPage(pageNum, pageSize);//调用分页
+        return userInfoAuditMapper.selectLikeUserInfoAuditExpertByStateAType(user_info_audit_state,user_info_audit_type,condition);
+    }
+
+    //分页查询专家审核信息列表
     @Override
     public List<Map<String, Object>> findUserInfoAuditExpert(PageRequest pageRequest, int user_info_audit_state, int user_info_audit_type) {
         List<Map<String, Object>> uiae=userInfoAuditMapper.

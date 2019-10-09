@@ -61,6 +61,18 @@ public interface UserInfoService {
                                                            int user_info_audit_type);
 
     /**
+     * 模糊条件查询审核专家信息列表
+     * @param user_info_audit_state
+     * @param user_info_audit_type
+     * @param condition 查询条件
+     * @return
+     */
+    List<Map<String,Object>> findUserInfoAuditExpert(PageRequest pageRequest,
+                                                     int user_info_audit_state,
+                                                     int user_info_audit_type,
+                                                     String condition);
+
+    /**
      * 分页查询审核专家信息列表
      * @param pageRequest 分页信息
      * @param user_info_audit_state
