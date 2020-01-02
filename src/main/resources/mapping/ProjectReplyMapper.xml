@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.ProjectReplyMapper" >
+  <resultMap id="BaseResultMap" type="com.example.entity.ProjectReply" >
+    <result column="project_reply_id" property="projectReplyId" jdbcType="INTEGER" />
+    <result column="reply_addtime" property="replyAddtime" jdbcType="BIGINT" />
+    <result column="reply_edittime" property="replyEdittime" jdbcType="BIGINT" />
+    <result column="reply_adduser_id" property="replyAdduserId" jdbcType="INTEGER" />
+    <result column="reply_edituser_id" property="replyEdituserId" jdbcType="INTEGER" />
+    <result column="reply_content" property="replyContent" jdbcType="VARCHAR" />
+    <result column="project_info_id" property="projectInfoId" jdbcType="INTEGER" />
+    <result column="reply_time" property="replyTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    project_reply_id, reply_addtime, reply_edittime, reply_adduser_id, reply_edituser_id, 
+    reply_content, project_info_id, reply_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.entity.ProjectReplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from project_reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.example.entity.ProjectReplyExample" >
+    delete from project_reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.entity.ProjectReply" >
+    insert into project_reply (project_reply_id, reply_addtime, reply_edittime, 
+      reply_adduser_id, reply_edituser_id, reply_content, 
+      project_info_id, reply_time)
+    values (#{projectReplyId,jdbcType=INTEGER}, #{replyAddtime,jdbcType=BIGINT}, #{replyEdittime,jdbcType=BIGINT}, 
+      #{replyAdduserId,jdbcType=INTEGER}, #{replyEdituserId,jdbcType=INTEGER}, #{replyContent,jdbcType=VARCHAR}, 
+      #{projectInfoId,jdbcType=INTEGER}, #{replyTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.entity.ProjectReply" >
+    insert into project_reply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectReplyId != null" >
+        project_reply_id,
+      </if>
+      <if test="replyAddtime != null" >
+        reply_addtime,
+      </if>
+      <if test="replyEdittime != null" >
+        reply_edittime,
+      </if>
+      <if test="replyAdduserId != null" >
+        reply_adduser_id,
+      </if>
+      <if test="replyEdituserId != null" >
+        reply_edituser_id,
+      </if>
+      <if test="replyContent != null" >
+        reply_content,
+      </if>
+      <if test="projectInfoId != null" >
+        project_info_id,
+      </if>
+      <if test="replyTime != null" >
+        reply_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectReplyId != null" >
+        #{projectReplyId,jdbcType=INTEGER},
+      </if>
+      <if test="replyAddtime != null" >
+        #{replyAddtime,jdbcType=BIGINT},
+      </if>
+      <if test="replyEdittime != null" >
+        #{replyEdittime,jdbcType=BIGINT},
+      </if>
+      <if test="replyAdduserId != null" >
+        #{replyAdduserId,jdbcType=INTEGER},
+      </if>
+      <if test="replyEdituserId != null" >
+        #{replyEdituserId,jdbcType=INTEGER},
+      </if>
+      <if test="replyContent != null" >
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="projectInfoId != null" >
+        #{projectInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="replyTime != null" >
+        #{replyTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update project_reply
+    <set >
+      <if test="record.projectReplyId != null" >
+        project_reply_id = #{record.projectReplyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.replyAddtime != null" >
+        reply_addtime = #{record.replyAddtime,jdbcType=BIGINT},
+      </if>
+      <if test="record.replyEdittime != null" >
+        reply_edittime = #{record.replyEdittime,jdbcType=BIGINT},
+      </if>
+      <if test="record.replyAdduserId != null" >
+        reply_adduser_id = #{record.replyAdduserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.replyEdituserId != null" >
+        reply_edituser_id = #{record.replyEdituserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.replyContent != null" >
+        reply_content = #{record.replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectInfoId != null" >
+        project_info_id = #{record.projectInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.replyTime != null" >
+        reply_time = #{record.replyTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update project_reply
+    set project_reply_id = #{record.projectReplyId,jdbcType=INTEGER},
+      reply_addtime = #{record.replyAddtime,jdbcType=BIGINT},
+      reply_edittime = #{record.replyEdittime,jdbcType=BIGINT},
+      reply_adduser_id = #{record.replyAdduserId,jdbcType=INTEGER},
+      reply_edituser_id = #{record.replyEdituserId,jdbcType=INTEGER},
+      reply_content = #{record.replyContent,jdbcType=VARCHAR},
+      project_info_id = #{record.projectInfoId,jdbcType=INTEGER},
+      reply_time = #{record.replyTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectPrFullByPiid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  select * from project_reply where project_info_id=#{project_info_id}
+
+  </select>
+</mapper>

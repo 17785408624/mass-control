@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.ProjectParticipantMapper" >
+  <resultMap id="BaseResultMap" type="com.example.entity.ProjectParticipant" >
+    <result column="project_participant_id" property="projectParticipantId" jdbcType="INTEGER" />
+    <result column="project_info_id" property="projectInfoId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_role" property="userRole" jdbcType="INTEGER" />
+    <result column="user_audit" property="userAudit" jdbcType="INTEGER"/>
+  </resultMap>
+  <insert id="insert" parameterType="com.example.entity.ProjectParticipant" >
+    insert into project_participant (project_participant_id, project_info_id, 
+      user_id, user_role)
+    values (#{projectParticipantId,jdbcType=INTEGER}, #{projectInfoId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{userRole,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.entity.ProjectParticipant" >
+    insert into project_participant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectParticipantId != null" >
+        project_participant_id,
+      </if>
+      <if test="projectInfoId != null" >
+        project_info_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userRole != null" >
+        user_role,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectParticipantId != null" >
+        #{projectParticipantId,jdbcType=INTEGER},
+      </if>
+      <if test="projectInfoId != null" >
+        #{projectInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userRole != null" >
+        #{userRole,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertBatch">
+    insert into project_participant (
+      project_info_id,
+      user_id,
+      user_role)
+    values
+    <foreach collection="array" separator="," item="projectParticipant">
+      (
+      #{projectParticipant.projectInfoId,jdbcType=INTEGER},
+      #{projectParticipant.userId,jdbcType=INTEGER},
+      #{projectParticipant.userRole,jdbcType=INTEGER})
+    </foreach>
+   </insert>
+  <select id="selectPIidByUidUrole">
+    select project_info_id from
+    where user_id=#{user_id}
+    and user_role=#{user_role}
+  </select>
+  <select id="selectPpByPiid" resultMap="BaseResultMap">
+     select * from project_participant
+     where project_info_id=#{projectInfoId}
+     <trim prefix="and" prefixOverrides="and">
+       <if test="userRoles != null">
+           <foreach collection="userRoles" item="userRole" open="(" close=")" separator="or">
+             user_role=#{userRole}
+           </foreach>
+       </if>
+       <if test="userAudit != null">
+         and user_audit=#{userAudit}
+       </if>
+     </trim>
+  </select>
+  <update id="updateUaByUidPid">
+    update project_participant
+    set user_audit=#{userAudit}
+    where project_info_id=#{projectInfoId}
+    and user_id=#{userId}
+  </update>
+</mapper>

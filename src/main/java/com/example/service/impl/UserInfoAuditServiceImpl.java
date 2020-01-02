@@ -30,7 +30,7 @@ public class UserInfoAuditServiceImpl implements UserInfoService {
     }
 
     /**
-     *
+     * 查询第三方机构完整信息
      * @param organization_info_id
      * @return
      */
@@ -90,8 +90,9 @@ public class UserInfoAuditServiceImpl implements UserInfoService {
     //查询用户最近提交的一条审核信息
     @Override
     public UserInfoAuditEntity findUserInfoAuditRecentlyByUid(int user_id_add) {
-        return userInfoAuditMapper.
+        UserInfoAuditEntity uie=userInfoAuditMapper.
                 selectUserInfoAuditRecentlyByUid(user_id_add);
+        return uie;
     }
 
     //查询专家审核信息申请列表

@@ -1,11 +1,13 @@
 package com.example.service;
 
+import com.example.common.exceptiondefine.AuditOperationServiceException;
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.entity.ProjectauditExpertInvite;
 import com.example.entity.requstparam.InsertPEinviteBatch;
 import com.example.entity.requstparam.PageRequest;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProjectauditExpertInviteService {
     /**
@@ -15,7 +17,7 @@ public interface ProjectauditExpertInviteService {
      * @return
      */
     int addPEInvite(
-            ProjectauditExpertInvite pei,Integer inviteAdduserId);
+            ProjectauditExpertInvite pei,Integer inviteAdduserId) throws AuditOperationServiceException;
 
     /**
      *分页查询用户项目审核邀请信息列表(专家)
@@ -59,4 +61,11 @@ public interface ProjectauditExpertInviteService {
      * @return
      */
     Integer addPEInvite(InsertPEinviteBatch insertPEinviteBatch,Integer inviteAdduserId);
+
+    /**
+     * 查询项目的专家组成员审核邀请信息 不包含过期以及取消的邀请
+     * @param projectInfoId 项目信息id
+     * @return
+     */
+    List<Map>findPeiByPid(Integer projectInfoId);
 }

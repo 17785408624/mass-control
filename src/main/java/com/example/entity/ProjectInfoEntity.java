@@ -5,8 +5,7 @@ public class ProjectInfoEntity {
      * 数据主键
      */
     private Integer projectInfoId;
-
-    /**
+     /**
      * 项目名字
      */
     private String projectInfoName;
@@ -108,6 +107,11 @@ public class ProjectInfoEntity {
      * 项目审核过期时间
      */
     private Long projectInfoExpiration;
+    /**
+     * 项目进程状态 1未操作 2等待邀请对象响应 3邀请过期 4拒绝邀请
+     */
+    private Integer projectInfoProgressoperation;//
+
 
 
 
@@ -449,5 +453,14 @@ public class ProjectInfoEntity {
 
     public void setProjectInfoExpiration(Long projectInfoExpiration) {
         this.projectInfoExpiration = projectInfoExpiration;
+    }
+
+
+    public Integer getProjectInfoProgressoperation() {
+        return projectInfoProgressoperation;
+    }
+
+    public void setProjectInfoProgressoperation(Integer projectInfoProgressoperation) {
+        this.projectInfoProgressoperation = projectInfoProgressoperation;
     }
 }

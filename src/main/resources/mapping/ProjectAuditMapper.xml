@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.ProjectAuditMapper" >
+  <resultMap id="BaseResultMap" type="com.example.entity.ProjectAudit" >
+    <result column="project_audit_id" property="projectAuditId" jdbcType="INTEGER" />
+    <result column="project_info_id" property="projectInfoId" jdbcType="INTEGER" />
+    <result column="audit_user_id" property="auditUserId" jdbcType="INTEGER" />
+    <result column="add_user_id" property="addUserId" jdbcType="INTEGER" />
+    <result column="add_datetime" property="addDatetime" jdbcType="BIGINT" />
+    <result column="audit_user_role" property="auditUserRole" jdbcType="INTEGER" />
+    <result column="audit_content" property="auditContent" jdbcType="VARCHAR" />
+    <result column="audit_datetime" property="auditDatetime" jdbcType="BIGINT" />
+    <result column="audit_revamp" property="auditRevamp" jdbcType="BIGINT" />
+    <result column="audit_state" property="auditState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <insert id="insert" parameterType="com.example.entity.ProjectAudit" >
+    insert into project_audit (project_audit_id, project_info_id, audit_user_id, 
+      add_user_id, add_datetime, audit_user_role, 
+      audit_content, audit_datetime, audit_revamp, 
+      audit_state)
+    values (#{projectAuditId,jdbcType=INTEGER}, #{projectInfoId,jdbcType=INTEGER}, #{auditUserId,jdbcType=INTEGER}, 
+      #{addUserId,jdbcType=INTEGER}, #{addDatetime,jdbcType=BIGINT}, #{auditUserRole,jdbcType=INTEGER}, 
+      #{auditContent,jdbcType=VARCHAR}, #{auditDatetime,jdbcType=BIGINT}, #{auditRevamp,jdbcType=BIGINT}, 
+      #{auditState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.entity.ProjectAudit" >
+    insert into project_audit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectAuditId != null" >
+        project_audit_id,
+      </if>
+      <if test="projectInfoId != null" >
+        project_info_id,
+      </if>
+      <if test="auditUserId != null" >
+        audit_user_id,
+      </if>
+      <if test="addUserId != null" >
+        add_user_id,
+      </if>
+      <if test="addDatetime != null" >
+        add_datetime,
+      </if>
+      <if test="auditUserRole != null" >
+        audit_user_role,
+      </if>
+      <if test="auditContent != null" >
+        audit_content,
+      </if>
+      <if test="auditDatetime != null" >
+        audit_datetime,
+      </if>
+      <if test="auditRevamp != null" >
+        audit_revamp,
+      </if>
+      <if test="auditState != null" >
+        audit_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectAuditId != null" >
+        #{projectAuditId,jdbcType=INTEGER},
+      </if>
+      <if test="projectInfoId != null" >
+        #{projectInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="auditUserId != null" >
+        #{auditUserId,jdbcType=INTEGER},
+      </if>
+      <if test="addUserId != null" >
+        #{addUserId,jdbcType=INTEGER},
+      </if>
+      <if test="addDatetime != null" >
+        #{addDatetime,jdbcType=BIGINT},
+      </if>
+      <if test="auditUserRole != null" >
+        #{auditUserRole,jdbcType=INTEGER},
+      </if>
+      <if test="auditContent != null" >
+        #{auditContent,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDatetime != null" >
+        #{auditDatetime,jdbcType=BIGINT},
+      </if>
+      <if test="auditRevamp != null" >
+        #{auditRevamp,jdbcType=BIGINT},
+      </if>
+      <if test="auditState != null" >
+        #{auditState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective"  parameterType="map" >
+    update project_audit
+    <set >
+      <if test="record.projectAuditId != null" >
+        project_audit_id = #{record.projectAuditId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectInfoId != null" >
+        project_info_id = #{record.projectInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditUserId != null" >
+        audit_user_id = #{record.auditUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.addUserId != null" >
+        add_user_id = #{record.addUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.addDatetime != null" >
+        add_datetime = #{record.addDatetime,jdbcType=BIGINT},
+      </if>
+      <if test="record.auditUserRole != null" >
+        audit_user_role = #{record.auditUserRole,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditContent != null" >
+        audit_content = #{record.auditContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditDatetime != null" >
+        audit_datetime = #{record.auditDatetime,jdbcType=BIGINT},
+      </if>
+      <if test="record.auditRevamp != null" >
+        audit_revamp = #{record.auditRevamp,jdbcType=BIGINT},
+      </if>
+      <if test="record.auditState != null" >
+        audit_state = #{record.auditState,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update project_audit
+    set project_audit_id = #{record.projectAuditId,jdbcType=INTEGER},
+      project_info_id = #{record.projectInfoId,jdbcType=INTEGER},
+      audit_user_id = #{record.auditUserId,jdbcType=INTEGER},
+      add_user_id = #{record.addUserId,jdbcType=INTEGER},
+      add_datetime = #{record.addDatetime,jdbcType=BIGINT},
+      audit_user_role = #{record.auditUserRole,jdbcType=INTEGER},
+      audit_content = #{record.auditContent,jdbcType=VARCHAR},
+      audit_datetime = #{record.auditDatetime,jdbcType=BIGINT},
+      audit_revamp = #{record.auditRevamp,jdbcType=BIGINT},
+      audit_state = #{record.auditState,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectProjectAuditList" resultType="java.util.Map">
+    SELECT
+    pa.project_audit_id,
+	pi.project_info_name,
+	pi.project_info_id,
+	pi.project_info_type,
+	pi.project_info_auditstartdate,
+	pi.project_info_expiration,
+    pa.audit_state,
+    pi.project_info_area
+      FROM
+	  project_audit pa
+      LEFT JOIN project_info pi ON (
+	  pa.project_info_id = pi.project_info_id
+      )
+      <trim prefix="where" prefixOverrides="and">
+        <if test="auditUserId != null">
+         pa.audit_user_id=#{auditUserId}
+        </if>
+        <if test="auditState != null">
+          and pa.audit_state=#{auditState}
+        </if>
+        <if test="!isExpiration">
+          and pi.project_info_expiration>(select UNIX_TIMESTAMP(now())*1000)
+        </if>
+      </trim>
+   </select>
+  <update id="updateProjectAuditByPAuditId" >
+    update project_audit
+    <trim prefix="set">
+    </trim>
+  </update>
+  <select id="selectPiIdByPaId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT project_info_id
+    FROM project_audit
+    where project_audit_id=#{project_audit_id}
+  </select>
+  <select id="selectEaListByPiidlAtAur" resultType="java.util.Map">
+     SELECT
+	 u.user_id,
+	 pa.audit_content,
+	 ei.expert_info_name,
+	 pa.add_datetime
+
+     FROM
+	project_audit pa
+     LEFT JOIN user u ON(pa.audit_user_id=u.user_id)
+     LEFT JOIN expert_info ei ON (
+	  u.info_id = ei.expert_info_id)
+     where pa.project_info_id=#{projectInfoId}
+     and pa.audit_state=#{auditState}
+     and pa.audit_user_role=#{auditUserRole}
+  </select>
+  <select id="selectPaByPiidAuid" resultMap="BaseResultMap">
+  select * from project_audit
+  where project_info_id=#{projectInfoId}
+
+  <foreach collection="auditUserIds"  item="auditUserId" open="and audit_user_id in(" close=")" separator=",">
+    #{auditUserId}
+  </foreach>
+  </select>
+</mapper>

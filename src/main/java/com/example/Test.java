@@ -1,8 +1,10 @@
 package com.example;
 
 import com.example.config.UploadFileType;
+import com.example.entity.user.UserEntity;
 import com.util.MyStringUril;
 import com.util.PropertiesUitls;
+import com.util.PublicUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,15 +15,17 @@ import java.util.Date;
 
 public class Test {
     public static void main(String[] args) throws IOException {
-        DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-        Date date=null;
-        try {
-            date= dateFormat1.parse("1970-01-01");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        System.out.println(date.getTime());
-        System.out.println(new Date(0));
+        UserEntity u1=new UserEntity();
+        u1.setUser_state(2);
+        //u1.setUser_password("ss");
+        u1.setUser_password("ss");
+        u1.setUser_id(1);
+        UserEntity u2=new UserEntity();
+        u2.setUser_id(1);
+        ;
+          System.out.println(PublicUtil.isEntityEquality(u1,u2));
+
+
 
     }
 }

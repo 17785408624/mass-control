@@ -113,7 +113,14 @@ public interface UserInfoAuditMapper {
      */
     UserInfoAuditEntity selectUserInfoAuditRecentlyByUid(int user_id_idd);
 
-
+    /**
+     * 查询用户未审核的信息
+     * @param Uid 用户id
+     * @param user_info_audit_content 审核类容 1第三方机构信息 2专家信息
+     * @return
+     */
+    Integer selectUiaByUid(@Param("Uid") Integer Uid,
+                                       @Param("user_info_audit_content") Integer user_info_audit_content);
 
 
 }

@@ -10,13 +10,17 @@ import com.example.entity.requstparam.PageOderRequestMap;
 import com.example.entity.requstparam.PageRequest;
 import com.example.entity.resultsparam.ExpertInfoResults;
 import com.example.entity.resultsparam.OrganizationAuditResults;
+import com.example.entity.user.UserEntity;
 import com.example.entity.user.UserInfoAuditEntity;
 import com.example.entity.user.UserInfoLoginSession;
 import com.example.service.UserInfoService;
+import com.example.service.UserService;
 import com.github.pagehelper.PageInfo;
+import com.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +32,8 @@ import java.util.Map;
 public class UserInfoAuditController {
     @Autowired
     UserInfoService userInfoService;
+    @Autowired
+    UserService userService;
 
 //    public VisitConsequenceParent findNotAuditUserInfoAuditOrganization(@RequestBody Map param){
 //        VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
@@ -294,14 +300,14 @@ public class UserInfoAuditController {
     }
 
     /**
-     * 查询用户提交时间最近的一条审核信息
+     * 查询用户最近提交的一条审核信息，如果是未审核用户当状态变为审核通过将用户信息重新登录
      *
      * @param
      * @param httpSession
      * @return
      */
     @GetMapping ("findUserInfoAuditRecentlyByUid")
-    public VisitConsequenceParent findUserInfoAuditRecentlyByUid(HttpSession httpSession) {
+    public VisitConsequenceParent findUserInfoAuditRecentlyByUid(HttpSession httpSession, HttpServletRequest request) {
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
         UserInfoLoginSession uils = null;
         try {
@@ -329,7 +335,7 @@ public class UserInfoAuditController {
     @PostMapping("findAuditExpertInfoNonePage")
     public VisitConsequenceParent findAuditExpertInfoNonePage(
             @RequestBody PageOderRequestMap porm) {
-        VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
+        VisitConsequenceParent vcp = new VisitConsequencePage();
         Map param=porm.getParam();//前端传入除开分页的请求参数
         List<Map<String,Object>> uiae=new ArrayList<>();
         int user_info_audit_state = 1;
@@ -347,7 +353,7 @@ public class UserInfoAuditController {
                             user_info_audit_type);
         }
         PageInfo a=new PageInfo<Map<String,Object>>(uiae);
-        vcp.setObject(uiae);
+        vcp= PageUtils.getVisitConsequencePage(a);
         return vcp;
     }
 

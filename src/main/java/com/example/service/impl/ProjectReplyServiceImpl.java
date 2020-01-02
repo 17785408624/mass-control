@@ -28,7 +28,7 @@ public class ProjectReplyServiceImpl implements ProjectReplyService {
         projectReply.setReplyContent(replyContent);//项目批复内容
         projectReply.setReplyTime(replyTime);//审批时间
         projectReplyMapper.insertSelective(projectReply);//添加项目批复信息
-        projectInfoEntityMapper.updateProjectInfoProgressByPIid(projectInfoId,6);//改变项目进程
+        projectInfoEntityMapper.updatePiProgressByPIid(projectInfoId,6,1);//改变项目进程
         return true;
     }
     //项目批复操作
@@ -42,7 +42,7 @@ public class ProjectReplyServiceImpl implements ProjectReplyService {
         projectReply.setReplyContent(replyContent);//项目批复内容
         projectReply.setReplyTime(newDate);//审批时间
         projectReplyMapper.insertSelective(projectReply);//添加项目批复信息
-        projectInfoEntityMapper.updateProjectInfoProgressByPIid(projectInfoId,6);//改变项目进程
+        projectInfoEntityMapper.updatePiProgressByPIid(projectInfoId,6,null);//改变项目进程
         return true;
     }
 }

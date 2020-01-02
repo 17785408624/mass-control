@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.common.exceptiondefine.AuditOperationServiceException;
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.entity.ProjectauditExpertInvite;
@@ -52,7 +53,13 @@ public class ProjectauditEInviteController {
             return  vcp;
         }
         projectauditExpertInvite.setInviteType(1);//邀请类型(1组长 2组员)
-        projectauditExpertInviteService.addPEInvite(projectauditExpertInvite,us.getUser_id());
+        try {
+            projectauditExpertInviteService.addPEInvite(projectauditExpertInvite,us.getUser_id());
+        } catch (AuditOperationServiceException e) {
+            vcp.setMessage(e.getMessage());
+            vcp.setState(1);
+            return vcp;
+        }
         vcp.setMessage("请求成功");
         vcp.setState(0);
         vcp.setObject(1);
@@ -167,5 +174,19 @@ public class ProjectauditEInviteController {
         vc.setObject(i);
         return vc;
     }
+
+    /**
+     * 查询项目的专家组成员审核邀请信息 不包含过期以及取消的邀请
+     * @param param
+     * @return
+     */
+    @PostMapping("findPeiByPid")
+    public VisitConsequenceParent findPeiByPid( @RequestBody Map param){
+        Integer projectInfoId= Integer.valueOf(String.valueOf(param.get("projectInfoId")));
+        VisitConsequenceParent vc=new VisitConsequenceParentImpl();
+        List list=projectauditExpertInviteService.findPeiByPid(projectInfoId);
+        vc.setObject(list);
+        return vc;
+    };
 
 }

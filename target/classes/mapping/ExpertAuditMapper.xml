@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.ExpertAuditMapper">
+    <resultMap id="BaseResultMap" type="com.example.entity.ExpertAudit">
+        <result column="expert_audit_id" property="expertAuditId" jdbcType="INTEGER"/>
+        <result column="expertise" property="expertise" jdbcType="INTEGER"/>
+        <result column="professional" property="professional" jdbcType="INTEGER"/>
+        <result column="attitude" property="attitude" jdbcType="INTEGER"/>
+        <result column="audit_content" property="auditContent" jdbcType="VARCHAR"/>
+        <result column="project_info_id" property="projectInfoId" jdbcType="INTEGER"/>
+        <result column="audit_user_id" property="auditUserId" jdbcType="INTEGER"/>
+        <result column="add_user_id" property="addUserId" jdbcType="INTEGER"/>
+        <result column="add_datetime" property="addDatetime" jdbcType="BIGINT"/>
+        <result column="audit_user_role" property="auditUserRole" jdbcType="INTEGER"/>
+        <result column="audit_datetime" property="auditDatetime" jdbcType="BIGINT"/>
+        <result column="audit_revamp" property="auditRevamp" jdbcType="BIGINT"/>
+        <result column="audit_state" property="auditState" jdbcType="INTEGER"/>
+        <result column="byaudit_user_id" property="byauditUserId" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    expert_audit_id, expertise, professional, attitude, audit_content, project_info_id, 
+    audit_user_id, add_user_id, add_datetime, audit_user_role, audit_datetime, audit_revamp, 
+    audit_state, byaudit_user_id
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.entity.ExpertAuditExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from expert_audit
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="com.example.entity.ExpertAuditExample">
+        delete from expert_audit
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.example.entity.ExpertAudit">
+    insert into expert_audit (expert_audit_id, expertise, professional, 
+      attitude, audit_content, project_info_id, 
+      audit_user_id, add_user_id, add_datetime, 
+      audit_user_role, audit_datetime, audit_revamp, 
+      audit_state, byaudit_user_id)
+    values (#{expertAuditId,jdbcType=INTEGER}, #{expertise,jdbcType=INTEGER}, #{professional,jdbcType=INTEGER}, 
+      #{attitude,jdbcType=INTEGER}, #{auditContent,jdbcType=VARCHAR}, #{projectInfoId,jdbcType=INTEGER}, 
+      #{auditUserId,jdbcType=INTEGER}, #{addUserId,jdbcType=INTEGER}, #{addDatetime,jdbcType=BIGINT}, 
+      #{auditUserRole,jdbcType=INTEGER}, #{auditDatetime,jdbcType=BIGINT}, #{auditRevamp,jdbcType=BIGINT}, 
+      #{auditState,jdbcType=INTEGER}, #{byauditUserId,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.entity.ExpertAudit">
+        insert into expert_audit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="expertAuditId != null">
+                expert_audit_id,
+            </if>
+            <if test="expertise != null">
+                expertise,
+            </if>
+            <if test="professional != null">
+                professional,
+            </if>
+            <if test="attitude != null">
+                attitude,
+            </if>
+            <if test="auditContent != null">
+                audit_content,
+            </if>
+            <if test="projectInfoId != null">
+                project_info_id,
+            </if>
+            <if test="auditUserId != null">
+                audit_user_id,
+            </if>
+            <if test="addUserId != null">
+                add_user_id,
+            </if>
+            <if test="addDatetime != null">
+                add_datetime,
+            </if>
+            <if test="auditUserRole != null">
+                audit_user_role,
+            </if>
+            <if test="auditDatetime != null">
+                audit_datetime,
+            </if>
+            <if test="auditRevamp != null">
+                audit_revamp,
+            </if>
+            <if test="auditState != null">
+                audit_state,
+            </if>
+            <if test="byauditUserId != null">
+                byaudit_user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="expertAuditId != null">
+                #{expertAuditId,jdbcType=INTEGER},
+            </if>
+            <if test="expertise != null">
+                #{expertise,jdbcType=INTEGER},
+            </if>
+            <if test="professional != null">
+                #{professional,jdbcType=INTEGER},
+            </if>
+            <if test="attitude != null">
+                #{attitude,jdbcType=INTEGER},
+            </if>
+            <if test="auditContent != null">
+                #{auditContent,jdbcType=VARCHAR},
+            </if>
+            <if test="projectInfoId != null">
+                #{projectInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="auditUserId != null">
+                #{auditUserId,jdbcType=INTEGER},
+            </if>
+            <if test="addUserId != null">
+                #{addUserId,jdbcType=INTEGER},
+            </if>
+            <if test="addDatetime != null">
+                #{addDatetime,jdbcType=BIGINT},
+            </if>
+            <if test="auditUserRole != null">
+                #{auditUserRole,jdbcType=INTEGER},
+            </if>
+            <if test="auditDatetime != null">
+                #{auditDatetime,jdbcType=BIGINT},
+            </if>
+            <if test="auditRevamp != null">
+                #{auditRevamp,jdbcType=BIGINT},
+            </if>
+            <if test="auditState != null">
+                #{auditState,jdbcType=INTEGER},
+            </if>
+            <if test="byauditUserId != null">
+                #{byauditUserId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByExampleSelective" parameterType="map">
+        update expert_audit
+        <set>
+            <if test="record.expertAuditId != null">
+                expert_audit_id = #{record.expertAuditId,jdbcType=INTEGER},
+            </if>
+            <if test="record.expertise != null">
+                expertise = #{record.expertise,jdbcType=INTEGER},
+            </if>
+            <if test="record.professional != null">
+                professional = #{record.professional,jdbcType=INTEGER},
+            </if>
+            <if test="record.attitude != null">
+                attitude = #{record.attitude,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditContent != null">
+                audit_content = #{record.auditContent,jdbcType=VARCHAR},
+            </if>
+            <if test="record.projectInfoId != null">
+                project_info_id = #{record.projectInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditUserId != null">
+                audit_user_id = #{record.auditUserId,jdbcType=INTEGER},
+            </if>
+            <if test="record.addUserId != null">
+                add_user_id = #{record.addUserId,jdbcType=INTEGER},
+            </if>
+            <if test="record.addDatetime != null">
+                add_datetime = #{record.addDatetime,jdbcType=BIGINT},
+            </if>
+            <if test="record.auditUserRole != null">
+                audit_user_role = #{record.auditUserRole,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditDatetime != null">
+                audit_datetime = #{record.auditDatetime,jdbcType=BIGINT},
+            </if>
+            <if test="record.auditRevamp != null">
+                audit_revamp = #{record.auditRevamp,jdbcType=BIGINT},
+            </if>
+            <if test="record.auditState != null">
+                audit_state = #{record.auditState,jdbcType=INTEGER},
+            </if>
+            <if test="record.byauditUserId != null">
+                byaudit_user_id = #{record.byauditUserId,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update expert_audit
+        set expert_audit_id = #{record.expertAuditId,jdbcType=INTEGER},
+        expertise = #{record.expertise,jdbcType=INTEGER},
+        professional = #{record.professional,jdbcType=INTEGER},
+        attitude = #{record.attitude,jdbcType=INTEGER},
+        audit_content = #{record.auditContent,jdbcType=VARCHAR},
+        project_info_id = #{record.projectInfoId,jdbcType=INTEGER},
+        audit_user_id = #{record.auditUserId,jdbcType=INTEGER},
+        add_user_id = #{record.addUserId,jdbcType=INTEGER},
+        add_datetime = #{record.addDatetime,jdbcType=BIGINT},
+        audit_user_role = #{record.auditUserRole,jdbcType=INTEGER},
+        audit_datetime = #{record.auditDatetime,jdbcType=BIGINT},
+        audit_revamp = #{record.auditRevamp,jdbcType=BIGINT},
+        audit_state = #{record.auditState,jdbcType=INTEGER},
+        byaudit_user_id = #{record.byauditUserId,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <select id="selectExpertAuditListByPid" resultType="java.util.Map">
+        SELECT
+        ea.expert_audit_id,
+        u.user_id,
+        ei.expert_info_name,
+        fi.file_url,
+        ea.expertise,
+        ea.professional,
+        ea.attitude, COUNT(DISTINCT u.user_id) as jilei
+        FROM
+        expert_audit ea
+        LEFT JOIN USER u ON (
+        ea.byaudit_user_id = u.user_id
+        )
+        LEFT JOIN expert_info ei ON (
+        u.info_id = ei.expert_info_id
+        )
+        LEFT JOIN file_info fi ON (
+        ei.expert_info_picture_file_info_id = fi.file_info_id
+        )
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="expertAuditInfoId != null">
+                project_info_id IN (
+                SELECT
+                project_info_id
+                FROM
+                expert_audit_info
+                WHERE
+                expert_audit_info_id = #{expertAuditInfoId}
+                )
+            </if>
+            <if test="auditState != null">
+                AND ea.audit_state=#{auditState}
+            </if>
+        </trim>
+        group by u.user_id
+    </select>
+    <update id="updateEaByEiDBatch">
+        UPDATE expert_audit SET
+        <if test="commonUpdate.auditUserId != null">
+            audit_user_id=#{auditUserId},
+        </if>
+        <if test="commonUpdate.auditUserRole != null">
+            audit_user_role=#{auditUserRole},
+        </if>
+        <if test="commonUpdate.auditDatetime != null">
+            audit_datetime=#{auditDatetime},
+        </if>
+        <if test="commonUpdate.auditRevamp != null">
+            audit_revamp=#{auditRevamp}
+        </if>
+        <if test="commonUpdate.auditState != null">
+            audit_state=#{auditState}
+        </if>
+        <foreach collection="expertAudits" item="expertAudit" close="end,">
+            expertise = CASE expert_audit_id
+            WHEN #{expertAudit.expertAuditId} THEN #{expertAudit.expertise}
+        </foreach>
+        <foreach collection="expertAudits" item="expertAudit">
+            professional= CASE expert_audit_id
+            WHEN #{expertAudit.expertAuditId} THEN #{expertAudit.professional}
+        </foreach>
+        <foreach collection="expertAudits" item="expertAudit">
+            attitude= CASE expert_audit_id
+            WHEN #{expertAudit.expertAuditId} THEN #{expertAudit.attitude}
+        </foreach>
+        <foreach collection="expertAudits" item="expertAudit">
+            attitude= CASE expert_audit_id
+            WHEN #{expertAudit.expertAuditId} THEN #{expertAudit.auditContent}
+        </foreach>
+        <foreach collection="expertAudits" item="expertAudit" open=" where in(" close=")" separator=",">
+            #{expertAudit.expertAuditId}
+        </foreach>
+    </update>
+
+</mapper>

@@ -30,24 +30,24 @@
         </javaTypeResolver>
 
         <!-- java实体类路径 -->
-        <javaModelGenerator targetPackage="com.example.entity" targetProject="D:\Java\idea-workspace\mass-control\src\main\java" >
+        <javaModelGenerator targetPackage="com.example.entity" targetProject="D:\IdeaProjects\mass-control\src\main\java" >
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!-- sqlmap xml -->
-        <sqlMapGenerator targetPackage="mapping"  targetProject="D:\Java\idea-workspace\mass-control\src\main\resources">
+        <sqlMapGenerator targetPackage="mapping"  targetProject="D:\IdeaProjects\mass-control\src\main\resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.mapper"  targetProject="D:\Java\idea-workspace\mass-control\src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.mapper"  targetProject="D:\IdeaProjects\mass-control\src\main\java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
         <!-- 要逆向生成Dao的所有表 -->
-        <table schema="ProjectReply" tableName="project_reply"
-               domainObjectName="ProjectReply" enableCountByExample="false"
+        <table schema="userAudit" tableName="user_audit"
+               domainObjectName="userAudit" enableCountByExample="false"
                enableDeleteByExample="true" enableSelectByExample="true"
                enableUpdateByExample="true">
         </table>

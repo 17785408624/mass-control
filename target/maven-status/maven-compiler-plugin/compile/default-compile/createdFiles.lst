@@ -4,6 +4,7 @@ com\example\mapper\ProjectParticipantMapper.class
 com\example\service\impl\ProjectAuditServiceImpl.class
 com\example\common\exceptiondefine\RegException.class
 com\example\entity\ProjectAudit.class
+com\example\common\exceptiondefine\AuditOperationServiceException.class
 com\example\entity\common\VisitConsequenceParentImpl.class
 com\example\config\MyConfiguration.class
 com\example\entity\ProjectAuditExample.class
@@ -47,6 +48,7 @@ com\example\entity\user\OrganizationInfoCareermanEntity.class
 com\example\service\impl\ProjectInfoServiceImpl.class
 com\example\controller\ProjectReplyController.class
 com\example\entity\ExpertAuditInfoExample$Criterion.class
+com\example\service\vice\LoginVice.class
 com\example\service\impl\ExpertAuditServiceImpl.class
 com\example\controller\ProjectController.class
 com\example\common\annotation\NeedLogin.class
@@ -56,6 +58,7 @@ com\example\config\ServiceConfig.class
 com\example\entity\ProjectReplyExample.class
 com\example\entity\MyCommentGenerator.class
 com\example\entity\resultsparam\OrganizationAuditResults.class
+com\util\ResponseUtil.class
 com\example\entity\ProjectauditOrganizationInvite.class
 com\example\controller\ProjectauditOInviteController.class
 com\example\common\service\ScheduledService.class
@@ -78,13 +81,14 @@ com\example\service\ProjectReplyService.class
 com\example\config\MyConfiguration$1.class
 com\example\entity\resultsparam\ExpertInfoResults.class
 com\example\entity\requstparam\PageOderRequest.class
-com\example\common\interceptor\LoginInterceptor.class
 com\example\entity\user\UserInfoLoginSession.class
 com\example\controller\ExpertAuditInfoController.class
 com\example\entity\ExpertAuditInfoExample$GeneratedCriteria.class
 com\example\service\impl\ExpertAuditInfoServiceImpl.class
+com\example\controller\TestController.class
 com\example\entity\AcidAndProductEntity.class
 com\example\entity\ExpertAuditInfo.class
+com\util\SpringContextUtil.class
 com\example\service\CommonService.class
 com\example\service\UserService.class
 com\example\mapper\TestMapper.class
@@ -93,6 +97,7 @@ com\example\mapper\ProjectAuditMapper.class
 com\example\service\impl\UserInfoAuditServiceImpl.class
 com\example\controller\UserController.class
 com\example\service\ProjectauditExpertInviteService.class
+com\example\common\interceptor\AccessInterceptor.class
 com\example\service\AcidAndProductForecastService.class
 com\example\entity\user\OrganizationInfoEntity.class
 com\example\entity\ExpertAuditInfoExample$Criteria.class
@@ -100,8 +105,8 @@ com\example\entity\requstparam\PageRequest.class
 com\util\EncryptUtil.class
 com\example\entity\ProjectReplyExample$Criteria.class
 com\example\controller\UserInfoAuditController.class
+com\util\PublicUtil.class
 com\example\entity\user\UserInfoAuditEntity.class
-com\example\config\LonginConf.class
 com\example\entity\ProjectAuditExample$Criteria.class
 com\example\entity\common\FileInfoeEntity.class
 com\example\config\WebConfig.class

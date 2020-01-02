@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ExpertAuditInfoMapper">
+    <resultMap id="BaseResultMap" type="com.example.entity.ExpertAuditInfo">
+        <result column="expert_audit_info_id" jdbcType="INTEGER" property="expertAuditInfoId"/>
+        <result column="project_info_id" jdbcType="INTEGER" property="projectInfoId"/>
+        <result column="not_audit_num" jdbcType="INTEGER" property="notAuditNum"/>
+        <result column="audit_user_id" jdbcType="INTEGER" property="auditUserId"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    expert_audit_info_id, project_info_id, not_audit_num, audit_user_id
+  </sql>
+    <select id="selectByExample" parameterType="com.example.entity.ExpertAuditInfoExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from expert_audit_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="com.example.entity.ExpertAuditInfoExample">
+        delete from expert_audit_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.example.entity.ExpertAuditInfo">
+    insert into expert_audit_info (expert_audit_info_id, project_info_id,
+      not_audit_num, audit_user_id)
+    values (#{expertAuditInfoId,jdbcType=INTEGER}, #{projectInfoId,jdbcType=INTEGER},
+      #{notAuditNum,jdbcType=INTEGER}, #{auditUserId,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.entity.ExpertAuditInfo">
+        insert into expert_audit_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="expertAuditInfoId != null">
+                expert_audit_info_id,
+            </if>
+            <if test="projectInfoId != null">
+                project_info_id,
+            </if>
+            <if test="notAuditNum != null">
+                not_audit_num,
+            </if>
+            <if test="auditUserId != null">
+                audit_user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="expertAuditInfoId != null">
+                #{expertAuditInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="projectInfoId != null">
+                #{projectInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="notAuditNum != null">
+                #{notAuditNum,jdbcType=INTEGER},
+            </if>
+            <if test="auditUserId != null">
+                #{auditUserId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByExampleSelective" parameterType="map">
+        update expert_audit_info
+        <set>
+            <if test="record.expertAuditInfoId != null">
+                expert_audit_info_id = #{record.expertAuditInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="record.projectInfoId != null">
+                project_info_id = #{record.projectInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="record.notAuditNum != null">
+                not_audit_num = #{record.notAuditNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditUserId != null">
+                audit_user_id = #{record.auditUserId,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update expert_audit_info
+        set expert_audit_info_id = #{record.expertAuditInfoId,jdbcType=INTEGER},
+        project_info_id = #{record.projectInfoId,jdbcType=INTEGER},
+        not_audit_num = #{record.notAuditNum,jdbcType=INTEGER},
+        audit_user_id = #{record.auditUserId,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateNotAuditNumByPid">
+        update expert_audit_info
+        set not_audit_num=
+        <choose>
+            <when test="isadd">
+                not_audit_num+${updateNum}
+            </when>
+            <otherwise>
+                not_audit_num-${updateNum}
+            </otherwise>
+        </choose>
+    </update>
+    <select id="selectEaiList" resultType="java.util.Map">
+        SELECT
+        eai.expert_audit_info_id,
+        pi.project_info_id,
+        pi.project_info_expiration,
+        pi.project_info_name,
+        pi.project_info_progress,
+        pi.project_info_auditstartdate,
+        pi.project_info_type,
+        eai.not_audit_num,
+        pi.project_info_area
+        FROM
+        expert_audit_info eai
+        LEFT JOIN project_info pi ON (
+        eai.project_info_id = pi.project_info_id
+        )
+        <trim prefix="where" prefixOverrides="and">
+            <if test="auditUserId != null and auditUserId != '0'">
+                eai.audit_user_id=#{auditUserId}
+            </if>
+            <if test="project_info_progress != null and project_info_progress != '0'">
+                and pi.project_info_progress=#{project_info_progress}
+            </if>
+            <if test="isContainExpiration != true">
+                and pi.project_info_expiration <![CDATA[>]]> (SELECT (unix_timestamp(NOW())*1000))
+            </if>
+            <if test="isContainAuditnumZero != true">
+                and eai.not_audit_num>0
+            </if>
+        </trim>
+    </select>
+</mapper>

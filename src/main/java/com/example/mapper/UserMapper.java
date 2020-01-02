@@ -153,5 +153,12 @@ public interface UserMapper {
 	List<Map>selectExperList(@Param("conditions") Map conditions,
 							 @Param("orderRequests") OrderRequest[]orderRequests);
 
+	/**
+	 * 通过用户id查询用户专家信息
+	 * @param Uid 用户id
+	 * @return
+	 */
+	ExpertInfoEntity selectEiByUid(Integer Uid);
+
 
 }

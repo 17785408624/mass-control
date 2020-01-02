@@ -24,6 +24,7 @@
         <result column="project_info_adduserid" jdbcType="INTEGER" property="projectInfoAdduserid"/>
         <result column="project_info_auditstartdate" jdbcType="BIGINT" property="projectInfoAuditstartdate"/>
         <result column="project_info_expiration" jdbcType="BIGINT" property="projectInfoExpiration"/>
+        <result column="project_info_progressoperation" jdbcType="INTEGER" property="projectInfoProgressoperation"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.entity.ProjectInfoEntityWithBLOBs">
         <result column="project_info_synopsis" jdbcType="LONGVARCHAR" property="projectInfoSynopsis"/>
@@ -32,6 +33,13 @@
     <sql id="Blob_Column_List">
     project_info_synopsis, project_info_content
   </sql>
+    <sql id="ORDER_BY">
+        <if test="orderRequests != null">
+            <foreach collection="orderRequests" item="orderRequest" open="ORDER BY" separator=",">
+                ${orderRequest.orderName} ${orderRequest.orderRule}
+            </foreach>
+        </if>
+    </sql>
     <insert id="insert" parameterType="com.example.entity.ProjectInfoEntityWithBLOBs">
     insert into project_info (project_info_id, project_info_name, project_info_area, 
       project_info_nature, project_info_invest, project_info_scale, 
@@ -54,7 +62,8 @@
       #{projectInfoSynopsis,jdbcType=LONGVARCHAR}, #{projectInfoContent,jdbcType=LONGVARCHAR}
       )
   </insert>
-    <insert id="insertSelective" parameterType="com.example.entity.ProjectInfoEntityWithBLOBs">
+    <insert id="insertSelective" parameterType="com.example.entity.ProjectInfoEntityWithBLOBs" useGeneratedKeys="true"
+            keyProperty="projectInfoId">
         insert into project_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="projectInfoId != null">
@@ -313,15 +322,28 @@
         project_info_adduserid,
         project_info_type,
         project_info_progress,
+        project_info_progressoperation,
         project_info_state
         FROM project_info
-        <if test="array != null">
-            where
-            <foreach collection="array" item="projectInfoProgress" separator="">
-                project_info_progress=#{projectInfoProgress} or
-            </foreach>
-            1=2
-        </if>
+        <trim prefix="where" prefixOverrides="and">
+            <if test="projectInfoProgress != null">
+                and
+                <foreach collection="projectInfoProgress" item="p" separator="or" open="(" close=")">
+                    project_info_progress=#{p}
+                </foreach>
+
+            </if>
+            <if test="projectInfoName != null">
+                and
+                project_info_name like '%${projectInfoName}%'
+            </if>
+            <if test="projectInfoProgressoperations != null">
+            and
+                <foreach collection="projectInfoProgressoperations" item="p" separator="or" open="(" close=")">
+                    project_info_progressoperation=#{p}
+                </foreach>
+            </if>
+        </trim>
         <if test="orderRequests != null">
             <foreach collection="orderRequests" item="orderRequest" open="ORDER BY" separator=",">
                 ${orderRequest.orderName} ${orderRequest.orderRule}
@@ -353,11 +375,10 @@
             </foreach>
             )
         </if>
-        <if test="orderRequests != null">
-            <foreach collection="orderRequests" item="orderRequest" open="ORDER BY" separator=",">
-                ${orderRequest.orderName} ${orderRequest.orderRule}
-            </foreach>
+        <if test="searchCondition != null">
+            and project_info_name like '%${searchCondition}%'
         </if>
+        <include refid="ORDER_BY"></include>
     </select>
     <select id="selectProjectInfoAll" resultMap="ResultMapWithBLOBs">
    select * from
@@ -365,13 +386,20 @@
     where
     project_info_id =#{project_info_id}
   </select>
-    <update id="updateProjectInfoProgressByPIid">
-    update project_info
-    set
-    project_info_progress=#{projectInfoProgress}
-    where
-    project_info_id=#{projectInfoId}
-  </update>
+    <update id="updatePiProgressByPIid">
+        update project_info
+        set
+        <trim suffixOverrides=",">
+            <if test="projectInfoProgressoperation != null">
+                project_Info_progressoperation=#{projectInfoProgressoperation},
+            </if>
+            <if test="projectInfoProgress != null">
+                project_info_progress=#{projectInfoProgress}
+            </if>
+        </trim>
+        where
+        project_info_id=#{projectInfoId}
+    </update>
     <update id="updateProjectInfoDateByPIid">
     update project_info
     set
@@ -398,7 +426,7 @@
     AND pp.user_role = #{Urole}
     AND pi.project_info_progress = =#{projectInfselectListByPiProgressoProgress}
   </select>
-    <update id="updateProjectInfoState">
+    <update id="updateProjectInfoStateByPAid">
         update project_info
         set project_info_state=#{projectInfoState}
         where project_info_id
@@ -409,6 +437,11 @@
              from project_audit
              where project_audit_id=#{projectAuditId}
              )
+    </update>
+    <update id="updateProjectInfoStateByPIid">
+        update project_info
+        set project_info_state=#{projectInfoState}
+        where project_info_id=#{projectInfoId}
     </update>
     <select id="selectPidToReviewExpiration" resultType="java.lang.Integer">
         SELECT
@@ -431,4 +464,31 @@
         </foreach>
         )
     </update>
+    <select id="selectPiAll" resultType="java.util.Map">
+        SELECT
+        project_info_id,
+        project_info_name,
+        project_info_area,
+        project_info_nature,
+        project_info_invest,
+        project_info_scale,
+        project_info_duration,
+        project_info_progress,
+        project_info_type,
+        project_info_addtime,
+        project_info_progressoperation,
+        project_info_adduserid,
+        project_info_serve,
+        project_info_reservesquantity,
+        project_info_usequantity,
+        project_info_gas
+        from
+        project_info
+        <trim prefix="where" suffixOverrides="and">
+            <if test="conditionSearch != null">
+                project_info_name like '%${conditionSearch}%'
+            </if>
+        </trim>
+        <include refid="ORDER_BY"></include>
+    </select>
 </mapper>

@@ -1,19 +1,19 @@
 package com.example.config;
 
-import com.example.common.interceptor.LoginInterceptor;
+import com.example.common.interceptor.AccessInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-@Configuration
+//@Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
-    private LoginInterceptor loginInterceptor;
+    private AccessInterceptor accessInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 自定义拦截器，添加拦截路径和排除拦截路径
-        registry.addInterceptor(loginInterceptor).
+        registry.addInterceptor(accessInterceptor).
                 addPathPatterns("/**").
                 excludePathPatterns("/user/reg").
                 excludePathPatterns("/user/login/**");

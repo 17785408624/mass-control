@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ProjectauditOrganizationInviteMapper">
+  <resultMap id="BaseResultMap" type="com.example.entity.ProjectauditOrganizationInvite">
+    <result column="projectaudit_organization_invite_id" jdbcType="INTEGER" property="projectauditOrganizationInviteId" />
+    <result column="invite_state" jdbcType="INTEGER" property="inviteState" />
+    <result column="invite_user_id" jdbcType="INTEGER" property="inviteUserId" />
+    <result column="invite_organization_name" jdbcType="VARCHAR" property="inviteOrganizationName" />
+    <result column="invite_addtime" jdbcType="BIGINT" property="inviteAddtime" />
+    <result column="invite_expiration" jdbcType="BIGINT" property="inviteExpiration"/>
+    <result column="invite_edittime" jdbcType="BIGINT" property="inviteEdittime" />
+    <result column="invite_adduser_id" jdbcType="INTEGER" property="inviteAdduserId" />
+    <result column="invite_edituser_id" jdbcType="INTEGER" property="inviteEdituserId"/>
+    <result column="project_info_name" jdbcType="VARCHAR" property="projectInfoName"/>
+    <result column="project_info_id" jdbcType="INTEGER" property="projectInfoId"/>
+  </resultMap>
+  <insert id="insert" parameterType="com.example.entity.ProjectauditOrganizationInvite">
+    insert into projectaudit_organization_invite (projectaudit_organization_invite_id, invite_state, 
+      invite_user_id, invite_organization_name, invite_addtime, 
+      invite_edittime, invite_adduser_id)
+    values (#{projectauditOrganizationInviteId,jdbcType=INTEGER}, #{inviteState,jdbcType=INTEGER}, 
+      #{inviteUserId,jdbcType=INTEGER}, #{inviteOrganizationName,jdbcType=VARCHAR}, #{inviteAddtime,jdbcType=BIGINT}, 
+      #{inviteEdittime,jdbcType=BIGINT}, #{inviteAdduserId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.entity.ProjectauditOrganizationInvite">
+    insert into projectaudit_organization_invite
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectauditOrganizationInviteId != null">
+        projectaudit_organization_invite_id,
+      </if>
+      <if test="inviteState != null">
+        invite_state,
+      </if>
+      <if test="inviteUserId != null">
+        invite_user_id,
+      </if>
+      <if test="inviteOrganizationName != null">
+        invite_organization_name,
+      </if>
+      <if test="inviteAddtime != null">
+        invite_addtime,
+      </if>
+      <if test="inviteEdittime != null">
+        invite_edittime,
+      </if>
+      <if test="inviteAdduserId != null">
+        invite_adduser_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectauditOrganizationInviteId != null">
+        #{projectauditOrganizationInviteId,jdbcType=INTEGER},
+      </if>
+      <if test="inviteState != null">
+        #{inviteState,jdbcType=INTEGER},
+      </if>
+      <if test="inviteUserId != null">
+        #{inviteUserId,jdbcType=INTEGER},
+      </if>
+      <if test="inviteOrganizationName != null">
+        #{inviteOrganizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteAddtime != null">
+        #{inviteAddtime,jdbcType=BIGINT},
+      </if>
+      <if test="inviteEdittime != null">
+        #{inviteEdittime,jdbcType=BIGINT},
+      </if>
+      <if test="inviteAdduserId != null">
+        #{inviteAdduserId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertPoi" useGeneratedKeys="true"  keyColumn="projectaudit_organization_invite_id" keyProperty="projectauditOrganizationInviteId">
+   insert into projectaudit_organization_invite ( invite_state,
+      invite_user_id, invite_organization_name, invite_addtime,
+      invite_edittime, invite_adduser_id,invite_expiration,
+      project_info_name,project_info_id)
+    values ( #{inviteState,jdbcType=INTEGER},
+      #{inviteUserId,jdbcType=INTEGER}, #{inviteOrganizationName,jdbcType=VARCHAR}, #{inviteAddtime,jdbcType=BIGINT},
+      #{inviteEdittime,jdbcType=BIGINT}, #{inviteAdduserId,jdbcType=INTEGER},
+      #{inviteExpiration,jdbcType=BIGINT},#{projectInfoName},
+      #{projectInfoId}
+      )
+
+  </insert>
+  <select id="selectProjectauditOInviteListByinviteUserId" resultType="java.util.Map">
+    select poi.*,pi.project_info_type,pi.project_info_name from projectaudit_organization_invite poi
+    left join project_info pi on(poi.project_info_id=pi.project_info_id)
+    where invite_user_id=#{inviteUserId}
+  </select>
+  <select id="selectProjectauditOInviteListByIUserIdExpirationNot" resultType="java.util.Map">
+    select poi.*,pi.project_info_type,pi.project_info_name from projectaudit_organization_invite poi
+    left join project_info pi on(poi.project_info_id=pi.project_info_id)
+    where invite_user_id=#{inviteUserId}
+    AND invite_expiration <![CDATA[ > ]]> (select (unix_timestamp(now())*1000))
+    <if test="inviteState != null">
+    AND  invite_state=#{inviteState}
+    </if>
+  </select>
+  <update id="updatePOIStateByPOIId">
+    UPDATE projectaudit_organization_invite
+      SET invite_state = #{inviteState},
+      invite_edittime = #{inviteEdittime},
+      invite_edituser_id = #{inviteEdituserId}
+    WHERE
+	  projectaudit_organization_invite_id = #{projectauditOrganizationInviteId}
+  </update>
+  <select id="selectPoiByPoiId" resultMap="BaseResultMap">
+   select * from projectaudit_organization_invite
+   where projectaudit_organization_invite_id=#{projectaudit_organization_invite_id}
+  </select>
+  <select id="selectPoiByIuidIs" resultMap="BaseResultMap">
+     select * from projectaudit_organization_invite
+   where invite_user_id=#{inviteUserId}
+   and invite_state=#{inviteState}
+  </select>
+  <select id="countPoiNumByPiIdIs" resultType="java.lang.Integer">
+    select count(*) from projectaudit_organization_invite
+    where project_info_id=#{projectInfoId}
+   and invite_state=#{inviteState}
+  </select>
+</mapper>

@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.common.exceptiondefine.LoginException;
+import com.example.common.exceptiondefine.OperationServiceException;
 import com.example.common.exceptiondefine.RegException;
 import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.user.ExpertInfoEntity;
@@ -60,7 +61,7 @@ public interface UserService {
 			ExpertInfoEntity expertInfoEntity,
 			int user_id,
 			int user_state
-	);
+	) throws OperationServiceException;
 
 	/**
 	 * 用户注销登录
@@ -105,5 +106,14 @@ public interface UserService {
 	 * @return
 	 */
 	List<Map>findExperList(Map conditions,PageOderRequest por);
+
+	/**
+	 * 用户重新登录
+	 * @param ue
+	 * @param session
+	 * @return
+	 */
+	UserEntity againLoginByMobilePhone(UserEntity ue,HttpSession session);
+
 
 }

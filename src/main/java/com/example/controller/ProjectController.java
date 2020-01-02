@@ -8,10 +8,12 @@ import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.ExtractionPERequest;
 import com.example.entity.requstparam.PageOderRequest;
+import com.example.entity.requstparam.PageOderRequestMap;
 import com.example.entity.user.UserInfoLoginSession;
 import com.example.service.ProjectInfoService;
 import com.github.pagehelper.PageInfo;
 import com.util.PageUtils;
+import com.util.PublicUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,7 +64,7 @@ public class ProjectController {
      */
     @PostMapping("findProjectInfoChooseByProgressOE_Page")
     public VisitConsequenceParent findProjectInfoChooseByProgressOE_Page(
-            @RequestBody PageOderRequest pageOderRequest) {
+            @RequestBody PageOderRequestMap pageOderRequest) {
         List<ProjectInfoEntityWithBLOBs> listP =
                 projectInfoService.findProjectInfoChooseByProgressOE(pageOderRequest);
         PageInfo a = new PageInfo<ProjectInfoEntityWithBLOBs>(listP);
@@ -124,8 +126,13 @@ public class ProjectController {
      */
     @PostMapping("O_findProjectInfoProgressLeader_page")
     public VisitConsequenceParent findProjectInfoProgressLeader_page(HttpSession session,
-            @RequestBody PageOderRequest pageOderRequest) {
+            @RequestBody PageOderRequestMap pageOderRequest) {
         VisitConsequenceParent vcp=new VisitConsequencePage();
+        Map param=pageOderRequest.getParam();
+        String searchCondition=null;//搜索条件
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"searchCondition")){
+            searchCondition= String.valueOf(param.get("searchCondition"));
+        }
         UserInfoLoginSession uils = null;
         try {
             uils = new UserInfoLoginSession(session);
@@ -135,7 +142,7 @@ public class ProjectController {
             return vcp;
         }
         List<ProjectInfoEntityWithBLOBs> listP =
-                projectInfoService.findProjectInfoProgressLeader(pageOderRequest,uils.getUser_id());
+                projectInfoService.findProjectInfoProgressLeader(pageOderRequest,uils.getUser_id(),searchCondition);
         PageInfo a = new PageInfo<ProjectInfoEntityWithBLOBs>(listP);
         vcp = PageUtils.getVisitConsequencePage(a);
         return vcp;
@@ -179,18 +186,71 @@ public class ProjectController {
 
     /**
      * 分页查询 进程为等待批复的项目信息
-     * @param pageOderRequest
+     * @param porm
      * @return
      */
     @PostMapping("findProjectInfoToProgress5_Page")
     public VisitConsequenceParent findProjectInfoToProgress5_Page(
-            @RequestBody PageOderRequest pageOderRequest) {
-        List<ProjectInfoEntityWithBLOBs> listP =
-                projectInfoService.findProjectInfoToProgress5(pageOderRequest);
+            @RequestBody PageOderRequestMap porm) {
+        List<ProjectInfoEntityWithBLOBs> listP ;
+        if(porm.getParam()!=null&&porm.getParam().containsKey("projectInfoName")
+                &&porm.getParam().get("projectInfoName")!=null&&!porm.getParam().get("projectInfoName").equals("null")){
+            listP= projectInfoService.findProjectInfoToProgress5(porm, (String) porm.getParam().get("projectInfoName"));
+        }else{
+            listP= projectInfoService.findProjectInfoToProgress5(porm);
+    }
         PageInfo a = new PageInfo<ProjectInfoEntityWithBLOBs>(listP);
         VisitConsequenceParent vcp = PageUtils.getVisitConsequencePage(a);
         return vcp;
     }
 
+    /**
+     * 查询 进程为评审项目的项目信息
+     * @param porm
+     * @return
+     */
+    @PostMapping("findProjectInfoToProgress4_Page")
+    public VisitConsequenceParent findProjectInfoToProgress4_Page(
+            @RequestBody PageOderRequestMap porm) {
+        List<ProjectInfoEntityWithBLOBs> listP ;
+        listP= projectInfoService.findProjectInfoToProgress4(porm);
+        PageInfo a = new PageInfo<ProjectInfoEntityWithBLOBs>(listP);
+        VisitConsequenceParent vcp = PageUtils.getVisitConsequencePage(a);
+        return vcp;
+    }
+
+    /**
+     * 查询所有项目信息
+     * @param porm
+     * @return
+     */
+    @PostMapping("findPiAll")
+    public VisitConsequenceParent findPiAll(@RequestBody PageOderRequestMap porm){
+        //String conditionSearch=pageOderRequest.getParam().;
+        Map param=porm.getParam();
+        String conditionSearch=null;//查询条件
+        if(param!=null&&param.containsKey("conditionSearch")&&param.get("conditionSearch")!=null
+                &&!param.get("conditionSearch").equals("")&&!param.get("conditionSearch").equals(null)&&!param.get("conditionSearch").equals(" ")){//判断是否传入搜索条件
+            conditionSearch=String.valueOf(param.get("conditionSearch"));
+        }
+        List listp=projectInfoService.findPiAll(porm,conditionSearch);//查询所有项目
+        PageInfo a = new PageInfo<Map>(listp);
+        VisitConsequenceParent vcp = PageUtils.getVisitConsequencePage(a);
+        return vcp;
+    }
+
+    /**
+     * 查询项目历程
+     * @param param
+     * @return
+     */
+    @PostMapping("findProjectCourse")
+    public VisitConsequenceParent findProjectCourse(@RequestBody Map param){
+        Integer projectInfoId= Integer.valueOf(String.valueOf(param.get("projectInfoId")));
+        VisitConsequenceParent vcp =new VisitConsequenceParentImpl();
+        Map map=projectInfoService.findProjectCourse(projectInfoId);
+        vcp.setObject(map);
+        return vcp;
+    }
 
 }

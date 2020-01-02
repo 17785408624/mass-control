@@ -1,10 +1,12 @@
 package com.example.service;
 
+import com.example.common.exceptiondefine.AuditOperationServiceException;
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.entity.ProjectauditOrganizationInvite;
 import com.example.entity.requstparam.PageRequest;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProjectauditOrganizationInviteService {
    /**
@@ -14,7 +16,7 @@ public interface ProjectauditOrganizationInviteService {
     * @return
     */
    int  addProjectauditInvite(Integer inviteAdduserId,
-           ProjectauditOrganizationInvite projectauditOrganizationInvite);
+           ProjectauditOrganizationInvite projectauditOrganizationInvite) throws AuditOperationServiceException;
 
    /**
     *
@@ -28,7 +30,7 @@ public interface ProjectauditOrganizationInviteService {
      * @param pageRequest 分页信息
      * @return
      */
-  List<ProjectauditOrganizationInvite> findProjectauditOInviteListByUserIdPage(Integer inviteUserId, boolean inviteExpiration,PageRequest pageRequest);
+  List<Map> findProjectauditOInviteListByUserIdPage(Integer inviteUserId, boolean inviteExpiration, PageRequest pageRequest);
 
     /**
      * 用户操作项目审核邀请 (第三方机构)

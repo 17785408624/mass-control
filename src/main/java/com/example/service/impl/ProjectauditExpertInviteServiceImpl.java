@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import com.example.common.exceptiondefine.AuditOperationServiceException;
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.config.ServiceConfig;
 import com.example.entity.ExpertAudit;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Transactional(rollbackFor=Exception.class)
 @Service
@@ -33,15 +35,22 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
     ExpertAuditMapper expertAuditMapper;
     @Autowired
     ExpertAuditInfoMapper expertAuditInfoMapper;
-    //添加项目审核邀请
+    //添加项目审核邀请(专家组长)
     @Override
-    public int addPEInvite(ProjectauditExpertInvite pei, Integer inviteAdduserId) {
+    public int addPEInvite(ProjectauditExpertInvite pei, Integer inviteAdduserId) throws AuditOperationServiceException {
+        if(projectauditExpertInviteMapper.countPeiNumByPiidIsIt(
+                pei.getProjectInfoId(),pei.getInviteType(),1)>0){
+            throw new AuditOperationServiceException("已发出组长审核邀请，请勿重复操作");
+
+        };
         Long nowDate=new Date().getTime();
         pei.setInviteAddtime(nowDate);//添加时间
         pei.setInviteExpiration(
                 ServiceConfig.getAUDIT_INVITE_EXPIRATION(nowDate));//过期时间
         pei.setInviteAdduserId(inviteAdduserId);//添加人id
+
         projectauditExpertInviteMapper.insertSelective(pei);//添加项目审核邀请信息
+        projectInfoEntityMapper.updatePiProgressByPIid(pei.getProjectInfoId(),null,2);
         return pei.getProjectauditExpertInviteId();
     }
     //分页查询用户项目审核邀请信息列表(专家)
@@ -80,8 +89,8 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
                 switch (inviteType){//邀请类型
                     case 1://组长
                         projectinfoProgress=3;//项目进程为选择专家组组员
-                        projectInfoEntityMapper.updateProjectInfoProgressByPIid(
-                                projectInfoId,projectinfoProgress);//改变邀请审核的项目进程为选择专家组组员
+                        projectInfoEntityMapper.updatePiProgressByPIid(
+                                projectInfoId,projectinfoProgress,1);//改变邀请审核的项目进程为选择专家组组员
                         userRole=6;//改变用户角色
                         break;
                     case 2://组员
@@ -107,9 +116,14 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
                 expertAudit.setProjectInfoId(projectInfoId);//关联项目id
                 expertAuditMapper.insertSelective(expertAudit);//添加专家评测数据
                 expertAuditInfoMapper.updateNotAuditNumByPid(projectInfoId,true,1);//改变未审核人数
+
+                projectInfoEntityMapper.updatePiProgressByPIid(
+                        projectInfoId,null,1);//初始项目进程状态
                 break;
             case 3://拒绝
                 projectauditExpertInviteMapper.updatePEInviteStateById(pei);//修改审核状态
+                projectInfoEntityMapper.updatePiProgressByPIid(
+                        projectInfoId,null,4);//改变项目进程状态为已拒绝
                 break;
             case 4://取消邀请
                 break;
@@ -129,13 +143,35 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
         insertPEinviteBatch.setInviteType(2);// 邀请类型(1组长 2组员)
         insertPEinviteBatch.setInviteExpiration(
                 ServiceConfig.getAUDIT_INVITE_EXPIRATION(nowDate));//邀请过期时间
-        projectInfoEntityMapper.updateProjectInfoProgressByPIid(
+        auditstart(insertPEinviteBatch.getProjectInfoId());
+        projectauditExpertInviteMapper.insertPEinviteBatch(insertPEinviteBatch,insertPEinviteBatch.getExperInfos());//添加项目审核邀请(专家组组员);
+        projectInfoEntityMapper.updatePiProgressByPIid(
                 insertPEinviteBatch.getProjectInfoId(),
-                4);//将项目进程改为项目评审
+                null,2);//将项目进程状态改为等待邀请对象相应
+        return 1;
+
+    }
+    //查询项目的专家组成员审核邀请信息 不包含过期以及取消的邀请
+    @Override
+    public List<Map> findPeiByPid(Integer projectInfoId) {
+
+        return projectauditExpertInviteMapper.selectPeiByPid(projectInfoId,new Integer[]{1,2,3});
+    }
+
+    /**
+     * 开始审核项目，将项目进程改为等待项目评审
+     * @param projectInfoId 项目id
+     * @return
+     */
+    private void auditstart(Integer projectInfoId){
+        Long nowDate=new Date().getTime();
+        projectInfoEntityMapper.updatePiProgressByPIid(
+                projectInfoId,
+                4,1);//将项目进程改为项目评审
         projectInfoEntityMapper.updateProjectInfoDateByPIid(
-                insertPEinviteBatch.getProjectInfoId(),
-                nowDate,ServiceConfig.getPROJECT_AUDIT_EXPIRATION(nowDate));//修改项目审核开始时间
-        return projectauditExpertInviteMapper.insertPEinviteBatch(insertPEinviteBatch,insertPEinviteBatch.getExperInfos());//添加项目审核邀请(专家组组员)
+                projectInfoId,
+                nowDate,ServiceConfig.getPROJECT_AUDIT_EXPIRATION(nowDate));//修改项目审核开始时间和审核过期时间
+
 
     }
 }

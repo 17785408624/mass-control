@@ -45,8 +45,8 @@ public interface UserInfoService {
      */
     UserInfoAuditEntity findUserInfoAuditSubmitFirst(int user_id_add);
     /**
-     *  查询用户最近提交的一条审核信息
-     * @param user_id_add
+     *  //查询用户最近提交的一条审核信息，如果是未审核用户当状态变为审核通过将用户信息重新登录
+     * @param user_id_add 用户id
      * @return
      */
     UserInfoAuditEntity findUserInfoAuditRecentlyByUid(int user_id_add);

@@ -11,12 +11,15 @@ import com.example.service.ProjectAuditService;
 import com.github.pagehelper.PageInfo;
 import com.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -98,5 +101,59 @@ public class ProjectAuditController {
         return vcp;
     }
 
+    /**
+     * 能源局审核项目
+     * @param  param auditUserId 评审人id auditUserRole 评审人角色
+     *      auditContent 评审内容 projectInfoState 评审状态 2通过 3不通过
+     *     auditTime 评审时间   projectInfoId 评审的项目id
+     */
+    @PostMapping("auditProjectBureau")
+    public VisitConsequenceParent auditProjectBureau(@RequestBody Map param, HttpServletRequest request){
+        Integer auditUserId = null;//评审人id
+        Integer auditUserRole= null;//评审人角色
+        String auditContent= null;//评审内容
+        Integer projectInfoState= null;//评审状态 2通过 3不通过
+        Long auditTime= null;//评审时间
+        Integer projectInfoId= null;//项目id
+        VisitConsequenceParent vcp =new VisitConsequenceParentImpl();
+        try {
+            UserInfoLoginSession uils=new UserInfoLoginSession(request.getSession());
+            auditUserId=uils.getUser_id();
+            auditUserRole=uils.getUser_role();
+        } catch (LoginException e) {
+            vcp.setMessage(e.getMessage());
+            vcp.setState(1);
+            return vcp;
+        }
+        auditContent= String.valueOf(param.get("auditContent"));
+        projectInfoState=Integer.valueOf(String.valueOf(param.get("projectInfoState")));
+        projectInfoId=Integer.valueOf(String.valueOf(param.get("projectInfoId")));
+        if(!param.containsKey("auditTime")||param.get("auditTime")==null||param.get("auditTime").equals(0)||param.get("auditTime").equals(null)||param.get("auditTime").equals("")||param.get("auditTime").equals(" ")){//如果前端没有传入这里设置默认值
+            auditTime=new Date().getTime();
+        }else{
+            auditTime=Long.valueOf(String.valueOf(param.get("auditTime")));
+        }
+        if(!param.containsKey("auditContent")||param.get("auditContent")==null||param.get("auditContent").equals(null)){//如果前端没有传入这里设置默认值
+            auditContent="未填写内容";
+        }else{
+            auditContent=String.valueOf(param.get("auditContent"));
+        }
+        projectAuditService.auditProjectBureau(auditUserId,auditUserRole,auditContent,projectInfoState,auditTime,projectInfoId);
+        return vcp;
+    }
+
+    /**
+     * 查询专家对项目的评审信息
+     * @param param projectInfoId 项目id
+     * @return
+     */
+    @RequestMapping("findEaListExper")
+    public VisitConsequenceParent findEaListExper( @RequestBody Map param) {
+        Integer projectInfoId= Integer.valueOf(String.valueOf(param.get("projectInfoId")));
+        List<Map>listp=projectAuditService.findEaListByPiidlAtAur(projectInfoId,2,1);
+        VisitConsequenceParent vcp=new VisitConsequenceParentImpl();
+        vcp.setObject(listp);
+        return vcp;
+    }
 
 }

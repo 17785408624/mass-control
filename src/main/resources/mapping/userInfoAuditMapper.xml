@@ -154,6 +154,11 @@
 	DESC
     LIMIT  0,1
     </select>
-
+    <select id="selectUiaByUid" resultType="java.lang.Integer">
+        select count(*) from  user_info_audit
+         where user_id_add=#{Uid}
+         AND user_info_audit_content=#{user_info_audit_content}
+         And user_info_audit_state=1
+    </select>
 
 </mapper>

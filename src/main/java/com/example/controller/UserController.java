@@ -1,15 +1,14 @@
 package com.example.controller;
 
 import com.example.common.exceptiondefine.LoginException;
+import com.example.common.exceptiondefine.OperationServiceException;
 import com.example.common.exceptiondefine.RegException;
-import com.example.config.LonginConf;
-import com.example.entity.ProjectInfoEntityWithBLOBs;
+import com.example.entity.common.VisitConsequencePage;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.AddOrganizationInfoAudit;
 import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.requstparam.PageOderRequestMap;
-import com.example.entity.requstparam.PageRequest;
 import com.example.entity.resultsparam.ExpertInfoResults;
 import com.example.entity.resultsparam.OrganizationAuditResults;
 import com.example.entity.user.*;
@@ -22,12 +21,9 @@ import javax.servlet.http.HttpSession;
 
 import com.github.pagehelper.PageInfo;
 import com.util.PageUtils;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -143,9 +139,15 @@ public class UserController {
             vcp.setState(0);
             return vcp;
         }
-        int user_info_audit_id=userService.addExpertInfoAudit(eie,
-                uIls.getUser_id(),
-                uIls.getUser_state());//添加审核信息与需要被审核的资料信息返回审核编号
+        try {
+            int user_info_audit_id=userService.addExpertInfoAudit(eie,
+                    uIls.getUser_id(),
+                    uIls.getUser_state());//添加审核信息与需要被审核的资料信息返回审核编号
+        } catch (OperationServiceException e) {
+            vcp.setState(1);
+            vcp.setMessage(e.getMessage());
+            return vcp;
+        }
         String user_info_audit_state ="1";//状态。。。。。
         vcp.setMessage("请求成功");
         vcp.setState(0);
@@ -276,17 +278,18 @@ public class UserController {
     };
 
     /**
-     * 查询用户信息列表(专家)
+     * 查询审核通过的用户信息列表(专家)
      * @param porm
      * @return
      */
     @RequestMapping("findExperList")
     public VisitConsequenceParent findExperList(@RequestBody PageOderRequestMap porm){
         Map param=porm.getParam();
-        VisitConsequenceParent vcp =new VisitConsequenceParentImpl();
+        VisitConsequenceParent vcp =new VisitConsequencePage();
 
         List<Map>listM=userService.findExperList(param,porm);
-        vcp.setObject(listM);
+        PageInfo a=new PageInfo<Map>(listM);
+        vcp= PageUtils.getVisitConsequencePage(a);
         return vcp;
     };
 

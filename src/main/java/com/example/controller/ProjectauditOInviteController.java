@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.common.exceptiondefine.AuditOperationServiceException;
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.entity.ProjectInfoEntityWithBLOBs;
@@ -27,11 +28,11 @@ public class ProjectauditOInviteController {
 
     /**
      * 添加第三方机构项目审核邀请
-     * @param projectauditOrganizationInvite
+     * @param
      * @param httpSession
      * @return
      */
-    @PostMapping("addProjectauditInvite")
+    @PostMapping("")
     public VisitConsequenceParent addProjectauditInvite(
             @RequestBody ProjectauditOrganizationInvite projectauditOrganizationInvite,
             HttpSession httpSession) {
@@ -45,7 +46,13 @@ public class ProjectauditOInviteController {
             e.printStackTrace();
             return  vcp;
         }
-        projectauditOrganizationInviteService.addProjectauditInvite(us.getUser_id(),projectauditOrganizationInvite);
+        try {
+            projectauditOrganizationInviteService.addProjectauditInvite(us.getUser_id(),projectauditOrganizationInvite);
+        } catch (AuditOperationServiceException e) {
+            vcp.setState(1);
+            vcp.setMessage(e.getMessage());
+            return vcp;
+        }
         vcp.setMessage("请求成功");
         vcp.setState(0);
         return  vcp;
@@ -68,8 +75,8 @@ public class ProjectauditOInviteController {
             e.printStackTrace();
             return  vc;
         }
-        List<ProjectauditOrganizationInvite> listP=projectauditOrganizationInviteService.findProjectauditOInviteListByUserIdPage(us.getUser_id(),true,pageRequest);
-        PageInfo a=new PageInfo<ProjectauditOrganizationInvite>(listP);//分页信息
+        List<Map> listP=projectauditOrganizationInviteService.findProjectauditOInviteListByUserIdPage(us.getUser_id(),true,pageRequest);
+        PageInfo a=new PageInfo<Map>(listP);//分页信息
         vc=PageUtils.getVisitConsequencePage(a);//将分页信息结果封装成返回结果
         return vc;
     }
@@ -91,8 +98,8 @@ public class ProjectauditOInviteController {
             e.printStackTrace();
             return  vc;
         }
-        List<ProjectauditOrganizationInvite> listP=projectauditOrganizationInviteService.findProjectauditOInviteListByUserIdPage(us.getUser_id(),false,pageRequest);
-        PageInfo a=new PageInfo<ProjectauditOrganizationInvite>(listP);//分页信息
+        List<Map> listP=projectauditOrganizationInviteService.findProjectauditOInviteListByUserIdPage(us.getUser_id(),false,pageRequest);
+        PageInfo a=new PageInfo<Map>(listP);//分页信息
         vc=PageUtils.getVisitConsequencePage(a);//将分页信息结果封装成返回结果
         return vc;
     }
