@@ -160,5 +160,13 @@ public interface UserMapper {
 	 */
 	ExpertInfoEntity selectEiByUid(Integer Uid);
 
+	/**
+	 * 通过用户id修改密码
+	 * @param userId 用户手机号或者是id
+	 * @param password 用户密码
+	 * @return
+	 */
+	int updatePasswordByUserId(@Param("userId")Integer  userId,@Param("password") String password);
+	int updatePasswordByUseruserMobilePhone(@Param("userMobilePhone")String userId,@Param("password") String password);
 
 }

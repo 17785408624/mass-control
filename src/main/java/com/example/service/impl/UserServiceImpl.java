@@ -176,5 +176,24 @@ public class UserServiceImpl implements UserService {
         return listM;
     }
 
+    //重置密码为默认值
+    @Override
+    public Boolean resetPassword(String userCode) {
+        String password="123456";
+        String passwordE=MyMD5Util.encrypt(password);
+        Long userCodeL=Long.valueOf(userCode);
+        if(userCodeL>2147483647L){//如果传入的值大于2147483647L说明不为int类型的自增用户id 则视为传入手机号
+            userMapper.updatePasswordByUseruserMobilePhone(userCode,passwordE);//通过用户手机号改变密码
+        }else{
+            userMapper.updatePasswordByUserId(Integer.parseInt(userCode),passwordE);//通过用户id号改变密码
+        }
+        return true;
+    }
+    //重置密码
+    @Override
+    public Boolean resetPassword(String userCode,String password) {
+        return null;
+    }
+
 
 }

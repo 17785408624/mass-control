@@ -286,11 +286,61 @@ public class UserController {
     public VisitConsequenceParent findExperList(@RequestBody PageOderRequestMap porm){
         Map param=porm.getParam();
         VisitConsequenceParent vcp =new VisitConsequencePage();
-
         List<Map>listM=userService.findExperList(param,porm);
         PageInfo a=new PageInfo<Map>(listM);
         vcp= PageUtils.getVisitConsequencePage(a);
         return vcp;
     };
+
+    /**
+     * 密码重置为默认
+     * @param pamar userCode 用户id或者手机号
+     * @return
+     */
+    @RequestMapping("resetPasswordDefault")
+    public VisitConsequenceParent resetPasswordDefault(@RequestBody Map pamar){
+        VisitConsequenceParent vcp =new VisitConsequenceParentImpl();
+        String userCode=String.valueOf(pamar.get("userCode"));
+        userService.resetPassword(userCode);
+
+
+        return vcp;
+    }
+
+    /**
+     * 查询用户详细信息(专家)
+     * @param param user_id用户id
+     * @return
+     */
+    @PostMapping("findUserInfoFullE")
+    public VisitConsequenceParent findUserInfoFullE(@RequestBody Map param) {
+        VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
+        Integer user_id=Integer.valueOf(param.get("user_id").toString());
+        ExpertInfoResults eir= userInfoService.findExpertInfoFullNowsave(user_id);
+        eir.setUser_id(user_id);
+        vcp.setState(0);
+        vcp.setMessage("请求成功");
+        vcp.setObject(eir);
+        return vcp;
+    }
+
+    /**
+     * 查询用户详细信息(第三方机构)
+     * @param param
+     * @return
+     */
+    @PostMapping("findUserInfoFullO")
+    public VisitConsequenceParent findUserInfoFullO(@RequestBody Map param) {
+        VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
+        Integer user_id= Integer.valueOf(param.get("user_id").toString());
+
+        OrganizationAuditResults oar =
+                userInfoService.findOrganizationInfoFullNowsave(user_id);
+        oar.setUser_id(user_id);
+        vcp.setState(0);
+        vcp.setMessage("请求成功");
+        vcp.setObject(oar);
+        return vcp;
+    }
 
 }

@@ -10,10 +10,14 @@ import com.example.entity.user.OrganizationInfoEntity;
  * 第三方机构审核信息返回封装
  */
 public class OrganizationAuditResults {
+    private Integer user_id;
     private OrganizationInfoEntity OrganizationInfoEntity;//第三方机构信息
     private FileInfoeEntity organization_license_file;//营业执照
     private FileInfoeEntity organization_adjunct_file;//附件文件
     private List<OrganizationInfoCareermanEntity> oiceList;//机构专业人员信息
+
+    public OrganizationAuditResults() {
+    }
 
     public com.example.entity.user.OrganizationInfoEntity getOrganizationInfoEntity() {
         return OrganizationInfoEntity;
@@ -45,5 +49,13 @@ public class OrganizationAuditResults {
 
     public void setOiceList(List<OrganizationInfoCareermanEntity> oiceList) {
         this.oiceList = oiceList;
+    }
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 }

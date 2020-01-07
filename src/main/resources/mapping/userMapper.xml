@@ -435,5 +435,21 @@
             </foreach>
         </if>
     </select>
+    <update id="updatePasswordByUserId">
+        update
+         user
+         set
+         user_password=#{password}
+         where
+         user_id=#{userId}
+    </update>
+    <update id="updatePasswordByUseruserMobilePhone">
+        update
+         user
+         set
+         user_password=#{password}
+         where
+         user_mobile_phone=#{userMobilePhone}
+    </update>
 
 </mapper>
