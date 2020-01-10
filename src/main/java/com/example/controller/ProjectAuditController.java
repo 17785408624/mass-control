@@ -6,12 +6,12 @@ import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.requstparam.PageOderRequestMap;
-import com.example.entity.user.UserInfoLoginSession;
+import com.example.entity.user.UserInfoLoginEntity;
 import com.example.service.ProjectAuditService;
+import com.example.service.vice.LoginVice;
 import com.github.pagehelper.PageInfo;
 import com.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +28,8 @@ import java.util.Map;
 public class ProjectAuditController {
     @Autowired
     ProjectAuditService projectAuditService;
-
+    @Autowired
+    private LoginVice loginVice;
     /**
      * 用户查询所属用户项目审核信息列表
      *
@@ -40,7 +41,7 @@ public class ProjectAuditController {
     public VisitConsequenceParent findProjectAuditListByUser_page(HttpSession httpSession,
                                                                   @RequestBody PageOderRequestMap params) {
         VisitConsequenceParent vcp = new VisitConsequencePage();
-        UserInfoLoginSession uils = null;
+        UserInfoLoginEntity uie = null;
         Integer auditState = null;//审核信息的状态 1待操作，2已评审
         Map param = params.getParam();//请求条件参数
         PageOderRequest pageOderRequest = params;//请求分页参数
@@ -53,14 +54,14 @@ public class ProjectAuditController {
             isExpiration = Boolean.valueOf(s);
         }
         try {
-            uils = new UserInfoLoginSession(httpSession);
+            uie = loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             e.printStackTrace();
             vcp.setState(1);
             vcp.setMessage(e.getMessage());
             return vcp;
         }
-        List<Map> listM = projectAuditService.findProjectAuditListByUser(uils.getUser_id(), auditState, isExpiration, pageOderRequest);
+        List<Map> listM = projectAuditService.findProjectAuditListByUser(Integer.valueOf(uie.getUser_id()), auditState, isExpiration, pageOderRequest);
         PageInfo a = new PageInfo<Map>(listM);//分页信息
         //将分页信息封装到统一的对象
         vcp = PageUtils.getVisitConsequencePage(a);
@@ -78,9 +79,9 @@ public class ProjectAuditController {
         VisitConsequenceParent vcp = new VisitConsequenceParentImpl();
         Integer projectAuditId = null;//审核信息id
         String auditContent = "";//审核内容
-        UserInfoLoginSession uils = null;//用户登录信息
+        UserInfoLoginEntity uie = null;//用户登录信息
         try {
-            uils = new UserInfoLoginSession(session);
+            uie = loginVice.getLoginInfo(session);
         } catch (LoginException e) {
             vcp.setMessage(e.getMessage());
             vcp.setState(1);
@@ -94,9 +95,11 @@ public class ProjectAuditController {
                 !param.equals("null")) {//判断是否需要更改项目状态
             Integer projectInfoState;//项目状态
             projectInfoState = Integer.parseInt(String.valueOf(param.get("projectInfoState")));
-            projectAuditService.auditProject(projectAuditId, uils.getUser_id(), uils.getUser_role(), auditContent,projectInfoState);
+            projectAuditService.auditProject(projectAuditId, Integer.valueOf(uie.getUser_id()),
+                    Integer.valueOf(uie.getUser_role()), auditContent,projectInfoState);
         } else {
-            projectAuditService.auditProject(projectAuditId, uils.getUser_id(), uils.getUser_role(), auditContent);
+            projectAuditService.auditProject(projectAuditId, Integer.valueOf(uie.getUser_id()),
+                    Integer.valueOf(uie.getUser_role()), auditContent);
         }
         return vcp;
     }
@@ -117,9 +120,9 @@ public class ProjectAuditController {
         Integer projectInfoId= null;//项目id
         VisitConsequenceParent vcp =new VisitConsequenceParentImpl();
         try {
-            UserInfoLoginSession uils=new UserInfoLoginSession(request.getSession());
-            auditUserId=uils.getUser_id();
-            auditUserRole=uils.getUser_role();
+            UserInfoLoginEntity uie=loginVice.getLoginInfo(request.getSession());
+            auditUserId= Integer.valueOf(uie.getUser_id());
+            auditUserRole= Integer.valueOf(uie.getUser_role());
         } catch (LoginException e) {
             vcp.setMessage(e.getMessage());
             vcp.setState(1);

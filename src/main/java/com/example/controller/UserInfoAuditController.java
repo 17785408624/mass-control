@@ -4,17 +4,14 @@ import com.example.common.exceptiondefine.LoginException;
 import com.example.entity.common.VisitConsequencePage;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
-import com.example.entity.requstparam.OrderRequest;
-import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.requstparam.PageOderRequestMap;
-import com.example.entity.requstparam.PageRequest;
 import com.example.entity.resultsparam.ExpertInfoResults;
 import com.example.entity.resultsparam.OrganizationAuditResults;
-import com.example.entity.user.UserEntity;
 import com.example.entity.user.UserInfoAuditEntity;
-import com.example.entity.user.UserInfoLoginSession;
+import com.example.entity.user.UserInfoLoginEntity;
 import com.example.service.UserInfoService;
 import com.example.service.UserService;
+import com.example.service.vice.LoginVice;
 import com.github.pagehelper.PageInfo;
 import com.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +31,8 @@ public class UserInfoAuditController {
     UserInfoService userInfoService;
     @Autowired
     UserService userService;
+    @Autowired
+    private LoginVice loginVice;
 
 //    public VisitConsequenceParent findNotAuditUserInfoAuditOrganization(@RequestBody Map param){
 //        VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
@@ -100,16 +99,16 @@ public class UserInfoAuditController {
     @RequestMapping("findUserInfoAuditSubmit")
     public VisitConsequenceParent findUserInfoAuditSubmit(HttpSession httpSession) {
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
-        UserInfoLoginSession uils = null;
+        UserInfoLoginEntity uie = null;
         try {
-            uils = new UserInfoLoginSession(httpSession);
+            uie = loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vcp.setState(1);
             vcp.setMessage(e.getMessage());
             return vcp;
         }
         List<UserInfoAuditEntity> list = userInfoService.
-                selectUserInfoAuditByUid(uils.getUser_id());//查询用户提交的审核信息
+                selectUserInfoAuditByUid(Integer.valueOf(uie.getUser_id()));//查询用户提交的审核信息
         Map map = new HashMap();
 
         map.put("userInfoAuditList", list);
@@ -128,23 +127,25 @@ public class UserInfoAuditController {
     @RequestMapping("findUserInfoAuditSubmitState")
     public VisitConsequenceParent findUserInfoAuditSubmitState(HttpSession httpSession) {
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
-        UserInfoLoginSession uils = null;
+        UserInfoLoginEntity uie = null;
         try {
-            uils = new UserInfoLoginSession(httpSession);
+            uie=loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vcp.setState(1);
             vcp.setMessage(e.getMessage());
+            Map map=new HashMap();
+            map.put("user_state",uie.getUser_state());
             return vcp;
         }
 
         Map map = new HashMap();
         boolean userInfoAuditSubmit=false;//用户是否提交过审核申请
         userInfoAuditSubmit = userInfoService.
-                findUserInfoAuditSubmitState(uils.getUser_id());//查询用户是否提交过资料审核信息
+                findUserInfoAuditSubmitState(Integer.parseInt(uie.getUser_id()));//查询用户是否提交过资料审核信息
         if (userInfoAuditSubmit) {
-            UserInfoAuditEntity uie = userInfoService.
-                    findUserInfoAuditSubmitFirst(uils.getUser_id());//查询用户提交的第一条审核信息
-            int user_info_audit_state = uie.getUser_info_audit_state();//审核状态 1未审核 2拒绝 3 通过
+            UserInfoAuditEntity uiae = userInfoService.
+                    findUserInfoAuditSubmitFirst(Integer.parseInt(uie.getUser_id()));//查询用户提交的第一条审核信息
+            int user_info_audit_state = uiae.getUser_info_audit_state();//审核状态 1未审核 2拒绝 3 通过
             map.put("user_info_audit_state", user_info_audit_state);
         }
 
@@ -166,16 +167,16 @@ public class UserInfoAuditController {
     @RequestMapping("findUserInfoAuditSubmitFirst")
     public VisitConsequenceParent findUserInfoAuditSubmitFirst(HttpSession httpSession) {
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
-        UserInfoLoginSession uils = null;
+        UserInfoLoginEntity uie = null;
         try {
-            uils = new UserInfoLoginSession(httpSession);
+            uie = loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vcp.setState(1);
             vcp.setMessage(e.getMessage());
             return vcp;
         }
-        UserInfoAuditEntity uie = userInfoService.
-                findUserInfoAuditSubmitFirst(uils.getUser_id());//查询用户提交的第一条审核信息
+        UserInfoAuditEntity uiae = userInfoService.
+                findUserInfoAuditSubmitFirst(Integer.parseInt(uie.getUser_id()));//查询用户提交的第一条审核信息
         Map map = new HashMap();
 
         map.put("userInfoAuditList", uie);
@@ -309,16 +310,16 @@ public class UserInfoAuditController {
     @GetMapping ("findUserInfoAuditRecentlyByUid")
     public VisitConsequenceParent findUserInfoAuditRecentlyByUid(HttpSession httpSession, HttpServletRequest request) {
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
-        UserInfoLoginSession uils = null;
+        UserInfoLoginEntity uie = null;
         try {
-            uils = new UserInfoLoginSession(httpSession);
+            uie = loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vcp.setState(1);
             vcp.setMessage(e.getMessage());
             return vcp;
         }
         UserInfoAuditEntity uia = userInfoService.
-                findUserInfoAuditRecentlyByUid(uils.getUser_id());//查询用户提交的第一条审核信息
+                findUserInfoAuditRecentlyByUid(Integer.parseInt(uie.getUser_id()));//查询用户提交的第一条审核信息
         Map map = new HashMap();
         map.put("uia", uia);
         vcp.setObject(map);

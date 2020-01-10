@@ -3,8 +3,8 @@ package com.example.controller;
 import com.example.common.exceptiondefine.LoginException;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
-import com.example.entity.user.UserInfoLoginSession;
 import com.example.service.ProjectReplyService;
+import com.example.service.vice.LoginVice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +19,8 @@ import java.util.Map;
 public class ProjectReplyController {
     @Autowired
     ProjectReplyService projectReplyService;
+    @Autowired
+    private LoginVice loginVice;
 
     /**
      * 项目批复操作
@@ -36,7 +38,7 @@ public class ProjectReplyController {
         replyContent= String.valueOf(param.get("replyContent"));
         projectInfoId=Integer.parseInt(String.valueOf(param.get("projectInfoId")));
         try {
-            userId=new UserInfoLoginSession(session).getUser_id();
+            userId=Integer.valueOf(loginVice.getLoginInfo(session).getUser_id());
         } catch (LoginException e) {
             e.printStackTrace();
         }

@@ -5,7 +5,7 @@ import com.example.entity.common.FileInfoeEntity;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.service.CommonService;
-import com.util.SecurityUtil;
+import com.util.SecurityCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -87,7 +87,7 @@ public class CommonController {
         response.setHeader("Expires", "-1");
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Pragma", "-1");
-        SecurityUtil util = SecurityUtil.Instance();
+        SecurityCodeUtil util = SecurityCodeUtil.Instance();
         // 将验证码输入到session中，用来验证
         String code = util.getString();
         request.getSession().setAttribute("code", code);

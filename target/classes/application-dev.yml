@@ -20,6 +20,25 @@ spring:
       max-file-size: 100Mb
       maxRequestSize: 100Mb
 
+  redis:
+      database: 0 # redis数据库索引(默认为0)
+      host: 127.0.0.1 # redis服务器地址（默认为loaclhost）
+      port: 6379  # redis端口（默认为6379）
+      #password: 123456 # redis访问密码（默认为空）
+      timeout: 6000ms # redis连接超时时间（单位毫秒）
+      #expire: 6 #过期时间
+      # redis连接池配置
+      jedis:
+        pool:
+          # 最大可用连接数（默认为8，负数表示无限）
+          max-active: 8
+          # 最大空闲连接数（默认为8，负数表示无限）
+          max-idle: 8
+          # 最小空闲连接数（默认为0，该值只有为正数才有用）
+          min-idle: 0
+          # 从连接池中获取连接最大等待时间（默认为-1，单位为毫秒，负数表示无限）
+          max-wait: -1
+
 mybatis:
   config-location: classpath:/mybatis-config.xml
   mapper-locations: classpath:mapping/*Mapper.xml

@@ -95,6 +95,19 @@ public class PublicUtil {
         return false;
     }
 
+    public static String getRandomNum(Integer length){
+        String rc="";
+        for(int i=0;i<length;i++){
+            rc+= (int) (Math.random()*10);
+        }
+
+        return rc;
+    }
+    static String getRandomCh(Integer length){
+
+        return null;
+    }
+
 
 
 }

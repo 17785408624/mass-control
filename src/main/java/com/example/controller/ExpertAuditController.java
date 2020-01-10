@@ -2,20 +2,18 @@ package com.example.controller;
 
 import com.example.common.exceptiondefine.LoginException;
 import com.example.entity.ExpertAudit;
-import com.example.entity.ProjectauditExpertInvite;
 import com.example.entity.common.VisitConsequencePage;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.ExpertEvaluationMap;
 import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.requstparam.PageOderRequestMap;
-import com.example.entity.user.UserInfoLoginSession;
+import com.example.entity.user.UserInfoLoginEntity;
 import com.example.service.ExpertAuditService;
+import com.example.service.vice.LoginVice;
 import com.github.pagehelper.PageInfo;
 import com.util.PageUtils;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +29,8 @@ import java.util.Map;
 public class ExpertAuditController {
     @Autowired
     ExpertAuditService expertAuditService;
-
+    @Autowired
+    private LoginVice loginVice;
     /**
      * 查询用户所属的专家评测信息详细记录列表
      *
@@ -47,7 +46,7 @@ public class ExpertAuditController {
         Integer auditState = null;
         Integer auditUserId = null;
         try {
-            auditUserId = new UserInfoLoginSession(session).getUser_id();
+            auditUserId = Integer.valueOf(loginVice.getLoginInfo(session).getUser_id());
         } catch (LoginException e) {
             e.printStackTrace();
             vcp.setMessage(e.getMessage());
@@ -90,9 +89,9 @@ public class ExpertAuditController {
     @PostMapping("expertEvaluation")
     public VisitConsequenceParent expertEvaluation(@RequestBody ExpertEvaluationMap expertEvaluationMap, HttpSession session){
         VisitConsequenceParent vcp=new VisitConsequenceParentImpl();
-        UserInfoLoginSession user=null;
+        UserInfoLoginEntity uie=null;
         try {
-            user=new UserInfoLoginSession(session);
+            uie=loginVice.getLoginInfo(session);
         } catch (LoginException e) {
             e.printStackTrace();
         }
@@ -102,8 +101,8 @@ public class ExpertAuditController {
         Integer projectInfoId = null;//评测信息关联项目id
         expertAudits=expertEvaluationMap.getExpertAudits();
         projectInfoId=expertEvaluationMap.getProjectInfoId();
-        userRole=user.getUser_role();
-        userId=user.getUser_id();
+        userRole= Integer.valueOf(uie.getUser_role());
+        userId= Integer.valueOf(uie.getUser_id());
         //评测专家信息
         expertAuditService.expertEvaluation( expertAudits,projectInfoId, userId, userRole);
         return vcp;

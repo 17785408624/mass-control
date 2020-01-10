@@ -2,7 +2,7 @@ package com.example.service.vice;
 
 import com.example.common.exceptiondefine.LoginException;
 import com.example.entity.user.UserEntity;
-import com.example.entity.user.UserInfoLoginSession;
+import com.example.entity.user.UserInfoLoginEntity;
 import com.example.mapper.UserMapper;
 import com.util.PublicUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,8 @@ public class LoginVice {
      * @return
      */
     public boolean saveLoginInfo(UserEntity ue, HttpSession session){
-        session.setAttribute(LONGIN_SESSION_KEY, ue);//将登录信息保存session
+        UserInfoLoginEntity uile=new UserInfoLoginEntity(ue);
+        session.setAttribute(LONGIN_SESSION_KEY, uile);//将登录信息保存session
         session.setMaxInactiveInterval(LOGIN_VALID_TIME);//登录保存时间
         return true;
     };
@@ -60,16 +61,15 @@ public class LoginVice {
      * @param session
      * @return
      */
-    public UserEntity getLoginInfo(HttpSession session) throws LoginException {
+    public UserInfoLoginEntity getLoginInfo(HttpSession session) throws LoginException {
         Object o=session.getAttribute(LONGIN_SESSION_KEY);
-        UserEntity ue = null;
-        if(o!=null&&o instanceof UserEntity){
-            ue=(UserEntity)o;
-        }
-        /**else{
+        UserInfoLoginEntity uile = null;
+        if(o!=null&&o instanceof UserInfoLoginEntity){
+            uile=(UserInfoLoginEntity)o;
+        }else{
             throw new LoginException("登录信息错误");
-        }**/
-     return ue;
+        }
+     return uile;
     }
 
     /**
@@ -90,7 +90,7 @@ public class LoginVice {
      * @return true为已登录
      */
     public boolean isLogin(HttpSession session) throws LoginException {
-        UserEntity userInfoLoginEntity = (UserEntity) getLoginInfo(session);
+        UserInfoLoginEntity userInfoLoginEntity = (UserInfoLoginEntity) getLoginInfo(session);
         if(userInfoLoginEntity==null){
             return false;
         }
@@ -103,10 +103,10 @@ public class LoginVice {
      * @return
      */
     public boolean isLoginInfoSynchroniza(HttpSession session) throws LoginException {//判断登录信息和当前的用户信息是否同步
-        UserEntity loginUe=null;
+        UserInfoLoginEntity loginUe=null;
         UserEntity ue=null;
         loginUe=getLoginInfo(session);
-        ue=userMapper.selectUserEntityByUId(loginUe.getUser_id());
+        ue=userMapper.selectUserEntityByUId(Integer.valueOf(loginUe.getUser_id()));
         return false;
     }
 
@@ -118,14 +118,15 @@ public class LoginVice {
      * @throws LoginException
      */
     public boolean isLoginInfoSynchroniza(HttpSession session,Boolean updateInfoLogin) throws LoginException {//判断登录信息和当前的用户信息是否同步
-        UserEntity loginUe=null;//登录的用户信息
+        UserInfoLoginEntity loginUe=null;//登录的用户信息
         UserEntity ue=null;
         loginUe=getLoginInfo(session);//保存的用户信息
-        ue=userMapper.selectUserEntityByUId(loginUe.getUser_id());
-        if(PublicUtil.isEntityEquality(ue,loginUe)){
+        ue=userMapper.selectUserEntityByUId(Integer.valueOf(loginUe.getUser_id()));
+        //判断登录信息和当前保存的用户信息是否同步
+        if(PublicUtil.isEntityEquality(ue,loginUe)){//信息同步
             return true;
-        }else{;//判断登录信息和当前保存的用户信息是否同步
-            if(updateInfoLogin){
+        }else{//信息不同步
+            if(updateInfoLogin){//是否更新用户信息
                 updateLoginInfo(ue,session);//更新用户信息
             }
             return false;

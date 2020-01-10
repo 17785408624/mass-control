@@ -9,8 +9,9 @@ import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.InsertPEinviteBatch;
 import com.example.entity.requstparam.PageOderRequest;
-import com.example.entity.user.UserInfoLoginSession;
+import com.example.entity.user.UserInfoLoginEntity;
 import com.example.service.ProjectauditExpertInviteService;
+import com.example.service.vice.LoginVice;
 import com.github.pagehelper.PageInfo;
 import com.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ import java.util.Map;
 public class ProjectauditEInviteController {
     @Autowired
     private ProjectauditExpertInviteService projectauditExpertInviteService;
+    @Autowired
+    LoginVice loginVice;
 
     /**
      * 添加项目审核邀请 (专家组组长)
@@ -43,9 +46,9 @@ public class ProjectauditEInviteController {
             @RequestBody ProjectauditExpertInvite projectauditExpertInvite,
             HttpSession httpSession) {
         VisitConsequenceParent vcp=new VisitConsequenceParentImpl();
-        UserInfoLoginSession us;
+        UserInfoLoginEntity uie;
         try {
-            us=new UserInfoLoginSession(httpSession);
+            uie=loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vcp.setMessage(e.getMessage());
             vcp.setState(1);
@@ -54,7 +57,7 @@ public class ProjectauditEInviteController {
         }
         projectauditExpertInvite.setInviteType(1);//邀请类型(1组长 2组员)
         try {
-            projectauditExpertInviteService.addPEInvite(projectauditExpertInvite,us.getUser_id());
+            projectauditExpertInviteService.addPEInvite(projectauditExpertInvite,Integer.valueOf(uie.getUser_id()));
         } catch (AuditOperationServiceException e) {
             vcp.setMessage(e.getMessage());
             vcp.setState(1);
@@ -73,9 +76,9 @@ public class ProjectauditEInviteController {
     @PostMapping("findPEInviteListPageENot")
     public VisitConsequenceParent findPEInviteListPageENot(HttpSession httpSession,@RequestBody PageOderRequest pageOderRequest){
         VisitConsequenceParent vc=new VisitConsequencePage();
-        UserInfoLoginSession us;
+        UserInfoLoginEntity uie;
         try {
-            us=new UserInfoLoginSession(httpSession);
+            uie=loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vc.setMessage(e.getMessage());
             vc.setState(1);
@@ -83,7 +86,8 @@ public class ProjectauditEInviteController {
             return  vc;
         }
         //查询项目审核邀请信息(专家)
-        List<ProjectauditExpertInvite> listP=projectauditExpertInviteService.findPEInviteListByUserIdPage(us.getUser_id(),false,pageOderRequest.getPageRequest());
+        List<ProjectauditExpertInvite> listP=projectauditExpertInviteService.findPEInviteListByUserIdPage(
+                Integer.valueOf(uie.getUser_id()),false,pageOderRequest.getPageRequest());
         PageInfo a=new PageInfo<ProjectauditExpertInvite>(listP);//分页信息
         vc= PageUtils.getVisitConsequencePage(a);//将分页信息结果封装成返回结果
         return vc;
@@ -96,16 +100,17 @@ public class ProjectauditEInviteController {
     @PostMapping("findPEInviteListPage")
     public VisitConsequenceParent findPEInviteListPage(HttpSession httpSession,@RequestBody PageOderRequest pageOderRequest){
         VisitConsequenceParent vc=new VisitConsequencePage();
-        UserInfoLoginSession us;
+        UserInfoLoginEntity uie;
         try {
-            us=new UserInfoLoginSession(httpSession);
+            uie=loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vc.setMessage(e.getMessage());
             vc.setState(1);
             e.printStackTrace();
             return  vc;
         }
-        List<ProjectauditExpertInvite> listP=projectauditExpertInviteService.findPEInviteListByUserIdPage(us.getUser_id(),true,pageOderRequest.getPageRequest());
+        List<ProjectauditExpertInvite> listP=projectauditExpertInviteService.findPEInviteListByUserIdPage(
+                Integer.valueOf(uie.getUser_id()),true,pageOderRequest.getPageRequest());
         PageInfo a=new PageInfo<ProjectauditExpertInvite>(listP);//分页信息
         vc= PageUtils.getVisitConsequencePage(a);//将分页信息结果封装成返回结果
         return vc;
@@ -119,7 +124,7 @@ public class ProjectauditEInviteController {
     @PostMapping("operationUserPEInvite")
     public VisitConsequenceParent operationUserPEInvite(HttpSession httpSession,@RequestBody Map pamar){
         VisitConsequenceParent vc=new VisitConsequenceParentImpl();
-        UserInfoLoginSession us;//用户登录信息
+        UserInfoLoginEntity uie;//用户登录信息
         Integer projectauditExpertInviteId;//邀请信息数据id
         Integer inviteType;//邀请类型(1组长 2组员)
         Integer inviteState;//修改状态 (1等待操作 2接受 3拒绝 4取消邀请)
@@ -130,15 +135,15 @@ public class ProjectauditEInviteController {
         inviteState=Integer.parseInt(String.valueOf(pamar.get("inviteState")));
         inviteType=Integer.parseInt(String.valueOf(pamar.get("inviteType")));
         try {
-            us=new UserInfoLoginSession(httpSession);
+            uie=loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vc.setMessage(e.getMessage());
             vc.setState(1);
             e.printStackTrace();
             return  vc;
         }
-        userRole=us.getUser_role();//用户角色
-        inviteEdituserId=us.getUser_id();//用户id
+        userRole= Integer.valueOf(uie.getUser_role());//用户角色
+        inviteEdituserId= Integer.valueOf(uie.getUser_id());//用户id
         boolean results;
         try {
             results=projectauditExpertInviteService.operationUserPEInvite(projectauditExpertInviteId,inviteEdituserId,inviteState,userRole,inviteType);
@@ -161,16 +166,16 @@ public class ProjectauditEInviteController {
     public VisitConsequenceParent addPEInvite(HttpSession httpSession,
                                               @RequestBody InsertPEinviteBatch insertPEinviteBatch){
         VisitConsequenceParent vc=new VisitConsequenceParentImpl();
-        UserInfoLoginSession us;
+        UserInfoLoginEntity uie;
         try {
-            us=new UserInfoLoginSession(httpSession);
+            uie=loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vc.setMessage(e.getMessage());
             vc.setState(1);
             e.printStackTrace();
             return  vc;
         }
-        Integer i=projectauditExpertInviteService.addPEInvite(insertPEinviteBatch,us.getUser_id());
+        Integer i=projectauditExpertInviteService.addPEInvite(insertPEinviteBatch,Integer.valueOf(uie.getUser_id()));
         vc.setObject(i);
         return vc;
     }

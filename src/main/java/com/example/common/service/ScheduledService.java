@@ -22,7 +22,7 @@ public class ScheduledService {
     @Scheduled(cron  = "0 0 0 * * ?")//每天0点执行
     public void isProjectProcessReply(){
         Integer[]projectInfoIds= projectInfoEntityMapper.
-                selectPidToReviewExpiration();//查询需要改变状态的项目id
+                selectPidToReviewExpiration();//查询需要改变状态的项目id 查询超过工作时间点的项目
         //修改项目状态为等待批复
         projectInfoEntityMapper.updateProjectInfoStateByPIidBatch(projectInfoIds,5);
 

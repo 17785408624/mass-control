@@ -3,14 +3,14 @@ package com.example.controller;
 import com.example.common.exceptiondefine.AuditOperationServiceException;
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
-import com.example.entity.ProjectInfoEntityWithBLOBs;
 import com.example.entity.ProjectauditOrganizationInvite;
 import com.example.entity.common.VisitConsequencePage;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.PageRequest;
-import com.example.entity.user.UserInfoLoginSession;
+import com.example.entity.user.UserInfoLoginEntity;
 import com.example.service.ProjectauditOrganizationInviteService;
+import com.example.service.vice.LoginVice;
 import com.github.pagehelper.PageInfo;
 import com.util.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,8 @@ import java.util.Map;
 public class ProjectauditOInviteController {
     @Autowired
     ProjectauditOrganizationInviteService projectauditOrganizationInviteService;
-
+    @Autowired
+    private LoginVice loginVice;
     /**
      * 添加第三方机构项目审核邀请
      * @param
@@ -37,9 +38,9 @@ public class ProjectauditOInviteController {
             @RequestBody ProjectauditOrganizationInvite projectauditOrganizationInvite,
             HttpSession httpSession) {
         VisitConsequenceParent vcp=new VisitConsequenceParentImpl();
-        UserInfoLoginSession us;
+        UserInfoLoginEntity uie;
         try {
-            us=new UserInfoLoginSession(httpSession);
+             uie=loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vcp.setMessage(e.getMessage());
             vcp.setState(1);
@@ -47,7 +48,7 @@ public class ProjectauditOInviteController {
             return  vcp;
         }
         try {
-            projectauditOrganizationInviteService.addProjectauditInvite(us.getUser_id(),projectauditOrganizationInvite);
+            projectauditOrganizationInviteService.addProjectauditInvite(Integer.valueOf(uie.getUser_id()),projectauditOrganizationInvite);
         } catch (AuditOperationServiceException e) {
             vcp.setState(1);
             vcp.setMessage(e.getMessage());
@@ -66,16 +67,17 @@ public class ProjectauditOInviteController {
     @PostMapping("findUserProjectauditOIListPage")
     public VisitConsequenceParent findUserProjectauditOIListPage(HttpSession httpSession,@RequestBody PageRequest pageRequest){
         VisitConsequenceParent vc=new VisitConsequencePage();
-        UserInfoLoginSession us;
+        UserInfoLoginEntity uie;
         try {
-            us=new UserInfoLoginSession(httpSession);
+            uie=loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vc.setMessage(e.getMessage());
             vc.setState(1);
             e.printStackTrace();
             return  vc;
         }
-        List<Map> listP=projectauditOrganizationInviteService.findProjectauditOInviteListByUserIdPage(us.getUser_id(),true,pageRequest);
+        List<Map> listP=projectauditOrganizationInviteService.findProjectauditOInviteListByUserIdPage(
+                Integer.valueOf(uie.getUser_id()),true,pageRequest);
         PageInfo a=new PageInfo<Map>(listP);//分页信息
         vc=PageUtils.getVisitConsequencePage(a);//将分页信息结果封装成返回结果
         return vc;
@@ -89,16 +91,17 @@ public class ProjectauditOInviteController {
     @PostMapping("findUserProjectauditOIListPageENot")
     public VisitConsequenceParent findUserProjectauditOIListPageENot(HttpSession httpSession,@RequestBody PageRequest pageRequest){
         VisitConsequenceParent vc=new VisitConsequencePage();
-        UserInfoLoginSession us;
+        UserInfoLoginEntity uie;
         try {
-            us=new UserInfoLoginSession(httpSession);
+            uie=loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vc.setMessage(e.getMessage());
             vc.setState(1);
             e.printStackTrace();
             return  vc;
         }
-        List<Map> listP=projectauditOrganizationInviteService.findProjectauditOInviteListByUserIdPage(us.getUser_id(),false,pageRequest);
+        List<Map> listP=projectauditOrganizationInviteService.findProjectauditOInviteListByUserIdPage(
+                Integer.valueOf(uie.getUser_id()),false,pageRequest);
         PageInfo a=new PageInfo<Map>(listP);//分页信息
         vc=PageUtils.getVisitConsequencePage(a);//将分页信息结果封装成返回结果
         return vc;
@@ -113,7 +116,7 @@ public class ProjectauditOInviteController {
     @PostMapping("operationUserProjectauditOInvite")
     public VisitConsequenceParent operationUserProjectauditOInvite(HttpSession httpSession,@RequestBody Map pamar){
         VisitConsequenceParent vc=new VisitConsequenceParentImpl();
-        UserInfoLoginSession us;//用户登录信息
+        UserInfoLoginEntity uie;//用户登录信息
         Integer projectInfoId;//审核项目id
         Integer projectauditOrganizationInviteId;//邀请信息数据id
         Integer inviteEdituserId;//修改人id
@@ -122,15 +125,15 @@ public class ProjectauditOInviteController {
         projectauditOrganizationInviteId=Integer.parseInt(String.valueOf(pamar.get("projectauditOrganizationInviteId")));
         inviteState=Integer.parseInt(String.valueOf(pamar.get("inviteState")));
         try {
-            us=new UserInfoLoginSession(httpSession);
+            uie=loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vc.setMessage(e.getMessage());
             vc.setState(1);
             e.printStackTrace();
             return  vc;
         }
-        userRole=us.getUser_role();//用户角色
-        inviteEdituserId=us.getUser_id();//用户id
+        userRole= Integer.valueOf(uie.getUser_role());//用户角色
+        inviteEdituserId= Integer.valueOf(uie.getUser_id());//用户id
         boolean results;
         try {
             results=projectauditOrganizationInviteService.operationUserProjectauditOInvite(

@@ -6,21 +6,21 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class SecurityUtil {
+public class SecurityCodeUtil {
 
     private BufferedImage image;// 图像
     private String str;// 验证码
     private static char code[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789".toCharArray();
     public static final String SESSION_CODE_NAME="code";
-    private SecurityUtil() {
+    private SecurityCodeUtil() {
         init();// 初始化属性
 }
 
     /*
      * 取得RandomNumUtil实例
      */
-    public static SecurityUtil Instance() {
-        return new SecurityUtil();
+    public static SecurityCodeUtil Instance() {
+        return new SecurityCodeUtil();
     }
 
     /*

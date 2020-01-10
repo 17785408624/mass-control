@@ -1,19 +1,27 @@
 package com.example.service.impl;
 
-import com.example.common.exceptiondefine.LoginException;
-import com.example.common.exceptiondefine.OperationServiceException;
-import com.example.common.exceptiondefine.RegException;
+import com.example.api.RonglianPhoneMessages;
+import com.example.common.exceptiondefine.*;
+import com.example.entity.UserAuthenticate;
+import com.example.entity.UserAuthenticateExample;
+import com.example.entity.phoneMessages.PhoneMessagesEntity;
+import com.example.entity.phoneMessages.PhoneMessagesType;
 import com.example.entity.requstparam.OrderRequest;
 import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.requstparam.PageRequest;
 import com.example.entity.user.*;
+import com.example.mapper.PhoneMessagesMapper;
+import com.example.mapper.UserAuthenticateMapper;
 import com.example.mapper.UserInfoAuditMapper;
 import com.example.mapper.UserMapper;
+import com.example.mapper.redis.RedisUtils;
 import com.example.service.UserService;
 import com.example.service.vice.LoginVice;
 import com.github.pagehelper.PageHelper;
 import com.util.EncryptUtil;
 import com.util.MyMD5Util;
+import com.util.PageUtils;
+import com.util.PublicUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +30,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.time.Instant;
 
 @Transactional(rollbackFor = Exception.class)
 @Service
@@ -30,8 +39,15 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
     @Autowired
     UserInfoAuditMapper userInfoAuditMapper;
+
     @Autowired
-    LoginVice loginVice;
+    RonglianPhoneMessages ronglianPhoneMessages;
+    @Autowired
+    RedisUtils redisUtils;
+    @Autowired
+    PhoneMessagesMapper phoneMessagesMapper;
+    @Autowired
+    UserAuthenticateMapper userAuthenticateMapper;
     @Override
     public boolean regUser(UserEntity userEntity) throws RegException {//用户注册
         if (userEntity.getUser_role() == 5) {//不能注册添加超级管理员用户
@@ -46,6 +62,31 @@ public class UserServiceImpl implements UserService {
         userMapper.insertUserEntity(userEntity);
         return true;
 
+    }
+    //用户注册
+    @Override
+    public boolean regUser(UserEntity userEntity, Boolean isboundPhoneNum) throws RegException {
+        if (userEntity.getUser_role() == 5) {//不能注册添加超级管理员用户
+            throw new RegException("不能注册添加超级管理员用户");
+        }
+        if(isboundPhoneNum){
+            UserAuthenticateExample uae=new UserAuthenticateExample();
+            UserAuthenticateExample.Criteria c=uae.createCriteria();
+            c.andPhoneNumEqualTo(userEntity.getUser_mobile_phone());
+            uae.or(c);
+            List<UserAuthenticate>uaList=userAuthenticateMapper.selectByExample(uae);
+            if(uaList==null||uaList.size()<1){
+                throw new RegException("请先绑定手机号码");
+            }
+        }
+        userEntity.setUser_register_time(new Date().getTime());
+        userEntity.setUser_password(MyMD5Util.encrypt(userEntity.getUser_password()));
+        List list = userMapper.selectUserEntityByMobilePhone(userEntity.getUser_mobile_phone());
+        if (list != null && list.size() > 0) {
+            throw new RegException("手机号重复");
+        }
+        userMapper.insertUserEntity(userEntity);
+        return true;
     }
 
     //添加第三方机构信息审核申请
@@ -80,13 +121,13 @@ public class UserServiceImpl implements UserService {
 
     //用户登录
     @Override
-    public UserEntity userLoginByMobilePhone(String user_mobile_phone, String user_password, HttpSession session) throws LoginException {
+    public UserEntity userLoginByMobilePhone(String user_mobile_phone, String user_password) throws LoginException {
         user_password = MyMD5Util.encrypt(user_password);
         UserEntity ue = userMapper.selectUserEntityByMobilePhone_Password(user_mobile_phone, user_password);
         if (ue == null) {
             throw new LoginException("账号/密码错误");
         }
-        loginVice.saveLoginInfo(ue,session);//保存用户登录信息
+        //loginVice.saveLoginInfo(ue,session);//保存用户登录信息
         ue.setUser_password(EncryptUtil.encrypt(ue.getUser_password()));
         ue.setUser_id(Integer.parseInt(EncryptUtil.encrypt(String.valueOf(ue.getUser_id()))));
         return ue;
@@ -94,12 +135,11 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 重新登录
-     * @param session
      * @return
      */
     @Override
-    public UserEntity againLoginByMobilePhone(UserEntity ue,HttpSession session){
-        loginVice.updateLoginInfo(ue,session);//更新用户登录信息
+    public UserEntity againLoginByMobilePhone(UserEntity ue){
+        //loginVice.updateLoginInfo(ue,session);//更新用户登录信息
         ue.setUser_password(EncryptUtil.encrypt(ue.getUser_password()));
         ue.setUser_id(Integer.parseInt(EncryptUtil.encrypt(String.valueOf(ue.getUser_id()))));
         return ue;
@@ -134,8 +174,8 @@ public class UserServiceImpl implements UserService {
     }
     //注销登录
     @Override
-    public boolean userLoginOut(HttpSession httpSession) {
-        loginVice.cleanLoginInfo(httpSession);//清空登录信息
+    public boolean userLoginOut() {
+        //loginVice.cleanLoginInfo(httpSession);//清空登录信息
         return true;
     }
     //查询已审核认证的第三方机构id和名字信息列表
@@ -193,6 +233,48 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean resetPassword(String userCode,String password) {
         return null;
+    }
+    //用户获取绑定手机的验证码
+    @Override
+    public Boolean getPhoneBoundCod(String phoneNum) throws SedMessagesException {
+        Integer codeValidity=60*10;//验证码有效时间（秒）
+        String chValidity=codeValidity/60+"分钟";//有效时间文字词（分钟）
+        PhoneMessagesEntity pme=new PhoneMessagesEntity();
+        pme.setPhoneNum(phoneNum);//接收的手机号码
+        pme.setPhoneMessagesType(PhoneMessagesType.messagesBoundCod);//短信类型
+        String codeNum= PublicUtil.getRandomNum(6);//短信随机验证码
+        pme.setSendData(new String[]{codeNum,chValidity});//发送短信
+        Map result= null;//发送短信后的返回结果
+        try {
+            result = ronglianPhoneMessages.sedMessages(pme);
+        } catch (SedMessagesException e) {
+            throw new SedMessagesException("错误码=" + result.get("statusCode") + " 错误信息：" + result.get("statusMsg"));
+
+        }
+        String templateContent=result.get("templateContent").toString();//短信完整内容
+        Integer sendState;//发送状态 1成功 0失败
+        redisUtils.set(pme.getPhoneNum()+pme.getPhoneMessagesType().getMessagesId(),
+                codeNum,codeValidity);//随机验证码放入redis缓存
+        phoneMessagesMapper.insertPhoneMessages(pme);//将发送信息写入数据库
+        return true;
+    }
+    //绑定手机号码
+    @Override
+    public Boolean boundPhone(String phoneNum, String phoneBoundCod,int user_id) {
+        Object phoneBoundCodc=redisUtils.
+                get(phoneNum+PhoneMessagesType.messagesBoundCod.getMessagesId());//存入redis中正确的验证码
+        if(phoneBoundCodc==null){//缓存中不存在
+            return false;
+        }
+        if(!phoneBoundCod.equals(phoneBoundCodc)){//验证码错误
+            return false;
+        }
+        UserAuthenticate ua=new UserAuthenticate();
+        ua.setAuthenticateDate(Instant.now().getEpochSecond()*1000);//验证时间
+        ua.setPhoneNum(phoneNum);//手机号码
+        ua.setUserId(user_id);//用户id
+        userAuthenticateMapper.insert(ua);//绑定信息写入数据库
+        return true;
     }
 
 

@@ -8,8 +8,8 @@ public class EncryptUtil {
      * @param str
      * @return
      */
-    public static String encrypt(String str){//加密
-        return str;
+    public static String encrypt(Object str){//加密
+        return str.toString();
     }
 
     /**

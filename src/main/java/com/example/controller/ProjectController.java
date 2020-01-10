@@ -7,10 +7,10 @@ import com.example.entity.common.VisitConsequencePage;
 import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.ExtractionPERequest;
-import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.requstparam.PageOderRequestMap;
-import com.example.entity.user.UserInfoLoginSession;
+import com.example.entity.user.UserInfoLoginEntity;
 import com.example.service.ProjectInfoService;
+import com.example.service.vice.LoginVice;
 import com.github.pagehelper.PageInfo;
 import com.util.PageUtils;
 import com.util.PublicUtil;
@@ -29,6 +29,8 @@ import java.util.Map;
 public class ProjectController {
     @Autowired
     ProjectInfoService projectInfoService;
+    @Autowired
+    LoginVice loginVice;
 
     /**
      * 添加项目信息
@@ -40,16 +42,16 @@ public class ProjectController {
     public VisitConsequenceParent addProjectInfo(@RequestBody ProjectInfoEntityWithBLOBs projectInfoEntityWithBLOBs,
                                                  HttpSession httpSession) {
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
-        UserInfoLoginSession uils = null;
+        UserInfoLoginEntity uie = null;
         try {
-            uils = new UserInfoLoginSession(httpSession);
+            uie =loginVice.getLoginInfo(httpSession);
         } catch (LoginException e) {
             vcp.setMessage(e.getMessage());
             vcp.setState(1);
             e.printStackTrace();
             return vcp;
         }
-        projectInfoService.addProjectInfo(uils.getUser_id(), uils.getUser_role(), projectInfoEntityWithBLOBs);
+        projectInfoService.addProjectInfo(Integer.parseInt(uie.getUser_id()), Integer.valueOf(uie.getUser_role()), projectInfoEntityWithBLOBs);
         //vcp.setObject(projectInfoEntityWithBLOBs.getProjectInfoId());//项目信息主键id 项目编号
         return vcp;
     }
@@ -133,16 +135,16 @@ public class ProjectController {
         if(!PublicUtil.mapKeyIsNull_keyString(param,"searchCondition")){
             searchCondition= String.valueOf(param.get("searchCondition"));
         }
-        UserInfoLoginSession uils = null;
+        UserInfoLoginEntity uie = null;
         try {
-            uils = new UserInfoLoginSession(session);
+            uie = loginVice.getLoginInfo(session);
         } catch (LoginException e) {
             vcp.setState(1);
             vcp.setMessage(e.getMessage());
             return vcp;
         }
         List<ProjectInfoEntityWithBLOBs> listP =
-                projectInfoService.findProjectInfoProgressLeader(pageOderRequest,uils.getUser_id(),searchCondition);
+                projectInfoService.findProjectInfoProgressLeader(pageOderRequest,Integer.valueOf(uie.getUser_id()),searchCondition);
         PageInfo a = new PageInfo<ProjectInfoEntityWithBLOBs>(listP);
         vcp = PageUtils.getVisitConsequencePage(a);
         return vcp;

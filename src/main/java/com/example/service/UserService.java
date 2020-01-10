@@ -1,8 +1,6 @@
 package com.example.service;
 
-import com.example.common.exceptiondefine.LoginException;
-import com.example.common.exceptiondefine.OperationServiceException;
-import com.example.common.exceptiondefine.RegException;
+import com.example.common.exceptiondefine.*;
 import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.user.ExpertInfoEntity;
 import com.example.entity.user.OrganizationInfoCareermanEntity;
@@ -25,6 +23,15 @@ public interface UserService {
 	boolean regUser(UserEntity userEntity) throws RegException;//用户注册
 
 	/**
+	 *
+	 * @param userEntity 用户信息
+	 * @param isboundPhoneNum 是否绑定手机号码，ture需要绑定
+	 * @return
+	 * @throws RegException
+	 */
+	boolean regUser(UserEntity userEntity,Boolean isboundPhoneNum) throws RegException;//用户注册
+
+	/**
 	 * 添加第三方机构信息审核
 	 * @param organizationInfoEntity 第三方机构信息
 	 * @param oceList 第三方机构信息   人员信息
@@ -42,13 +49,11 @@ public interface UserService {
 	 *  用户通过手机号登录
 	 * @param user_mobile_phone
 	 * @param user_password
-	 * @param session
 	 * @return
 	 * @throws LoginException
 	 */
 	UserEntity userLoginByMobilePhone(String user_mobile_phone,
-									  String user_password,
-									  HttpSession session) throws LoginException;
+									  String user_password) throws LoginException;
 
 	/**
 	 * 用户添加专家审核信息
@@ -65,10 +70,9 @@ public interface UserService {
 
 	/**
 	 * 用户注销登录
-	 * @param httpSession
 	 * @return
 	 */
-	boolean userLoginOut(HttpSession httpSession);
+	boolean userLoginOut();
 
 	/**
 	 * 查询第三方机构id和名字信息列表
@@ -110,10 +114,9 @@ public interface UserService {
 	/**
 	 * 用户重新登录
 	 * @param ue
-	 * @param session
 	 * @return
 	 */
-	UserEntity againLoginByMobilePhone(UserEntity ue,HttpSession session);
+	UserEntity againLoginByMobilePhone(UserEntity ue);
 	/**
 	 * 重置密码为默认值
 	 * @param userCod 用户手机号或者是用户id
@@ -128,5 +131,21 @@ public interface UserService {
 	 * @return
 	 */
 	Boolean resetPassword(String userCod,String password);
+
+	/**
+	 * 用户获取绑定手机号验证码
+	 * @param phoneNum 手机号
+	 * @return
+	 * @throws SedMessagesException
+	 */
+	Boolean getPhoneBoundCod(String phoneNum) throws SedMessagesException;
+
+	/**
+	 * 用户绑定手机号
+	 * @param phoneNum
+	 * @param phoneBoundCod
+	 * @return
+	 */
+	Boolean boundPhone(String phoneNum,String phoneBoundCod,int user_id);
 
 }

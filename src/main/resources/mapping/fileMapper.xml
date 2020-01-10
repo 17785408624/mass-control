@@ -15,7 +15,6 @@
     #{file_url}
 
     )
-
     </insert>
     <select id="selectFileInfoById">
     select
