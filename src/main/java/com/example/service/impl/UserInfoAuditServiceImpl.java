@@ -7,7 +7,7 @@ import com.example.entity.resultsparam.OrganizationAuditResults;
 import com.example.entity.user.*;
 import com.example.mapper.UserInfoAuditMapper;
 import com.example.mapper.UserMapper;
-import com.example.service.UserInfoService;
+import com.example.service.UserInfoAuditService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 @Transactional(rollbackFor=Exception.class)
 @Service
-public class UserInfoAuditServiceImpl implements UserInfoService {
+public class UserInfoAuditServiceImpl implements UserInfoAuditService {
     @Autowired
     UserInfoAuditMapper userInfoAuditMapper;
     @Autowired
@@ -123,27 +123,41 @@ public class UserInfoAuditServiceImpl implements UserInfoService {
                         (user_info_audit_state,user_info_audit_type);
     }
 
-    //审核用户初次提交的信息
+
+
+    //审核用户提交的信息
     @Override
-    public boolean operationUserInfoAuditFirst(int info_id, int user_info_audit_state) {
+    public boolean operationUserInfoAudit(int info_id, int user_info_audit_state,boolean isCertification) {
         userInfoAuditMapper.updateUserInfoAuditStateByinfoId(
-                user_info_audit_state,info_id);//改变审核的状态
+                info_id,user_info_audit_state,null);//改变审核的状态
+        int user_state=0;
+
         if(user_info_audit_state==3){//审核通过
-            userMapper.updateUserInfoIdAUserStateByinfo_id(info_id, 2);//修改用户的状态和现存信息
+            if(isCertification){//是否为初次审核
+                user_state=2;
+            }
+            //修改用户现存信息
+            userMapper.updateUserInfoIdAUserStateByinfo_id(info_id, user_state);
         }
         return true;
     }
     //审核用户提交的信息
     @Override
-    public boolean operationUserInfoAudit(int info_id, int user_info_audit_state) {
+    public boolean operationUserInfoAudit(int info_id, int user_info_audit_state,boolean isCertification,
+                                          String user_info_audit_describe) {
         userInfoAuditMapper.updateUserInfoAuditStateByinfoId(
-                info_id,user_info_audit_state);//改变审核的状态
+                info_id,user_info_audit_state,user_info_audit_describe);//改变审核的状态
+        int user_state=0;
         if(user_info_audit_state==3){//审核通过
+            if(isCertification){//是否为初次审核
+                user_state=2;
+            }
             //修改用户现存信息
-            userMapper.updateUserInfoIdAUserStateByinfo_id(info_id, 0);
+            userMapper.updateUserInfoIdAUserStateByinfo_id(info_id, user_state);
         }
         return true;
     }
+
     //查询专家完整信息
     @Override
     public ExpertInfoResults findExpertInfoFull(int expert_info_id) {

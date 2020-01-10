@@ -8,7 +8,6 @@ public enum PhoneMessagesType {
      private String messagesId;//消息类型id
      private String messagesName;//消息类型名字
      private Integer sndMessagesRestrict;//发送次数限制
-
     PhoneMessagesType(String messagesId, String messagesName,Integer sndMessagesRestrict) {
         this.messagesId=messagesId;
         this.messagesName=messagesName;

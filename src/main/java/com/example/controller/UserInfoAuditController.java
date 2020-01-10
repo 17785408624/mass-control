@@ -9,7 +9,7 @@ import com.example.entity.resultsparam.ExpertInfoResults;
 import com.example.entity.resultsparam.OrganizationAuditResults;
 import com.example.entity.user.UserInfoAuditEntity;
 import com.example.entity.user.UserInfoLoginEntity;
-import com.example.service.UserInfoService;
+import com.example.service.UserInfoAuditService;
 import com.example.service.UserService;
 import com.example.service.vice.LoginVice;
 import com.github.pagehelper.PageInfo;
@@ -28,7 +28,7 @@ import java.util.Map;
 @RequestMapping("/UserInfoAudit")
 public class UserInfoAuditController {
     @Autowired
-    UserInfoService userInfoService;
+    UserInfoAuditService userInfoService;
     @Autowired
     UserService userService;
     @Autowired
@@ -218,7 +218,7 @@ public class UserInfoAuditController {
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
         int info_id= (int) map.get("info_id");
         int user_info_audit_state= (int) map.get("user_info_audit_state");
-        userInfoService.operationUserInfoAuditFirst(info_id,user_info_audit_state);
+        userInfoService.operationUserInfoAudit(info_id,user_info_audit_state,true);
         vcp.setState(0);
         vcp.setMessage("请求成功");
         return vcp;
@@ -235,7 +235,7 @@ public class UserInfoAuditController {
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
         int info_id= (int) map.get("info_id");
         int user_info_audit_state= (int) map.get("user_info_audit_state");
-        userInfoService.operationUserInfoAudit(info_id,user_info_audit_state);
+        userInfoService.operationUserInfoAudit(info_id,user_info_audit_state,false);
         return vcp;
     }
 

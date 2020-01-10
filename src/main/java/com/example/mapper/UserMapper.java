@@ -4,6 +4,7 @@ import com.example.entity.requstparam.OrderRequest;
 import com.example.entity.user.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Map;
@@ -66,13 +67,12 @@ public interface UserMapper {
 	/**
 	 * 通过用户的信息id修改用户的状态和现存信息
 	 * @param info_id 信息id
-	 * @param user_state 用户状态
+	 * @param user_state 用户状态 为0则不做修改   1未认证审核 2已认证审核  3解聘
 	 * @return
 	 */
 	Integer updateUserInfoIdAUserStateByinfo_id(
 			@Param("info_id") Integer info_id,
-			@Param("user_state")Integer user_state
-	);
+			@Param("user_state")Integer user_state);
 
 	/**
 	 * 通过用户id查询用户信息

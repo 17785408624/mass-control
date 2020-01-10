@@ -1,18 +1,26 @@
 package com.example.service.vice;
 
 import com.example.common.exceptiondefine.LoginException;
+import com.example.common.exceptiondefine.RegException;
+import com.example.entity.UserAuthenticate;
+import com.example.entity.UserAuthenticateExample;
 import com.example.entity.user.UserEntity;
 import com.example.entity.user.UserInfoLoginEntity;
+import com.example.mapper.UserAuthenticateMapper;
 import com.example.mapper.UserMapper;
 import com.util.PublicUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
+
 @Component
 public class LoginVice {
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    UserAuthenticateMapper userAuthenticateMapper;
     public static String LONGIN_SESSION_KEY="LOGINKEY";//登录SESSION键名
     public static String LONGIN_TOKEN_NAME="LONGINSTATE";//登录token名
     public static int LOGIN_VALID_TIME=60*30*1000;//登录有效时间
@@ -131,6 +139,24 @@ public class LoginVice {
             }
             return false;
         }
+    }
+
+    /**
+     * 用户手机号是否验证绑定
+     * @param User_mobile_phone 手机号码
+     * @return
+     */
+    public Boolean isboundPhoneNum(String User_mobile_phone){
+        UserAuthenticateExample uae=new UserAuthenticateExample();
+        UserAuthenticateExample.Criteria c=uae.createCriteria();
+        c.andPhoneNumEqualTo(User_mobile_phone);
+        uae.or(c);
+        List<UserAuthenticate> uaList=userAuthenticateMapper.selectByExample(uae);
+        if(uaList==null||uaList.size()<1){
+            return false;
+        }
+        return true;
+
     }
 
 

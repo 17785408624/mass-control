@@ -137,6 +137,11 @@
         update  user_info_audit
         set
         user_info_audit_state=#{user_info_audit_state}
+        <trim prefix=",">
+            <if test="user_info_audit_describe != null">
+                user_info_audit_describe=#{user_info_audit_describe}
+            </if>
+        </trim>
         where  info_id=#{info_id}
     </update>
     <select id="selectExpertInfoFull" resultType="ExpertInfoEntity">

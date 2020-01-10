@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import com.example.api.PhoneMessages;
 import com.example.api.RonglianPhoneMessages;
 import com.example.common.exceptiondefine.*;
 import com.example.entity.UserAuthenticate;
@@ -48,6 +49,8 @@ public class UserServiceImpl implements UserService {
     PhoneMessagesMapper phoneMessagesMapper;
     @Autowired
     UserAuthenticateMapper userAuthenticateMapper;
+    @Autowired
+    PhoneMessages phoneMessages;
     @Override
     public boolean regUser(UserEntity userEntity) throws RegException {//用户注册
         if (userEntity.getUser_role() == 5) {//不能注册添加超级管理员用户
@@ -69,6 +72,12 @@ public class UserServiceImpl implements UserService {
         if (userEntity.getUser_role() == 5) {//不能注册添加超级管理员用户
             throw new RegException("不能注册添加超级管理员用户");
         }
+        userEntity.setUser_register_time(new Date().getTime());
+        userEntity.setUser_password(MyMD5Util.encrypt(userEntity.getUser_password()));
+        List list = userMapper.selectUserEntityByMobilePhone(userEntity.getUser_mobile_phone());
+        if (list != null && list.size() > 0) {
+            throw new RegException("手机号重复");
+        }
         if(isboundPhoneNum){
             UserAuthenticateExample uae=new UserAuthenticateExample();
             UserAuthenticateExample.Criteria c=uae.createCriteria();
@@ -79,12 +88,7 @@ public class UserServiceImpl implements UserService {
                 throw new RegException("请先绑定手机号码");
             }
         }
-        userEntity.setUser_register_time(new Date().getTime());
-        userEntity.setUser_password(MyMD5Util.encrypt(userEntity.getUser_password()));
-        List list = userMapper.selectUserEntityByMobilePhone(userEntity.getUser_mobile_phone());
-        if (list != null && list.size() > 0) {
-            throw new RegException("手机号重复");
-        }
+
         userMapper.insertUserEntity(userEntity);
         return true;
     }
@@ -246,7 +250,7 @@ public class UserServiceImpl implements UserService {
         pme.setSendData(new String[]{codeNum,chValidity});//发送短信
         Map result= null;//发送短信后的返回结果
         try {
-            result = ronglianPhoneMessages.sedMessages(pme);
+            result = phoneMessages.sedMessages(pme);//发送短信
         } catch (SedMessagesException e) {
             throw new SedMessagesException("错误码=" + result.get("statusCode") + " 错误信息：" + result.get("statusMsg"));
 
