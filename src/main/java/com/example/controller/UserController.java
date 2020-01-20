@@ -294,9 +294,12 @@ public class UserController {
      */
     @RequestMapping("findExperList")
     public VisitConsequenceParent findExperList(@RequestBody PageOderRequestMap porm){
-        Map param=porm.getParam();
+        String conditions=null;
+        if(porm.getParam()!=null&&porm.getParam().get("conditions")!=null){
+            conditions =porm.getParam().get("conditions").toString();//获取搜索条件
+        }
         VisitConsequenceParent vcp =new VisitConsequencePage();
-        List<Map>listM=userService.findExperList(param,porm);
+        List<Map>listM=userService.findExperList(conditions,porm);
         PageInfo a=new PageInfo<Map>(listM);
         vcp= PageUtils.getVisitConsequencePage(a);
         return vcp;
@@ -395,6 +398,21 @@ public class UserController {
         userService.boundPhone(phoneNum,boundPhoneCode,Integer.valueOf(ue.getUser_id()));
         return vcp;
     }
+
+    /**
+     * 获取手机号是否已经绑定过
+     * @param param phoneNum手机号码
+     * @return
+     */
+    @PostMapping("isBoundPhoneNum")
+    public VisitConsequenceParent isBoundPhoneNum(@RequestBody Map param){
+        VisitConsequenceParent vcp=new VisitConsequenceParentImpl();
+        String phoneNum=param.get("phoneNum").toString();
+        Boolean b=loginVice.isboundPhoneNum(phoneNum);
+        vcp.setObject(b);
+        return vcp;
+    }
+
 
 
 }

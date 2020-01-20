@@ -210,7 +210,7 @@ public class UserServiceImpl implements UserService {
     }
     //查询用户信息列表(专家)
     @Override
-    public List<Map> findExperList(Map conditions, PageOderRequest por) {
+    public List<Map> findExperList(String conditions, PageOderRequest por) {
         PageRequest pageRequest=por.getPageRequest();//分页信息
         OrderRequest[]orderRequests=por.getOrderRequests();
         Integer pageNum=pageRequest.getPageNum();//当前页
@@ -218,6 +218,12 @@ public class UserServiceImpl implements UserService {
         PageHelper.startPage(pageNum, pageSize);//调用分页
         List<Map>listM= userMapper.selectExperList(conditions,orderRequests);//查询
         return listM;
+    }
+
+    @Override
+    public List<Map> findOrganizationList(String conditions, PageOderRequest por) {
+
+        return null;
     }
 
     //重置密码为默认值

@@ -28,6 +28,22 @@ public interface UserInfoAuditMapper {
             @Param("user_info_audit_type") int user_info_audit_type);
 
     /**
+     * 查询第三方机构审核信息列表导出数据
+     * @param user_info_audit_state 审核状态 1未审核 2拒绝 3 通过
+     * @param user_info_audit_typ 审核类型 1初审 2变更审核
+     * @param user_info_audit_content 审核类容 1第三方机构信息 2专家信息
+     * @param index 开始索引  为null或者 查询条数为0则视为不设置条件
+     * @param num 查询条数
+     * @return
+     */
+    List<Map<String,Object>> selectUserInfoAuditOrganizationByStateATypeExportExcel(
+            @Param("user_info_audit_state") Integer user_info_audit_state,
+            @Param("user_info_audit_type") Integer user_info_audit_typ,
+            @Param("user_info_audit_content") Integer user_info_audit_content,
+            @Param("index")Integer index,
+            @Param("num") Integer num);
+
+    /**
      * 查询第三方机构完整信息
      * @param organization_info_id
      * @return
@@ -78,7 +94,7 @@ public interface UserInfoAuditMapper {
             @Param("user_info_audit_type") int user_info_audit_type);
 
     /**
-     *
+     * 查询专家审核信息列表
      * @param user_info_audit_state
      * @param user_info_audit_type
      * @param condition 模糊查询条件
