@@ -283,6 +283,9 @@
         SELECT
         oi.organization_name,
         oi.organization_info_id,
+        oi.organization_code,
+        oi.organization_telephone,
+        u.user_register_time,
         u.user_id
         FROM
         organization_info oi

@@ -91,6 +91,7 @@ public interface UserMapper {
 	List<Map> selectOrganizationInfoNameIdListByState(
 			@Param("user_state") Integer user_state);
 
+
 	/**
 	 * 查询用户数量
 	 * @param user_role 用户角色  1专家 2第三方机构 3煤监局 4能源局 5超级管理员
