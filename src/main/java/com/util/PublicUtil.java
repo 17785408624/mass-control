@@ -95,6 +95,11 @@ public class PublicUtil {
         return false;
     }
 
+    /**
+     * 获取随机数字字符串
+     * @param length 数字长度
+     * @return
+     */
     public static String getRandomNum(Integer length){
         String rc="";
         for(int i=0;i<length;i++){

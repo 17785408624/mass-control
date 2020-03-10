@@ -71,7 +71,7 @@ public class UserInfoLoginEntity {
     }
 
     public UserInfoLoginEntity(UserEntity ue){
-        setInfo_id(EncryptUtil.encrypt(ue.getInfo_id()));
+        //setInfo_id(EncryptUtil.encrypt(ue.getInfo_id()));
         setUser_id(EncryptUtil.encrypt(ue.getUser_id()));
         setUser_mobile_phone(EncryptUtil.encrypt(ue.getUser_mobile_phone()));
         setUser_password(EncryptUtil.encrypt(ue.getUser_password()));

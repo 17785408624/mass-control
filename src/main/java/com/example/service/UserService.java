@@ -68,6 +68,8 @@ public interface UserService {
 			int user_state
 	) throws OperationServiceException;
 
+
+
 	/**
 	 * 用户注销登录
 	 * @return
@@ -109,7 +111,15 @@ public interface UserService {
 	 * @param conditions 查询条件
 	 * @return
 	 */
-	List<Map>findExperList(Map conditions,PageOderRequest por);
+	List<Map>findExperList(String conditions,PageOderRequest por);
+
+	/**
+	 * 查询用户信息列表(第三方机构)
+	 * @param conditions
+	 * @param por
+	 * @return
+	 */
+	List<Map>findOrganizationList(String conditions,PageOderRequest por);
 
 	/**
 	 * 用户重新登录

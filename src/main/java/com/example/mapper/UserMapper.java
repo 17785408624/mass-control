@@ -151,7 +151,16 @@ public interface UserMapper {
 	 * @param orderRequests 排序规则
 	 * @return
 	 */
-	List<Map>selectExperList(@Param("conditions") Map conditions,
+	List<Map>selectExperList(@Param("conditions") String conditions,
+							 @Param("orderRequests") OrderRequest[]orderRequests);
+
+	/**
+	 * 查询用户列表(第三方机构)
+	 * @param conditions
+	 * @param orderRequests
+	 * @return
+	 */
+	List<Map>selectOrganizationList(@Param("conditions") String conditions,
 							 @Param("orderRequests") OrderRequest[]orderRequests);
 
 	/**

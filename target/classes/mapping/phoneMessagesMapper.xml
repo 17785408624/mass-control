@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.PhoneMessagesMapper">
+    <insert id="insertPhoneMessages" parameterType="com.example.entity.phoneMessages.PhoneMessagesEntity" useGeneratedKeys="true" keyProperty="PhoneMessagesId" keyColumn="phone_messages_id">
+       INSERT INTO phone_messages (
+	   phone_messages_type,
+	   phone_num,
+	   send_num,
+	   send_date,
+	   send_data,
+	   full_content
+       ) SELECT
+	   #{phoneMessagesType.messagesId},
+	   #{phoneNum},
+	   IFNULL(Max(send_num) + 1, 1),
+       #{sendDate},
+		replace(
+       "
+       <foreach collection="sendData" separator="|" item="sd" close="" open="">
+		   ${sd}
+	   </foreach>
+		",' ',''),
+	   #{fullContent}
+
+       FROM
+	     phone_messages
+        WHERE
+	     phone_num = #{phoneNum}
+        AND phone_messages_type = #{phoneMessagesType.messagesId}
+    </insert>
+
+</mapper>
