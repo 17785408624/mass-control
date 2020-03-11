@@ -193,9 +193,13 @@ public class UserServiceImpl implements UserService {
     public List<Map> findOINameIdListCertified(PageOderRequestMap pageOderRequestMap) {
         int pageNum = pageOderRequestMap.getPageRequest().getPageNum();//当前页码
         int pageSize = pageOderRequestMap.getPageRequest().getPageSize();//每页数量
+        OrderRequest[]orderRequest=pageOderRequestMap.getOrderRequests();
+        if(orderRequest.length<1){
+            orderRequest=null;
+        }
         PageHelper.startPage(pageNum, pageSize);//调用分页
         String SearchField=pageOderRequestMap.getParam().get("SearchField").toString();//搜索字段
-        return userMapper.selectOrganizationListByState(2,pageOderRequestMap.getOrderRequests(),SearchField);
+        return userMapper.selectOrganizationListByState(2,orderRequest,SearchField);
     }
 
     //分页查询专家信息列表

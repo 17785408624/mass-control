@@ -7,6 +7,8 @@ import com.util.PublicUtil;
 public class test1 {
     public static void main(String[]args){
 
-        System.out.println(PublicUtil.getRandomNum(50));
+       int[]iii=null;
+       iii[1]=2;
+       System.out.println(iii[1]);
     }
 }
