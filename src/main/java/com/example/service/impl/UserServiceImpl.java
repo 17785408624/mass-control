@@ -9,6 +9,7 @@ import com.example.entity.phoneMessages.PhoneMessagesEntity;
 import com.example.entity.phoneMessages.PhoneMessagesType;
 import com.example.entity.requstparam.OrderRequest;
 import com.example.entity.requstparam.PageOderRequest;
+import com.example.entity.requstparam.PageOderRequestMap;
 import com.example.entity.requstparam.PageRequest;
 import com.example.entity.user.*;
 import com.example.mapper.PhoneMessagesMapper;
@@ -186,6 +187,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Map> findOINameIdListCertified() {
         return userMapper.selectOrganizationInfoNameIdListByState(2);
+    }
+    //查询第三方机构信息列表
+    @Override
+    public List<Map> findOINameIdListCertified(PageOderRequestMap pageOderRequestMap) {
+        int pageNum = pageOderRequestMap.getPageRequest().getPageNum();//当前页码
+        int pageSize = pageOderRequestMap.getPageRequest().getPageSize();//每页数量
+        PageHelper.startPage(pageNum, pageSize);//调用分页
+        String SearchField=pageOderRequestMap.getParam().get("SearchField").toString();//搜索字段
+        return userMapper.selectOrganizationListByState(2,pageOderRequestMap.getOrderRequests(),SearchField);
     }
 
     //分页查询专家信息列表

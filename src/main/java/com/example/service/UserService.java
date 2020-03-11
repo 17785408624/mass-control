@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.common.exceptiondefine.*;
 import com.example.entity.requstparam.PageOderRequest;
+import com.example.entity.requstparam.PageOderRequestMap;
 import com.example.entity.user.ExpertInfoEntity;
 import com.example.entity.user.OrganizationInfoCareermanEntity;
 import com.example.entity.user.OrganizationInfoEntity;
@@ -81,6 +82,11 @@ public interface UserService {
 	 * @return
 	 */
 	List<Map>  findOINameIdListCertified();
+	/**
+	 * 分页查询第三方机构信息列表
+	 * @return
+	 */
+	List<Map>  findOINameIdListCertified(PageOderRequestMap pageOderRequestMap);
 
 	/**
 	 *

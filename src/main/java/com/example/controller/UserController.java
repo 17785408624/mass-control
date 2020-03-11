@@ -413,6 +413,21 @@ public class UserController {
         return vcp;
     }
 
+    /**
+     * 查询第三方机构信息列表
+     * @param pageOderRequestMap
+     * @return
+     */
+    @PostMapping("findOI")
+    public VisitConsequenceParent findOI(@RequestBody PageOderRequestMap pageOderRequestMap) {
+        VisitConsequenceParent vcp=new VisitConsequenceParentImpl();
+        List<Map> listM=userService.findOINameIdListCertified(pageOderRequestMap);
+        vcp.setMessage("请求成功");
+        vcp.setState(0);
+        vcp.setObject(listM);
+        return  vcp;
+    }
+
 
 
 }
