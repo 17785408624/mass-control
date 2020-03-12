@@ -6,7 +6,7 @@ import com.github.pagehelper.PageInfo;
 
 public class PageUtils {
     /**
-     * 将分页信息封装到统一的对象
+     *
      * @param pageRequest
      * @param
      * @return
@@ -20,6 +20,12 @@ public class PageUtils {
 //        pageResult.setContent(pageInfo.getList());
 //        return pageResult;
 //    }
+
+    /**
+     *  将分页信息封装到统一的对象
+     * @param pageInfo 分页信息
+     * @return
+     */
     public static VisitConsequencePage getVisitConsequencePage( PageInfo<?> pageInfo) {
         VisitConsequencePage pageResult=new VisitConsequencePage();
         pageResult.setPageNum(pageInfo.getPageNum());

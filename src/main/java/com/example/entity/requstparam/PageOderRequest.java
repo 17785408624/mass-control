@@ -14,10 +14,11 @@ public class PageOderRequest {
      * @return
      */
     public com.example.entity.requstparam.OrderRequest[] getOrderRequests() {
-        OrderRequest[] orderRequests1=new OrderRequest[0];
         if(orderRequests==null||orderRequests.length<1){
             return null;
         }
+        OrderRequest[] orderRequests1=new OrderRequest[0];
+        //如果排序字段中为空则视为作废的字段
         for (int i=0;i<orderRequests.length;i++) {
             if(orderRequests[i].getOrderName()!=null
                     &&orderRequests[i].getOrderName()!=""
