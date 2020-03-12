@@ -15,6 +15,9 @@ public class PageOderRequest {
      */
     public com.example.entity.requstparam.OrderRequest[] getOrderRequests() {
         OrderRequest[] orderRequests1=new OrderRequest[0];
+        if(orderRequests==null||orderRequests.length<1){
+            return null;
+        }
         for (int i=0;i<orderRequests.length;i++) {
             if(orderRequests[i].getOrderName()!=null
                     &&orderRequests[i].getOrderName()!=""
