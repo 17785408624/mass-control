@@ -306,7 +306,7 @@
         <if test="user_state != null">
             and u.user_state=#{user_state}
         </if>
-        <if test="SearchField != null AND SearchField !='' AND SearchField !=' '">
+        <if test="SearchField != null and SearchField !='' and SearchField !=' '">
            and ((user_mobile_phone like "%${SearchField}%")
            or (organization_name like '%${SearchField}%')
            or (organization_code like '%${SearchField}%'))
