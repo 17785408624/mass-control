@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.entity.ExportExcel.ExcelDataEntity;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
 
 public interface ExcelManage {
@@ -13,5 +14,14 @@ public interface ExcelManage {
      * @param num 导出条数
      * @return
      */
-    Boolean outputExcel(OutputStream os,Integer typeCode,Integer index,Integer num);
+    /**
+     * 使用浏览器导出excel数据文件
+     * @param response
+     * @param typeCode
+     * @param index
+     * @param num
+     * @return
+     */
+    Boolean exportExcel(HttpServletResponse response, Integer typeCode, Integer index, Integer num);
+    Boolean exportExcel(HttpServletResponse response, Integer typeCode);
 }

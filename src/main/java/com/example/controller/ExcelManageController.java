@@ -31,7 +31,7 @@ public class ExcelManageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        excelManage.outputExcel(os,1,1,20);
+        //excelManage.outputExcel(os,1,1,20);
 
     }
 

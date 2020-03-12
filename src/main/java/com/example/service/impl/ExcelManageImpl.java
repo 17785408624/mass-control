@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class ExcelManageImpl  implements ExcelManage {
     @Autowired
     UserInfoAuditMapper userInfoAuditMapper;
     //
-    @Override
+
     public Boolean outputExcel(OutputStream os,
                                  Integer typeCode,
                                  Integer index,
@@ -47,6 +48,16 @@ public class ExcelManageImpl  implements ExcelManage {
             }
             int i=1;
         }
+        return null;
+    }
+
+    @Override
+    public Boolean exportExcel(HttpServletResponse response, Integer typeCode, Integer index, Integer num) {
+        return null;
+    }
+
+    @Override
+    public Boolean exportExcel(HttpServletResponse response, Integer typeCode) {
         return null;
     }
 }

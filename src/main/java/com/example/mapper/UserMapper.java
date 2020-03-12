@@ -96,11 +96,11 @@ public interface UserMapper {
 	 * 查询第三方机构信息列表
 	 * @param user_state  用户状态  1未认证审核 2已认证审核  3解聘
 	 * @param orderRequests 排序参数
-	 * @param SearchField  搜索字段
+	 * @param searchField  搜索字段
 	 * @return
 	 */
 	List<Map> selectOrganizationListByState(
-			@Param("user_state") Integer user_state, @Param("orderRequests")OrderRequest[] orderRequests,@Param("SearchField")String SearchField);
+			@Param("user_state") Integer user_state, @Param("orderRequests")OrderRequest[] orderRequests,@Param("searchField")String searchField);
 
 
 	/**
