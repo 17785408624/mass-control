@@ -148,11 +148,22 @@ public interface UserInfoAuditMapper {
     /**
      *  查询专家用户已提交的审核信息
      * @param queryFields 查询的字段名
-     * @param user_info_audit_state 审核状态 1未审核 2拒绝 3通过
-     * @param user_info_audit_type 审核类型 1初审 2变更信息审核
+     * @param user_info_audit_state 审核状态 1未审核 2拒绝 3通过 为0视为不设置此条件
+     * @param user_info_audit_type 审核类型 1初审 2变更信息审核 为0视为不设置此条件
      * @return
      */
     List<Map<String,String>>selectExperInfoByQueryFields(@Param("queryFields") String[]queryFields,
+                                                         @Param("user_info_audit_state")Integer user_info_audit_state,
+                                                         @Param("user_info_audit_type")Integer user_info_audit_type);
+
+    /**
+     * 查询第三方机构用户已提交的审核信息
+     * @param queryFields 查询的字段名
+     * @param user_info_audit_state 审核状态 1未审核 2拒绝 3通过 为0视为不设置此条件
+     * @param user_info_audit_type 审核类型 1初审 2变更信息审核 为0视为不设置此条件
+     * @return
+     */
+    List<Map<String,String>>selectOrganizationInfoByQueryFields(@Param("queryFields") String[]queryFields,
                                                          @Param("user_info_audit_state")Integer user_info_audit_state,
                                                          @Param("user_info_audit_type")Integer user_info_audit_type);
 

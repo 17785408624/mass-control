@@ -50,10 +50,18 @@ public class ExcelDataEntity implements Serializable {
     public ExcelDataEntity(List listM,ExcelType eet){
         init( listM, eet);
     }
+    public ExcelDataEntity(List listM,String sheetName,String[]ExcelTitle){
+        init(  listM, sheetName,ExcelTitle);
+    }
+    private void init(List listM,String sheetName,String[]ExcelTitle){
+        setRows(listM);
+        setName(sheetName);
+        setTitles(Arrays.asList(ExcelTitle));//数组转换list
+    }
     private void init(List listM,ExcelType eet){
          setRows(listM);
          setName(eet.getTypeName());
-         setTitles(Arrays.asList(eet.getTypeTitle()));
+         setTitles(Arrays.asList(eet.getExcelTitle()));
     }
 
 
