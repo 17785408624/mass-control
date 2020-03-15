@@ -188,6 +188,14 @@ public interface UserMapper {
 	 * @return
 	 */
 	int updatePasswordByUserId(@Param("userId")Integer  userId,@Param("password") String password);
+	/**
+	 * 通过用户手机号码修改密码
+	 * @param userId 用户手机号或者是id
+	 * @param password 用户密码
+	 * @return
+	 */
 	int updatePasswordByUseruserMobilePhone(@Param("userMobilePhone")String userId,@Param("password") String password);
+
+
 
 }

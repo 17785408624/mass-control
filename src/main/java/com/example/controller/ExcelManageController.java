@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.service.ExcelManage;
+import com.example.service.ExcelManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -16,23 +16,14 @@ import java.util.Map;
 @RequestMapping("ExcelManage")
 public class ExcelManageController {
     @Autowired
-    private ExcelManage excelManage;
+    private ExcelManageService excelManage;
 
     //获取图片验证码
-    @ResponseBody
-    @RequestMapping("/downloadExcel")
-    public void downloadExcel(HttpServletResponse response, @RequestBody Map param) {
-        Integer typeCode=Integer.valueOf(param.get("typeCode").toString());
-        Integer index=Integer.valueOf(param.get("index").toString());
-        Integer num=Integer.valueOf(param.get("num").toString());
-        OutputStream os=null;
-        try {
-            os=response.getOutputStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //excelManage.outputExcel(os,1,1,20);
 
-    }
+    @RequestMapping("/exportExcel")
+    public void exportExcel(HttpServletResponse response, @RequestBody Map param) {
+        Integer typeCode=Integer.valueOf(param.get("typeCode").toString());
+        excelManage.exportExcel(response,typeCode);
+        }
 
 }

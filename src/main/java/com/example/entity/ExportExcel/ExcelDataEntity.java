@@ -47,10 +47,10 @@ public class ExcelDataEntity implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public ExcelDataEntity(List listM,ExportExcelType eet){
+    public ExcelDataEntity(List listM,ExcelType eet){
         init( listM, eet);
     }
-    private void init(List listM,ExportExcelType eet){
+    private void init(List listM,ExcelType eet){
          setRows(listM);
          setName(eet.getTypeName());
          setTitles(Arrays.asList(eet.getTypeTitle()));

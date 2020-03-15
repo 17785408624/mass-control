@@ -8,41 +8,30 @@ import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletResponse;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.net.URLEncoder;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 @Transactional(rollbackFor = Exception.class)
 @Service
 public class ExcelVice {
-    /**
-     * 使用浏览器选择路径下载
-     * @param response
-     * @param fileName
-     * @param data
-     * @throws Exception
-     */
-    public  void exportExcel(HttpServletResponse response, String fileName, ExcelDataEntity data,Class rowDataClass) throws Exception {
-        // 告诉浏览器用什么软件可以打开此文件
-        response.setHeader("content-Type", "application/vnd.ms-excel");
-        // 下载文件的默认名称
-        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName + ".xls", "utf-8"));
-        OutputStream os= response.getOutputStream();
-        exportExcel(data, os,rowDataClass);
+
+    public  void exportExcel(OutputStream os, String fileName, ExcelDataEntity data,Class rowDataClass) throws Exception {
+
+       exportExcel(data, os,rowDataClass);
+    }
+    public  void exportExcel(OutputStream os, ExcelDataEntity data) throws Exception {
+
+        exportExcel(data, os);
     }
     /**
      * 输出excel文件
@@ -70,6 +59,25 @@ public class ExcelVice {
             }
             XSSFSheet sheet = wb.createSheet(sheetName);
             rowIndex = writeExcel(wb, sheet, data,rowDataClass);
+            wb.write(out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //此处需要关闭 wb 变量
+            out.close();
+        }
+        return rowIndex;
+    }
+    private  int exportExcel(ExcelDataEntity data, OutputStream out) throws IOException {
+        XSSFWorkbook wb = new XSSFWorkbook();
+        int rowIndex = 0;
+        try {
+            String sheetName = data.getName();
+            if (null == sheetName) {
+                sheetName = "Sheet1";
+            }
+            XSSFSheet sheet = wb.createSheet(sheetName);
+            rowIndex = writeExcel(wb, sheet, data);
             wb.write(out);
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,6 +117,13 @@ public class ExcelVice {
         autoSizeColumns(sheet, data.getTitles().size() + 1);
         return rowIndex;
     }
+    private  int writeExcel(XSSFWorkbook wb, Sheet sheet, ExcelDataEntity data) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        int rowIndex = 0;
+        rowIndex = writeTitlesToExcel(wb, sheet, data.getTitles());
+        rowIndex = writeRowsToExcel(wb, sheet, data.getRows(), rowIndex);
+        autoSizeColumns(sheet, data.getTitles().size() + 1);
+        return rowIndex;
+    }
     /**
      * 设置表头
      *
@@ -135,7 +150,7 @@ public class ExcelVice {
         //垂直居中
         titleStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
         //设置图案颜色
-        titleStyle.setFillForegroundColor(new XSSFColor(new Color(182, 184, 192)));
+        titleStyle.setFillForegroundColor(new XSSFColor(new Color(174, 182, 175)));
         //设置图案样式
         titleStyle.setFillPattern(XSSFCellStyle.SOLID_FOREGROUND);
         titleStyle.setFont(titleFont);
@@ -171,11 +186,46 @@ public class ExcelVice {
         XSSFCellStyle dataStyle = wb.createCellStyle();
         dataStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
         dataStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
+
         dataStyle.setFont(dataFont);
         setBorder(dataStyle, BorderStyle.THIN, new XSSFColor(new Color(95, 95, 95, 117)));
 //        for(List rowData : rows){
 //
 //        }
+        return rowIndex;
+    }
+    private  int writeRowsToExcel(XSSFWorkbook wb, Sheet sheet, List rows, int rowIndex) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        int colIndex;
+        Font dataFont = wb.createFont();
+        dataFont.setFontName("simsun");
+        dataFont.setFontHeightInPoints((short) 14);
+        dataFont.setColor(IndexedColors.BLACK.index);
+        XSSFCellStyle dataStyle = wb.createCellStyle();
+        dataStyle.setFillForegroundColor(new XSSFColor(new Color(80, 154, 179, 117)));
+        //dataStyle.setFillPattern(XSSFCellStyle.SOLID_FOREGROUND);
+        dataStyle.setFont(dataFont);
+        setBorder(dataStyle, BorderStyle.THIN, new XSSFColor(new Color(95, 95, 95, 117)));
+        //dataStyle.setFillForegroundColor(new XSSFColor(new Color(33, 0, 179, 117)));
+        //dataStyle.setFillPattern(XSSFCellStyle.SOLID_FOREGROUND);
+        for(Object rowDataO : rows){
+            Row dataRow = sheet.createRow(rowIndex);
+            dataRow.setHeightInPoints(25);
+            colIndex = 0;
+            Map rowData= (Map) rowDataO;
+            Iterator<Map.Entry<String, Object>> entries = rowData.entrySet().iterator();
+            while (entries.hasNext()){
+                Map.Entry<String,Object> cellData = entries.next();
+                Cell cell = dataRow.createCell(colIndex);
+                if (cellData != null) {
+                    cell.setCellValue(cellData.getValue().toString());
+                } else {
+                    cell.setCellValue("");
+                }
+                cell.setCellStyle(dataStyle);
+                colIndex++;
+            }
+            rowIndex++;
+        }
         return rowIndex;
     }
 //    private  int writeRowsToExcel(XSSFWorkbook wb, Sheet sheet, List<List<Object>> rows, int rowIndex) {

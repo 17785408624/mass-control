@@ -5,7 +5,7 @@ import com.example.entity.ExportExcel.ExcelDataEntity;
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
 
-public interface ExcelManage {
+public interface ExcelManageService {
     /**
      * 输出excel文件
      * @param os 输出流对象
