@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.entity.requstparam.OrderRequest;
 import com.example.entity.requstparam.PageRequest;
 import com.example.entity.resultsparam.ExpertInfoResults;
 import com.example.entity.resultsparam.OrganizationAuditResults;
@@ -62,15 +63,34 @@ public interface UserInfoAuditService {
 
     /**
      * 模糊条件查询审核专家信息列表
-     * @param user_info_audit_state
-     * @param user_info_audit_type
+     * @param pageRequest //分页参数
+     * @param user_info_audit_state //审核状态 1未审核 2拒绝 3 通过
+     * @param user_info_audit_type //审核类型 1初审 2变更审核
      * @param condition 查询条件
+     * @param orderRequests 排序字段
      * @return
      */
     List<Map<String,Object>> findUserInfoAuditExpert(PageRequest pageRequest,
                                                      int user_info_audit_state,
                                                      int user_info_audit_type,
-                                                     String condition);
+                                                     String condition,
+                                                     OrderRequest[]orderRequests);
+
+    /**
+     * 模糊条件分页查询审核第三方机构信息列表
+     * @param pageRequest 分页参数
+     * @param user_info_audit_state //审核状态 1未审核 2拒绝 3 通过
+     * @param user_info_audit_type //审核类型 1初审 2变更审核
+     * @param condition 查询条件
+     * @param orderRequests 排序字段
+     * @return
+     */
+    List<Map<String,Object>> findUserInfoAuditOrganization(PageRequest pageRequest,
+                                                     int user_info_audit_state,
+                                                     int user_info_audit_type,
+                                                     String condition,
+                                                     OrderRequest[]orderRequests);
+
 
     /**
      * 分页查询审核专家信息列表
@@ -81,6 +101,7 @@ public interface UserInfoAuditService {
      */
     List<Map<String,Object>> findUserInfoAuditExpert(PageRequest pageRequest, int user_info_audit_state,
                                                      int user_info_audit_type);
+
 
 
 
@@ -129,6 +150,7 @@ public interface UserInfoAuditService {
      * @return
      */
     ExpertInfoResults findExpertInfoFullNowsave(int user_id);
+
 
 
 

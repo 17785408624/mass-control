@@ -17,15 +17,20 @@ public class PageOderRequest {
         if(orderRequests==null||orderRequests.length<1){
             return null;
         }
-        OrderRequest[] orderRequests1=new OrderRequest[0];
+        OrderRequest[] orderRequests1=null;
         //如果排序字段中为空则视为作废的字段
         for (int i=0;i<orderRequests.length;i++) {
             if(orderRequests[i].getOrderName()!=null
                     &&orderRequests[i].getOrderName()!=""
+                    &&orderRequests[i].getOrderName()!=" "
                     &&orderRequests[i].getOrderRule()!=null
+                    &&orderRequests[i].getOrderRule()!=" "
                     &&orderRequests[i].getOrderRule()!=""){
-                orderRequests1=java.util.Arrays.copyOf(orderRequests1,orderRequests1.length+1);
-                orderRequests1[i]=orderRequests[i];
+                if(orderRequests1==null){
+                    orderRequests1=new OrderRequest[]{orderRequests[i]};
+                }else{
+                    orderRequests1=java.util.Arrays.copyOf(orderRequests1,orderRequests1.length+1);//数组扩容
+                }
             }
         }
         return EncryptUtil.decodeOrderField(orderRequests1);//解密排序字段

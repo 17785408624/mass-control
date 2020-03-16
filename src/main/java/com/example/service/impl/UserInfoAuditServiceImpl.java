@@ -1,6 +1,7 @@
 package com.example.service.impl;
 
 import com.example.entity.common.FileInfoeEntity;
+import com.example.entity.requstparam.OrderRequest;
 import com.example.entity.requstparam.PageRequest;
 import com.example.entity.resultsparam.ExpertInfoResults;
 import com.example.entity.resultsparam.OrganizationAuditResults;
@@ -102,11 +103,19 @@ public class UserInfoAuditServiceImpl implements UserInfoAuditService {
     }
     //分页模糊条件查询专家审核信息列表
     @Override
-    public List<Map<String, Object>> findUserInfoAuditExpert(PageRequest pageRequest,int user_info_audit_state, int user_info_audit_type, String condition) {
+    public List<Map<String, Object>> findUserInfoAuditExpert(PageRequest pageRequest,int user_info_audit_state, int user_info_audit_type, String condition, OrderRequest[]orderRequests) {
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);//调用分页
-        return userInfoAuditMapper.selectLikeUserInfoAuditExpertByStateAType(user_info_audit_state,user_info_audit_type,condition);
+        return userInfoAuditMapper.selectLikeUserInfoAuditExpertByStateAType(user_info_audit_state,user_info_audit_type,condition,orderRequests);
+    }
+   //模糊条件分页查询审核第三方机构信息列表
+    @Override
+    public List<Map<String, Object>> findUserInfoAuditOrganization(PageRequest pageRequest, int user_info_audit_state, int user_info_audit_type, String condition, OrderRequest[] orderRequests) {
+        int pageNum = pageRequest.getPageNum();
+        int pageSize = pageRequest.getPageSize();
+        PageHelper.startPage(pageNum, pageSize);//调用分页
+        return userInfoAuditMapper.selectLikeUserInfoAuditOrganizationByStateAType(user_info_audit_state,user_info_audit_type,condition,orderRequests);
     }
 
     //分页查询专家审核信息列表

@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 import com.example.entity.common.FileInfoeEntity;
+import com.example.entity.requstparam.OrderRequest;
 import com.example.entity.resultsparam.OrganizationAuditResults;
 import com.example.entity.user.ExpertInfoEntity;
 import com.example.entity.user.OrganizationInfoCareermanEntity;
@@ -99,15 +100,32 @@ public interface UserInfoAuditMapper {
 
     /**
      * 查询专家审核信息列表
-     * @param user_info_audit_state
-     * @param user_info_audit_type
+     * @param user_info_audit_state //审核状态 1未审核 2拒绝 3 通过
+     * @param user_info_audit_type //审核类型 1初审 2变更审核
      * @param condition 模糊查询条件
+     * @param orderRequests 排序字段
      * @return
      */
     List<Map<String,Object>> selectLikeUserInfoAuditExpertByStateAType(
             @Param("user_info_audit_state") int user_info_audit_state,
             @Param("user_info_audit_type") int user_info_audit_type,
-            @Param("condition") String condition);
+            @Param("condition") String condition,
+            @Param("orderRequests") OrderRequest[]orderRequests);
+
+    /**
+     * 查询第三方机构审核信息列表
+     * @param user_info_audit_state //审核状态 1未审核 2拒绝 3 通过
+     * @param user_info_audit_type //审核类型 1初审 2变更审核
+     * @param condition 模糊查询条件
+     * @param orderRequests 排序字段
+     * @return
+     */
+    List<Map<String,Object>> selectLikeUserInfoAuditOrganizationByStateAType(
+            @Param("user_info_audit_state") int user_info_audit_state,
+            @Param("user_info_audit_type") int user_info_audit_type,
+            @Param("condition") String condition,
+            @Param("orderRequests") OrderRequest[]orderRequests);
+
 
     /**
      * 根据审核id改变审核状态

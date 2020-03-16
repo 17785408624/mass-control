@@ -196,6 +196,13 @@ public interface UserMapper {
 	 */
 	int updatePasswordByUseruserMobilePhone(@Param("userMobilePhone")String userId,@Param("password") String password);
 
+	/**
+	 * 物理删除用户数据，删除后不可恢复
+	 * @param Uid 用户id
+	 * @return
+	 */
+	int deleteUserByUid(@Param("Uid") Integer[]Uid);
+
 
 
 }
