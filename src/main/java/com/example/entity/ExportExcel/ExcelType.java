@@ -105,10 +105,21 @@ public enum ExcelType {
             "未审核的专家用户信息",
             "expertDate"),
     UserInfoAudit_Organization_All_NotRefer(
-            19,
+            20,
             new String[]{"用户编号", "用户手机号", "用户注册时间", "用户角色", "用户状态", "机构/公司名", "组织社会信用码", "机构地址", "邮编", "电话号码", "机构邮箱", "法定代表人名字", "法定代表人移动电话", "申请时间","审核类型"},
-            "未审核的专家用户信息",
-            "organizationDate");
+            "未审核的第三方机构用户信息",
+            "organizationDate"),
+    UserInfoAudit_Expert_All_Pass(
+            21,
+            new String[]{"用户编号", "用户手机号", "学历", "申请时间", "用户注册时间", "专家名", "身份证号", "所学专业", "从事专业", "申报专业-技术报告咨询审查类", "审核类型"},
+            "已通过的专家用户信息",
+            "expertDate"),
+    UserInfoAudit_Organization_All_Pass(
+            22,
+            new String[]{"用户编号", "用户手机号", "用户注册时间", "用户角色", "用户状态", "机构/公司名", "组织社会信用码", "机构地址", "邮编", "电话号码", "机构邮箱", "法定代表人名字", "法定代表人移动电话", "申请时间","审核类型"},
+            "已通过的第三方机构用户信息",
+            "organizationDate")
+    ;
     private Integer typeCode;//类型code
     private String[] excelTitle;//类型表头
     private String typeName;//类型名字

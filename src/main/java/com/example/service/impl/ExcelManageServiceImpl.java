@@ -120,9 +120,15 @@ public class ExcelManageServiceImpl implements ExcelManageService {
         }else if (typeCode == ExcelType.UserInfoAuditChange_Pass_Organization.getTypeCode()) {//变更审核-已通过的第三方机构用户审核信息
             listM = userInfoAuditMapper.
                     selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 3, 2);//变更审核-已通过的第三方机构用户审核信息
-        }else if (typeCode == ExcelType.UserInfoAuditChange_Pass_Organization.getTypeCode()) {//变更审核-已拒绝的第三方机构用户审核信息
+        }else if (typeCode == ExcelType.UserInfoAuditChange_Refuse_Organization.getTypeCode()) {//变更审核-已拒绝的第三方机构用户审核信息
             listM = userInfoAuditMapper.
                     selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 2, 2);//变更审核-已拒绝的第三方机构用户审核信息
+        }else if (typeCode == ExcelType.UserInfoAudit_Expert_All_Pass.getTypeCode()) {//已通过的专家用户信息
+            listM = userInfoAuditMapper.
+                    selectExperInfoByQueryFields(exportExcelType.getQueryFields(), 3, 0);//已通过的专家用户信息
+        }else if (typeCode == ExcelType.UserInfoAudit_Organization_All_Pass.getTypeCode()) {//已通过的第三方机构用户信息
+            listM = userInfoAuditMapper.
+                    selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 3, 0);//已通过的第三方机构用户信息
         }
         ;
 
