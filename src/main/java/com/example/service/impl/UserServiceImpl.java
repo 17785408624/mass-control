@@ -300,6 +300,20 @@ public class UserServiceImpl implements UserService {
         userAuthenticateMapper.insert(ua);//绑定信息写入数据库
         return true;
     }
+    //解聘用户
+    @Override
+    public Boolean dismissUser(Integer[] uIds) {
+        Integer userState=3;//状态 1未认证审核 2已认证审核  3解聘
+        userMapper.updateUserState(uIds,userState);//改变用户状态
+        return true;
+    }
+    //返聘用户
+    @Override
+    public Boolean rehireUser(Integer[] uIds) {
+        Integer userState=2;//状态 1未认证审核 2已认证审核  3解聘
+        userMapper.updateUserState(uIds,userState);//改变用户状态
+        return true;
+    }
 
 
 }

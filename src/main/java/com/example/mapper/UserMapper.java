@@ -134,6 +134,14 @@ public interface UserMapper {
 	List<Map>selectExpertInfoList(@Param("orderRequests") OrderRequest[] orderRequest,@Param("user_state") Integer user_state);
 
 	/**
+	 * 改变用户状态
+	 * @param uIds 用户id
+	 * @param userState 状态 1未认证审核 2已认证审核  3解聘
+	 * @return
+	 */
+	int updateUserState(@Param("uIds") Integer[]uIds,@Param("userState") Integer userState);
+
+	/**
 	 * 通过用户角色和状态查询用户Id
 	 * @param user_role 用户角色  1专家 2第三方机构 3煤监局 4能源局 5超级管理员
 	 * @param user_state 用户状态  1未认证审核 2已认证审核  3解聘

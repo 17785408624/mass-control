@@ -164,4 +164,18 @@ public interface UserService {
 	 */
 	Boolean boundPhone(String phoneNum,String phoneBoundCod,int user_id);
 
+	/**
+	 * 解聘用户
+	 * @param uIds 用户id
+	 * @return
+	 */
+	Boolean dismissUser(Integer[]uIds);
+
+	/**
+	 *
+	 * @param uIds
+	 * @return
+	 */
+	Boolean rehireUser(Integer[]uIds);
+
 }

@@ -307,9 +307,9 @@
             and u.user_state=#{user_state}
         </if>
         <if test="searchField != null and searchField !=''.toString() and searchField !=' '.toString()">
-           and ((user_mobile_phone like "%${searchField}%")
-           or (organization_name like "%${searchField}%")
-           or (organization_code like "%${searchField}%")
+            and ((user_mobile_phone like "%${searchField}%")
+            or (organization_name like "%${searchField}%")
+            or (organization_code like "%${searchField}%")
             or (user_id like "%${searchField}%"))
         </if>
         <include refid="order_by"></include>
@@ -505,5 +505,15 @@
         where
             user_mobile_phone = #{userMobilePhone}
     </update>
+    <update id="updateUserState">
+        update user
+        set user_state =#{userState}
+        where user_id
+        in
+        <foreach collection="uIds" separator="," item="uIds" open="(" close=")">
+            uIds
+        </foreach>
+    </update>
+
 
 </mapper>

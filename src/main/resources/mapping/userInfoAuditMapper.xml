@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.mapper.UserInfoAuditMapper">
+    <sql id="order_by">
+        <if test="orderRequests != null">
+            <foreach collection="orderRequests" item="orderRequest" open="ORDER BY" separator=",">
+                ${orderRequest.orderName} ${orderRequest.orderRule}
+            </foreach>
+        </if>
+    </sql>
 
     <select id="selectUserInfoAuditOrganizationByStateATypeExportExcel" resultType="java.util.Map">
         SELECT
@@ -114,6 +121,7 @@
 
     <select id="selectUserInfoAuditExpertByStateAType" resultType="java.util.Map">
         SELECT
+        u.user_id,
         uia.user_info_audit_id,
         uia.user_info_audit_state,
         uia.user_info_audit_addtime,
@@ -148,6 +156,7 @@
     </select>
     <select id="selectLikeUserInfoAuditExpertByStateAType" resultType="java.util.Map">
         SELECT
+        u.user_id,
         uia.user_info_audit_id,
         uia.user_info_audit_state,
         uia.user_info_audit_addtime,
@@ -155,6 +164,8 @@
         ei.expert_info_name,
         ei.expert_info_idcard,
         ei.expert_info_companyname,
+        ei.expert_info_education,
+        ei.expert_info_learnmajor,
         u.user_mobile_phone,
         uia.info_id
         FROM
@@ -179,6 +190,9 @@
                 </if>
             </otherwise>
         </choose>
+        <if test="condition !=null">
+
+        </if>
         AND (
         ei.expert_info_name
         like
@@ -192,6 +206,58 @@
         like
         "%${condition}%"
         )
+        <include refid="order_by"></include>
+    </select>
+    <select id="selectLikeUserInfoAuditOrganizationByStateAType" resultType="java.util.Map">
+        SELECT
+        u.user_id,
+        uia.user_info_audit_id,
+        uia.user_info_audit_state,
+        uia.user_info_audit_addtime,
+        uia.user_info_audit_type,
+        oi.organization_name,
+        oi.organization_code,
+        u.user_mobile_phone,
+        uia.info_id
+        FROM
+        user_info_audit AS uia
+        LEFT JOIN organization_info oi ON (
+        uia.info_id = oi.organization_info_id
+        )
+        LEFT JOIN user u ON(
+        u.info_id= oi.organization_info_id
+        )
+        where uia.user_info_audit_content =2
+        <choose>
+            <when test="user_info_audit_state !=null and user_info_audit_state != '0'.toString()">
+                and uia.user_info_audit_state =#{user_info_audit_state}
+                <if test="user_info_audit_type !=null and user_info_audit_type !='0'.toString()">
+                    and uia.user_info_audit_type=#{user_info_audit_type}
+                </if>
+            </when>
+            <otherwise>
+                <if test="user_info_audit_type !=null and user_info_audit_type !='0'.toString()">
+                    and uia.user_info_audit_type=#{user_info_audit_type}
+                </if>
+            </otherwise>
+        </choose>
+        <if test="condition !=null">
+
+        </if>
+        AND (
+        oi.organization_name
+        like
+        "%${condition}%"
+        or
+        oi.organization_code
+        like
+        "%${condition}%"
+        or
+        u.user_mobile_phone
+        like
+        "%${condition}%"
+        )
+        <include refid="order_by"></include>
     </select>
     <update id="updateUserInfoAuditStateByinfoId">
         update user_info_audit
@@ -314,7 +380,7 @@
         </if>
     </select>
     <select id="selectOrganizationInfoByQueryFields" resultType="java.util.LinkedHashMap">
-       select
+        select
         <foreach collection="queryFields" separator="," item="queryField">
             <choose>
                 <when test="queryField.equals('user_register_time')">
