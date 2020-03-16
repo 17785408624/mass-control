@@ -190,7 +190,7 @@
         or
         u.user_mobile_phone
         like
-        "%${expert_info_mobilephone}%"
+        "%${condition}%"
         )
     </select>
     <update id="updateUserInfoAuditStateByinfoId">
