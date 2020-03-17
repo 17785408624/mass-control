@@ -20,6 +20,7 @@ import com.example.service.UserService;
 import com.example.service.vice.LoginVice;
 import com.github.pagehelper.PageInfo;
 import com.util.PageUtils;
+import com.util.PublicUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -485,6 +486,27 @@ public class UserController {
             vcp.setMessage("返聘用户请求错误");
             vcp.setState(1);
         } ;
+        return vcp;
+    }
+
+    /**
+     * 查询专家用户信息列表
+     * @param porm
+     * @return
+     */
+    @RequestMapping("findExperListBstate")
+    public VisitConsequenceParent findExperListBstate(@RequestBody PageOderRequestMap porm) {
+       Map param=porm.getParam();//前端传入的请求参数
+        String condition=param.get("condition").toString();//搜索条件
+        Object []userStates=null;//用户状态 1未认证审核 2已认证审核  3解聘
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"userStates")){//前端是否传入用户状态参数
+            userStates= ((List) param.get("userStates")).toArray();
+
+        }
+        VisitConsequenceParent vcp = new VisitConsequencePage();
+        List listM=userService.findExperList(porm,userStates,condition);
+        PageInfo a = new PageInfo<Map>(listM);
+        vcp = PageUtils.getVisitConsequencePage(a);
         return vcp;
     }
 

@@ -314,6 +314,17 @@ public class UserServiceImpl implements UserService {
         userMapper.updateUserState(uIds,userState);//改变用户状态
         return true;
     }
+    //查询专家用户信息
+    @Override
+    public List findExperList(PageOderRequest pageOderRequest, Object[] userStates, String condition) {
+        PageRequest pageRequest=pageOderRequest.getPageRequest();//分页信息
+        OrderRequest[]orderRequests=pageOderRequest.getOrderRequests();//排序参数
+        Integer pageNum=pageRequest.getPageNum();//当前页
+        Integer pageSize=pageRequest.getPageSize();//每页长度
+        PageHelper.startPage(pageNum, pageSize);//调用分页
+        List l=userMapper.selectExpersByState(userStates,orderRequests,condition);//查询专家用户信息
+        return l;
+    }
 
 
 }

@@ -514,6 +514,44 @@
             ${uIds}
         </foreach>
     </update>
+    <select id="selectExpersByState" resultType="java.util.Map">
+        SELECT
+        u.user_id,
+        ei.expert_info_name,
+        u.user_mobile_phone,
+        ei.expert_info_idcard,
+        ei.expert_info_companyname,
+        ei.expert_info_department,
+        ei.expert_info_mail,
+        ei.expert_info_education,
+        ei.expert_info_learnmajor,
+        u.user_state
+        FROM
+        USER u
+        LEFT JOIN expert_info ei
+        on(u.info_id=ei.expert_info_id)
+        where u.user_role=1
+          <if test="userStates != null">
+              and u.user_state IN
+          <foreach collection="userStates" item="userState" open="(" close=")" separator=",">
+              ${userState}
+          </foreach>
+          </if>
+        <if test="condition !=null and !condition.equals('') and !condition.equals(' ')">
+            and (
+            ei.expert_info_name like "%${condition}%"
+            or ei.expert_info_idcard like "%${condition}%"
+            or u.user_mobile_phone like "%${condition}%"
+            or ei.expert_info_companyname like "%${condition}%"
+            )
+        </if>
+        and TRIM(user_id)!='null'
+        <if test="orderRequests != null">
+            <foreach collection="orderRequests" item="orderRequest" open="ORDER BY" separator=",">
+                ${orderRequest.orderName} ${orderRequest.orderRule}
+            </foreach>
+        </if>
+    </select>
 
 
 </mapper>

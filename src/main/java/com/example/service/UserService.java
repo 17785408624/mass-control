@@ -1,8 +1,10 @@
 package com.example.service;
 
 import com.example.common.exceptiondefine.*;
+import com.example.entity.requstparam.OrderRequest;
 import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.requstparam.PageOderRequestMap;
+import com.example.entity.requstparam.PageRequest;
 import com.example.entity.user.ExpertInfoEntity;
 import com.example.entity.user.OrganizationInfoCareermanEntity;
 import com.example.entity.user.OrganizationInfoEntity;
@@ -177,5 +179,14 @@ public interface UserService {
 	 * @return
 	 */
 	Boolean rehireUser(Integer[]uIds);
+
+	/**
+	 * 查询专家用户信息
+	 * @param pageOderRequest 分页和排序参数
+	 * @param userStates 需要查询的用户状态 1未认证审核 2已认证审核  3解聘
+	 * @param condition 查询关键字
+	 * @return
+	 */
+	List findExperList(PageOderRequest pageOderRequest,Object[] userStates,String condition);
 
 }
