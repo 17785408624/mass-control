@@ -2,10 +2,7 @@ package com.example.service.impl;
 
 import com.example.common.exceptiondefine.OperationServiceException;
 import com.example.config.ServiceConfig;
-import com.example.entity.ProjectAudit;
-import com.example.entity.ProjectInfoEntityWithBLOBs;
-import com.example.entity.ProjectParticipant;
-import com.example.entity.ProjectReply;
+import com.example.entity.*;
 import com.example.entity.requstparam.OrderRequest;
 import com.example.entity.requstparam.PageOderRequest;
 import com.example.entity.requstparam.PageOderRequestMap;
@@ -13,7 +10,6 @@ import com.example.entity.requstparam.PageRequest;
 import com.example.mapper.*;
 import com.example.service.ProjectInfoService;
 import com.github.pagehelper.PageHelper;
-import com.util.EncryptUtil;
 import com.util.PublicUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,20 +30,24 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
     ProjectParticipantMapper projectParticipantMapper;
     @Autowired
     ProjectAuditMapper projectAuditMapper;
+    @Autowired
+    ProjectauditOrganizationInviteMapper projectauditOrganizationInviteMapper;
+    @Autowired
+    ProjectauditExpertInviteMapper projectauditExpertInviteMapper;
 
     //添加项目信息
     @Override
     public int addProjectInfo(int user_id, int user_role, ProjectInfoEntityWithBLOBs projectInfoEntityWithBLOBs) {
         projectInfoEntityWithBLOBs.setProjectInfoAddtime(new Date().getTime());
         projectInfoEntityWithBLOBs.setProjectInfoAdduserid(user_id);
-        Integer projectInfoId=null;//项目id
-        ProjectParticipant p=new ProjectParticipant();//项目参与者信息
+        Integer projectInfoId = null;//项目id
+        ProjectParticipant p = new ProjectParticipant();//项目参与者信息
         p.setUserRole(user_role);//用户角色
-        for(int i=1;i<=2;i++){
+        for (int i = 1; i <= 2; i++) {
             projectInfoEntityWithBLOBs.setProjectInfoType(i);//设置项目类型
             projectInfoEntityWithBLOBs.setProjectInfoId(null);
             projectInfoEntityMapper.insertSelective(projectInfoEntityWithBLOBs);//添加项目信息
-            projectInfoId=projectInfoEntityWithBLOBs.getProjectInfoId();//项目id
+            projectInfoId = projectInfoEntityWithBLOBs.getProjectInfoId();//项目id
             p.setProjectInfoId(projectInfoId);//参与者信息项目id
             projectParticipantMapper.insertSelective(p);//添加项目参与者信息
         }
@@ -57,7 +57,7 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
     //查询项目信息列表
     @Override
     public List<ProjectInfoEntityWithBLOBs> findProjectInfoChooseByProgressOE() {
-        return projectInfoEntityMapper.selectListByPiProgress(new int[]{1, 3}, null, null,null);
+        return projectInfoEntityMapper.selectListByPiProgress(new int[]{1, 3}, null, null, null);
     }
 
     //查询 进程为选择机构和选择专家组 的项目列表
@@ -67,23 +67,23 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);//调用分页
-        Map param =pageOderRequest.getParam();
-        Integer[] projectInfoProgressoperations=null;//项目进程状态
-        String projectInfoName=null;
+        Map param = pageOderRequest.getParam();
+        Integer[] projectInfoProgressoperations = null;//项目进程状态
+        String projectInfoName = null;
 
-        if(!PublicUtil.mapKeyIsNull_keyString(param,"projectInfoProgressoperations")){//判断是否传入条件查询参数
-            List list=new ArrayList();
-            list= (List) param.get("projectInfoProgressoperations");
-            Object[] o=list.toArray();
-            projectInfoProgressoperations= PublicUtil.convertArray(Integer.class,o);//object数组转化Integer数组
-            if(projectInfoProgressoperations.length<1){
-                projectInfoProgressoperations=null;
+        if (!PublicUtil.mapKeyIsNull_keyString(param, "projectInfoProgressoperations")) {//判断是否传入条件查询参数
+            List list = new ArrayList();
+            list = (List) param.get("projectInfoProgressoperations");
+            Object[] o = list.toArray();
+            projectInfoProgressoperations = PublicUtil.convertArray(Integer.class, o);//object数组转化Integer数组
+            if (projectInfoProgressoperations.length < 1) {
+                projectInfoProgressoperations = null;
             }
         }
-        if(!PublicUtil.mapKeyIsNull_keyString(param,"projectInfoName")){//判断是否传入项目搜索名
-            projectInfoName= String.valueOf(param.get("projectInfoName"));
+        if (!PublicUtil.mapKeyIsNull_keyString(param, "projectInfoName")) {//判断是否传入项目搜索名
+            projectInfoName = String.valueOf(param.get("projectInfoName"));
         }
-        return projectInfoEntityMapper.selectListByPiProgress(new int[]{1, 3}, pageOderRequest.getOrderRequests(), projectInfoName,projectInfoProgressoperations);
+        return projectInfoEntityMapper.selectListByPiProgress(new int[]{1, 3}, pageOderRequest.getOrderRequests(), projectInfoName, projectInfoProgressoperations);
 
     }
 
@@ -94,7 +94,7 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);//调用分页
-        return projectInfoEntityMapper.selectListByPiProgress(new int[]{5}, pageOderRequest.getOrderRequests(), null,null);
+        return projectInfoEntityMapper.selectListByPiProgress(new int[]{5}, pageOderRequest.getOrderRequests(), null, null);
     }
 
     /**
@@ -110,7 +110,7 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);//调用分页
-        return projectInfoEntityMapper.selectListByPiProgress(new int[]{5}, pageOderRequest.getOrderRequests(), projectInfoName,null);
+        return projectInfoEntityMapper.selectListByPiProgress(new int[]{5}, pageOderRequest.getOrderRequests(), projectInfoName, null);
 
     }
 
@@ -143,7 +143,7 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
 
     //分页查询 进程为选择专家组组长的项目信息列表
     @Override
-    public List<ProjectInfoEntityWithBLOBs> findProjectInfoProgressLeader(PageOderRequest pageOderRequest, Integer Uid,String searchCondition) {
+    public List<ProjectInfoEntityWithBLOBs> findProjectInfoProgressLeader(PageOderRequest pageOderRequest, Integer Uid, String searchCondition) {
         PageRequest pageRequest = pageOderRequest.getPageRequest();
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
@@ -209,7 +209,7 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
             condition = String.valueOf(param.get("condition"));//查询条件 项目名
         }
         PageHelper.startPage(pageNum, pageSize);//调用分页
-        return projectInfoEntityMapper.selectListByPiProgress(new int[]{4}, pageOderRequest.getOrderRequests(), condition,null);
+        return projectInfoEntityMapper.selectListByPiProgress(new int[]{4}, pageOderRequest.getOrderRequests(), condition, null);
     }
 
     //查询全部项目信息
@@ -218,11 +218,11 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
         PageRequest pageRequest = pageOderRequest.getPageRequest();
         PageHelper.startPage(pageRequest.getPageNum(), pageRequest.getPageSize());//调用分页
         OrderRequest[] or = pageOderRequest.getOrderRequests();
-        if(or==null||or.length<1){//未传入排序字段默认按照添加时间进行排序
-            OrderRequest o=new OrderRequest();
+        if (or == null || or.length < 1) {//未传入排序字段默认按照添加时间进行排序
+            OrderRequest o = new OrderRequest();
             o.setOrderName("project_info_addtime");
             o.setOrderRule("desc");
-            or=new OrderRequest[]{o};
+            or = new OrderRequest[]{o};
 
         }
         return projectInfoEntityMapper.selectPiAll(or, conditionSearch);//查询全部项目信息
@@ -234,43 +234,68 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
     public Map findProjectCourse(Integer projectInfoId) {
         ProjectInfoEntityWithBLOBs pi = projectInfoEntityMapper.selectProjectInfoAll(projectInfoId);
         Integer projectInfoProgress = pi.getProjectInfoProgress();//项目进程
-        Map projectCourse=new HashMap();
-         switch (projectInfoProgress) {
+        Map projectCourse = new HashMap();
+        switch (projectInfoProgress) {
             case 6://6完成
-                ProjectReply projectReply= projectReplyMapper.selectPrFullByPiid(projectInfoId);//查询批复信息
-                Long replyTime=projectReply.getReplyTime();//批复时间
-                projectCourse.put("replyTime",replyTime);
+                ProjectReply projectReply = projectReplyMapper.selectPrFullByPiid(projectInfoId);//查询批复信息
+                Long replyTime = projectReply.getReplyTime();//批复时间
+                projectCourse.put("replyTime", replyTime);
             case 5://5等待批复
-                List<ProjectParticipant>listp=projectParticipantMapper.
+                List<ProjectParticipant> listp = projectParticipantMapper.
                         selectPpByPiid(projectInfoId, ServiceConfig.PROJECT_PARTICIPANT_DECISION,
                                 2);//查询已评审并且能对项目状态进行操作的项目参与者信息
-               int[] auditUserIds=new int[listp.size()];//项目参与者的用户id
-                for(int i=0;i<listp.size();i++){
-                    auditUserIds[i]=listp.get(i).getUserId();
+                int[] auditUserIds = new int[listp.size()];//项目参与者的用户id
+                for (int i = 0; i < listp.size(); i++) {
+                    auditUserIds[i] = listp.get(i).getUserId();
                 }
                 //通过项目ip和项目评审人id查询项目评审信息
-                List<ProjectAudit> listPa=projectAuditMapper.selectPaByPiidAuid(projectInfoId,auditUserIds);
-                Long []auditDatetimes=new Long[listPa.size()];//评审时间
-                for(int i=0;i<listPa.size();i++){
-                    auditDatetimes[i]=listPa.get(i).getAuditDatetime();
+                List<ProjectAudit> listPa = projectAuditMapper.selectPaByPiidAuid(projectInfoId, auditUserIds);
+                Long[] auditDatetimes = new Long[listPa.size()];//评审时间
+                for (int i = 0; i < listPa.size(); i++) {
+                    auditDatetimes[i] = listPa.get(i).getAuditDatetime();
                 }
-                if(auditDatetimes.length>0){
+                if (auditDatetimes.length > 0) {
                     Arrays.sort(auditDatetimes);
-                    projectCourse.put("projectAuditTime",auditDatetimes[listPa.size()]);//项目评审情况
+                    projectCourse.put("projectAuditTime", auditDatetimes[listPa.size()]);//项目评审情况
                 }
 
             case 4://4等待项目评审
-                Long ProjectInfoAuditstartdate=pi.getProjectInfoAuditstartdate();//项目审核开始时间
-                projectCourse.put("ProjectInfoAuditstartdate",ProjectInfoAuditstartdate);
+                Long ProjectInfoAuditstartdate = pi.getProjectInfoAuditstartdate();//项目审核开始时间
+                projectCourse.put("ProjectInfoAuditstartdate", ProjectInfoAuditstartdate);
             case 3://3等待选择专家组
             case 2://2等待选择组长
             case 1://1等待选择机构
-                Long projectInfoAddtime= pi.getProjectInfoAddtime();//项目添加时间
-                projectCourse.put("projectInfoAddtime",projectInfoAddtime);
-                projectCourse.put("projectInfoProgress",pi.getProjectInfoProgress());//当前项目进程
-              break;
+                Long projectInfoAddtime = pi.getProjectInfoAddtime();//项目添加时间
+                projectCourse.put("projectInfoAddtime", projectInfoAddtime);
+                projectCourse.put("projectInfoProgress", pi.getProjectInfoProgress());//当前项目进程
+                break;
         }
         return projectCourse;
+    }
+
+    //查询项目审核邀请信息
+    @Override
+    public Map findProjectAuditInfo(Integer projectInfoId, Integer project_info_progress) {
+        Map projectAuditInfo=new HashMap();//审核邀请信息
+        switch (project_info_progress) {
+            case 3://3选择专家组
+                List<ProjectauditExpertInvite> listPei = projectauditExpertInviteMapper.selectPeiNewestByPid(projectInfoId);
+                projectAuditInfo.put("listPei",listPei);//专家组审核邀请信息
+            case 2://2选择组长
+                ProjectauditExpertInvite pei = projectauditExpertInviteMapper.selectPeiNewestLeaderByPid(projectInfoId);
+                projectAuditInfo.put("pei",pei);//专家组长审核邀请信息
+            case 1://1选择机构
+                ProjectauditOrganizationInvite poi = projectauditOrganizationInviteMapper.selectPoiNewestByPid(projectInfoId);
+                projectAuditInfo.put("poi",poi);//机构审核邀请信息
+                break;
+//            case 4://4项目评审
+//                break;
+//            case 5://5批复
+//                break;
+//            case 6://6完成
+//                break;
+        }
+        return projectAuditInfo;
     }
 
 }

@@ -120,4 +120,11 @@
     where project_info_id=#{projectInfoId}
    and invite_state=#{inviteState}
   </select>
+  <select id="selectPoiNewestByPid" resultMap="BaseResultMap">
+    SELECT
+      * , max( invite_addtime )
+    FROM
+      projectaudit_organization_invite
+    where project_info_id=#{projectInfoId}
+ </select>
 </mapper>

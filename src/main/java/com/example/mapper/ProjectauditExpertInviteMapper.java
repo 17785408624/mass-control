@@ -93,4 +93,17 @@ public interface ProjectauditExpertInviteMapper {
      */
     List<Map> selectPeiByPid(@Param("projectInfoId") Integer projectInfoId,@Param("inviteState") Integer[]inviteState);
 
+    /**
+     * 根据项目id查询项目审核 组长 邀请信息最新的一条数据
+     * @param projectInfoId
+     * @return
+     */
+    ProjectauditExpertInvite selectPeiNewestLeaderByPid(@Param("projectInfoId") Integer projectInfoId);
+    /**
+     * 根据项目id查询项目审核 组员 邀请信息最新的一条数据
+     * @param projectInfoId
+     * @return
+     */
+    List<ProjectauditExpertInvite> selectPeiNewestByPid(@Param("projectInfoId") Integer projectInfoId);
+
 }

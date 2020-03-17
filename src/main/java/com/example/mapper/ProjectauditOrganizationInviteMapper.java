@@ -74,4 +74,11 @@ public interface ProjectauditOrganizationInviteMapper {
      */
     Integer countPoiNumByPiIdIs(@Param("projectInfoId") Integer projectInfoId,@Param("inviteState") Integer inviteState);
 
+    /**
+     * 根据项目id查询第三方机构项目审核邀请信息最新的一条数据
+     * @param projectInfoId
+     * @return
+     */
+    ProjectauditOrganizationInvite selectPoiNewestByPid(@Param("projectInfoId") Integer projectInfoId);
+
 }
