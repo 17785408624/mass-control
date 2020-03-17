@@ -120,14 +120,12 @@
         LEFT JOIN user u on(pei.invite_adduser_id=u.user_id)
         Left join organization_info oi on(u.info_id=oi.organization_info_id)
         where invite_user_id=#{inviteUserId}
-        <trim>
-            <if test="inviteStates ! =null">
+        <if test="inviteStates != null">
                 and inviteStates in
                 <foreach collection="inviteStates" item="inviteState" separator="," open="(" close=")">
                     ${inviteState}
                 </foreach>
             </if>
-        </trim>
     </select>
     <select id="selectPEInviteListByinviteUserIdExpirationNot" resultType="java.util.Map">
        SELECT
@@ -139,14 +137,12 @@
         Left join organization_info oi on(u.info_id=oi.organization_info_id)
         where invite_user_id=#{inviteUserId}
 
-        <trim>
-            <if test="inviteStates ! =null">
+        <if test="inviteStates != null">
                 and inviteStates in
                 <foreach collection="inviteStates" item="inviteState" separator="," open="(" close=")">
                     ${inviteState}
                 </foreach>
             </if>
-        </trim>
         AND invite_expiration <![CDATA[ > ]]> (select (unix_timestamp(now())*1000))
     </select>
     <select id="updatePEInviteStateById" resultMap="BaseResultMap" resultType="java.lang.Integer">
