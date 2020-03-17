@@ -91,6 +91,7 @@ public class ProjectauditEInviteController {
             try {
                 UserInfoLoginEntity uie;
                 uie=loginVice.getLoginInfo(httpSession);
+                userId=Integer.valueOf(uie.getUser_id());
             } catch (LoginException e) {
                 vc.setMessage(e.getMessage());
                 vc.setState(1);

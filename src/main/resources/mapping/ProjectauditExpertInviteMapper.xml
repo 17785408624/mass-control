@@ -121,7 +121,7 @@
         Left join organization_info oi on(u.info_id=oi.organization_info_id)
         where invite_user_id=#{inviteUserId}
         <if test="inviteStates != null">
-                and inviteStates in
+                and invite_state in
                 <foreach collection="inviteStates" item="inviteState" separator="," open="(" close=")">
                     ${inviteState}
                 </foreach>
