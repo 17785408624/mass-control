@@ -242,6 +242,9 @@ public interface UserMapper {
     List selectExpersByState(@Param("userStates") Object[] userStates,
                                @Param("orderRequests") OrderRequest[] orderRequests,
                                @Param("condition") String condition);
+    List selectOrganizationByState(@Param("userStates") Object[] userStates,
+                             @Param("orderRequests") OrderRequest[] orderRequests,
+                             @Param("condition") String condition);
 
 
 }
