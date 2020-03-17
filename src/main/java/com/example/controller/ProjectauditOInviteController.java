@@ -33,7 +33,7 @@ public class ProjectauditOInviteController {
      * @param httpSession
      * @return
      */
-    @PostMapping("")
+    @PostMapping("addProjectauditInvite")
     public VisitConsequenceParent addProjectauditInvite(
             @RequestBody ProjectauditOrganizationInvite projectauditOrganizationInvite,
             HttpSession httpSession) {
