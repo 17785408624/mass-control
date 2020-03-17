@@ -199,12 +199,12 @@
   </select>
   <select id="selectPeiNewestLeaderByPid" resultMap="BaseResultMap">
     select *,max(invite_addtime)from projectaudit_expert_invite
-    where project_info_id=#{project_info_id}
+    where project_info_id=#{projectInfoId}
     and invite_type=1
     </select>
   <select id="selectPeiNewestByPid" resultMap="BaseResultMap">
     select *(invite_addtime)from projectaudit_expert_invite
-    where project_info_id=#{project_info_id}
+    where project_info_id=#{projectInfoId}
       and invite_type=2
   </select>
 </mapper>
