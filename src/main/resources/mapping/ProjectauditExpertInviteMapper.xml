@@ -111,7 +111,7 @@
             </if>
         </trim>
     </insert>
-    <select id="selectPEInviteListByinviteUserId" resultMap="java.util.Map">
+    <select id="selectPEInviteListByinviteUserId" resultType="java.util.Map">
         SELECT
         pei.*,
         oi.organization_name
@@ -129,7 +129,7 @@
             </if>
         </trim>
     </select>
-    <select id="selectPEInviteListByinviteUserIdExpirationNot" resultMap="BaseResultMap">
+    <select id="selectPEInviteListByinviteUserIdExpirationNot" resultType="java.util.Map">
        SELECT
         pei.*,
         oi.organization_name
