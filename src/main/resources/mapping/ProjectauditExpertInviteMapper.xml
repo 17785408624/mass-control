@@ -1,210 +1,245 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.ProjectauditExpertInviteMapper">
-  <resultMap id="BaseResultMap" type="com.example.entity.ProjectauditExpertInvite">
-    <result column="projectaudit_expert_invite_id" jdbcType="INTEGER" property="projectauditExpertInviteId" />
-    <result column="invite_state" jdbcType="INTEGER" property="inviteState" />
-    <result column="invite_user_id" jdbcType="INTEGER" property="inviteUserId" />
-    <result column="invite_expert_name" jdbcType="VARCHAR" property="inviteExpertName" />
-    <result column="invite_expiration" jdbcType="BIGINT" property="inviteExpiration" />
-    <result column="invite_addtime" jdbcType="BIGINT" property="inviteAddtime" />
-    <result column="invite_edittime" jdbcType="BIGINT" property="inviteEdittime" />
-    <result column="invite_adduser_id" jdbcType="INTEGER" property="inviteAdduserId" />
-    <result column="invite_edituser_id" jdbcType="INTEGER" property="inviteEdituserId" />
-    <result column="invite_expiration" jdbcType="BIGINT" property="inviteExpiration" />
-    <result column="project_info_name" jdbcType="VARCHAR" property="projectInfoName" />
-    <result column="project_info_id" jdbcType="INTEGER" property="projectInfoId" />
-    <result column="invite_type" jdbcType="INTEGER" property="inviteType" />
-  </resultMap>
-  <insert id="insert" parameterType="com.example.entity.ProjectauditExpertInvite">
-    insert into projectaudit_expert_invite (projectaudit_expert_invite_id, invite_state, 
-      invite_user_id, invite_expert_name, invite_addtime, 
-      invite_edittime, invite_adduser_id, invite_edituser_id, 
-      invite_expiration, project_info_name, project_info_id, 
-      invite_type)
-    values (#{projectauditExpertInviteId,jdbcType=INTEGER}, #{inviteState,jdbcType=INTEGER}, 
-      #{inviteUserId,jdbcType=INTEGER}, #{inviteExpertName,jdbcType=VARCHAR}, #{inviteAddtime,jdbcType=BIGINT}, 
-      #{inviteEdittime,jdbcType=BIGINT}, #{inviteAdduserId,jdbcType=INTEGER}, #{inviteEdituserId,jdbcType=INTEGER}, 
-      #{inviteExpiration,jdbcType=BIGINT}, #{projectInfoName,jdbcType=VARCHAR}, #{projectInfoId,jdbcType=INTEGER}, 
-      #{inviteType,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.example.entity.ProjectauditExpertInvite" useGeneratedKeys="true" keyProperty="projectauditExpertInviteId" keyColumn="projectaudit_expert_invite_id">
-    insert into projectaudit_expert_invite
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="projectauditExpertInviteId != null">
-        projectaudit_expert_invite_id,
-      </if>
-      <if test="inviteState != null">
-        invite_state,
-      </if>
-      <if test="inviteUserId != null">
-        invite_user_id,
-      </if>
-      <if test="inviteExpertName != null">
-        invite_expert_name,
-      </if>
-      <if test="inviteAddtime != null">
-        invite_addtime,
-      </if>
-      <if test="inviteEdittime != null">
-        invite_edittime,
-      </if>
-      <if test="inviteAdduserId != null">
-        invite_adduser_id,
-      </if>
-      <if test="inviteEdituserId != null">
-        invite_edituser_id,
-      </if>
-      <if test="inviteExpiration != null">
-        invite_expiration,
-      </if>
-      <if test="projectInfoName != null">
-        project_info_name,
-      </if>
-      <if test="projectInfoId != null">
-        project_info_id,
-      </if>
-      <if test="inviteType != null">
-        invite_type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="projectauditExpertInviteId != null">
-        #{projectauditExpertInviteId,jdbcType=INTEGER},
-      </if>
-      <if test="inviteState != null">
-        #{inviteState,jdbcType=INTEGER},
-      </if>
-      <if test="inviteUserId != null">
-        #{inviteUserId,jdbcType=INTEGER},
-      </if>
-      <if test="inviteExpertName != null">
-        #{inviteExpertName,jdbcType=VARCHAR},
-      </if>
-      <if test="inviteAddtime != null">
-        #{inviteAddtime,jdbcType=BIGINT},
-      </if>
-      <if test="inviteEdittime != null">
-        #{inviteEdittime,jdbcType=BIGINT},
-      </if>
-      <if test="inviteAdduserId != null">
-        #{inviteAdduserId,jdbcType=INTEGER},
-      </if>
-      <if test="inviteEdituserId != null">
-        #{inviteEdituserId,jdbcType=INTEGER},
-      </if>
-      <if test="inviteExpiration != null">
-        #{inviteExpiration,jdbcType=BIGINT},
-      </if>
-      <if test="projectInfoName != null">
-        #{projectInfoName,jdbcType=VARCHAR},
-      </if>
-      <if test="projectInfoId != null">
-        #{projectInfoId,jdbcType=INTEGER},
-      </if>
-      <if test="inviteType != null">
-        #{inviteType,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <select id="selectPEInviteListByinviteUserId" resultMap="BaseResultMap">
-    select * from projectaudit_expert_invite
-    where invite_user_id=#{inviteUserId}
-  </select>
-  <select id="selectPEInviteListByinviteUserIdExpirationNot" resultMap="BaseResultMap">
-    select * from projectaudit_expert_invite
-    where invite_user_id=#{inviteUserId}
-    AND invite_expiration <![CDATA[ > ]]> (select (unix_timestamp(now())*1000))
-    <if test="inviteState != null">
-      AND  invite_state=#{inviteState}
-    </if>
-  </select>
-  <select id="updatePEInviteStateById" resultMap="BaseResultMap" resultType="java.lang.Integer">
-     UPDATE projectaudit_expert_invite
-      SET invite_state = #{inviteState},
-      invite_edittime = #{inviteEdittime},
-      invite_edituser_id = #{inviteEdituserId}
-    WHERE
-	  projectaudit_expert_invite_id = #{projectauditExpertInviteId}
-  </select>
-  <insert id="insertPEinviteBatch">
-    insert into projectaudit_expert_invite
-    (invite_state,
-    invite_addtime,
-    invite_adduser_id,
-    invite_expiration,
-    project_info_name,
-    project_info_id,
-    invite_type,
-    invite_user_id,
-    invite_expert_name
-    )
-    values
-    <foreach collection="experInfos" item="experInfo" separator=",">
-      (
-      #{invitesInfo.inviteState},
-      #{invitesInfo.inviteAddtime},
-      #{invitesInfo.inviteAdduserId},
-      #{invitesInfo.inviteExpiration},
-      #{invitesInfo.projectInfoName},
-      #{invitesInfo.projectInfoId},
-      #{invitesInfo.inviteType},
-      #{experInfo.inviteUserId},
-      #{experInfo.inviteExpertName}
-      )
-    </foreach>
-
-  </insert>
-  <select id="selectPEinviteById" resultMap="BaseResultMap">
-    select * from projectaudit_expert_invite
-    where
-    projectaudit_expert_invite_id =#{projectauditExpertInviteId}
-  </select>
-  <select id="selectPEinviteByiUidIsIt" resultMap="BaseResultMap">
-    select * from projectaudit_expert_invite
-    where invite_user_id=#{inviteUserId}
-    and invite_state=#{inviteState}
-    and invite_type=#{inviteType}
-  </select>
-  <select id="countPeiNumByPiidIsIt" resultType="java.lang.Integer">
-    select count(*) from projectaudit_expert_invite
-    where project_info_id=#{projectInfoId}
-    and invite_state=#{inviteState}
-    and invite_type=#{inviteType}
-  </select>
-
-  <select id="selectPeiByPid" resultType="java.util.Map">
-    SELECT
-	pei.invite_state,
-	u.user_id,
-	ei.expert_info_name,
-	pei.invite_type
-    FROM
-	projectaudit_expert_invite pei
-    LEFT JOIN USER u ON (
-	pei.invite_user_id = u.user_id
-    )
-    LEFT JOIN expert_info ei ON (
-	u.info_id = ei.expert_info_id
-    )
-    WHERE
-	pei.project_info_id = #{projectInfoId}
-	<if test="inviteState != null">
-      AND (
-            <foreach collection="inviteState" item="is"  separator="OR">
-            pei.invite_state = #{is}
-            </foreach>
-          )
-    </if>
-  </select>
-  <select id="selectPeiNewestLeaderByPid" resultMap="BaseResultMap">
-    select *,max(invite_addtime)from projectaudit_expert_invite
-    where project_info_id=#{projectInfoId}
-    and invite_type=1
+    <resultMap id="BaseResultMap" type="com.example.entity.ProjectauditExpertInvite">
+        <result column="projectaudit_expert_invite_id" jdbcType="INTEGER" property="projectauditExpertInviteId"/>
+        <result column="invite_state" jdbcType="INTEGER" property="inviteState"/>
+        <result column="invite_user_id" jdbcType="INTEGER" property="inviteUserId"/>
+        <result column="invite_expert_name" jdbcType="VARCHAR" property="inviteExpertName"/>
+        <result column="invite_expiration" jdbcType="BIGINT" property="inviteExpiration"/>
+        <result column="invite_addtime" jdbcType="BIGINT" property="inviteAddtime"/>
+        <result column="invite_edittime" jdbcType="BIGINT" property="inviteEdittime"/>
+        <result column="invite_adduser_id" jdbcType="INTEGER" property="inviteAdduserId"/>
+        <result column="invite_edituser_id" jdbcType="INTEGER" property="inviteEdituserId"/>
+        <result column="invite_expiration" jdbcType="BIGINT" property="inviteExpiration"/>
+        <result column="project_info_name" jdbcType="VARCHAR" property="projectInfoName"/>
+        <result column="project_info_id" jdbcType="INTEGER" property="projectInfoId"/>
+        <result column="invite_type" jdbcType="INTEGER" property="inviteType"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.example.entity.ProjectauditExpertInvite">
+        insert into projectaudit_expert_invite (projectaudit_expert_invite_id, invite_state,
+                                                invite_user_id, invite_expert_name, invite_addtime,
+                                                invite_edittime, invite_adduser_id, invite_edituser_id,
+                                                invite_expiration, project_info_name, project_info_id,
+                                                invite_type)
+        values (#{projectauditExpertInviteId,jdbcType=INTEGER}, #{inviteState,jdbcType=INTEGER},
+                #{inviteUserId,jdbcType=INTEGER}, #{inviteExpertName,jdbcType=VARCHAR},
+                #{inviteAddtime,jdbcType=BIGINT},
+                #{inviteEdittime,jdbcType=BIGINT}, #{inviteAdduserId,jdbcType=INTEGER},
+                #{inviteEdituserId,jdbcType=INTEGER},
+                #{inviteExpiration,jdbcType=BIGINT}, #{projectInfoName,jdbcType=VARCHAR},
+                #{projectInfoId,jdbcType=INTEGER},
+                #{inviteType,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.example.entity.ProjectauditExpertInvite" useGeneratedKeys="true"
+            keyProperty="projectauditExpertInviteId" keyColumn="projectaudit_expert_invite_id">
+        insert into projectaudit_expert_invite
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectauditExpertInviteId != null">
+                projectaudit_expert_invite_id,
+            </if>
+            <if test="inviteState != null">
+                invite_state,
+            </if>
+            <if test="inviteUserId != null">
+                invite_user_id,
+            </if>
+            <if test="inviteExpertName != null">
+                invite_expert_name,
+            </if>
+            <if test="inviteAddtime != null">
+                invite_addtime,
+            </if>
+            <if test="inviteEdittime != null">
+                invite_edittime,
+            </if>
+            <if test="inviteAdduserId != null">
+                invite_adduser_id,
+            </if>
+            <if test="inviteEdituserId != null">
+                invite_edituser_id,
+            </if>
+            <if test="inviteExpiration != null">
+                invite_expiration,
+            </if>
+            <if test="projectInfoName != null">
+                project_info_name,
+            </if>
+            <if test="projectInfoId != null">
+                project_info_id,
+            </if>
+            <if test="inviteType != null">
+                invite_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectauditExpertInviteId != null">
+                #{projectauditExpertInviteId,jdbcType=INTEGER},
+            </if>
+            <if test="inviteState != null">
+                #{inviteState,jdbcType=INTEGER},
+            </if>
+            <if test="inviteUserId != null">
+                #{inviteUserId,jdbcType=INTEGER},
+            </if>
+            <if test="inviteExpertName != null">
+                #{inviteExpertName,jdbcType=VARCHAR},
+            </if>
+            <if test="inviteAddtime != null">
+                #{inviteAddtime,jdbcType=BIGINT},
+            </if>
+            <if test="inviteEdittime != null">
+                #{inviteEdittime,jdbcType=BIGINT},
+            </if>
+            <if test="inviteAdduserId != null">
+                #{inviteAdduserId,jdbcType=INTEGER},
+            </if>
+            <if test="inviteEdituserId != null">
+                #{inviteEdituserId,jdbcType=INTEGER},
+            </if>
+            <if test="inviteExpiration != null">
+                #{inviteExpiration,jdbcType=BIGINT},
+            </if>
+            <if test="projectInfoName != null">
+                #{projectInfoName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectInfoId != null">
+                #{projectInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="inviteType != null">
+                #{inviteType,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectPEInviteListByinviteUserId" resultMap="java.util.Map">
+        SELECT
+        pei.*,
+        oi.organization_name
+        FROM
+        projectaudit_expert_invite pei
+        LEFT JOIN user u on(pei.invite_adduser_id=u.user_id)
+        Left join organization_info oi on(u.info_id=oi.organization_info_id)
+        where invite_user_id=#{inviteUserId}
+        <trim>
+            <if test="inviteStates ! =null">
+                and inviteStates in
+                <foreach collection="inviteStates" item="inviteState" separator="," open="(" close=")">
+                    ${inviteState}
+                </foreach>
+            </if>
+        </trim>
     </select>
-  <select id="selectPeiNewestByPid" resultMap="BaseResultMap">
-    select *(invite_addtime)from projectaudit_expert_invite
-    where project_info_id=#{projectInfoId}
-      and invite_type=2
-  </select>
+    <select id="selectPEInviteListByinviteUserIdExpirationNot" resultMap="BaseResultMap">
+       SELECT
+        pei.*,
+        oi.organization_name
+        FROM
+        projectaudit_expert_invite pei
+        LEFT JOIN user u on(pei.invite_adduser_id=u.user_id)
+        Left join organization_info oi on(u.info_id=oi.organization_info_id)
+        where invite_user_id=#{inviteUserId}
+
+        <trim>
+            <if test="inviteStates ! =null">
+                and inviteStates in
+                <foreach collection="inviteStates" item="inviteState" separator="," open="(" close=")">
+                    ${inviteState}
+                </foreach>
+            </if>
+        </trim>
+        AND invite_expiration <![CDATA[ > ]]> (select (unix_timestamp(now())*1000))
+    </select>
+    <select id="updatePEInviteStateById" resultMap="BaseResultMap" resultType="java.lang.Integer">
+        UPDATE projectaudit_expert_invite
+        SET invite_state       = #{inviteState},
+            invite_edittime    = #{inviteEdittime},
+            invite_edituser_id = #{inviteEdituserId}
+        WHERE
+            projectaudit_expert_invite_id = #{projectauditExpertInviteId}
+    </select>
+    <insert id="insertPEinviteBatch">
+        insert into projectaudit_expert_invite
+        (invite_state,
+        invite_addtime,
+        invite_adduser_id,
+        invite_expiration,
+        project_info_name,
+        project_info_id,
+        invite_type,
+        invite_user_id,
+        invite_expert_name
+        )
+        values
+        <foreach collection="experInfos" item="experInfo" separator=",">
+            (
+            #{invitesInfo.inviteState},
+            #{invitesInfo.inviteAddtime},
+            #{invitesInfo.inviteAdduserId},
+            #{invitesInfo.inviteExpiration},
+            #{invitesInfo.projectInfoName},
+            #{invitesInfo.projectInfoId},
+            #{invitesInfo.inviteType},
+            #{experInfo.inviteUserId},
+            #{experInfo.inviteExpertName}
+            )
+        </foreach>
+
+    </insert>
+    <select id="selectPEinviteById" resultMap="BaseResultMap">
+        select *
+        from projectaudit_expert_invite
+        where
+            projectaudit_expert_invite_id = #{projectauditExpertInviteId}
+    </select>
+    <select id="selectPEinviteByiUidIsIt" resultMap="BaseResultMap">
+        select *
+        from projectaudit_expert_invite
+        where invite_user_id = #{inviteUserId}
+          and invite_state = #{inviteState}
+          and invite_type = #{inviteType}
+    </select>
+    <select id="countPeiNumByPiidIsIt" resultType="java.lang.Integer">
+        select count(*)
+        from projectaudit_expert_invite
+        where project_info_id = #{projectInfoId}
+          and invite_state = #{inviteState}
+          and invite_type = #{inviteType}
+    </select>
+
+    <select id="selectPeiByPid" resultType="java.util.Map">
+        SELECT
+        pei.invite_state,
+        u.user_id,
+        ei.expert_info_name,
+        pei.invite_type
+        FROM
+        projectaudit_expert_invite pei
+        LEFT JOIN USER u ON (
+        pei.invite_user_id = u.user_id
+        )
+        LEFT JOIN expert_info ei ON (
+        u.info_id = ei.expert_info_id
+        )
+        WHERE
+        pei.project_info_id = #{projectInfoId}
+        <if test="inviteState != null">
+            AND (
+            <foreach collection="inviteState" item="is" separator="OR">
+                pei.invite_state = #{is}
+            </foreach>
+            )
+        </if>
+    </select>
+    <select id="selectPeiNewestLeaderByPid" resultMap="BaseResultMap">
+        select *,max(invite_addtime)
+        from projectaudit_expert_invite
+        where project_info_id = #{projectInfoId}
+          and invite_type = 1
+    </select>
+    <select id="selectPeiNewestByPid" resultMap="BaseResultMap">
+        select *(invite_addtime)
+        from projectaudit_expert_invite
+        where project_info_id = #{projectInfoId}
+          and invite_type = 2
+    </select>
 </mapper>

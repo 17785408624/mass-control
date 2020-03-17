@@ -98,7 +98,7 @@ public interface ProjectInfoService {
      * @return
      */
     /**
-     * 查询项目审核邀请信息信息
+     * 查询项目审核邀请信息
      * @param projectInfoId 项目id
      * @param project_info_progress 1选择机构 2选择组长 3选择专家组 4项目评审 5批复 6完成
      * @return

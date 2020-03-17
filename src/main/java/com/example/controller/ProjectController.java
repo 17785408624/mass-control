@@ -256,16 +256,16 @@ public class ProjectController {
     }
 
     /**
-     *
+     * 查询项目审核邀请信息
      * @param param
      * @return
      */
     @PostMapping("findProjectAuditInfo")
     public VisitConsequenceParent findProjectAuditInfo(@RequestBody Map param){
         Integer projectInfoId= Integer.valueOf(String.valueOf(param.get("projectInfoId")));//项目id
-        Integer project_info_progress=Integer.valueOf(String.valueOf(param.get("project_info_progress")));//进程1选择机构 2选择组长 3选择专家组 4项目评审 5批复 6完成
+        Integer projectInfoProgress=Integer.valueOf(String.valueOf(param.get("projectInfoProgress")));//进程1选择机构 2选择组长 3选择专家组 4项目评审 5批复 6完成
         VisitConsequenceParent vcp =new VisitConsequenceParentImpl();
-        Map map=projectInfoService.findProjectAuditInfo(projectInfoId,project_info_progress);
+        Map map=projectInfoService.findProjectAuditInfo(projectInfoId,projectInfoProgress);
         vcp.setObject(map);
         return vcp;
     }

@@ -22,11 +22,12 @@ public interface ProjectauditExpertInviteService {
     /**
      *分页查询用户项目审核邀请信息列表(专家)
      * @param inviteUserId 邀请对象的用户id
+     * @param inviteStates 邀请状态(1等待操作 2接受 3拒绝 4取消邀请 5邀请过期) 为空则不加此条件
      * @param inviteExpiration 是否包含过期记录 true包含 false不包含
      * @param pageRequest 分页信息
      * @return
      */
-    List<ProjectauditExpertInvite> findPEInviteListByUserIdPage(Integer inviteUserId,
+    List findPEInviteListByUserIdPage(Integer inviteUserId,Object[] inviteStates,
                                                                 boolean inviteExpiration, PageRequest pageRequest);
 
     /**

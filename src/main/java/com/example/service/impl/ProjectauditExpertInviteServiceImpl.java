@@ -55,12 +55,12 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
     }
     //分页查询用户项目审核邀请信息列表(专家)
     @Override
-    public List<ProjectauditExpertInvite> findPEInviteListByUserIdPage(Integer inviteUserId, boolean inviteExpiration, PageRequest pageRequest) {
+    public List findPEInviteListByUserIdPage(Integer inviteUserId,Object[] inviteStates, boolean inviteExpiration, PageRequest pageRequest) {
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);//调用分页
         if(inviteExpiration){
-            return  projectauditExpertInviteMapper.selectPEInviteListByinviteUserId(inviteUserId);
+            return  projectauditExpertInviteMapper.selectPEInviteListByinviteUserId(inviteUserId,inviteStates);
         }else{
             return projectauditExpertInviteMapper.selectPEInviteListByinviteUserIdExpirationNot(inviteUserId,null);
         }

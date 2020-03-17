@@ -24,12 +24,13 @@ public interface ProjectauditExpertInviteMapper {
     int insertSelective(ProjectauditExpertInvite record);
 
     /**
-     *
+     * 通过用户id查询用户审核邀请记录
      * @param inviteUserId 邀请对象的用户id
+     * @param inviteStates 邀请状态 (1等待操作 2接受 3拒绝 4取消邀请 5邀请过期) 为空则不加此条件
      * @return
      */
-    List<ProjectauditExpertInvite> selectPEInviteListByinviteUserId(
-            @Param("inviteUserId") Integer inviteUserId);
+    List selectPEInviteListByinviteUserId(
+            @Param("inviteUserId") Integer inviteUserId,@Param("inviteStates")Object[] inviteStates);
 
     /**
      * 通过项目审核邀请对象的用户id和邀请状态查询未过期的记录

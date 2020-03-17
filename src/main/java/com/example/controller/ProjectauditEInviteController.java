@@ -9,11 +9,13 @@ import com.example.entity.common.VisitConsequenceParent;
 import com.example.entity.common.VisitConsequenceParentImpl;
 import com.example.entity.requstparam.InsertPEinviteBatch;
 import com.example.entity.requstparam.PageOderRequest;
+import com.example.entity.requstparam.PageOderRequestMap;
 import com.example.entity.user.UserInfoLoginEntity;
 import com.example.service.ProjectauditExpertInviteService;
 import com.example.service.vice.LoginVice;
 import com.github.pagehelper.PageInfo;
 import com.util.PageUtils;
+import com.util.PublicUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,49 +70,36 @@ public class ProjectauditEInviteController {
         vcp.setObject(1);
         return  vcp;
     }
+
     /**
-     * 分页查询用户项目审核邀请 （专家）不包含过期邀请
-     * @param pageOderRequest 分页信息
-     * @return
-     */
-    @PostMapping("findPEInviteListPageENot")
-    public VisitConsequenceParent findPEInviteListPageENot(HttpSession httpSession,@RequestBody PageOderRequest pageOderRequest){
-        VisitConsequenceParent vc=new VisitConsequencePage();
-        UserInfoLoginEntity uie;
-        try {
-            uie=loginVice.getLoginInfo(httpSession);
-        } catch (LoginException e) {
-            vc.setMessage(e.getMessage());
-            vc.setState(1);
-            e.printStackTrace();
-            return  vc;
-        }
-        //查询项目审核邀请信息(专家)
-        List<ProjectauditExpertInvite> listP=projectauditExpertInviteService.findPEInviteListByUserIdPage(
-                Integer.valueOf(uie.getUser_id()),false,pageOderRequest.getPageRequest());
-        PageInfo a=new PageInfo<ProjectauditExpertInvite>(listP);//分页信息
-        vc= PageUtils.getVisitConsequencePage(a);//将分页信息结果封装成返回结果
-        return vc;
-    }
-    /**
-     * 分页查询用户项目审核邀请 （专家） 包含过期邀请
+     * 分页查询用户项目审核邀请 （专家）
      * @param pageOderRequest 分页信息
      * @return
      */
     @PostMapping("findPEInviteListPage")
-    public VisitConsequenceParent findPEInviteListPage(HttpSession httpSession,@RequestBody PageOderRequest pageOderRequest){
+    public VisitConsequenceParent findPEInviteListPage(HttpSession httpSession,@RequestBody PageOderRequestMap pageOderRequest){
+        Map param=pageOderRequest.getParam();
         VisitConsequenceParent vc=new VisitConsequencePage();
-        UserInfoLoginEntity uie;
-        try {
-            uie=loginVice.getLoginInfo(httpSession);
-        } catch (LoginException e) {
-            vc.setMessage(e.getMessage());
-            vc.setState(1);
-            e.printStackTrace();
-            return  vc;
+        Object[] inviteStates=null;//邀请状态
+        Integer userId=null;//查询的用户id
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"inviteStates")){
+            inviteStates=((List)param.get("inviteStates")).toArray();
         }
-        List<ProjectauditExpertInvite> listP=projectauditExpertInviteService.findPEInviteListByUserIdPage(
-                Integer.valueOf(uie.getUser_id()),true,pageOderRequest.getPageRequest());
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"userId")){
+            userId= Integer.valueOf(param.get("userId").toString());
+        }else{
+            try {
+                UserInfoLoginEntity uie;
+                uie=loginVice.getLoginInfo(httpSession);
+            } catch (LoginException e) {
+                vc.setMessage(e.getMessage());
+                vc.setState(1);
+                e.printStackTrace();
+                return  vc;
+            }
+        }
+        List listP=projectauditExpertInviteService.findPEInviteListByUserIdPage(
+                userId,inviteStates,true,pageOderRequest.getPageRequest());
         PageInfo a=new PageInfo<ProjectauditExpertInvite>(listP);//分页信息
         vc= PageUtils.getVisitConsequencePage(a);//将分页信息结果封装成返回结果
         return vc;
