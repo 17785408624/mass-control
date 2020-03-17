@@ -562,7 +562,7 @@
         oi.organization_code,
         oi.organization_telephone,
         u.user_register_time,
-        o.organization_principal_name,
+        oi.organization_principal_name,
         u.user_id,
         u.user_state
         FROM
