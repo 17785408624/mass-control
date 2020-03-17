@@ -172,7 +172,7 @@ public interface UserService {
 	Boolean dismissUser(Integer[]uIds);
 
 	/**
-	 *
+	 *返聘用户
 	 * @param uIds
 	 * @return
 	 */

@@ -36,6 +36,7 @@
             and uia.user_info_audit_content =#{uia.user_info_audit_content}
         </if>
 
+
         <choose>
             <when test="user_info_audit_state !=null and user_info_audit_state != '0'.toString()">
                 and uia.user_info_audit_state =#{user_info_audit_state}
@@ -193,19 +194,22 @@
         <if test="condition !=null">
 
         </if>
-        AND (
-        ei.expert_info_name
-        like
-        "%${condition}%"
-        or
-        ei.expert_info_idcard
-        like
-        "%${condition}%"
-        or
-        u.user_mobile_phone
-        like
-        "%${condition}%"
-        )
+        <if test="condition!=null and !condition.equals('') and !condition.equals(' ')">
+            AND (
+            ei.expert_info_name
+            like
+            "%${condition}%"
+            or
+            ei.expert_info_idcard
+            like
+            "%${condition}%"
+            or
+            u.user_mobile_phone
+            like
+            "%${condition}%"
+            )
+        </if>
+        and TRIM(user_id)!='null'
         <include refid="order_by"></include>
     </select>
     <select id="selectLikeUserInfoAuditOrganizationByStateAType" resultType="java.util.Map">
@@ -244,19 +248,22 @@
         <if test="condition !=null">
 
         </if>
-        AND (
-        oi.organization_name
-        like
-        "%${condition}%"
-        or
-        oi.organization_code
-        like
-        "%${condition}%"
-        or
-        u.user_mobile_phone
-        like
-        "%${condition}%"
-        )
+        <if test="condition!=null and !condition.equals('') and !condition.equals(' ')">
+            AND (
+            oi.organization_name
+            like
+            "%${condition}%"
+            or
+            oi.organization_code
+            like
+            "%${condition}%"
+            or
+            u.user_mobile_phone
+            like
+            "%${condition}%"
+            )
+        </if>
+        and TRIM(user_id)!='null'
         <include refid="order_by"></include>
     </select>
     <update id="updateUserInfoAuditStateByinfoId">
@@ -293,6 +300,8 @@
           AND user_info_audit_content = #{user_info_audit_content}
           And user_info_audit_state = 1
     </select>
+
+
     <select id="selectExperInfoByQueryFields" resultType="java.util.LinkedHashMap">
         SELECT
         <foreach collection="queryFields" item="queryField" separator=",">
@@ -356,6 +365,12 @@
                     WHEN 3 THEN '通过'
                     END as user_info_audit_state
                 </when>
+                <when test="queryField.equals('expert_info_gender')">
+                    case ${queryField}
+                    when 1 then '男'
+                    when 2 then '女'
+                    END AS expert_info_gender
+                </when>
                 <when test="queryField.equals('user_info_audit_addtime')">
                     FROM_UNIXTIME(user_info_audit_addtime/1000,'%Y-%m-%d %H:%i:%s') as user_info_audit_addtime
                 </when>
@@ -378,7 +393,10 @@
         <if test="user_info_audit_type != null and user_info_audit_type != '0'.toString()">
             AND user_info_audit_type=#{user_info_audit_type}
         </if>
+        and TRIM(user_id)!='null'
     </select>
+
+
     <select id="selectOrganizationInfoByQueryFields" resultType="java.util.LinkedHashMap">
         select
         <foreach collection="queryFields" separator="," item="queryField">
@@ -436,6 +454,13 @@
         LEFT JOIN organization_info oi ON (uia.info_id=oi.organization_info_id )
         LEFT JOIN user u on(uia.user_id_add=u.user_id)
         where user_info_audit_content=1
+        and TRIM(user_id)!='null'
+        <if test="user_info_audit_state != null and user_info_audit_state != '0'.toString()">
+            AND user_info_audit_state=#{user_info_audit_state}
+        </if>
+        <if test="user_info_audit_type != null and user_info_audit_type != '0'.toString()">
+            AND user_info_audit_type=#{user_info_audit_type}
+        </if>
     </select>
 
 </mapper>

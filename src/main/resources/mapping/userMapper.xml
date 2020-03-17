@@ -511,7 +511,7 @@
         where user_id
         in
         <foreach collection="uIds" separator="," item="uIds" open="(" close=")">
-            uIds
+            ${uIds}
         </foreach>
     </update>
 

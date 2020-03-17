@@ -456,12 +456,33 @@ public class UserController {
         return vcp;
     }
 
+    /**
+     * 解聘用户
+     * @param param
+     * @return
+     */
     @PostMapping("dismissUser")
     public VisitConsequenceParent dismissUser(@RequestBody Map<String, Integer[]> param) {
         VisitConsequenceParent vcp = new VisitConsequenceParentImpl();
         Integer[] uIds = param.get("uIds");
         if (!userService.dismissUser(uIds)) {
             vcp.setMessage("解聘用户请求错误");
+            vcp.setState(1);
+        } ;
+        return vcp;
+    }
+
+    /**
+     * 返聘用户
+     * @param param
+     * @return
+     */
+    @PostMapping("rehireUser")
+    public VisitConsequenceParent rehireUser(@RequestBody Map<String, Integer[]> param) {
+        VisitConsequenceParent vcp = new VisitConsequenceParentImpl();
+        Integer[] uIds = param.get("uIds");
+        if (!userService.rehireUser(uIds)) {
+            vcp.setMessage("返聘用户请求错误");
             vcp.setState(1);
         } ;
         return vcp;
