@@ -326,5 +326,16 @@ public class UserServiceImpl implements UserService {
         return l;
     }
 
+    @Override
+    public List findOrganizationList(PageOderRequest pageOderRequest, Object[] userStates, String condition) {
+        PageRequest pageRequest=pageOderRequest.getPageRequest();//分页信息
+        OrderRequest[]orderRequests=pageOderRequest.getOrderRequests();//排序参数
+        Integer pageNum=pageRequest.getPageNum();//当前页
+        Integer pageSize=pageRequest.getPageSize();//每页长度
+        PageHelper.startPage(pageNum, pageSize);//调用分页
+        List list=userMapper.selectOrganizationByState(userStates,orderRequests,condition);//查询专家用户信息
+        return list;
+    }
+
 
 }

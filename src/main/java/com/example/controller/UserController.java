@@ -510,5 +510,26 @@ public class UserController {
         return vcp;
     }
 
+    /**
+     * 查询第三方发机构用户信息列表
+     * @param porm
+     * @return
+     */
+    @RequestMapping("findOrganizationListBstate")
+    public VisitConsequenceParent findOrganizationListBstate(@RequestBody PageOderRequestMap porm) {
+        Map param=porm.getParam();//前端传入的请求参数
+        String condition=param.get("condition").toString();//搜索条件
+        Object []userStates=null;//用户状态 1未认证审核 2已认证审核  3解聘
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"userStates")){//前端是否传入用户状态参数
+            userStates= ((List) param.get("userStates")).toArray();
+
+        }
+        VisitConsequenceParent vcp = new VisitConsequencePage();
+        List listM=userService.findOrganizationList(porm,userStates,condition);
+        PageInfo a = new PageInfo<Map>(listM);
+        vcp = PageUtils.getVisitConsequencePage(a);
+        return vcp;
+    }
+
 
 }

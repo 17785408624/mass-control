@@ -242,6 +242,14 @@ public interface UserMapper {
     List selectExpersByState(@Param("userStates") Object[] userStates,
                                @Param("orderRequests") OrderRequest[] orderRequests,
                                @Param("condition") String condition);
+
+    /**
+     * 通过第三方机构用户用户状态查询用户信息
+     * @param userStates 用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
+     * @param orderRequests 排序参数
+     * @param condition 查询搜索条件
+     * @return
+     */
     List selectOrganizationByState(@Param("userStates") Object[] userStates,
                              @Param("orderRequests") OrderRequest[] orderRequests,
                              @Param("condition") String condition);

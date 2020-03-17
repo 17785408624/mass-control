@@ -189,4 +189,15 @@ public interface UserService {
 	 */
 	List findExperList(PageOderRequest pageOderRequest,Object[] userStates,String condition);
 
+	/**
+	 * 查询第三方机构用户信息
+	 * @param pageOderRequest 分页和排序参数
+	 * @param userStates 需要查询的用户状态 1未认证审核 2已认证审核  3解聘
+	 * @param condition 查询关键字
+	 * @return
+	 */
+	List findOrganizationList(PageOderRequest pageOderRequest,Object[] userStates,String condition);
+
+
+
 }
