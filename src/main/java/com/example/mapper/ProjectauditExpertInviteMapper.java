@@ -68,7 +68,7 @@ public interface ProjectauditExpertInviteMapper {
      * 查询审核邀请信息
      * @param inviteUserId 邀请对象
      * @param inviteState 邀请状态 状态 (1等待操作 2接受 3拒绝 4取消邀请 5过期)
-     * @param inviteType 邀请对象类型
+     * @param inviteType 邀请对象类型 1组长，2组员
      * @return
      */
     ProjectauditExpertInvite selectPEinviteByiUidIsIt(@Param("inviteUserId") Integer inviteUserId,
