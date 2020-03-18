@@ -129,14 +129,14 @@ public interface UserInfoAuditMapper {
 
     /**
      * 根据审核id改变审核状态
-     * @param user_info_audit_state 审核状态 1未审核 2拒绝 3 通过
      * @param info_id 审核的资料信息id
+     * @param user_info_audit_state //审核状态 1未审核 2拒绝 3 通过
      * @param user_info_audit_describe 审核描述
      * @return
      */
     int updateUserInfoAuditStateByinfoId(
-            @Param("user_info_audit_state") int user_info_audit_state,
             @Param("info_id")int info_id,
+            @Param("user_info_audit_state") int user_info_audit_state,
             @Param("user_info_audit_describe")String user_info_audit_describe);
 
     /**
