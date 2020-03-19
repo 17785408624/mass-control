@@ -53,12 +53,11 @@ public class UserController {
     @RequestMapping("/reg")
     public VisitConsequenceParent reg(@RequestBody UserEntity user) {//用户注册
         VisitConsequenceParentImpl vcp = new VisitConsequenceParentImpl();
-        if (!loginVice.isboundPhoneNum(user.getUser_mobile_phone())) {//注册的手机号码是否绑定验证
-            vcp.setState(1);
-            vcp.setMessage("请先绑定手机号码");
-            return vcp;
-        }
-        ;
+//        if (!loginVice.isboundPhoneNum(user.getUser_mobile_phone())) {//注册的手机号码是否绑定验证
+//            vcp.setState(1);
+//            vcp.setMessage("请先绑定手机号码");
+//            return vcp;
+//        };
         try {
             userService.regUser(user);//新增注册用户
         } catch (RegException e) {
