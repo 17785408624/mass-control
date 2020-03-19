@@ -276,17 +276,20 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
     //查询项目审核邀请信息
     @Override
     public Map findProjectAuditInfo(Integer projectInfoId, Integer projectInfoProgress) {
-        Map projectAuditInfo=new HashMap();//审核邀请信息
+        Map projectAuditInfo = new HashMap();//审核邀请信息
         switch (projectInfoProgress) {
+            case 6://6完成
+            case 5:// 5批复
+            case 4://4项目评审
             case 3://3选择专家组
                 List<ProjectauditExpertInvite> listPei = projectauditExpertInviteMapper.selectPeiNewestByPid(projectInfoId);
-                projectAuditInfo.put("listPei",listPei);//专家组审核邀请信息
+                projectAuditInfo.put("listPei", listPei);//专家组审核邀请信息
             case 2://2选择组长
                 ProjectauditExpertInvite pei = projectauditExpertInviteMapper.selectPeiNewestLeaderByPid(projectInfoId);
-                projectAuditInfo.put("pei",pei);//专家组长审核邀请信息
+                projectAuditInfo.put("pei", pei);//专家组长审核邀请信息
             case 1://1选择机构
                 ProjectauditOrganizationInvite poi = projectauditOrganizationInviteMapper.selectPoiNewestByPid(projectInfoId);
-                projectAuditInfo.put("poi",poi);//机构审核邀请信息
+                projectAuditInfo.put("poi", poi);//机构审核邀请信息
                 break;
 //            case 4://4项目评审
 //                break;

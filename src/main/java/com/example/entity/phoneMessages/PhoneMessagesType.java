@@ -4,7 +4,8 @@ package com.example.entity.phoneMessages;
  * 手机短信类型
  */
 public enum PhoneMessagesType {
-     messagesBoundCod("boundCod","绑定手机验证码",3),;
+     messagesBoundCod("boundCod","绑定手机验证码",3),
+    reminderMessages("reminderMessages","发送提醒消息",3);
      private String messagesId;//消息类型id
      private String messagesName;//消息类型名字
      private Integer sndMessagesRestrict;//发送次数限制
