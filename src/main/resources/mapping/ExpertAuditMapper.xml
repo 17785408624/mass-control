@@ -286,7 +286,7 @@
         ea.attitude, COUNT(DISTINCT u.user_id) as jilei
         FROM
         expert_audit ea
-        LEFT JOIN USER u ON (
+        LEFT JOIN user u ON (
         ea.byaudit_user_id = u.user_id
         )
         LEFT JOIN expert_info ei ON (
