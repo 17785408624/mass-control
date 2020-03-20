@@ -460,7 +460,7 @@
         set project_info_progress=#{projectInfoProgress}
         where project_info_id in(
         <foreach collection="projectInfoIds" open="" separator="," close="" item="projectInfoId">
-            projectInfoId
+            #{projectInfoId}
         </foreach>
         )
     </update>
