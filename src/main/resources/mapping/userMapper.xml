@@ -280,7 +280,7 @@
         u.user_id
         FROM
         organization_info oi
-        LEFT JOIN USER u ON (
+        LEFT JOIN user u ON (
         oi.organization_info_id = u.info_id
         )
         where u.user_role=2
