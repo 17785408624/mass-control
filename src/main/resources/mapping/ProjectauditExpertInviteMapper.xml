@@ -210,7 +210,7 @@
         pei.invite_type
         FROM
         projectaudit_expert_invite pei
-        LEFT JOIN USER u ON (
+        LEFT JOIN user u ON (
         pei.invite_user_id = u.user_id
         )
         LEFT JOIN expert_info ei ON (
