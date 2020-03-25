@@ -42,5 +42,20 @@ public interface ExcelManageService {
      * @return
      */
     Boolean exportExcelOrganizationAudit(OutputStream os, Integer user_info_audit_state,Integer user_info_audit_type);
+    /**
+     * 导出专家信息数据为excel文件
+     * @param os 输出流
+     * @param userStates 用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
+     * @return
+     */
+    Boolean exportExcelExpert(OutputStream os,Object[]userStates);
+
+    /**
+     * 导出第三方机构信息数据为excel文件
+     * @param os 输出流
+     * @param userStates 用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
+     * @return
+     */
+    Boolean exportExcelOrganization(OutputStream os,Object[]userStates);
 
 }

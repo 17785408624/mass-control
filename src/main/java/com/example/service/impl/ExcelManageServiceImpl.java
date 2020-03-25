@@ -172,7 +172,7 @@ public class ExcelManageServiceImpl implements ExcelManageService {
                 selectExpertInfoAuditByQueryFields(s,user_info_audit_state,user_info_audit_type);
         ExcelDataEntity ede=new ExcelDataEntity(listM,"专家审核信息",ExcelFieldMap.expertExcelTitleAudit);
         try {
-            excelVice.exportExcel(os, ede);
+            excelVice.exportExcel(os, ede);//输出excel文件
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -182,10 +182,38 @@ public class ExcelManageServiceImpl implements ExcelManageService {
     @Override
     public Boolean exportExcelOrganizationAudit(OutputStream os, Integer user_info_audit_state, Integer user_info_audit_type) {
         List listM ;//接收数据库返回数据
-        String[] s=ExcelFieldMap.organizationQueryFieldsAudit;
+        String[] s=ExcelFieldMap.organizationQueryFieldsAudit;//默认查询第三方机构审核信息的字段组
         listM = userInfoAuditMapper.
                 selectOrganizationInfoAuditByQueryFields(ExcelFieldMap.organizationQueryFieldsAudit,user_info_audit_state,user_info_audit_type);
         ExcelDataEntity ede=new ExcelDataEntity(listM,"第三方机构审核信息",ExcelFieldMap.organizationExcelTitleAudit);
+        try {
+            excelVice.exportExcel(os, ede);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+   //导出专家信息数据为excel文件
+    @Override
+    public Boolean exportExcelExpert(OutputStream os, Object[] userStates) {
+        List listM ;//接收数据库返回数据
+        String[]str=ExcelFieldMap.expertQueryFields;//默认查询审核专家信息的字段组
+        listM = userMapper.selectExperInfoByQueryFields(str,userStates);
+        ExcelDataEntity ede=new ExcelDataEntity(listM,"专家信息",ExcelFieldMap.expertExcelTitleAudit);
+        try {
+            excelVice.exportExcel(os, ede);//输出excel文件
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+    //导出第三方机构信息数据为excel文件
+    @Override
+    public Boolean exportExcelOrganization(OutputStream os, Object[] userStates) {
+        List listM ;//接收数据库返回数据
+        String[] str=ExcelFieldMap.organizationQueryFields;//默认查询第三方机构审核信息的字段组
+        listM = userMapper.selectOrganizationByQueryFields(str,userStates);
+        ExcelDataEntity ede=new ExcelDataEntity(listM,"第三方机构信息",ExcelFieldMap.organizationExcelTitleAudit);
         try {
             excelVice.exportExcel(os, ede);
         } catch (Exception e) {

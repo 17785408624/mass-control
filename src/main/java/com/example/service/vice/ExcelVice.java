@@ -29,6 +29,13 @@ public class ExcelVice {
 
        exportExcel(data, os,rowDataClass);
     }
+
+    /**
+     * 输出excel文件
+     * @param os 输出流
+     * @param data 文件数据
+     * @throws Exception
+     */
     public  void exportExcel(OutputStream os, ExcelDataEntity data) throws Exception {
 
         exportExcel(data, os);

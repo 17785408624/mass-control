@@ -92,5 +92,58 @@ public class ExcelManageController {
         }
         excelManage.exportExcelOrganizationAudit(os,Integer.valueOf(user_info_audit_state),Integer.valueOf(user_info_audit_type));
     }
+    /**
+     * 导出专家信息为excel文件
+     * @param response
+     * @param reqeust
+     */
+    @RequestMapping("/exportExcelExpert")
+    public void exportExcelExpert(HttpServletResponse response, HttpServletRequest reqeust) {
+        String[] userStates=null;
+        userStates=reqeust.getParameterValues("userStates");//用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接
+        OutputStream os = null;
+        try {
+            os =response.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        response.setHeader("content-Type", "application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+        // 下载文件的默认名称
+        try {
+            //response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(exportExcelType.getTypeName() + ".xls", "utf-8"));
+            response.setHeader("Content-Disposition","attachment;filename="+ java.net.URLEncoder.encode("专家审核信息"+".xls", "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        excelManage.exportExcelExpert(os,userStates);
+    }
+    /**
+     * 导出第三方机构审核信息为excel文件
+     * @param response
+     * @param reqeust
+     */
+    @RequestMapping("/exportExcelOrganization")
+    public void exportExcelOrganization(HttpServletResponse response, HttpServletRequest reqeust) {
+        String[] userStates=null;
+        userStates=reqeust.getParameterValues("userStates");//用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接
+        OutputStream os = null;
+        try {
+            os =response.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // 告诉浏览器用什么软件可以打开此文件
+        response.setHeader("content-Type", "application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+        // 下载文件的默认名称
+        try {
+            //response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(exportExcelType.getTypeName() + ".xls", "utf-8"));
+            response.setHeader("Content-Disposition","attachment;filename="+ java.net.URLEncoder.encode("第三方机构审核信息"+".xls", "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        excelManage.exportExcelOrganization(os,userStates);
+    }
 
 }
