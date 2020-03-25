@@ -32,14 +32,15 @@ public class ExcelFieldMap {
     //static BiMap<String,String> expertFieldMap = HashBiMap.create();
     //expertFieldMap.inverse();//映射反转，即key/value互相切换的映射
     static Map<String,String> expertFieldMap=new HashMap<String,String>();//专家信息表标题与数据库字段的映射键值对
-    public static String []expertExcelTitle=new String[]{//默认导出专家excel表的标题
+    static Map<String,String> organizationFieldMap=new HashMap<String,String>();//第三方机构信息表标题与数据库字段的映射键值对
+    public static String []expertExcelTitleAudit=new String[]{//默认导出审核专家excel表的标题
             "用户编号", "用户手机号", "学历", "申请时间", "用户注册时间", "专家名", "身份证号", "所学专业", "从事专业", "申报专业-技术报告咨询审查类", "申报专业-安全生产检查类","审核状态","单位名","职务","职业资格","性别"};
-    public static String[]expertQueryFields;//默认查询专家信息的字段组
-    public static String []organizationExcelTitle=new String[]{//默认导出专家excel表的标题
+    public static String[]expertQueryFieldsAudit;//默认查询审核专家信息的字段组
+    public static String []organizationExcelTitleAudit=new String[]{//默认导出审核第三方机构excel表的标题
             "用户编号", "用户手机号", "用户注册时间", "用户角色", "用户状态", "机构/公司名", "组织社会信用码", "机构地址", "邮编", "电话号码", "机构邮箱", "法定代表人名字", "法定代表人移动电话", "审核状态", "申请时间"
            };
-    public static String[]organizationQueryFields;//默认查询专家信息的字段组
-    static Map<String,String> organizationFieldMap=new HashMap<String,String>();//第三方机构信息表标题与数据库字段的映射键值对
+    public static String[]organizationQueryFieldsAudit;//默认查询第三方机构审核信息的字段组
+
     static{
         for(int i=0;i<expertExcelFiledName.length;i++){//将信息表标题与数据库字段相互映射存入map
             expertFieldMap.put(expertExcelFiledName[i],expertExcelTitleName[i]);
@@ -50,14 +51,14 @@ public class ExcelFieldMap {
             organizationFieldMap.put(organizationExcelTitleName[i],organizationExcelFiledName[i]);
         }
         //通过标题映射默认查询专家信息的字段组
-        expertQueryFields=new String[expertExcelTitle.length];
-        for(int i=0;i<expertExcelTitle.length;i++){
-            expertQueryFields[i]=expertFieldMap.get(expertExcelTitle[i]);
+        expertQueryFieldsAudit=new String[expertExcelTitleAudit.length];
+        for(int i=0;i<expertExcelTitleAudit.length;i++){
+            expertQueryFieldsAudit[i]=expertFieldMap.get(expertExcelTitleAudit[i]);
         }
         //通过标题映射默认查询第三方机构信息的字段组
-        organizationQueryFields=new String[organizationExcelTitle.length];
-        for(int i=0;i<organizationExcelTitle.length;i++){
-            organizationQueryFields[i]=organizationFieldMap.get(organizationExcelTitle[i]);
+        organizationQueryFieldsAudit=new String[organizationExcelTitleAudit.length];
+        for(int i=0;i<organizationExcelTitleAudit.length;i++){
+            organizationQueryFieldsAudit[i]=organizationFieldMap.get(organizationExcelTitleAudit[i]);
         }
     };
     //获取专家表标题与数据库字段的映射键值对

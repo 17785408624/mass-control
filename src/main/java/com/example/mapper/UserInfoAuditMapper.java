@@ -170,7 +170,7 @@ public interface UserInfoAuditMapper {
      * @param user_info_audit_type 审核类型 1初审 2变更信息审核 为0视为不设置此条件
      * @return
      */
-    List<Map<String,String>>selectExperInfoByQueryFields(@Param("queryFields") String[]queryFields,
+    List<Map<String,String>>selectExpertInfoAuditByQueryFields(@Param("queryFields") String[]queryFields,
                                                          @Param("user_info_audit_state")Integer user_info_audit_state,
                                                          @Param("user_info_audit_type")Integer user_info_audit_type);
 
@@ -181,7 +181,7 @@ public interface UserInfoAuditMapper {
      * @param user_info_audit_type 审核类型 1初审 2变更信息审核 为0视为不设置此条件
      * @return
      */
-    List<Map<String,String>>selectOrganizationInfoByQueryFields(@Param("queryFields") String[]queryFields,
+    List<Map<String,String>>selectOrganizationInfoAuditByQueryFields(@Param("queryFields") String[]queryFields,
                                                          @Param("user_info_audit_state")Integer user_info_audit_state,
                                                          @Param("user_info_audit_type")Integer user_info_audit_type);
 

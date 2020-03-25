@@ -299,7 +299,7 @@
     </select>
 
 
-    <select id="selectExperInfoByQueryFields" resultType="java.util.LinkedHashMap">
+    <select id="selectExpertInfoAuditByQueryFields" resultType="java.util.LinkedHashMap">
         SELECT
         <foreach collection="queryFields" item="queryField" separator=",">
             <choose>
@@ -394,7 +394,7 @@
     </select>
 
 
-    <select id="selectOrganizationInfoByQueryFields" resultType="java.util.LinkedHashMap">
+    <select id="selectOrganizationInfoAuditByQueryFields" resultType="java.util.LinkedHashMap">
         select
         <foreach collection="queryFields" separator="," item="queryField">
             <choose>

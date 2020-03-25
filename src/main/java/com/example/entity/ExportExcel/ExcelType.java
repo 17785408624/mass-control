@@ -112,13 +112,24 @@ public enum ExcelType {
     UserInfoAudit_Expert_All_Pass(
             21,
             new String[]{"用户编号", "用户手机号", "学历", "申请时间", "用户注册时间", "专家名", "身份证号", "所学专业", "从事专业", "申报专业-技术报告咨询审查类", "审核类型"},
-            "已通过的专家用户信息",
+            "已通过的专家用户审核信息",
             "expertDate"),
     UserInfoAudit_Organization_All_Pass(
             22,
             new String[]{"用户编号", "用户手机号", "用户注册时间", "用户角色", "用户状态", "机构/公司名", "组织社会信用码", "机构地址", "邮编", "电话号码", "机构邮箱", "法定代表人名字", "法定代表人移动电话", "申请时间","审核类型"},
-            "已通过的第三方机构用户信息",
+            "已通过的第三方机构用户审核信息",
+            "organizationDate"),
+    UserInfo_Expert_Authenticated(
+            23,
+            new String[]{"用户编号", "用户手机号", "学历", "用户注册时间", "专家名", "身份证号", "所学专业", "从事专业", "申报专业-技术报告咨询审查类", "申报专业-安全生产检查类","单位名","职务","职业资格","性别"},
+            "已认证审核的专家信息",
+            "expertDate"),
+    UserInfo_Organization_Authenticated(
+            24,
+            new String[]{"用户编号", "用户手机号", "用户注册时间", "用户角色", "用户状态", "机构/公司名", "组织社会信用码", "机构地址", "邮编", "电话号码", "机构邮箱", "法定代表人名字", "法定代表人移动电话"},
+            "已认证审核的第三方机构信息",
             "organizationDate")
+
     ;
     private Integer typeCode;//类型code
     private String[] excelTitle;//类型表头

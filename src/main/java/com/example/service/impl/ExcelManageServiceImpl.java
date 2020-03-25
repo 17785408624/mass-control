@@ -6,6 +6,7 @@ import com.example.entity.ExportExcel.ExcelDataEntity;
 import com.example.entity.ExportExcel.ExcelFieldMap;
 import com.example.entity.ExportExcel.ExcelType;
 import com.example.mapper.UserInfoAuditMapper;
+import com.example.mapper.UserMapper;
 import com.example.service.ExcelManageService;
 import com.example.service.vice.ExcelVice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class ExcelManageServiceImpl implements ExcelManageService {
     ExcelVice excelVice;
     @Autowired
     UserInfoAuditMapper userInfoAuditMapper;
+    @Autowired
+    UserMapper userMapper;
     //
 
     public Boolean outputExcel(OutputStream os,
@@ -71,64 +74,68 @@ public class ExcelManageServiceImpl implements ExcelManageService {
         }
         if (typeCode == ExcelType.UserInfoAudit_Expert_all.getTypeCode()) {//专家用户全部审核信息
             listM = userInfoAuditMapper.
-                    selectExperInfoByQueryFields(exportExcelType.getQueryFields(), 0, 0);//专家用户全部审核信息
+                    selectExpertInfoAuditByQueryFields(exportExcelType.getQueryFields(), 0, 0);//专家用户全部审核信息
         }else if(typeCode == ExcelType.UserInfoAudit_Expert.getTypeCode()){//初审审核-专家用户信息
             listM = userInfoAuditMapper.
-                    selectExperInfoByQueryFields(exportExcelType.getQueryFields(), 0, 1);//初审审核-专家用户信息
+                    selectExpertInfoAuditByQueryFields(exportExcelType.getQueryFields(), 0, 1);//初审审核-专家用户信息
         }else if (typeCode == ExcelType.UserInfoAuditChange_Expert.getTypeCode()) {//变更审核-专家用户信息
             listM = userInfoAuditMapper.
-                    selectExperInfoByQueryFields(exportExcelType.getQueryFields(), 0, 2);//变更审核-专家用户信息
+                    selectExpertInfoAuditByQueryFields(exportExcelType.getQueryFields(), 0, 2);//变更审核-专家用户信息
         }else if (typeCode == ExcelType.UserInfoAudit_NotRefer_Expert.getTypeCode()) {//初审未审核的专家用户信息
             listM = userInfoAuditMapper.
-                    selectExperInfoByQueryFields(exportExcelType.getQueryFields(), 1, 1);//初审未审核的专家用户信息
+                    selectExpertInfoAuditByQueryFields(exportExcelType.getQueryFields(), 1, 1);//初审未审核的专家用户信息
         } else if (typeCode == ExcelType.UserInfoAudit_Pass_Expert.getTypeCode()) {//初审已通过审核的专家用户信息
             listM = userInfoAuditMapper.
-                    selectExperInfoByQueryFields(exportExcelType.getQueryFields(), 3, 1);//初审已通过审核的专家用户信息
+                    selectExpertInfoAuditByQueryFields(exportExcelType.getQueryFields(), 3, 1);//初审已通过审核的专家用户信息
         } else if (typeCode == ExcelType.UserInfoAudit_Refuse_Expert.getTypeCode()) {//初审已拒绝的用户审核信息
             listM = userInfoAuditMapper.
-                    selectExperInfoByQueryFields(exportExcelType.getQueryFields(), 2, 1);//初审已拒绝的用户审核信息
+                    selectExpertInfoAuditByQueryFields(exportExcelType.getQueryFields(), 2, 1);//初审已拒绝的用户审核信息
         }else if (typeCode == ExcelType.UserInfoAuditChange_NotRefer_Expert.getTypeCode()) {//变更审核-未审核的专家用户信息
             listM = userInfoAuditMapper.
-                    selectExperInfoByQueryFields(exportExcelType.getQueryFields(), 1, 2);//变更审核-未审核的专家用户信息
+                    selectExpertInfoAuditByQueryFields(exportExcelType.getQueryFields(), 1, 2);//变更审核-未审核的专家用户信息
         }else if (typeCode == ExcelType.UserInfoAuditChange_Pass_Expert.getTypeCode()) {//变更审核-已通过的专家用户信息
             listM = userInfoAuditMapper.
-                    selectExperInfoByQueryFields(exportExcelType.getQueryFields(), 3, 2);//变更审核-已通过的专家用户信息
+                    selectExpertInfoAuditByQueryFields(exportExcelType.getQueryFields(), 3, 2);//变更审核-已通过的专家用户信息
         }else if (typeCode == ExcelType.UserInfoAuditChange_Refuse_Expert.getTypeCode()) {//变更审核-已拒绝的专家用户信息
             listM = userInfoAuditMapper.
-                    selectExperInfoByQueryFields(exportExcelType.getQueryFields(), 2, 2);//变更审核-已拒绝的专家用户信息
+                    selectExpertInfoAuditByQueryFields(exportExcelType.getQueryFields(), 2, 2);//变更审核-已拒绝的专家用户信息
         }else if (typeCode == ExcelType.UserInfoAudit_Organization_all.getTypeCode()) {//第三方机构用户审核信息
             listM = userInfoAuditMapper.
-                    selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 0, 0);//第三方机构用户审核信息
+                    selectOrganizationInfoAuditByQueryFields(exportExcelType.getQueryFields(), 0, 0);//第三方机构用户审核信息
         }else if (typeCode == ExcelType.UserInfoAudit_Organization.getTypeCode()) {//初审审核-第三方机构用户审核信息
             listM = userInfoAuditMapper.
-                    selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 0, 1);//初审审核-第三方机构用户审核信息
+                    selectOrganizationInfoAuditByQueryFields(exportExcelType.getQueryFields(), 0, 1);//初审审核-第三方机构用户审核信息
         }else if (typeCode == ExcelType.UserInfoAuditChange_Organization.getTypeCode()) {//变更审核-第三方机构用户审核信息
             listM = userInfoAuditMapper.
-                    selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 0, 2);//变更审核-第三方机构用户审核信息
+                    selectOrganizationInfoAuditByQueryFields(exportExcelType.getQueryFields(), 0, 2);//变更审核-第三方机构用户审核信息
         }else if (typeCode == ExcelType.UserInfoAudit_NotRefer_Organization.getTypeCode()) {//初审审核-未审核的第三方机构用户审核信息
             listM = userInfoAuditMapper.
-                    selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 1, 1);//初审审核-未审核的第三方机构用户审核信息
+                    selectOrganizationInfoAuditByQueryFields(exportExcelType.getQueryFields(), 1, 1);//初审审核-未审核的第三方机构用户审核信息
         }else if (typeCode == ExcelType.UserInfoAudit_Pass_Organization.getTypeCode()) {//初审审核-已通过的第三方机构用户审核信息
             listM = userInfoAuditMapper.
-                    selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 3, 1);//初审审核-已通过的第三方机构用户审核信息
+                    selectOrganizationInfoAuditByQueryFields(exportExcelType.getQueryFields(), 3, 1);//初审审核-已通过的第三方机构用户审核信息
         }else if (typeCode == ExcelType.UserInfoAudit_Refuse_Organization.getTypeCode()) {//初审审核-已拒绝的第三方机构用户审核信息
             listM = userInfoAuditMapper.
-                    selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 2, 1);//初审审核-已拒绝的第三方机构用户审核信息
+                    selectOrganizationInfoAuditByQueryFields(exportExcelType.getQueryFields(), 2, 1);//初审审核-已拒绝的第三方机构用户审核信息
         }else if (typeCode == ExcelType.UserInfoAuditChange_NotRefer_Organization.getTypeCode()) {//变更审核-未审核的第三方机构用户审核信息
             listM = userInfoAuditMapper.
-                    selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 1, 2);//变更审核-未审核的第三方机构用户审核信息
+                    selectOrganizationInfoAuditByQueryFields(exportExcelType.getQueryFields(), 1, 2);//变更审核-未审核的第三方机构用户审核信息
         }else if (typeCode == ExcelType.UserInfoAuditChange_Pass_Organization.getTypeCode()) {//变更审核-已通过的第三方机构用户审核信息
             listM = userInfoAuditMapper.
-                    selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 3, 2);//变更审核-已通过的第三方机构用户审核信息
+                    selectOrganizationInfoAuditByQueryFields(exportExcelType.getQueryFields(), 3, 2);//变更审核-已通过的第三方机构用户审核信息
         }else if (typeCode == ExcelType.UserInfoAuditChange_Refuse_Organization.getTypeCode()) {//变更审核-已拒绝的第三方机构用户审核信息
             listM = userInfoAuditMapper.
-                    selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 2, 2);//变更审核-已拒绝的第三方机构用户审核信息
-        }else if (typeCode == ExcelType.UserInfoAudit_Expert_All_Pass.getTypeCode()) {//已通过的专家用户信息
+                    selectOrganizationInfoAuditByQueryFields(exportExcelType.getQueryFields(), 2, 2);//变更审核-已拒绝的第三方机构用户审核信息
+        }else if (typeCode == ExcelType.UserInfoAudit_Expert_All_Pass.getTypeCode()) {//已通过的专家用户审核信息
             listM = userInfoAuditMapper.
-                    selectExperInfoByQueryFields(exportExcelType.getQueryFields(), 3, 0);//已通过的专家用户信息
-        }else if (typeCode == ExcelType.UserInfoAudit_Organization_All_Pass.getTypeCode()) {//已通过的第三方机构用户信息
+                    selectExpertInfoAuditByQueryFields(exportExcelType.getQueryFields(), 3, 0);//已通过的专家用户信息
+        }else if (typeCode == ExcelType.UserInfoAudit_Organization_All_Pass.getTypeCode()) {//已通过的第三方机构用户审核信息
             listM = userInfoAuditMapper.
-                    selectOrganizationInfoByQueryFields(exportExcelType.getQueryFields(), 3, 0);//已通过的第三方机构用户信息
+                    selectOrganizationInfoAuditByQueryFields(exportExcelType.getQueryFields(), 3, 0);//已通过的第三方机构用户信息
+        }else if (typeCode == ExcelType.UserInfo_Expert_Authenticated.getTypeCode()) {//已认证审核的专家信息
+            listM =userMapper.selectExperInfoByQueryFields(exportExcelType.getQueryFields(),new Object[]{2,3});//已认证审核的专家信息
+        }else if (typeCode == ExcelType.UserInfo_Organization_Authenticated.getTypeCode()) {//已认证审核的专家信息
+            listM =userMapper.selectOrganizationByQueryFields(exportExcelType.getQueryFields(),new Object[]{2,3});//已认证审核的第三方机构信息
         }
         ;
 
@@ -156,14 +163,14 @@ public class ExcelManageServiceImpl implements ExcelManageService {
         }
         return true;
     }
-    //导出专家信息数据为excel文件
+    //导出审核专家的信息数据为excel文件
     @Override
     public Boolean exportExcelExpertAudit(OutputStream os, Integer user_info_audit_state, Integer user_info_audit_type) {
         List listM ;//接收数据库返回数据
-        String[]s=ExcelFieldMap.expertQueryFields;
+        String[]s=ExcelFieldMap.expertQueryFieldsAudit;
         listM = userInfoAuditMapper.
-                selectExperInfoByQueryFields(s,user_info_audit_state,user_info_audit_type);
-        ExcelDataEntity ede=new ExcelDataEntity(listM,"专家审核信息",ExcelFieldMap.expertExcelTitle);
+                selectExpertInfoAuditByQueryFields(s,user_info_audit_state,user_info_audit_type);
+        ExcelDataEntity ede=new ExcelDataEntity(listM,"专家审核信息",ExcelFieldMap.expertExcelTitleAudit);
         try {
             excelVice.exportExcel(os, ede);
         } catch (Exception e) {
@@ -171,14 +178,14 @@ public class ExcelManageServiceImpl implements ExcelManageService {
         }
         return true;
     }
-    //导出第三方机构信息数据为excel文件
+    //导出审核第三方机构的信息数据为excel文件
     @Override
     public Boolean exportExcelOrganizationAudit(OutputStream os, Integer user_info_audit_state, Integer user_info_audit_type) {
         List listM ;//接收数据库返回数据
-        String[] s=ExcelFieldMap.organizationQueryFields;
+        String[] s=ExcelFieldMap.organizationQueryFieldsAudit;
         listM = userInfoAuditMapper.
-                selectOrganizationInfoByQueryFields(ExcelFieldMap.organizationQueryFields,user_info_audit_state,user_info_audit_type);
-        ExcelDataEntity ede=new ExcelDataEntity(listM,"第三方机构审核信息",ExcelFieldMap.organizationExcelTitle);
+                selectOrganizationInfoAuditByQueryFields(ExcelFieldMap.organizationQueryFieldsAudit,user_info_audit_state,user_info_audit_type);
+        ExcelDataEntity ede=new ExcelDataEntity(listM,"第三方机构审核信息",ExcelFieldMap.organizationExcelTitleAudit);
         try {
             excelVice.exportExcel(os, ede);
         } catch (Exception e) {

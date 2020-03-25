@@ -591,6 +591,135 @@
         </if>
     </select>
 
+    <select id="selectExperInfoByQueryFields" resultType="java.util.LinkedHashMap">
+        SELECT
+        <foreach collection="queryFields" item="queryField" separator=",">
+            <choose>
+                <when test="queryField.equals('user_register_time')">
+                    FROM_UNIXTIME( ${queryField} / 1000, '%Y-%m-%d %H:%i:%s' ) as user_register_time
+                </when>
+                <when test="queryField.equals('user_role')">
+                    CASE
+                    user_role
+                    WHEN 1 THEN
+                    "专家"
+                    WHEN 2 THEN
+                    "第三方机构"
+                    WHEN 3 THEN
+                    "煤监局"
+                    WHEN 4 THEN
+                    "能源局"
+                    END as user_role
+                </when>
+                <when test="queryField.equals('user_state')">
+                    CASE
+                    user_state
+                    WHEN 1 THEN
+                    '未认证审核'
+                    WHEN 2 THEN
+                    '已认证审核'
+                    WHEN 3 THEN
+                    '解聘'
+                    END as user_state
+                </when>
+                <when test="queryField.equals('expert_info_education')">
+                    CASE expert_info_education
+                    WHEN 1 THEN '小学'
+                    WHEN 2 THEN '初中'
+                    WHEN 3 THEN '高中'
+                    WHEN 4 THEN '大学'
+                    WHEN 5 THEN '硕士'
+                    WHEN 6 THEN '博士'
+                    WHEN 7 THEN '更多'
+                    END as expert_info_education
+                </when>
+                <when test="queryField.equals('expert_info_learnmajor')">
+                    specialtyMap(${queryField},'expert_info_learnmajor','|') as expert_info_learnmajor
+                </when>
+                <when test="queryField.equals('expert_info_workmajor')">
+                    specialtyMap(${queryField},'expert_info_workmajor','|') as expert_info_workmajor
+                </when>
+                <when test="queryField.equals('expert_info_declaredesign_design')">
+                    specialtyMap(${queryField},'expert_info_declaredesign_design','|') as
+                    expert_info_declaredesign_design
+                </when>
+                <when test="queryField.equals('expert_info_declaredesign_safety')">
+                    specialtyMap(${queryField},'expert_info_declaredesign_safety','|') as
+                    expert_info_declaredesign_safety
+                </when>
+                <when test="queryField.equals('expert_info_gender')">
+                    case ${queryField}
+                    when 1 then '男'
+                    when 2 then '女'
+                    END AS expert_info_gender
+                </when>
+                <otherwise>${queryField}</otherwise>
+            </choose>
+        </foreach>
+        FROM user u
+        LEFT JOIN expert_info ei ON ( u.info_id = ei.expert_info_id )
+        where user_role =1
+        <if test="userStates != null or userStates != '0'.toString()">
+            and user_state IN
+            <foreach collection="userStates" item="userState" open="(" close=")" separator=",">
+                #{userState}
+            </foreach>
+        </if>
+        and TRIM(user_id)!='null'
+    </select>
+    <select id="selectOrganizationByQueryFields" resultType="java.util.LinkedHashMap">
+        select
+        <foreach collection="queryFields" separator="," item="queryField">
+            <choose>
+                <when test="queryField.equals('user_register_time')">
+                    FROM_UNIXTIME(user_register_time/1000,'%Y-%m-%d %H:%i:%s') as user_register_time
+                </when>
+                <when test="queryField.equals('user_role')">
+                    CASE
+                    user_role
+                    WHEN 1 THEN
+                    "专家"
+                    WHEN 2 THEN
+                    "第三方机构"
+                    WHEN 3 THEN
+                    "煤监局"
+                    WHEN 4 THEN
+                    "能源局"
+                    END as user_role
+                </when>
+                <when test="queryField.equals('user_state')">
+                    CASE
+                    user_state
+                    WHEN 1 THEN
+                    '未认证审核'
+                    WHEN 2 THEN
+                    '已认证审核'
+                    WHEN 3 THEN
+                    '解聘'
+                    END as user_state
+                </when>
+               <when test="queryField.equals('user_info_audit_type')">
+                    CASE user_info_audit_type
+                    WHEN 1 THEN "初审"
+                    WHEN 2 THEN "变更审核"
+                    END as user_info_audit_type
+                </when>
+                <otherwise>
+                    ${queryField}
+                </otherwise>
+            </choose>
+        </foreach>
+        FROM
+        user u
+        LEFT JOIN organization_info oi ON (u.info_id=oi.organization_info_id )
+        where user_role =2
+        <if test="userStates != null or userStates != '0'.toString()">
+            and user_state IN
+            <foreach collection="userStates" item="userState" open="(" close=")" separator=",">
+                #{userState}
+            </foreach>
+        </if>
+    </select>
 
 
 </mapper>

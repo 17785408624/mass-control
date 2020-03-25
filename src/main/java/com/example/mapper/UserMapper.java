@@ -254,5 +254,20 @@ public interface UserMapper {
                              @Param("orderRequests") OrderRequest[] orderRequests,
                              @Param("condition") String condition);
 
+    /**
+     *  查询用户信息列表
+     * @param queryFields 需要查询的字段
+     * @param userStates 用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
+     * @return
+     */
+    List selectExperInfoByQueryFields(@Param("queryFields") String[]queryFields,@Param("userStates") Object[]userStates);
+    /**
+     *  查询第三方机构信息列表
+     * @param queryFields 需要查询的字段
+     * @param userStates 用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
+     * @return
+     */
+    List selectOrganizationByQueryFields(@Param("queryFields") String[]queryFields,@Param("userStates") Object[]userStates);
+
 
 }
