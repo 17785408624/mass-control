@@ -244,7 +244,7 @@
         update
         user
         set
-        <if test="user_state != '0' and user_state != null ">
+        <if test="user_state != '0'.toString() and user_state != null ">
             user_state=#{user_state},
         </if>
         info_id =#{info_id}
