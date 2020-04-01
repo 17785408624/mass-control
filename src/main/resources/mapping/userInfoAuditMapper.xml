@@ -99,7 +99,7 @@
     <select id="selectFileInfoeEntityFullByFileId" resultType="FileInfoeEntity">
         select *
         from file_info
-        where file_info_id = #{file_info_id}
+        where file_info_id in ( ${file_info_id})
     </select>
     <select id="selectUserInfoAuditByUid" resultType="UserInfoAuditEntity">
         SELECT *

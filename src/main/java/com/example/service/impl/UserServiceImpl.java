@@ -267,7 +267,7 @@ public class UserServiceImpl implements UserService {
         pme.setPhoneNum(phoneNum);//接收的手机号码
         pme.setPhoneMessagesType(PhoneMessagesType.messagesBoundCod);//短信类型
         String codeNum= PublicUtil.getRandomNum(6);//短信随机验证码
-        pme.setSendData(new String[]{codeNum,chValidity});//发送短信
+        pme.setSendData(new String[]{codeNum,chValidity});//自定义的发送信息
         Map result= null;//发送短信后的返回结果
         try {
             result = phoneMessages.sedMessages(pme);//发送短信

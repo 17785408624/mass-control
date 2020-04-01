@@ -13,7 +13,7 @@ public class OrganizationAuditResults {
     private Integer user_id;
     private OrganizationInfoEntity OrganizationInfoEntity;//第三方机构信息
     private FileInfoeEntity organization_license_file;//营业执照
-    private FileInfoeEntity organization_adjunct_file;//附件文件
+    private List<FileInfoeEntity> organization_adjunct_file;//附件文件
     private List<OrganizationInfoCareermanEntity> oiceList;//机构专业人员信息
 
     public OrganizationAuditResults() {
@@ -35,11 +35,11 @@ public class OrganizationAuditResults {
         this.organization_license_file = organization_license_file;
     }
 
-    public FileInfoeEntity getOrganization_adjunct_file() {
+    public List<FileInfoeEntity> getOrganization_adjunct_file() {
         return organization_adjunct_file;
     }
 
-    public void setOrganization_adjunct_file(FileInfoeEntity organization_adjunct_file) {
+    public void setOrganization_adjunct_file(List<FileInfoeEntity> organization_adjunct_file) {
         this.organization_adjunct_file = organization_adjunct_file;
     }
 

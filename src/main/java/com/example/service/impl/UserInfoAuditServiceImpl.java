@@ -44,20 +44,20 @@ public class UserInfoAuditServiceImpl implements UserInfoAuditService {
         List<OrganizationInfoCareermanEntity>oiceList=
                 userInfoAuditMapper.selectOrganizationInfoCareermanFullByOrgInfoId(organization_info_id);
         //营业执照文件id
-        Integer organization_license_file_info_id=oie.getOrganization_license_file_info_id();
+        String organization_license_file_info_id=oie.getOrganization_license_file_info_id().toString();
 
         if (organization_license_file_info_id!=null){
             //营业执照文件
-            FileInfoeEntity organization_license_file=
+            List<FileInfoeEntity> organization_license_file=
                     userInfoAuditMapper.
                             selectFileInfoeEntityFullByFileId(organization_license_file_info_id);
-            oar.setOrganization_license_file(organization_license_file);
+            oar.setOrganization_license_file(organization_license_file.get(0));
         }
         //附件文件id
-        Integer organization_adjunct_file_info_id=oie.getOrganization_adjunct_file_info_id();
+        String organization_adjunct_file_info_id=oie.getOrganization_adjunct_file_info_id();
         if(organization_adjunct_file_info_id!=null){
             //附件文件
-            FileInfoeEntity organization_adjunct_file=
+            List<FileInfoeEntity> organization_adjunct_file=
                     userInfoAuditMapper.
                             selectFileInfoeEntityFullByFileId(organization_adjunct_file_info_id);
             oar.setOrganization_adjunct_file(organization_adjunct_file);
@@ -175,20 +175,20 @@ public class UserInfoAuditServiceImpl implements UserInfoAuditService {
                 userInfoAuditMapper.selectExpertInfoFull(expert_info_id);
         eir.setExpertInfoEntity(eie);
         //照片id
-        Integer expert_info_picture_file_info_id=eie.getExpert_info_picture_file_info_id();
+        String expert_info_picture_file_info_id=eie.getExpert_info_picture_file_info_id().toString();
 
         if (expert_info_picture_file_info_id!=null){
             //营业执照文件
-            FileInfoeEntity expert_info_picture_file=
+            List<FileInfoeEntity> expert_info_picture_file=
                     userInfoAuditMapper.
                             selectFileInfoeEntityFullByFileId(expert_info_picture_file_info_id);
-            eir.setExpert_info_picture_file(expert_info_picture_file);
+            eir.setExpert_info_picture_file(expert_info_picture_file.get(0));
         }
         //附件文件id
-        Integer expert_info_jadjunct_file_info_id=eie.getExpert_info_jadjunct_file_info_id();
+        String expert_info_jadjunct_file_info_id=eie.getExpert_info_jadjunct_file_info_id();
         if(expert_info_jadjunct_file_info_id!=null){
             //附件文件
-            FileInfoeEntity expert_info_jadjunct_file=
+            List<FileInfoeEntity> expert_info_jadjunct_file=
                     userInfoAuditMapper.
                             selectFileInfoeEntityFullByFileId(expert_info_jadjunct_file_info_id);
             eir.setExpert_info_jadjunct_file(expert_info_jadjunct_file);
@@ -209,22 +209,22 @@ public class UserInfoAuditServiceImpl implements UserInfoAuditService {
                 userInfoAuditMapper.
                         selectOrganizationInfoCareermanFullByOrgInfoId(organization_info_id);
         //营业执照文件id
-        Integer organization_license_file_info_id=oie.getOrganization_license_file_info_id();
+        String organization_license_file_info_id=oie.getOrganization_license_file_info_id()==null?null:oie.getOrganization_license_file_info_id().toString();
 
         if (organization_license_file_info_id!=null){
             //营业执照文件
-            FileInfoeEntity organization_license_file=
+            List<FileInfoeEntity> organization_license_file=
                     userInfoAuditMapper.
                             selectFileInfoeEntityFullByFileId(organization_license_file_info_id);
-            oar.setOrganization_license_file(organization_license_file);
+            oar.setOrganization_license_file(organization_license_file.get(0));
         }
         //附件文件id
-        Integer organization_adjunct_file_info_id=oie.getOrganization_adjunct_file_info_id();
-        if(organization_adjunct_file_info_id!=null){
+        String organization_adjunct_file_info_ids=oie.getOrganization_adjunct_file_info_id();
+        if(organization_adjunct_file_info_ids!=null){
             //附件文件
-            FileInfoeEntity organization_adjunct_file=
+           List<FileInfoeEntity>  organization_adjunct_file=
                     userInfoAuditMapper.
-                            selectFileInfoeEntityFullByFileId(organization_adjunct_file_info_id);
+                            selectFileInfoeEntityFullByFileId(organization_adjunct_file_info_ids);
             oar.setOrganization_adjunct_file(organization_adjunct_file);
         }
         oar.setOiceList(oiceList);
@@ -241,20 +241,20 @@ public class UserInfoAuditServiceImpl implements UserInfoAuditService {
                 userInfoAuditMapper.selectExpertInfoFull(expert_info_id);
         eir.setExpertInfoEntity(eie);
         //照片id
-        Integer expert_info_picture_file_info_id=eie.getExpert_info_picture_file_info_id();
+        String expert_info_picture_file_info_id=eie.getExpert_info_picture_file_info_id().toString();
 
         if (expert_info_picture_file_info_id!=null){
             //营业执照文件
-            FileInfoeEntity expert_info_picture_file=
+            List<FileInfoeEntity> expert_info_picture_file=
                     userInfoAuditMapper.
                             selectFileInfoeEntityFullByFileId(expert_info_picture_file_info_id);
-            eir.setExpert_info_picture_file(expert_info_picture_file);
+            eir.setExpert_info_picture_file(expert_info_picture_file.get(0));
         }
         //附件文件id
-        Integer expert_info_jadjunct_file_info_id=eie.getExpert_info_jadjunct_file_info_id();
+        String expert_info_jadjunct_file_info_id=eie.getExpert_info_jadjunct_file_info_id();
         if(expert_info_jadjunct_file_info_id!=null){
             //附件文件
-            FileInfoeEntity expert_info_jadjunct_file=
+            List<FileInfoeEntity> expert_info_jadjunct_file=
                     userInfoAuditMapper.
                             selectFileInfoeEntityFullByFileId(expert_info_jadjunct_file_info_id);
             eir.setExpert_info_jadjunct_file(expert_info_jadjunct_file);

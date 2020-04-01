@@ -56,7 +56,7 @@ public class RonglianPhoneMessages implements PhoneMessages{
         sdk.setAccount(accountSId, accountToken);
         sdk.setAppId(appId);
         sdk.setBodyType(BodyType.Type_JSON);
-        HashMap<String, Object> result = sdk.sendTemplateSMS(pme.getPhoneNum(), templateId, pme.getSendData());
+        HashMap<String, Object> result = sdk.sendTemplateSMS(pme.getPhoneNum(), templateId, pme.getSendData());//发送短信
         result.put("templateContent",templateContent);
         if ("000000".equals(result.get("statusCode"))) {
             return result;

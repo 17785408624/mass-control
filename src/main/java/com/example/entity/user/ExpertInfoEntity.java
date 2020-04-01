@@ -39,7 +39,7 @@ public class ExpertInfoEntity {
     private String expert_info_awardrecord;//受奖励情况
     private String expert_info_researchachievement;//安全生产相关工作主要业绩及研究成果
     private Integer expert_info_picture_file_info_id;//照片文件id
-    private Integer expert_info_jadjunct_file_info_id;//附件id
+    private String expert_info_jadjunct_file_info_id;//附件id
 
     public Integer getExpert_info_id() {
         return expert_info_id;
@@ -262,11 +262,11 @@ public class ExpertInfoEntity {
         this.expert_info_researchachievement = expert_info_researchachievement;
     }
 
-    public Integer getExpert_info_jadjunct_file_info_id() {
+    public String getExpert_info_jadjunct_file_info_id() {
         return expert_info_jadjunct_file_info_id;
     }
 
-    public void setExpert_info_jadjunct_file_info_id(Integer expert_info_jadjunct_file_info_id) {
+    public void setExpert_info_jadjunct_file_info_id(String expert_info_jadjunct_file_info_id) {
         this.expert_info_jadjunct_file_info_id = expert_info_jadjunct_file_info_id;
     }
 

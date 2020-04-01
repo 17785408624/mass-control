@@ -3,11 +3,13 @@ package com.example.entity.resultsparam;
 import com.example.entity.common.FileInfoeEntity;
 import com.example.entity.user.ExpertInfoEntity;
 
+import java.util.List;
+
 public class ExpertInfoResults {
     private Integer user_id;
     private ExpertInfoEntity expertInfoEntity;//专家信息
     private FileInfoeEntity expert_info_picture_file;//照片文件
-    private FileInfoeEntity expert_info_jadjunct_file;//附件文件
+    private List<FileInfoeEntity> expert_info_jadjunct_file;//附件文件
 
     public ExpertInfoEntity getExpertInfoEntity() {
         return expertInfoEntity;
@@ -25,11 +27,11 @@ public class ExpertInfoResults {
         this.expert_info_picture_file = expert_info_picture_file;
     }
 
-    public FileInfoeEntity getExpert_info_jadjunct_file() {
+    public List<FileInfoeEntity> getExpert_info_jadjunct_file() {
         return expert_info_jadjunct_file;
     }
 
-    public void setExpert_info_jadjunct_file(FileInfoeEntity expert_info_jadjunct_file) {
+    public void setExpert_info_jadjunct_file(List<FileInfoeEntity> expert_info_jadjunct_file) {
         this.expert_info_jadjunct_file = expert_info_jadjunct_file;
     }
 

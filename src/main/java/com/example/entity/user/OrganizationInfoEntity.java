@@ -1,5 +1,7 @@
 package com.example.entity.user;
 
+import java.util.List;
+
 /**
  * 第三方机构信息
  */
@@ -16,7 +18,7 @@ public class OrganizationInfoEntity {
     private String organization_principal_mobilephone;//法定代表人移动电话
     private String organization_performance_content;//组织业绩文本内容
     private Integer organization_license_file_info_id;//营业执照文件id
-    private Integer organization_adjunct_file_info_id;//附件文件id
+    private String organization_adjunct_file_info_id;//附件文件id
 
     public int getOrganization_info_id() {
         return organization_info_id;
@@ -115,11 +117,11 @@ public class OrganizationInfoEntity {
         this.organization_license_file_info_id = organization_license_file_info_id;
     }
 
-    public Integer getOrganization_adjunct_file_info_id() {
+    public String getOrganization_adjunct_file_info_id() {
         return organization_adjunct_file_info_id;
     }
 
-    public void setOrganization_adjunct_file_info_id(Integer organization_adjunct_file_info_id) {
+    public void setOrganization_adjunct_file_info_id(String organization_adjunct_file_info_id) {
         this.organization_adjunct_file_info_id = organization_adjunct_file_info_id;
     }
 }

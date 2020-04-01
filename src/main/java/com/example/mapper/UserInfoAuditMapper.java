@@ -65,10 +65,10 @@ public interface UserInfoAuditMapper {
 
     /**
      * 通过文件id查询文件信息
-     * @param file_info_id
+     * @param file_info_ids 文件id
      * @return
      */
-    FileInfoeEntity selectFileInfoeEntityFullByFileId(int file_info_id);
+    List<FileInfoeEntity> selectFileInfoeEntityFullByFileId(@Param("file_info_id") String file_info_ids);
 
     /**
      * 通过用户id查询审核信息
