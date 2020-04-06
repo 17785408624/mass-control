@@ -2,6 +2,7 @@ package com.util;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 
 public class PublicUtil {
@@ -37,10 +38,16 @@ public class PublicUtil {
      * @return true为没有设置值
      */
     public static Boolean mapKeyIsNull_keyString(Map map, String mapKey) {
-        if (map != null && map.containsKey(mapKey) && map.get(mapKey) != null && !map.get(mapKey).equals(null) && !map.get(mapKey).equals(" ") && !map.get(mapKey).equals("")) {
-            return false;
+        if (map == null || map.containsKey(mapKey) || map.get(mapKey) == null || map.get(mapKey).equals(null) ||
+                map.get(mapKey).equals(" ") || map.get(mapKey).equals("")) {
+            return true;
         }
-        return true;
+        if(map.get(mapKey) instanceof  List){
+            if(((List)map.get(mapKey)).size()<1){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

@@ -269,5 +269,41 @@ public interface UserMapper {
      */
     List selectOrganizationByQueryFields(@Param("queryFields") String[]queryFields,@Param("userStates") Object[]userStates);
 
+    /**
+     * 查询所有专家的公司名
+     * @param repetition 是否显示多个重复公司名
+     * @return
+     */
+    String[] selectExpertExpertCompanyname(@Param("repetition") Boolean repetition);
+
+    /**
+     * 查询各个所学专业从事专业的总人数
+     * @param types expert_info_learnmajor所学专业 expert_info_workmajor从事专业，多个已or进行链接
+     * @param majors 专业code  1采矿，2露采，3选煤，4矿山机电，5机械，6电气-供配电，7电气-自动控制，8电气-通信，9电气-信号，10建筑，11结构，
+     *                12给排水，13暖通空调，14环保，15总图，16运输
+     * @return
+     */
+    List selectExpertMajorSum(@Param("types") Object[] types,@Param("majors")Object[] majors);
+
+    /**
+     * 查询各个申报专业的总人数
+     * @param types expert_info_declaredesign_design 技术报告咨询审查类 ,expert_info_declaredesign_safety  安全生产检查类
+     * @param declaredesigns 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+     * @return
+     */
+    List selectExpertdeclaredesignSum(@Param("types") Object[] types,@Param("declaredesigns")Object[] declaredesigns);
+
+    /**
+     * 专业作为条件进行专家表分组查询
+     * @param domain
+     *  declaredesign申报专业技术报告咨询审查类和申报专业安全生产检查类
+     * declaredesign_design 申报专业技术报告咨询审查类 declaredesign_safety  申报专业安全生产检查类
+     * major 所学专业和从事专业
+     *learnmajor所学专业 workmajor从事专业
+     * 申报专业不能和所学专业与从事专业进行同时分组。
+     * @param expert_info_educations 学历
+     * @return
+     */
+    List selectExpertGroupDomain(@Param("domain")String domain,@Param("expert_info_educations") Object[] expert_info_educations);
 
 }

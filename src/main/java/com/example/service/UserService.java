@@ -198,6 +198,32 @@ public interface UserService {
 	 */
 	List findOrganizationList(PageOderRequest pageOderRequest,Object[] userStates,String condition);
 
+	/**
+	 * 查询所有专家的公司名
+	 * @param repetition 是否显示多个重复公司名
+	 * @return
+	 */
+	String[] getExpertExpertCompanyname(Boolean repetition);
+
+	/**
+	 * 查询所学专业从事专业的总人数
+	 * @param types expert_info_learnmajor 所学专业 expert_info_workmajor 从事专业，多个已or进行链接
+	 *              为null则视为查询全部
+	 * @param majors 专业code  1采矿，2露采，3选煤，4矿山机电，5机械，6电气-供配电，7电气-自动控制，8电气-通信，9电气-信号，10建筑，11结构，
+	 *                 12给排水，13暖通空调，14环保，15总图，16运输 为null则视为查询全部
+	 * @return
+	 */
+	List findExpertMajorSum(Object[] types,Object[] majors);
+
+	/**
+	 * 查询各个申报专业的总人数
+	 * @param types expert_info_declaredesign_design 技术报告咨询审查类 ,expert_info_declaredesign_safety  安全生产检查类
+	 *              为null则视为查询全部
+	 * @param declaredesigns 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+	 *                       为null则视为查询全部
+	 * @return
+	 */
+	List findExpertdeclaredesignSum(Object[] types,Object[] declaredesigns);
 
 
 }

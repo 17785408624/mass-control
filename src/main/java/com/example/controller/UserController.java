@@ -458,6 +458,7 @@ public class UserController {
 
     /**
      * 解聘用户
+     *
      * @param param
      * @return
      */
@@ -468,12 +469,14 @@ public class UserController {
         if (!userService.dismissUser(uIds)) {
             vcp.setMessage("解聘用户请求错误");
             vcp.setState(1);
-        } ;
+        }
+        ;
         return vcp;
     }
 
     /**
      * 返聘用户
+     *
      * @param param
      * @return
      */
@@ -484,26 +487,28 @@ public class UserController {
         if (!userService.rehireUser(uIds)) {
             vcp.setMessage("返聘用户请求错误");
             vcp.setState(1);
-        } ;
+        }
+        ;
         return vcp;
     }
 
     /**
      * 查询专家用户信息列表
+     *
      * @param porm
      * @return
      */
     @RequestMapping("findExperListBstate")
     public VisitConsequenceParent findExperListBstate(@RequestBody PageOderRequestMap porm) {
-       Map param=porm.getParam();//前端传入的请求参数
-        String condition=param.get("condition").toString();//搜索条件
-        Object []userStates=null;//用户状态 1未认证审核 2已认证审核  3解聘
-        if(!PublicUtil.mapKeyIsNull_keyString(param,"userStates")){//前端是否传入用户状态参数
-            userStates= ((List) param.get("userStates")).toArray();
+        Map param = porm.getParam();//前端传入的请求参数
+        String condition = param.get("condition").toString();//搜索条件
+        Object[] userStates = null;//用户状态 1未认证审核 2已认证审核  3解聘
+        if (!PublicUtil.mapKeyIsNull_keyString(param, "userStates")) {//前端是否传入用户状态参数
+            userStates = ((List) param.get("userStates")).toArray();
 
         }
         VisitConsequenceParent vcp = new VisitConsequencePage();
-        List listM=userService.findExperList(porm,userStates,condition);
+        List listM = userService.findExperList(porm, userStates, condition);
         PageInfo a = new PageInfo<Map>(listM);
         vcp = PageUtils.getVisitConsequencePage(a);
         return vcp;
@@ -511,22 +516,78 @@ public class UserController {
 
     /**
      * 查询第三方发机构用户信息列表
+     *
      * @param porm
      * @return
      */
     @RequestMapping("findOrganizationListBstate")
     public VisitConsequenceParent findOrganizationListBstate(@RequestBody PageOderRequestMap porm) {
-        Map param=porm.getParam();//前端传入的请求参数
-        String condition=param.get("condition").toString();//搜索条件
-        Object []userStates=null;//用户状态 1未认证审核 2已认证审核  3解聘
-        if(!PublicUtil.mapKeyIsNull_keyString(param,"userStates")){//前端是否传入用户状态参数
-            userStates= ((List) param.get("userStates")).toArray();
+        Map param = porm.getParam();//前端传入的请求参数
+        String condition = param.get("condition").toString();//搜索条件
+        Object[] userStates = null;//用户状态 1未认证审核 2已认证审核  3解聘
+        if (!PublicUtil.mapKeyIsNull_keyString(param, "userStates")) {//前端是否传入用户状态参数
+            userStates = ((List) param.get("userStates")).toArray();
 
         }
         VisitConsequenceParent vcp = new VisitConsequencePage();
-        List listM=userService.findOrganizationList(porm,userStates,condition);
+        List listM = userService.findOrganizationList(porm, userStates, condition);
         PageInfo a = new PageInfo<Map>(listM);
         vcp = PageUtils.getVisitConsequencePage(a);
+        return vcp;
+    }
+
+    /**
+     * 查询所有的专家公司名
+     *
+     * @return
+     */
+    @RequestMapping("getExpertExpertCompanyname")
+    public VisitConsequenceParent getExpertExpertCompanyname() {
+        VisitConsequenceParent vcp = new VisitConsequenceParentImpl();
+        String[] conpanynames = userService.getExpertExpertCompanyname(false);
+        vcp.setObject(conpanynames);
+        return vcp;
+    }
+
+    /**
+     * 查询各个所学专业从事专业的总人数
+     *
+     * @return
+     */
+    @RequestMapping("findExpertMajorSum")
+    public VisitConsequenceParent findExpertMajorSum(@RequestBody Map param) {
+        Object[] types=null;
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"types")){
+            types= ((List) param.get("types")).toArray();//expert_info_learnmajor所学专业 expert_info_workmajor从事专业，多个已or进行链接
+        }
+        Object[] majors=null;
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"majors")){
+            majors=((List) param.get("majors")).toArray();//专业code  1采矿，2露采，3选煤，4矿山机电，5机械，6电气-供配电，7电气-自动控制，8电气-通信，9电气-信号，10建筑，11结构，
+            //12给排水，13暖通空调，14环保，15总图，16运输
+        }
+        VisitConsequenceParent vcp = new VisitConsequenceParentImpl();
+        List list=userService.findExpertMajorSum(types,majors);
+        vcp.setObject(list);
+        return vcp;
+    }
+    /**
+     * 查询各个申报专业的总人数
+     *
+     * @return
+     */
+    @RequestMapping("findExpertdeclaredesignSum")
+    public VisitConsequenceParent findExpertdeclaredesignSum(@RequestBody Map param) {
+        Object[] types=null;//expert_info_declaredesign_design 技术报告咨询审查类 ,expert_info_declaredesign_safety  安全生产检查类
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"types")){
+            types= ((List) param.get("types")).toArray();
+        }
+        Object[] declaredesigns=null;//1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"declaredesigns")){
+            declaredesigns=((List) param.get("declaredesigns")).toArray();
+        }
+        VisitConsequenceParent vcp = new VisitConsequenceParentImpl();
+        List list=userService.findExpertdeclaredesignSum(types,declaredesigns);
+        vcp.setObject(list);
         return vcp;
     }
 

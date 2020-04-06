@@ -162,9 +162,9 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
                 expert_info_workmajors);//查询符合条件的用户id
         List<Map> resultList = new ArrayList<>();//抽取后的用户信息
         if (userIds == null || userIds.length < 1) {
-            throw new OperationServiceException("没有符合条件的专家");
+            throw new OperationServiceException("没有符合学历条件的专家");
         } else if (userIds.length < extractNum) {
-            throw new OperationServiceException("符合条件的专家没有达到指定人数");
+            throw new OperationServiceException("符合学历条件的专家没有达到指定人数");
         }
         List<Map> listMap = userMapper.selectExpertInfoListById(userIds);//符合条件的用户信息
         if (extractNum >= listMap.size()) {

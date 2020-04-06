@@ -5,6 +5,7 @@ import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
 import com.example.entity.ProjectauditExpertInvite;
 import com.example.entity.requstparam.InsertPEinviteBatch;
 import com.example.entity.requstparam.PageRequest;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -69,4 +70,21 @@ public interface ProjectauditExpertInviteService {
      * @return
      */
     List<Map>findPeiByPid(Integer projectInfoId);
+
+    /**
+     * 抽取专家
+     *  @domainType 专业条件类型 declaredesign申报专业
+     * major 所学专业或从事专业
+     *
+     * 申报专业不能和所学专业与从事专业进行同时分组。
+     * @param expert_info_educations 学历
+     * @param domainCondition 抽取条件
+     * @param domain  分组字段-- declaredesign申报专业技术报告咨询审查类和申报专业安全生产检查类
+     *      declaredesign_design 申报专业技术报告咨询审查类 declaredesign_safety  申报专业安全生产检查类
+     *      major 所学专业和从事专业
+     *      learnmajor所学专业 workmajor从事专业
+     *      申报专业不能和所学专业与从事专业进行同时分组。
+     * @return
+     */
+   List extractionExpert(String domainType,String domain, Object[] expert_info_educations,Map domainCondition);
 }

@@ -184,4 +184,34 @@ public class ProjectauditEInviteController {
         return vc;
     };
 
+    /**
+     * 抽取专家
+     * @param param
+     * @return
+     */
+    @PostMapping("extractionExpert")
+    public VisitConsequenceParent extractionExpert( @RequestBody Map param){
+        String domain=null;
+        Object[] expert_info_educations=null;
+        String domainType=null;
+        Map domainCondition= null;
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"domainCondition")){
+            domain=param.get("domainCondition").toString();
+        }
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"domain")){
+            domain=param.get("domain").toString();
+        }
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"domainType")){
+            domain=param.get("domainType").toString();
+        }
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"expert_info_educations")){
+            expert_info_educations=((List)param.get("domain")).toArray();
+        }
+        //Integer projectInfoId= Integer.valueOf(String.valueOf(param.get("projectInfoId")));
+        VisitConsequenceParent vc=new VisitConsequenceParentImpl();
+        List list=projectauditExpertInviteService.extractionExpert(domainType,domain,expert_info_educations,domainCondition);
+        vc.setObject(list);
+        return vc;
+    };
+
 }
