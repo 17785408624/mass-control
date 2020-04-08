@@ -11,6 +11,7 @@ import com.example.entity.requstparam.InsertPEinviteBatch;
 import com.example.entity.requstparam.PageRequest;
 import com.example.mapper.*;
 import com.example.service.ProjectauditExpertInviteService;
+import com.example.service.vice.ExpertInfo;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,8 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
     ExpertAuditInfoMapper expertAuditInfoMapper;
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    ExpertInfo expertInfo;
 
     //添加项目审核邀请(专家组长)
     @Override
@@ -166,30 +169,15 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
         return projectauditExpertInviteMapper.selectPeiByPid(projectInfoId, new Integer[]{1, 2, 3});
     }
 
-    //专业作为条件进行专家表分组查询
+    //抽取专家
     @Override
-    public List extractionExpert(String domainType, String domain, Object[] expert_info_educations, Map domainCondition) {
-        String declaredesignDefult ="declaredesign";//申报专业默认分组字段
-        String majorDefult ="major";//所学专业默认分组字段
-        domainType=domainType==null?"default":domainType;
-        if (domain == null) {
-            switch (domainType) {
-                //declaredesign申报专业
-                case "declaredesign":
-                    domain=declaredesignDefult;
-                    break;
-                //所学专业或从事专业
-                case "major":
-                    domain=majorDefult;
-                    break;
-                default:
-                    domain=declaredesignDefult;
-                    break;
-            }
-
-        }
-        List userGroupDomain=userMapper.selectExpertGroupDomain(domain, expert_info_educations);
-       return null;
+    public List extractionExpert(String domainType, Object[] expert_info_educations, Object[] excludeCompanyNames,
+            List majorRequire,Integer priorityNum,boolean repeatedlyExtraction) {
+        String domainTypeDefult = "declaredesign";//申报专业默认分组字段
+        domainType = domainType == null || domainType.equals("") || domainType.equals(" ") ? "default" : domainTypeDefult;
+        List userGroupDomain = userMapper.selectExpertGroupDomain(domainType, expert_info_educations, excludeCompanyNames);//获取专业分组数据
+        String[]aaa=expertInfo.drawRandomExpert(userGroupDomain,majorRequire);
+        return userGroupDomain;
     }
 
     /**

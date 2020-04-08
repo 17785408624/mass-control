@@ -105,4 +105,9 @@ public interface ProjectInfoService {
      */
     public Map findProjectAuditInfo(Integer projectInfoId,Integer project_info_progress);
 
+    /**
+     * 将超过工作时间点的项目改变为等待批复
+     */
+    void projectProcessReply();
+
 }

@@ -203,7 +203,7 @@ public interface UserService {
 	 * @param repetition 是否显示多个重复公司名
 	 * @return
 	 */
-	String[] getExpertExpertCompanyname(Boolean repetition);
+	String[] getExpertCompanyname(Boolean repetition);
 
 	/**
 	 * 查询所学专业从事专业的总人数
@@ -211,9 +211,11 @@ public interface UserService {
 	 *              为null则视为查询全部
 	 * @param majors 专业code  1采矿，2露采，3选煤，4矿山机电，5机械，6电气-供配电，7电气-自动控制，8电气-通信，9电气-信号，10建筑，11结构，
 	 *                 12给排水，13暖通空调，14环保，15总图，16运输 为null则视为查询全部
+	 * @param expert_info_educations 学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
+	 * @param excludeCompanyNames 回避的公司名字
 	 * @return
 	 */
-	List findExpertMajorSum(Object[] types,Object[] majors);
+	List findExpertMajorSum(Object[] types,Object[] majors,Object[]expert_info_educations,Object[]excludeCompanyNames);
 
 	/**
 	 * 查询各个申报专业的总人数
@@ -221,9 +223,25 @@ public interface UserService {
 	 *              为null则视为查询全部
 	 * @param declaredesigns 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
 	 *                       为null则视为查询全部
+	 * @param expert_info_educations 学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
+	 * @param excludeCompanyNames 回避的公司名字
 	 * @return
 	 */
-	List findExpertdeclaredesignSum(Object[] types,Object[] declaredesigns);
+	List findExpertdeclaredesignSum(Object[] types,Object[] declaredesigns,Object[]expert_info_educations,Object[]excludeCompanyNames);
+    /**
+	 * 合并名字相似的专家公司信息
+	 * @param saveType 保持类型
+	 * @param isRenewal 是否清除现有保存的相似公司名数据重新保存
+	 */
+    void mergeSimilarityExpertCompany(String saveType,boolean isRenewal);
+
+	/**
+	 * 查询相似公司名称合并后的专家信息的公司名
+	 * @return
+	 */
+	String[] findSimilarityExpertCompany();
+
+
 
 
 }

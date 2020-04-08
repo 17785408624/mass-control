@@ -1,7 +1,12 @@
 package com.example.common.service;
 
 import com.example.mapper.ProjectInfoEntityMapper;
+import com.example.mapper.UserMapper;
+import com.example.service.ProjectInfoService;
+import com.example.service.UserService;
+import com.example.service.vice.ExpertInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -13,18 +18,24 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class ScheduledService {
+public class ScheduledService  implements InitializingBean {
     @Autowired
-    ProjectInfoEntityMapper projectInfoEntityMapper;
+    ProjectInfoService projectInfoService;
+    @Autowired
+    UserService userService;
+
     /**
      * 判断项目状态是否需要改变为等待批复
      */
-    @Scheduled(cron  = "0 0 0 * * ?")//每天0点执行
-    public void isProjectProcessReply(){
-        Integer[]projectInfoIds= projectInfoEntityMapper.
-                selectPidToReviewExpiration();//查询需要改变状态的项目id 查询超过工作时间点的项目
-        //修改项目状态为等待批复
-        projectInfoEntityMapper.updateProjectInfoStateByPIidBatch(projectInfoIds,5);
+    @Scheduled(cron = "0 0 0 * * ?")//每天0点执行
+    public void Service0h() {
+        projectInfoService.projectProcessReply();//将超过工作时间点的项目改变为等待批复
+        userService.mergeSimilarityExpertCompany("database",true);//合并相似的专家公司名
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        userService.mergeSimilarityExpertCompany("database",true);//合并相似的专家公司名
 
     }
 }

@@ -191,25 +191,32 @@ public class ProjectauditEInviteController {
      */
     @PostMapping("extractionExpert")
     public VisitConsequenceParent extractionExpert( @RequestBody Map param){
-        String domain=null;
-        Object[] expert_info_educations=null;
-        String domainType=null;
-        Map domainCondition= null;
-        if(!PublicUtil.mapKeyIsNull_keyString(param,"domainCondition")){
-            domain=param.get("domainCondition").toString();
-        }
-        if(!PublicUtil.mapKeyIsNull_keyString(param,"domain")){
-            domain=param.get("domain").toString();
+        Object[] expert_info_educations=null;//学历
+        String domainType=null;//专业类型
+        Object[] excludeCompanyNames= null;//回避公司名
+        List majorRequire=null;//专业要求
+        Integer priorityNum=null;//优先抽取审核项目机构的人数
+        Boolean repeatedlyExtraction=null;//同一人在不同专业是否能多次抽取
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"expert_info_educations")){
+            expert_info_educations=((List)param.get("expert_info_educations")).toArray();
         }
         if(!PublicUtil.mapKeyIsNull_keyString(param,"domainType")){
-            domain=param.get("domainType").toString();
+            domainType=param.get("domainType").toString();
         }
-        if(!PublicUtil.mapKeyIsNull_keyString(param,"expert_info_educations")){
-            expert_info_educations=((List)param.get("domain")).toArray();
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"excludeCompanyNames")){
+            excludeCompanyNames=((List)param.get("excludeCompanyNames")).toArray();
         }
-        //Integer projectInfoId= Integer.valueOf(String.valueOf(param.get("projectInfoId")));
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"majorRequire")){
+            majorRequire=((List)param.get("majorRequire"));
+        }
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"priorityNum")){
+            priorityNum=Integer.valueOf(param.get("priorityNum").toString());
+        }
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"repeatedlyExtraction")){
+            repeatedlyExtraction=Boolean.valueOf(param.get("repeatedlyExtraction").toString());
+        }
         VisitConsequenceParent vc=new VisitConsequenceParentImpl();
-        List list=projectauditExpertInviteService.extractionExpert(domainType,domain,expert_info_educations,domainCondition);
+        List list=projectauditExpertInviteService.extractionExpert(domainType,expert_info_educations,excludeCompanyNames,majorRequire,2,false);
         vc.setObject(list);
         return vc;
     };

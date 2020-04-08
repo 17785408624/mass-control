@@ -38,7 +38,7 @@ public class PublicUtil {
      * @return true为没有设置值
      */
     public static Boolean mapKeyIsNull_keyString(Map map, String mapKey) {
-        if (map == null || map.containsKey(mapKey) || map.get(mapKey) == null || map.get(mapKey).equals(null) ||
+        if (map == null || !map.containsKey(mapKey) || map.get(mapKey) == null || map.get(mapKey).equals(null) ||
                 map.get(mapKey).equals(" ") || map.get(mapKey).equals("")) {
             return true;
         }

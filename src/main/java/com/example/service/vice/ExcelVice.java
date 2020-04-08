@@ -21,7 +21,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-@Transactional(rollbackFor = Exception.class)
 @Service
 public class ExcelVice {
 

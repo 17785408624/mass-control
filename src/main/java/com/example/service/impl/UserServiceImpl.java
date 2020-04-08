@@ -21,6 +21,7 @@ import com.example.mapper.UserInfoAuditMapper;
 import com.example.mapper.UserMapper;
 import com.example.mapper.redis.RedisUtils;
 import com.example.service.UserService;
+import com.example.service.vice.ExpertInfo;
 import com.github.pagehelper.PageHelper;
 import com.util.EncryptUtil;
 import com.util.MyMD5Util;
@@ -41,7 +42,6 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
     @Autowired
     UserInfoAuditMapper userInfoAuditMapper;
-
     @Autowired
     RonglianPhoneMessages ronglianPhoneMessages;
     @Autowired
@@ -52,6 +52,8 @@ public class UserServiceImpl implements UserService {
     UserAuthenticateMapper userAuthenticateMapper;
     @Autowired
     PhoneMessages phoneMessages;
+    @Autowired
+    ExpertInfo expertInfo;
 
     @Override
     public boolean regUser(UserEntity userEntity) throws RegException {//用户注册
@@ -357,7 +359,7 @@ public class UserServiceImpl implements UserService {
 
     //查询所有的专家公司名
     @Override
-    public String[] getExpertExpertCompanyname(Boolean repetition) {
+    public String[] getExpertCompanyname(Boolean repetition) {
 
         String[] companynames = userMapper.selectExpertExpertCompanyname(repetition);
         return companynames;
@@ -365,25 +367,57 @@ public class UserServiceImpl implements UserService {
 
     //查询所学专业从事专业的总人数
     @Override
-    public List findExpertMajorSum(Object[] types, Object[] majors) {
-        if (types == null||types.length<1) {
+    public List findExpertMajorSum(Object[] types, Object[] majors, Object[] expertInfoEducations, Object[] excludeCompanyNames) {
+        if (types == null || types.length < 1) {
             types = new Object[]{"expert_info_learnmajor", "expert_info_workmajor"};
         }
-        if (majors == null ||majors.length<1) {
+        if (majors == null || majors.length < 1) {
             majors = new Object[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"};
         }
-        return userMapper.selectExpertMajorSum(types, majors);
+        return userMapper.selectExpertMajorSum(types, majors, expertInfoEducations, excludeCompanyNames);
     }
+
     //查询各个申报专业的总人数
     @Override
-    public List findExpertdeclaredesignSum(Object[] types, Object[] declaredesigns) {
-        if (types == null||types.length<1) {
+    public List findExpertdeclaredesignSum(Object[] types, Object[] declaredesigns, Object[] expertInfoEducations, Object[] excludeCompanyNames) {
+        if (types == null || types.length < 1) {
             types = new Object[]{"expert_info_learnmajor", "expert_info_workmajor"};
         }
-        if (declaredesigns == null ||declaredesigns.length<1) {
-            declaredesigns = new Object[]{"1", "2", "3", "4", "5", "6", "7", "8","9"};
+        if (declaredesigns == null || declaredesigns.length < 1) {
+            declaredesigns = new Object[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"};
         }
-        return userMapper.selectExpertdeclaredesignSum(types,declaredesigns);
+        if (expertInfoEducations != null && expertInfoEducations.length < 1) {
+            expertInfoEducations = null;
+        }
+        if (excludeCompanyNames != null && excludeCompanyNames.length < 1) {
+            excludeCompanyNames = null;
+        }
+        return userMapper.selectExpertdeclaredesignSum(types, declaredesigns, expertInfoEducations, excludeCompanyNames);
+    }
+
+    //合并名字相似的专家公司信息
+    @Override
+    public void mergeSimilarityExpertCompany(String saveType, boolean isRenewal) {
+        List companyList;//专家公司信息
+        if (isRenewal) {//是否更新现在保存的公司名合并信息
+            userMapper.deleteData();
+            companyList = userMapper.selectExpertCompany(false);
+        } else {
+            companyList = userMapper.selectExpertCompany(true);
+        }
+        List companyMergeList = expertInfo.mergeExpertCompany(companyList);//合并专家信息中公司名相似的信息
+        switch (saveType) {//保存类型
+            case "database"://数据库
+                userMapper.insertMergeSimilarityCompany(companyMergeList);
+                break;
+            case "redis"://redis
+                break;
+        }
+    }
+
+    //查询合并后专家信息的公司名
+    public String[] findSimilarityExpertCompany() {
+        return userMapper.selectSecDistinct();
     }
 
 

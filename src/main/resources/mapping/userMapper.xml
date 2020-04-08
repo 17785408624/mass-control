@@ -747,6 +747,22 @@
         left join user u
         on ei.expert_info_id= u.info_id
         WHERE trim(u.user_id) !="null"
+        <if test="expertInfoEducations != null">
+            and expert_info_education in
+            <foreach collection="expertInfoEducations" item="expertInfoEducation" open="(" close=")" separator=",">
+                #{expertInfoEducation}
+            </foreach>
+        </if>
+        <if test="excludeCompanyNames != null">
+            and expert_info_id not in (
+            select similarity_company_id from merge_similarity_company
+            where similarity_company_name in
+            <foreach collection="excludeCompanyNames" item="excludeCompanyName" open="(" close=")" separator=",">
+                #{excludeCompanyName}
+            </foreach>
+            )
+
+        </if>
     </select>
     <select id="selectExpertdeclaredesignSum" resultType="java.util.Map">
         SELECT
@@ -763,6 +779,22 @@
         left join user u
         on ei.expert_info_id= u.info_id
         WHERE trim(u.user_id) !="null"
+        <if test="expertInfoEducations != null">
+            and expert_info_education in
+            <foreach collection="expertInfoEducations" item="expertInfoEducation" open="(" close=")" separator=",">
+                #{expertInfoEducation}
+            </foreach>
+        </if>
+        <if test="excludeCompanyNames != null">
+            and expert_info_id not in (
+            select similarity_company_id from merge_similarity_company
+            where similarity_company_name in
+            <foreach collection="excludeCompanyNames" item="excludeCompanyName" open="(" close=")" separator=",">
+                #{excludeCompanyName}
+            </foreach>
+            )
+
+        </if>
     </select>
     <select id="selectExpertGroupDomain" resultType="java.util.Map">
         SELECT
@@ -788,21 +820,22 @@
             </when>
             <when test="domain.equals('declaredesign')">
                 substring_index(
-                substring_index( CONCAT( ei.expert_info_declaredesign_design, ',', ei.expert_info_declaredesign_safety ), ',', addself.id + 1
+                substring_index( CONCAT( ei.expert_info_declaredesign_design, ',', ei.expert_info_declaredesign_safety
+                ), ',', addself.id + 1
                 ),
                 ',',- 1
                 )
             </when>
             <when test="domain.equals('declaredesign_design')">
                 substring_index(
-                substring_index(  ei.expert_info_declaredesign_design, ',', addself.id + 1
+                substring_index( ei.expert_info_declaredesign_design, ',', addself.id + 1
                 ),
                 ',',- 1
                 )
             </when>
             <when test="domain.equals('declaredesign_safety')">
                 substring_index(
-                substring_index(  ei.expert_info_declaredesign_safety, ',', addself.id + 1
+                substring_index( ei.expert_info_declaredesign_safety, ',', addself.id + 1
                 ),
                 ',',- 1
                 )
@@ -810,14 +843,10 @@
             </when>
         </choose>
         AS domain,
-        expert_info_learnmajor,
-        expert_info_workmajor,
         COUNT( * ),
-
-        GROUP_CONCAT( DISTINCT u.user_id SEPARATOR ',' ) as user_id,
-        GROUP_CONCAT( DISTINCT ei.expert_info_name SEPARATOR ',' ),
-        GROUP_CONCAT( DISTINCT ei.expert_info_id SEPARATOR ',' )
-
+        GROUP_CONCAT( DISTINCT u.user_id SEPARATOR ',' ) as user_id
+        <!--GROUP_CONCAT( DISTINCT ei.expert_info_name SEPARATOR ',' ),
+        GROUP_CONCAT( DISTINCT ei.expert_info_id SEPARATOR ',' )-->
         FROM
         expert_info ei
         JOIN addself ON addself.id <![CDATA[<]]>  (
@@ -825,39 +854,88 @@
             <when test="domain.equals('major')">
                 length( CONCAT( ei.expert_info_learnmajor, ',', ei.expert_info_workmajor ) ) - length( REPLACE ( CONCAT(
                 ei.expert_info_learnmajor, ',', ei.expert_info_workmajor ), ',', '' ) ) + 1)
-             </when>
+            </when>
             <when test="domain.equals('learnmajor')">
                 length( ei.expert_info_learnmajor ) - length( REPLACE ( ei.expert_info_learnmajor ), ',', '' ) ) + 1)
             </when>
             <when test="domain.equals('workmajor')">
-                length( ei.expert_info_workmajor )  - length( REPLACE (ei.expert_info_workmajor ), ',', '' ) ) + 1)
-             </when>
+                length( ei.expert_info_workmajor ) - length( REPLACE (ei.expert_info_workmajor ), ',', '' ) ) + 1)
+            </when>
             <when test="domain.equals('declaredesign')">
-                length( CONCAT( ei.expert_info_declaredesign_design, ',', ei.expert_info_declaredesign_safety ) ) - length( REPLACE ( CONCAT(
+                length( CONCAT( ei.expert_info_declaredesign_design, ',', ei.expert_info_declaredesign_safety ) ) -
+                length( REPLACE ( CONCAT(
                 ei.expert_info_declaredesign_design, ',', ei.expert_info_declaredesign_safety ), ',', '' ) ) + 1)
             </when>
             <when test="domain.equals('declaredesign_design')">
-                length(ei.expert_info_declaredesign_design ) - length( REPLACE ( ei.expert_info_declaredesign_design ), ',', '' ) ) + 1)
-             </when>
+                length(ei.expert_info_declaredesign_design ) - length( REPLACE ( ei.expert_info_declaredesign_design ),
+                ',', '' ) ) + 1)
+            </when>
             <when test="domain.equals('declaredesign_safety')">
-                length(ei.expert_info_declaredesign_safety ) - length( REPLACE ( ei.expert_info_declaredesign_safety ), ',', '' ) ) + 1)
+                length(ei.expert_info_declaredesign_safety ) - length( REPLACE ( ei.expert_info_declaredesign_safety ),
+                ',', '' ) ) + 1)
             </when>
         </choose>
-
-
         LEFT JOIN USER u ON ei.expert_info_id = u.info_id
         WHERE
         u.user_id != 'null'
         <if test="expert_info_educations != null">
-         and expert_info_education in
-        <foreach collection="expert_info_educations"  item="expert_info_education" open="(" close=")" separator=",">
-          #{expert_info_education}
-        </foreach>
+            and expert_info_education in
+            <foreach collection="expert_info_educations" item="expert_info_education" open="(" close=")" separator=",">
+                #{expert_info_education}
+            </foreach>
+        </if>
+        <if test="excludeCompanyNames != null">
+           and expert_info_id not in(
+           select similarity_company_id from merge_similarity_company where expert_info_companyname in
+           <foreach collection="excludeCompanyNames" item="excludeCompanyName" separator="," open="(" close=")">
+               #{excludeCompanyName}
+           </foreach>
+            )
         </if>
         GROUP BY
         domain
+    </select>
 
-
+    <select id="selectExpertCompany" resultType="java.util.Map">
+        SELECT
+        trim(expert_info_companyname) as expert_info_companyname,
+        ei.expert_info_id
+        FROM
+        expert_info ei
+        LEFT JOIN USER u ON (ei.expert_info_id = u.info_id)
+        WHERE
+        trim(u.user_id) != 'null'
+        <if test="!containMec">
+            and
+            expert_info_id not in(
+            select similarity_company_id from merge_similarity_company
+            )
+        </if>
+    </select>
+    <insert id="insertMergeSimilarityCompanyStr">
+        insert into (similarity_company_name,similarity_company_id)
+        values
+        <foreach collection="companyMergeList" item="companyMergeMap" separator=",">
+            (#{companyMergeMap.mergeExpertName},#{companyMergeMap.mergeExpertIds})
+        </foreach>
+    </insert>
+    <insert id="insertMergeSimilarityCompany">
+        insert into merge_similarity_company(similarity_company_name,similarity_company_id)
+        values
+        <foreach collection="companyMergeList" item="companyMergeMap" separator=",">
+            <foreach collection="companyMergeMap.mergeExpertIds" item="mergeExpertId" separator=",">
+                (#{companyMergeMap.mergeExpertName},#{mergeExpertId})
+            </foreach>
+        </foreach>
+    </insert>
+    <select id="selectSecDistinct" resultType="String">
+        SELECT DISTINCT similarity_company_name
+        FROM
+            merge_similarity_company
+    </select>
+    <select id="deleteData" resultType="String">
+        delete  FROM
+            merge_similarity_company
     </select>
 
 

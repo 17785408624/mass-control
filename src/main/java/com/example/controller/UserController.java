@@ -544,7 +544,7 @@ public class UserController {
     @RequestMapping("getExpertExpertCompanyname")
     public VisitConsequenceParent getExpertExpertCompanyname() {
         VisitConsequenceParent vcp = new VisitConsequenceParentImpl();
-        String[] conpanynames = userService.getExpertExpertCompanyname(false);
+        String[] conpanynames = userService.getExpertCompanyname(true);
         vcp.setObject(conpanynames);
         return vcp;
     }
@@ -565,8 +565,16 @@ public class UserController {
             majors=((List) param.get("majors")).toArray();//专业code  1采矿，2露采，3选煤，4矿山机电，5机械，6电气-供配电，7电气-自动控制，8电气-通信，9电气-信号，10建筑，11结构，
             //12给排水，13暖通空调，14环保，15总图，16运输
         }
+        Object[]expertInfoEducations=null;//学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"expertInfoEducations")){
+            expertInfoEducations=((List) param.get("expertInfoEducations")).toArray();
+        }
+        Object[]excludeCompanyNames=null;//回避公司名
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"excludeCompanyNames")){
+            excludeCompanyNames=((List) param.get("excludeCompanyNames")).toArray();
+        }
         VisitConsequenceParent vcp = new VisitConsequenceParentImpl();
-        List list=userService.findExpertMajorSum(types,majors);
+        List list=userService.findExpertMajorSum(types,majors,expertInfoEducations,excludeCompanyNames);
         vcp.setObject(list);
         return vcp;
     }
@@ -582,14 +590,38 @@ public class UserController {
             types= ((List) param.get("types")).toArray();
         }
         Object[] declaredesigns=null;//1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+
         if(!PublicUtil.mapKeyIsNull_keyString(param,"declaredesigns")){
             declaredesigns=((List) param.get("declaredesigns")).toArray();
         }
+        Object[]expertInfoEducations=null;//学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"expertInfoEducations")){
+            expertInfoEducations=((List) param.get("expertInfoEducations")).toArray();
+        }
+        Object[]excludeCompanyNames=null;//回避公司名
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"excludeCompanyNames")){
+            excludeCompanyNames=((List) param.get("excludeCompanyNames")).toArray();
+        }
         VisitConsequenceParent vcp = new VisitConsequenceParentImpl();
-        List list=userService.findExpertdeclaredesignSum(types,declaredesigns);
+        List list=userService.findExpertdeclaredesignSum(types,declaredesigns,expertInfoEducations,excludeCompanyNames);
         vcp.setObject(list);
         return vcp;
     }
+
+    /**
+     * 查询相似名称合并后的专家信息的公司名
+     * @return
+     */
+    @RequestMapping("findSimilarityExpertCompany")
+    public VisitConsequenceParent findSimilarityExpertCompany( ) {
+        VisitConsequenceParent vcp = new VisitConsequenceParentImpl();
+        String[]SimilarityExpertCompany= userService.findSimilarityExpertCompany();
+        vcp.setObject(SimilarityExpertCompany);
+        return vcp;
+    }
+
+
+
 
 
 }

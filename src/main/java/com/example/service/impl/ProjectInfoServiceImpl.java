@@ -300,5 +300,13 @@ public class ProjectInfoServiceImpl implements ProjectInfoService {
         }
         return projectAuditInfo;
     }
+   //将超过工作时间点的项目改变为等待批复
+    @Override
+    public void projectProcessReply() {
+        Integer[] projectInfoIds = projectInfoEntityMapper.
+                selectPidToReviewExpiration();//查询需要改变状态的项目id 查询超过工作时间点的项目
+        //修改项目状态为等待批复
+        projectInfoEntityMapper.updateProjectInfoStateByPIidBatch(projectInfoIds, 5);
+    }
 
 }
