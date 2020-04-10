@@ -341,4 +341,11 @@ public interface UserMapper {
      */
     void deleteData();
 
+    /**
+     * 查询专家信息
+     * @param uIds 用户id
+     * @return
+     */
+    List<Map> selectExpertInfosByUids(@Param("uIds") Object[]uIds);
+
 }

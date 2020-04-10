@@ -381,7 +381,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List findExpertdeclaredesignSum(Object[] types, Object[] declaredesigns, Object[] expertInfoEducations, Object[] excludeCompanyNames) {
         if (types == null || types.length < 1) {
-            types = new Object[]{"expert_info_learnmajor", "expert_info_workmajor"};
+            types = new Object[]{"expert_info_declaredesign_design", "expert_info_declaredesign_safety"};
         }
         if (declaredesigns == null || declaredesigns.length < 1) {
             declaredesigns = new Object[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"};

@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.common.exceptiondefine.AuditOperationServiceException;
 import com.example.common.exceptiondefine.LoginException;
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
+import com.example.common.exceptiondefine.ServiceException;
 import com.example.entity.ProjectauditExpertInvite;
 import com.example.entity.common.VisitConsequencePage;
 import com.example.entity.common.VisitConsequenceParent;
@@ -216,7 +217,14 @@ public class ProjectauditEInviteController {
             repeatedlyExtraction=Boolean.valueOf(param.get("repeatedlyExtraction").toString());
         }
         VisitConsequenceParent vc=new VisitConsequenceParentImpl();
-        List list=projectauditExpertInviteService.extractionExpert(domainType,expert_info_educations,excludeCompanyNames,majorRequire,2,false);
+        List list= null;
+        try {
+            list = projectauditExpertInviteService.extractionExpert(domainType,expert_info_educations,excludeCompanyNames,majorRequire);
+        } catch (ServiceException e) {
+            vc.setState(1);
+            vc.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
         vc.setObject(list);
         return vc;
     };

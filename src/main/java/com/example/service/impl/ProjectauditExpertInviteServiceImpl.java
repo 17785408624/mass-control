@@ -2,6 +2,7 @@ package com.example.service.impl;
 
 import com.example.common.exceptiondefine.AuditOperationServiceException;
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
+import com.example.common.exceptiondefine.ServiceException;
 import com.example.config.ServiceConfig;
 import com.example.entity.ExpertAudit;
 import com.example.entity.ProjectAudit;
@@ -169,15 +170,33 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
         return projectauditExpertInviteMapper.selectPeiByPid(projectInfoId, new Integer[]{1, 2, 3});
     }
 
+    @Override
+    public List extractionExpert(String domainType, Object[] expert_info_educations, Object[] excludeCompanyNames, List majorRequires, boolean repeatedlyExtraction, Map priorityExtract) throws ServiceException {
+        return null;
+    }
+
+    @Override
+    public List extractionExpert(String domainType, Object[] expert_info_educations, Object[] excludeCompanyNames, List majorRequires, Map priorityExtract) throws ServiceException {
+        return null;
+    }
+
+    @Override
+    public List extractionExpert(String domainType, Object[] expert_info_educations, Object[] excludeCompanyNames, List majorRequires, boolean repeatedlyExtraction) throws ServiceException {
+        return null;
+    }
+
+
+
     //抽取专家
     @Override
     public List extractionExpert(String domainType, Object[] expert_info_educations, Object[] excludeCompanyNames,
-            List majorRequire,Integer priorityNum,boolean repeatedlyExtraction) {
+            List majorRequire) throws ServiceException {
         String domainTypeDefult = "declaredesign";//申报专业默认分组字段
         domainType = domainType == null || domainType.equals("") || domainType.equals(" ") ? "default" : domainTypeDefult;
         List userGroupDomain = userMapper.selectExpertGroupDomain(domainType, expert_info_educations, excludeCompanyNames);//获取专业分组数据
-        String[]aaa=expertInfo.drawRandomExpert(userGroupDomain,majorRequire);
-        return userGroupDomain;
+        Object[]uIds=expertInfo.drawRandomExpert(userGroupDomain,majorRequire,domainType);//随机抽取到符合条件的用户id
+        List expertInfos=userMapper.selectExpertInfosByUids(uIds);
+        return expertInfos;
     }
 
     /**

@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.common.exceptiondefine.AuditOperationServiceException;
 import com.example.common.exceptiondefine.OperationProjectauditOInviteException;
+import com.example.common.exceptiondefine.ServiceException;
 import com.example.entity.ProjectauditExpertInvite;
 import com.example.entity.requstparam.InsertPEinviteBatch;
 import com.example.entity.requstparam.PageRequest;
@@ -83,9 +84,21 @@ public interface ProjectauditExpertInviteService {
      * @param expert_info_educations 学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
      * @param excludeCompanyNames 回避的公司名字
      * @param majorRequires majorCode为专业对应code majorNum为专业需要的人数
-     * @param priorityNum 优先抽取审核项目机构的人数
      * @param repeatedlyExtraction 同一人在不同专业是否能多次抽取
+      * @param priorityExtract 优先抽取的信息
+      *      priorityCompanyname 优先抽取的公司名
+      *      priorityCompanynameNum    已公司名为优先抽取条件的人数
      * @return
      */
-   List extractionExpert(String domainType, Object[] expert_info_educations,Object[] excludeCompanyNames,List majorRequires, Integer priorityNum,boolean repeatedlyExtraction);
+   List extractionExpert(String domainType, Object[] expert_info_educations,
+                         Object[] excludeCompanyNames,List majorRequires,
+                         boolean repeatedlyExtraction,Map priorityExtract) throws ServiceException;
+    List extractionExpert(String domainType, Object[] expert_info_educations,
+                          Object[] excludeCompanyNames,List majorRequires,Map priorityExtract) throws ServiceException;
+    List extractionExpert(String domainType, Object[] expert_info_educations,
+                          Object[] excludeCompanyNames,List majorRequires,
+                          boolean repeatedlyExtraction) throws ServiceException;
+    List extractionExpert(String domainType, Object[] expert_info_educations,
+                          Object[] excludeCompanyNames,List majorRequires) throws ServiceException;
+
 }
