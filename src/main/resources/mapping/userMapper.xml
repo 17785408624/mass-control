@@ -902,7 +902,7 @@
 
 
 
-    <select id="selectaExpertGroupDomain">
+    <select id="selectaExpertGroupDomain" resultType="java.util.Map">
         select user_id from  expert_info ei
         LEFT JOIN USER u ON ei.expert_info_id = u.info_id
         WHERE
@@ -924,7 +924,7 @@
             </foreach>
             )
         </if>
-        <if test="originUids != null">
+        <if test="originUids != null and originUids.length >0">
         and user_id not in(
               <foreach collection="originUids" item="originUid" separator=",">
                   #{originUid}
