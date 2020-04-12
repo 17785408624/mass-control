@@ -198,6 +198,17 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
         List expertInfos=userMapper.selectExpertInfosByUids(uIds);
         return expertInfos;
     }
+    //重新抽取专家信息
+    @Override
+    public Map extractionExpertAgain(Object[] originUids,String domainType,Object[]expert_info_educations,Object excludeCompanyNames,Integer majorCode) {
+        List userGroupDomain = userMapper.selectaExpertGroupDomain(originUids,domainType, expert_info_educations, excludeCompanyNames,majorCode);//获取专业分组数据
+        int num=userGroupDomain.size();
+        int randomIndex=(int)(Math.random()*num);
+        Map userEandom= (Map) userGroupDomain.get(randomIndex);
+        List expertInfo=userMapper.selectExpertInfosByUids(new Object[]{userEandom.get("user_id")});
+        Map userMap= (Map) expertInfo.get(0);
+        return userMap;
+    }
 
     /**
      * 开始审核项目，将项目进程改为等待项目评审

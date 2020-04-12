@@ -846,40 +846,43 @@
         </choose>
         AS domain,
         COUNT( DISTINCT  user_id)as userNum,
-        GROUP_CONCAT( DISTINCT u.user_id SEPARATOR ',' ) as user_id
+        GROUP_CONCAT( DISTINCT u.user_id SEPARATOR ',' ) as user_id,
+        pei.invite_state
         <!--GROUP_CONCAT( DISTINCT ei.expert_info_name SEPARATOR ',' ),
         GROUP_CONCAT( DISTINCT ei.expert_info_id SEPARATOR ',' )-->
         FROM
         expert_info ei
-        JOIN addself ON addself.id <![CDATA[<]]>  (
+
+        JOIN addself ON addself.id <![CDATA[<]]>
         <choose>
             <when test="domain.equals('major')">
-                length( CONCAT( ei.expert_info_learnmajor, ',', ei.expert_info_workmajor ) ) - length( REPLACE ( CONCAT(
+                (length( CONCAT( ei.expert_info_learnmajor, ',', ei.expert_info_workmajor ) ) - length( REPLACE ( CONCAT(
                 ei.expert_info_learnmajor, ',', ei.expert_info_workmajor ), ',', '' ) ) + 1)
 
             </when>
             <when test="domain.equals('learnmajor')">
-                 length( ei.expert_info_learnmajor ) - length( REPLACE ( ei.expert_info_learnmajor, ',', '' ) )+ 1  )
+                (length( ei.expert_info_learnmajor ) - length( REPLACE ( ei.expert_info_learnmajor, ',', '' ) )+ 1  )
             </when>
             <when test="domain.equals('workmajor')">
-                 length( ei.expert_info_workmajor ) - length( REPLACE ( ei.expert_info_workmajor, ',', '' ) )+ 1  )
+                (length( ei.expert_info_workmajor ) - length( REPLACE ( ei.expert_info_workmajor, ',', '' ) )+ 1  )
              </when>
             <when test="domain.equals('declaredesign')">
-                length( CONCAT( ei.expert_info_declaredesign_design, ',', ei.expert_info_declaredesign_safety ) ) -
+                (length( CONCAT( ei.expert_info_declaredesign_design, ',', ei.expert_info_declaredesign_safety ) ) -
                 length( REPLACE ( CONCAT(
                 ei.expert_info_declaredesign_design, ',', ei.expert_info_declaredesign_safety ), ',', '' ) ) + 1)
             </when>
             <when test="domain.equals('declaredesign_design')">
-                 length( ei.expert_info_declaredesign_design ) - length( REPLACE ( ei.expert_info_declaredesign_design, ',', '' ) )+ 1  )
+                (length( ei.expert_info_declaredesign_design ) - length( REPLACE ( ei.expert_info_declaredesign_design, ',', '' ) )+ 1  )
              </when>
             <when test="domain.equals('declaredesign_safety')">
-                 length( ei.expert_info_declaredesign_safety ) - length( REPLACE ( ei.expert_info_declaredesign_safety, ',', '' ) )+ 1  )
+                (length( ei.expert_info_declaredesign_safety ) - length( REPLACE ( ei.expert_info_declaredesign_safety, ',', '' ) )+ 1  )
              </when>
         </choose>
         LEFT JOIN USER u ON ei.expert_info_id = u.info_id
-        WHERE
+         WHERE
         u.user_id != 'null'
-        <if test="expert_info_educations != null">
+        and u.user_state=2
+         <if test="expert_info_educations != null">
             and expert_info_education in
             <foreach collection="expert_info_educations" item="expert_info_education" open="(" close=")" separator=",">
                 #{expert_info_education}
@@ -896,6 +899,41 @@
         GROUP BY
         domain
     </select>
+
+
+
+    <select id="selectaExpertGroupDomain">
+        select user_id from  expert_info ei
+        LEFT JOIN USER u ON ei.expert_info_id = u.info_id
+        WHERE
+        u.user_id != 'null'
+        and u.user_state=2
+        and
+        FIND_IN_SET( ${majorCode}, expert_info_workmajor )
+        <if test="expert_info_educations != null">
+            and expert_info_education in
+            <foreach collection="expert_info_educations" item="expert_info_education" open="(" close=")" separator=",">
+                #{expert_info_education}
+            </foreach>
+        </if>
+        <if test="excludeCompanyNames != null">
+            and expert_info_id not in(
+            select similarity_company_id from merge_similarity_company where similarity_company_name in
+            <foreach collection="excludeCompanyNames" item="excludeCompanyName" separator="," open="(" close=")">
+                #{excludeCompanyName}
+            </foreach>
+            )
+        </if>
+        <if test="originUids != null">
+        and user_id not in(
+              <foreach collection="originUids" item="originUid" separator=",">
+                  #{originUid}
+              </foreach>
+            )
+        </if>
+
+    </select>
+
 
     <select id="selectExpertCompany" resultType="java.util.Map">
         SELECT

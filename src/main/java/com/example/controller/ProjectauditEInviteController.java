@@ -228,5 +228,49 @@ public class ProjectauditEInviteController {
         vc.setObject(list);
         return vc;
     };
+    /**
+     * 抽取专家
+     * @param param
+     * @return
+     */
+    @PostMapping("extractionExpertAgain")
+    public VisitConsequenceParent extractionExpertAgain( @RequestBody Map param){
+        Object[] expert_info_educations=null;//学历
+        String domainType=null;//专业类型
+        Object[] excludeCompanyNames= null;//回避公司名
+        Integer majorCode=null;//  专业code
+        Object[]originUids = new Object[0];//已被抽取过的用户id
+        Integer priorityNum=null;//优先抽取审核项目机构的人数
+        Boolean repeatedlyExtraction=null;//同一人在不同专业是否能多次抽取
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"expert_info_educations")){
+            expert_info_educations=((List)param.get("expert_info_educations")).toArray();
+        }
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"domainType")){
+            domainType=param.get("domainType").toString();
+        }
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"excludeCompanyNames")){
+            excludeCompanyNames=((List)param.get("excludeCompanyNames")).toArray();
+        }
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"originUids")){
+            originUids=((List)param.get("originUids")).toArray();
+        }
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"majorCode")){
+            majorCode=Integer.valueOf(param.get("majorCode").toString());
+        }
+
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"priorityNum")){
+            priorityNum=Integer.valueOf(param.get("priorityNum").toString());
+        }
+        if(!PublicUtil.mapKeyIsNull_keyString(param,"repeatedlyExtraction")){
+            repeatedlyExtraction=Boolean.valueOf(param.get("repeatedlyExtraction").toString());
+        }
+        VisitConsequenceParent vc=new VisitConsequenceParentImpl();
+        List list= null;
+
+            Map user = projectauditExpertInviteService.extractionExpertAgain(originUids,domainType,expert_info_educations,excludeCompanyNames,majorCode);
+
+        vc.setObject(list);
+        return vc;
+    };
 
 }

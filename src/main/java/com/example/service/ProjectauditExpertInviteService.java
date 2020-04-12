@@ -100,4 +100,18 @@ public interface ProjectauditExpertInviteService {
     List extractionExpert(String domainType, Object[] expert_info_educations,
                           Object[] excludeCompanyNames,List majorRequires) throws ServiceException;
 
+    /**
+     *
+     */
+    /**
+     *
+     * @param originUids 已被抽取过的用户id
+     * @param domainType 抽取专业类型
+     * @param expert_info_educations 学历要求
+     * @param excludeCompanyNames 回避公司名
+     * @param majorCode 专业code
+     * @return
+     */
+    Map extractionExpertAgain(Object[] originUids,String domainType,Object[]expert_info_educations,Object excludeCompanyNames,Integer majorCode);
+
 }

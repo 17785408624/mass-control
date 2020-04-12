@@ -234,43 +234,49 @@ public interface UserMapper {
 
     /**
      * 通过专家用户状态查询用户信息
-     * @param userStates 用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
+     *
+     * @param userStates    用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
      * @param orderRequests 排序参数
-     * @param condition 查询搜索条件
+     * @param condition     查询搜索条件
      * @return
      */
     List selectExpersByState(@Param("userStates") Object[] userStates,
-                               @Param("orderRequests") OrderRequest[] orderRequests,
-                               @Param("condition") String condition);
-
-    /**
-     * 通过第三方机构用户用户状态查询用户信息
-     * @param userStates 用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
-     * @param orderRequests 排序参数
-     * @param condition 查询搜索条件
-     * @return
-     */
-    List selectOrganizationByState(@Param("userStates") Object[] userStates,
                              @Param("orderRequests") OrderRequest[] orderRequests,
                              @Param("condition") String condition);
 
     /**
-     *  查询用户信息列表
-     * @param queryFields 需要查询的字段
-     * @param userStates 用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
+     * 通过第三方机构用户用户状态查询用户信息
+     *
+     * @param userStates    用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
+     * @param orderRequests 排序参数
+     * @param condition     查询搜索条件
      * @return
      */
-    List selectExperInfoByQueryFields(@Param("queryFields") String[]queryFields,@Param("userStates") Object[]userStates);
+    List selectOrganizationByState(@Param("userStates") Object[] userStates,
+                                   @Param("orderRequests") OrderRequest[] orderRequests,
+                                   @Param("condition") String condition);
+
     /**
-     *  查询第三方机构信息列表
+     * 查询用户信息列表
+     *
      * @param queryFields 需要查询的字段
-     * @param userStates 用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
+     * @param userStates  用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
      * @return
      */
-    List selectOrganizationByQueryFields(@Param("queryFields") String[]queryFields,@Param("userStates") Object[]userStates);
+    List selectExperInfoByQueryFields(@Param("queryFields") String[] queryFields, @Param("userStates") Object[] userStates);
+
+    /**
+     * 查询第三方机构信息列表
+     *
+     * @param queryFields 需要查询的字段
+     * @param userStates  用户状态 1未认证审核 2已认证审核  3解聘 多个以or进行链接 为null则视为不添加条件
+     * @return
+     */
+    List selectOrganizationByQueryFields(@Param("queryFields") String[] queryFields, @Param("userStates") Object[] userStates);
 
     /**
      * 查询所有专家的公司名
+     *
      * @param repetition 是否显示多个重复公司名
      * @return
      */
@@ -278,41 +284,58 @@ public interface UserMapper {
 
     /**
      * 查询各个所学专业从事专业的总人数
-     * @param types expert_info_learnmajor所学专业 expert_info_workmajor从事专业，多个已or进行链接
+     *
+     * @param types  expert_info_learnmajor所学专业 expert_info_workmajor从事专业，多个已or进行链接
      * @param majors 专业code  1采矿，2露采，3选煤，4矿山机电，5机械，6电气-供配电，7电气-自动控制，8电气-通信，9电气-信号，10建筑，11结构，
-     *                12给排水，13暖通空调，14环保，15总图，16运输
+     *               12给排水，13暖通空调，14环保，15总图，16运输
      * @return
      */
-    List selectExpertMajorSum(@Param("types") Object[] types,@Param("majors")Object[] majors, @Param("expertInfoEducations") Object[]expertInfoEducations,@Param("excludeCompanyNames")Object[]excludeCompanyNames);
+    List selectExpertMajorSum(@Param("types") Object[] types, @Param("majors") Object[] majors, @Param("expertInfoEducations") Object[] expertInfoEducations, @Param("excludeCompanyNames") Object[] excludeCompanyNames);
 
     /**
      * 查询各个申报专业的总人数
-     * @param types expert_info_declaredesign_design 技术报告咨询审查类 ,expert_info_declaredesign_safety  安全生产检查类
-     * @param declaredesigns 1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
+     *
+     * @param types                expert_info_declaredesign_design 技术报告咨询审查类 ,expert_info_declaredesign_safety  安全生产检查类
+     * @param declaredesigns       1采矿工程2通风安全3供电4四大件5水文地质6总平面工程7造价8环保节能9土建工程
      * @param expertInfoEducations 学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
-     * @param excludeCompanyNames 回避的公司名字
+     * @param excludeCompanyNames  回避的公司名字
      * @return
      */
-    List selectExpertdeclaredesignSum(@Param("types") Object[] types,@Param("declaredesigns")Object[] declaredesigns,
-                                      @Param("expertInfoEducations") Object[]expertInfoEducations,@Param("excludeCompanyNames")Object[]excludeCompanyNames);
+    List selectExpertdeclaredesignSum(@Param("types") Object[] types, @Param("declaredesigns") Object[] declaredesigns,
+                                      @Param("expertInfoEducations") Object[] expertInfoEducations, @Param("excludeCompanyNames") Object[] excludeCompanyNames);
 
     /**
      * 专业作为条件进行专家表分组查询
-     * @param domain
-     *  declaredesign申报专业技术报告咨询审查类和申报专业安全生产检查类
-     * declaredesign_design 申报专业技术报告咨询审查类 declaredesign_safety  申报专业安全生产检查类
-     * major 所学专业和从事专业
-     *learnmajor所学专业 workmajor从事专业
-     * 申报专业不能和所学专业与从事专业进行同时分组。
+     *
+     * @param domain                 declaredesign申报专业技术报告咨询审查类和申报专业安全生产检查类
+     *                               declaredesign_design 申报专业技术报告咨询审查类 declaredesign_safety  申报专业安全生产检查类
+     *                               major 所学专业和从事专业
+     *                               learnmajor所学专业 workmajor从事专业
+     *                               申报专业不能和所学专业与从事专业进行同时分组。
      * @param expert_info_educations 学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
-     * @param excludeCompanyNames 排除查询数据的公司名
+     * @param excludeCompanyNames    排除查询数据的公司名
      * @return
      */
-    List selectExpertGroupDomain(@Param("domain")String domain,@Param("expert_info_educations") Object[] expert_info_educations,
-                                 @Param("excludeCompanyNames")Object[] excludeCompanyNames);
+    List selectExpertGroupDomain(@Param("domain") String domain, @Param("expert_info_educations") Object[] expert_info_educations,
+                                 @Param("excludeCompanyNames") Object[] excludeCompanyNames);
+
+    /**
+     * @param originUids             //已被抽取的用户id
+     * @param excludeCompanyNames
+     * @param expert_info_educations
+     * @param domain
+     * @param majorCode
+     * @return
+     */
+    List selectaExpertGroupDomain(@Param("originUids") Object[] originUids,
+                                  @Param("domain") String domain,
+                                  @Param("expert_info_educations") Object[] expert_info_educations,
+                                  @Param("excludeCompanyNames") Object excludeCompanyNames,
+                                  @Param("majorCode") Integer majorCode);
 
     /**
      * 查询专家数据中的公司信息
+     *
      * @param containMec 是否包含查询保存的相似公司数据
      * @return
      */
@@ -320,19 +343,22 @@ public interface UserMapper {
 
     /**
      * 添加专家公司合并信息数据
+     *
      * @param companyMergeList 合并的专家信息集合 mergeExpertName 合并后的名字
-     *mergeExpertIds 合并的专家信息id
+     *                         mergeExpertIds 合并的专家信息id
      */
     void insertMergeSimilarityCompanyStr(@Param("companyMergeList") List companyMergeList);
+
     /**
      * 添加专家公司合并信息数据
+     *
      * @param companyMergeList 合并的专家信息集合 mergeExpertName 合并后的名字
-     *mergeExpertIds 合并的专家信息id
+     *                         mergeExpertIds 合并的专家信息id
      */
     void insertMergeSimilarityCompany(@Param("companyMergeList") List companyMergeList);
 
     /**
-     *查询合并后的公司名字,重复值只显示一条数据
+     * 查询合并后的公司名字,重复值只显示一条数据
      */
     String[] selectSecDistinct();
 
@@ -343,9 +369,11 @@ public interface UserMapper {
 
     /**
      * 查询专家信息
+     *
      * @param uIds 用户id
      * @return
      */
-    List<Map> selectExpertInfosByUids(@Param("uIds") Object[]uIds);
+    List<Map> selectExpertInfosByUids(@Param("uIds") Object[] uIds);
+
 
 }
