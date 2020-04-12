@@ -2,7 +2,11 @@ package com.example.entity.CodeMap;
 
 public enum DomainTypeEnum {
     major("所学专业或从事专业", 1, "major"),
-    declaredesign("申报专业", 2, "declaredesign");
+    learnmajor("所学专业", 2, "learnmajor"),
+    workmajor("从事专业", 3, "workmajor"),
+    declaredesign("申报专业", 4, "declaredesign"),
+    declaredesign_design("申报专业技术报告咨询审查类", 5, "declaredesign_design"),
+    declaredesign_safety("申报专业安全生产检查类", 6, "declaredesign_safety");
     private String majorTypeName;
     private Integer majorTypeCodeNum;
     private String majorTypeCode;
@@ -62,25 +66,59 @@ public enum DomainTypeEnum {
 
             case 1:
                 this.setMapValues(new String[]{
-                        "采矿", "露采", "选煤", "矿山机电", "机械", "电气-供配电", "电气-自动控制", "电气-通信",
-                        "电气-信号", "建筑", "结构", "给排水", "暖通空调", "环保", "总图", "运输"
+                        "采矿", "通风安全", "露采", "选煤", "矿山机电", "水文地质", "电气-供配电", "电气-自动控制",
+                        "电气-通信", "电气-信号", "建筑", "结构","给排水", "暖通空调", "环保", "总图", "运输","造价","煤矿智能化"
+
                 });
                 this.setMapCodes(new String[]{
                         "1", "2", "3", "4", "5", "6", "7", "8",
-                        "9", "10", "11", "12", "13", "14", "15", "16"
+                        "9", "10", "11", "12", "13", "14", "15", "16","17","18","19"
                 });
                 break;
             case 2:
                 this.setMapValues(new String[]{
-                        "采矿工程", "通风安全", "供电", "四大件", "水文地质", "总平面工程", "造价", "环保节能",
-                        "土建工程"
+                        "采矿", "通风安全", "露采", "选煤", "矿山机电", "水文地质", "电气-供配电", "电气-自动控制",
+                        "电气-通信", "电气-信号", "建筑", "结构","给排水", "暖通空调", "环保", "总图", "运输","造价","煤矿智能化"
+
                 });
                 this.setMapCodes(new String[]{
                         "1", "2", "3", "4", "5", "6", "7", "8",
-                        "9", "10", "11", "12", "13", "14", "15", "16"
+                        "9", "10", "11", "12", "13", "14", "15", "16","17","18","19"
                 });
                 break;
+            case 3:
+                this.setMapValues(new String[]{
+                        "采矿", "通风安全", "露采", "选煤", "矿山机电", "水文地质", "电气-供配电", "电气-自动控制",
+                        "电气-通信", "电气-信号", "建筑", "结构","给排水", "暖通空调", "环保", "总图", "运输","造价","煤矿智能化"
 
+                });
+                this.setMapCodes(new String[]{
+                        "1", "2", "3", "4", "5", "6", "7", "8",
+                        "9", "10", "11", "12", "13", "14", "15", "16","17","18","19"
+                });
+                break;
+            case 4:
+
+            case 5:
+                this.setMapValues(new String[]{
+                        "采矿", "通风安全", "露采", "选煤", "矿山机电", "水文地质", "电气-供配电", "电气-自动控制",
+                        "电气-通信", "电气-信号", "建筑", "结构","给排水", "暖通空调", "环保", "总图", "运输","造价","煤矿智能化"
+
+                });
+                this.setMapCodes(new String[]{
+                        "1", "2", "3", "4", "5", "6", "7", "8",
+                        "9", "10", "11", "12", "13", "14", "15", "16","17","18","19"
+                });
+            case 6:
+                this.setMapValues(new String[]{
+                        "采矿", "通风安全", "露采", "矿山机电", "水文地质", "电气-供配电", "电气-自动控制",
+                        "电气-通信", "电气-信号", "建筑", "煤矿智能化","其他"
+
+                });
+                this.setMapCodes(new String[]{
+                        "1", "2", "3", "4", "5", "6", "7", "8",
+                        "9", "10", "11", "12"
+                });
         }
 
     }
@@ -102,8 +140,6 @@ public enum DomainTypeEnum {
     }
 
     public static DomainTypeEnum getDomainTypeEnumByTypeCode(String majorTypeCode) {
-        majorTypeCode = majorTypeCode == "declaredesign_design" || majorTypeCode == "declaredesign_safety" ? "declaredesign" : majorTypeCode;
-        majorTypeCode = majorTypeCode == "learnmajor" || majorTypeCode == "workmajor" ? "major" : majorTypeCode;
         switch (majorTypeCode) {
             case "major":
                 return major;

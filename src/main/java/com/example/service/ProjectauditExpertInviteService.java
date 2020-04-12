@@ -75,15 +75,14 @@ public interface ProjectauditExpertInviteService {
      /**
      * 抽取专家
      * @param domainType
-     * 专业条件类型 declaredesign申报专业 major 所学专业或从事专业 （申报专业不能和所学专业与从事专业进行同时分组）
-     *       分组字段-- declaredesign申报专业技术报告咨询审查类和申报专业安全生产检查类
+     * 专业条件类型 declaredesign 申报专业 major 所学专业或从事专业 （申报专业不能和所学专业与从事专业进行同时分组）
      *      declaredesign_design 申报专业技术报告咨询审查类 declaredesign_safety  申报专业安全生产检查类
      *      major 所学专业和从事专业
-     *      learnmajor所学专业 workmajor从事专业
+     *      learnmajor 所学专业 workmajor 从事专业
      *      申报专业不能和所学专业与从事专业进行同时分组。
      * @param expert_info_educations 学历 1小学 2初中 3高中 4大学 5硕士 6博士 7更多
      * @param excludeCompanyNames 回避的公司名字
-     * @param majorRequires majorCode为专业对应code majorNum为专业需要的人数
+     * @param majorRequires majorCode 为专业对应code majorNum 为专业需要的人数
      * @param repeatedlyExtraction 同一人在不同专业是否能多次抽取
       * @param priorityExtract 优先抽取的信息
       *      priorityCompanyname 优先抽取的公司名
