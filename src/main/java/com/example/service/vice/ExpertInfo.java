@@ -148,8 +148,8 @@ public class ExpertInfo {
         for (int i = 0; i < majorRequires.size(); i++) {//遍历抽取的专业条件及人数
             Map majorRequire = (Map) majorRequires.get(i);//抽取条件
             Integer majorNum = Integer.valueOf(majorRequire.get("majorNum").toString());//当前专业需要抽取的人数
-            if(majorNum<1){
-                continue ;
+            if (majorNum < 1) {
+                continue;
             }
             Integer requireMajorCode = Integer.valueOf(majorRequire.get("majorCode").toString());//抽取专业条件
             forUserGroupDomains:
@@ -198,8 +198,11 @@ public class ExpertInfo {
                     //drawUids=PublicUtil.arraycopy(drawUids,drawUids.length-1,randomDrawUids,0,randomDrawUids.length);
                     System.arraycopy(randomDrawUids, 0, drawUids, drawUids.length - randomDrawUids.length, randomDrawUids.length);
                     //drawUids[drawUids.length - 1] = userIdsValid[random - 1];//将抽中的用户id添加进已抽取的用户id数组中
-
-
+                } else if (i1 == userGroupDomains.size()-1) {
+                    String domainValue =
+                            DomainTypeEnum.getDomainTypeEnumByTypeCode(majorTypeCode).
+                                    getMapValueByMapCode(requireMajorCode.toString());//获取专业名称
+                    throw new ServiceException("没有符合条件的"+domainValue + "专家 ");
                 }
             }
         }
