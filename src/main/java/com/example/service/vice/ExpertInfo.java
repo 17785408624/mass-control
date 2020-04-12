@@ -147,6 +147,10 @@ public class ExpertInfo {
         forRmajorRequires:
         for (int i = 0; i < majorRequires.size(); i++) {//遍历抽取的专业条件及人数
             Map majorRequire = (Map) majorRequires.get(i);//抽取条件
+            Integer majorNum = Integer.valueOf(majorRequire.get("majorNum").toString());//当前专业需要抽取的人数
+            if(majorNum<1){
+                continue ;
+            }
             Integer requireMajorCode = Integer.valueOf(majorRequire.get("majorCode").toString());//抽取专业条件
             forUserGroupDomains:
             for (int i1 = 0; i1 < userGroupDomains.size(); i1++) {//遍历现有专家的专业信息
@@ -154,22 +158,19 @@ public class ExpertInfo {
                 Object[] userIds = userGroupDomain.get("user_id").toString().split(",");//得到符合专业条件的专家id
                 Object[] userIdsValid = new Object[0];//未被抽取过符合专业条件的专家id
                 if (userGroupDomain.get("domain").equals(requireMajorCode.toString())) {//是否遍历到传入的某个专业条件
-                    if(drawUids.length>0){
+                    if (drawUids.length > 0) {
                         for (int num = 1; num < userIds.length; num++) {
                             for (Object o : drawUids) {
                                 if (!userIds[i].equals(o)) {
-                                    userIdsValid=Arrays.copyOf(userIdsValid, userIdsValid.length + 1);
+                                    userIdsValid = Arrays.copyOf(userIdsValid, userIdsValid.length + 1);
                                     userIdsValid[userIdsValid.length - 1] = userIds[i];
                                 }
                             }
 
                         }
-                    }else{
-                        userIdsValid=userIds;
+                    } else {
+                        userIdsValid = userIds;
                     }
-
-
-                    Integer majorNum = Integer.valueOf(majorRequire.get("majorNum").toString());//当前专业需要抽取的人数
                     if (majorNum >= userIdsValid.length) {//抽取专业的人数与现有符合条件的人数相同或多于符合条件的人数
                         String domainValue =
                                 DomainTypeEnum.getDomainTypeEnumByTypeCode(majorTypeCode).
@@ -186,7 +187,7 @@ public class ExpertInfo {
 
                     }
                     //获取随机数作为获取专家id数组元素的下标
-                    int[] randomIndex = PublicUtil.randomArray(0, userIdsValid.length , majorNum);
+                    int[] randomIndex = PublicUtil.randomArray(0, userIdsValid.length, majorNum);
                     Object[] randomDrawUids;//随机抽取到的专家用户id
                     randomDrawUids = new Object[randomIndex.length];
                     for (int count = 0; count < randomIndex.length; count++) {
@@ -197,7 +198,6 @@ public class ExpertInfo {
                     //drawUids=PublicUtil.arraycopy(drawUids,drawUids.length-1,randomDrawUids,0,randomDrawUids.length);
                     System.arraycopy(randomDrawUids, 0, drawUids, drawUids.length - randomDrawUids.length, randomDrawUids.length);
                     //drawUids[drawUids.length - 1] = userIdsValid[random - 1];//将抽中的用户id添加进已抽取的用户id数组中
-
 
 
                 }
