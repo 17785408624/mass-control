@@ -369,10 +369,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List findExpertMajorSum(Object[] types, Object[] majors, Object[] expertInfoEducations, Object[] excludeCompanyNames) {
         if (types == null || types.length < 1) {
-            types = new Object[]{"expert_info_learnmajor", "expert_info_workmajor"};
+            types = new Object[]{"expert_info_workmajor"};
         }
         if (majors == null || majors.length < 1) {
-            majors = new Object[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"};
+            majors = new Object[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"};
         }
         return userMapper.selectExpertMajorSum(types, majors, expertInfoEducations, excludeCompanyNames);
     }
@@ -381,11 +381,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List findExpertdeclaredesignSum(Object[] types, Object[] declaredesigns, Object[] expertInfoEducations, Object[] excludeCompanyNames) {
         if (types == null || types.length < 1) {
-            types = new Object[]{"expert_info_declaredesign_design", "expert_info_declaredesign_safety"};
+            types = new Object[]{"expert_info_declaredesign_safety"};
         }
         if (declaredesigns == null || declaredesigns.length < 1) {
-            declaredesigns = new Object[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+            for (Object o : types) {
+                if (o.equals("expert_info_declaredesign_safety")) {
+                    declaredesigns = new Object[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+                }
+            }
+            declaredesigns = new Object[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12","13","14","16","17","18","19"};
         }
+
         if (expertInfoEducations != null && expertInfoEducations.length < 1) {
             expertInfoEducations = null;
         }

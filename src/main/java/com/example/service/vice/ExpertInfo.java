@@ -187,7 +187,7 @@ public class ExpertInfo {
 
                     }
                     //获取随机数作为获取专家id数组元素的下标
-                    int[] randomIndex = PublicUtil.randomArray(0, userIdsValid.length-1, majorNum);
+                    int[] randomIndex = PublicUtil.randomArray(0, userIdsValid.length - 1, majorNum);
                     Object[] randomDrawUids;//随机抽取到的专家用户id
                     randomDrawUids = new Object[randomIndex.length];
                     for (int count = 0; count < randomIndex.length; count++) {
@@ -197,12 +197,13 @@ public class ExpertInfo {
                     drawUids = Arrays.copyOf(drawUids, randomDrawUids.length);//抽取到的用户id数组扩容
                     //drawUids=PublicUtil.arraycopy(drawUids,drawUids.length-1,randomDrawUids,0,randomDrawUids.length);
                     System.arraycopy(randomDrawUids, 0, drawUids, drawUids.length - randomDrawUids.length, randomDrawUids.length);
+                    if (i1 == userGroupDomains.size() - 1) {
+                        String domainValue=DomainTypeEnum.getDomainTypeEnumByTypeCode(majorTypeCode).getMapValueByMapCode(requireMajorCode.toString());//获取专业名称
+                        throw new ServiceException(domainValue + " 没有符合条件的" + "专家 ");
+                    }
+                    continue;
+
                     //drawUids[drawUids.length - 1] = userIdsValid[random - 1];//将抽中的用户id添加进已抽取的用户id数组中
-                } else if (i1 == userGroupDomains.size()-1) {
-                    String domainValue =
-                            DomainTypeEnum.getDomainTypeEnumByTypeCode(majorTypeCode).
-                                    getMapValueByMapCode(requireMajorCode.toString());//获取专业名称
-                    throw new ServiceException("没有符合条件的"+domainValue + "专家 ");
                 }
             }
         }

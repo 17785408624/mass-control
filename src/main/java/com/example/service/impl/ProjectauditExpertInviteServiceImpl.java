@@ -192,7 +192,7 @@ public class ProjectauditExpertInviteServiceImpl implements ProjectauditExpertIn
     public List extractionExpert(String domainType, Object[] expert_info_educations, Object[] excludeCompanyNames,
             List majorRequire) throws ServiceException {
         String domainTypeDefult = "declaredesign_design";//申报专业默认分组字段
-        domainType = domainType == null || domainType.equals("") || domainType.equals(" ") ? "default" : domainTypeDefult;
+        domainType = domainType == null || domainType.equals("") || domainType.equals(" ") ? domainTypeDefult : domainType;
         List userGroupDomain = userMapper.selectExpertGroupDomain(domainType, expert_info_educations, excludeCompanyNames);//获取专业分组数据
         Object[]uIds=expertInfo.drawRandomExpert(userGroupDomain,majorRequire,domainType);//随机抽取到符合条件的用户id
         List expertInfos=userMapper.selectExpertInfosByUids(uIds);

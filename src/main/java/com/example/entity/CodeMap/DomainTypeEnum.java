@@ -145,6 +145,14 @@ public enum DomainTypeEnum {
                 return major;
             case "declaredesign":
                 return declaredesign;
+            case "learnmajor":
+                return learnmajor;
+            case "workmajor":
+                return workmajor;
+            case "declaredesign_design":
+                return declaredesign_design;
+            case "declaredesign_safety":
+                return declaredesign_safety;
         }
         return null;
     }

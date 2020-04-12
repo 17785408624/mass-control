@@ -796,6 +796,8 @@
 
         </if>
     </select>
+
+
     <select id="selectExpertGroupDomain" resultType="java.util.Map">
         SELECT
         <choose>
@@ -854,26 +856,25 @@
             <when test="domain.equals('major')">
                 length( CONCAT( ei.expert_info_learnmajor, ',', ei.expert_info_workmajor ) ) - length( REPLACE ( CONCAT(
                 ei.expert_info_learnmajor, ',', ei.expert_info_workmajor ), ',', '' ) ) + 1)
+
             </when>
             <when test="domain.equals('learnmajor')">
-                length( ei.expert_info_learnmajor ) - length( REPLACE ( ei.expert_info_learnmajor ), ',', '' ) ) + 1)
+                 length( ei.expert_info_learnmajor ) - length( REPLACE ( ei.expert_info_learnmajor, ',', '' ) )+ 1  )
             </when>
             <when test="domain.equals('workmajor')">
-                length( ei.expert_info_workmajor ) - length( REPLACE (ei.expert_info_workmajor ), ',', '' ) ) + 1)
-            </when>
+                 length( ei.expert_info_workmajor ) - length( REPLACE ( ei.expert_info_workmajor, ',', '' ) )+ 1  )
+             </when>
             <when test="domain.equals('declaredesign')">
                 length( CONCAT( ei.expert_info_declaredesign_design, ',', ei.expert_info_declaredesign_safety ) ) -
                 length( REPLACE ( CONCAT(
                 ei.expert_info_declaredesign_design, ',', ei.expert_info_declaredesign_safety ), ',', '' ) ) + 1)
             </when>
             <when test="domain.equals('declaredesign_design')">
-                length(ei.expert_info_declaredesign_design ) - length( REPLACE ( ei.expert_info_declaredesign_design ),
-                ',', '' ) ) + 1)
-            </when>
+                 length( ei.expert_info_declaredesign_design ) - length( REPLACE ( ei.expert_info_declaredesign_design, ',', '' ) )+ 1  )
+             </when>
             <when test="domain.equals('declaredesign_safety')">
-                length(ei.expert_info_declaredesign_safety ) - length( REPLACE ( ei.expert_info_declaredesign_safety ),
-                ',', '' ) ) + 1)
-            </when>
+                 length( ei.expert_info_declaredesign_safety ) - length( REPLACE ( ei.expert_info_declaredesign_safety, ',', '' ) )+ 1  )
+             </when>
         </choose>
         LEFT JOIN USER u ON ei.expert_info_id = u.info_id
         WHERE
