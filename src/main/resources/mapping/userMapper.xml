@@ -846,8 +846,7 @@
         </choose>
         AS domain,
         COUNT( DISTINCT  user_id)as userNum,
-        GROUP_CONCAT( DISTINCT u.user_id SEPARATOR ',' ) as user_id,
-        pei.invite_state
+        GROUP_CONCAT( DISTINCT u.user_id SEPARATOR ',' ) as user_id
         <!--GROUP_CONCAT( DISTINCT ei.expert_info_name SEPARATOR ',' ),
         GROUP_CONCAT( DISTINCT ei.expert_info_id SEPARATOR ',' )-->
         FROM

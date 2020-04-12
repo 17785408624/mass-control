@@ -25,6 +25,7 @@ public class AccessInterceptor implements HandlerInterceptor {
     LoginVice loginVice;
     @Autowired
     UserService userService;
+    Boolean interceptLogin=false;
 
     //这个方法是在访问接口之前执行的，我们只需要在这里写验证登陆状态的业务逻辑，就可以在用户调用指定接口之前验证登陆状态了
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -47,7 +48,7 @@ public class AccessInterceptor implements HandlerInterceptor {
 //            }
 //
 //        }
-        if (response.getStatus() == 200) {//请求正常
+        if (response.getStatus() == 200&&interceptLogin) {//请求正常
             if (!loginVice.isLogin(request.getSession())) {//判断用户是否登录
                 response.setHeader("Content-type", "text/html;charset=UTF-8");
                 response.setCharacterEncoding("utf-8");
