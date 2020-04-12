@@ -186,9 +186,8 @@ public class ExpertInfo {
 
                     }
                     //获取随机数作为获取专家id数组元素的下标
-                    int[] randomIndex = PublicUtil.randomArray(0, userIdsValid.length - 1, majorNum);
+                    int[] randomIndex = PublicUtil.randomArray(0, userIdsValid.length , majorNum);
                     Object[] randomDrawUids;//随机抽取到的专家用户id
-                    boolean isUidRuepeat = true;//抽取到的用户id中是否有重复的userid
                     randomDrawUids = new Object[randomIndex.length];
                     for (int count = 0; count < randomIndex.length; count++) {
                         randomDrawUids[count] = userIdsValid[randomIndex[count]];
