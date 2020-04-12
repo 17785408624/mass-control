@@ -843,7 +843,7 @@
             </when>
         </choose>
         AS domain,
-        COUNT( * ),
+        COUNT( DISTINCT  user_id)as userNum,
         GROUP_CONCAT( DISTINCT u.user_id SEPARATOR ',' ) as user_id
         <!--GROUP_CONCAT( DISTINCT ei.expert_info_name SEPARATOR ',' ),
         GROUP_CONCAT( DISTINCT ei.expert_info_id SEPARATOR ',' )-->
@@ -886,7 +886,7 @@
         </if>
         <if test="excludeCompanyNames != null">
            and expert_info_id not in(
-           select similarity_company_id from merge_similarity_company where expert_info_companyname in
+           select similarity_company_id from merge_similarity_company where similarity_company_name in
            <foreach collection="excludeCompanyNames" item="excludeCompanyName" separator="," open="(" close=")">
                #{excludeCompanyName}
            </foreach>
@@ -936,6 +936,28 @@
     <select id="deleteData" resultType="String">
         delete  FROM
             merge_similarity_company
+    </select>
+    <select id="selectExpertInfosByUids" resultType="java.util.Map">
+        SELECT
+            u.user_id,
+            ei.expert_info_name,
+            u.user_mobile_phone,
+            ei.expert_info_qualification,
+            expert_info_education,
+            expert_info_learnmajor,
+            expert_info_workmajor,
+            expert_info_declaredesign_design,
+            expert_info_declaredesign_safety,
+            expert_info_companyname
+        FROM
+            USER u
+                LEFT JOIN expert_info ei ON ( u.info_id = ei.expert_info_id )
+        WHERE
+            trim( ei.expert_info_id ) != 'null'
+            and u.user_id in
+            <foreach collection="uIds" item="uId" open="(" close=")" separator=",">
+                #{uId}
+            </foreach>
     </select>
 
 

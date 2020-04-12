@@ -158,7 +158,7 @@ public class ExpertInfo {
                         for (int num = 1; num < userIds.length; num++) {
                             for (Object o : drawUids) {
                                 if (!userIds[i].equals(o)) {
-                                    Arrays.copyOf(userIdsValid, userIdsValid.length + 1);
+                                    userIdsValid=Arrays.copyOf(userIdsValid, userIdsValid.length + 1);
                                     userIdsValid[userIdsValid.length - 1] = userIds[i];
                                 }
                             }
