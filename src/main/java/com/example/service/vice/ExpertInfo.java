@@ -187,7 +187,7 @@ public class ExpertInfo {
 
                     }
                     //获取随机数作为获取专家id数组元素的下标
-                    int[] randomIndex = PublicUtil.randomArray(0, userIdsValid.length, majorNum);
+                    int[] randomIndex = PublicUtil.randomArray(0, userIdsValid.length-1, majorNum);
                     Object[] randomDrawUids;//随机抽取到的专家用户id
                     randomDrawUids = new Object[randomIndex.length];
                     for (int count = 0; count < randomIndex.length; count++) {
