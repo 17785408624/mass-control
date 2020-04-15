@@ -13,7 +13,7 @@ public class ExpertInfo {
      * 合并专家信息中公司名相似的信息
      *
      * @param expertCompanyList 专家公司信息
-     * @return
+     * @return 将相似的公司名统一改成同一个公司名后返回修改后的公司名及信息id
      */
     public List mergeExpertCompany(List expertCompanyList) {
         List mergeList = new ArrayList();//
@@ -33,6 +33,7 @@ public class ExpertInfo {
             String mergeExpertName = conpanyName;//合并后的公司名
             for (int i1 = i + 1; i1 < expertCompanyList.size(); i1++) {
                 Map toExpertCompanyInfo = (Map) expertCompanyList.get(i1);
+                System.out.println();
                 if (toExpertCompanyInfo == null) {
                     continue;
                 }
@@ -121,6 +122,11 @@ public class ExpertInfo {
         int denySimilarityLength = 1;//两个公司名不相似的字符判断最大长度，超过长度则视为不相似
         char[] companynameC = companyname.toCharArray();
         char[] toCompanynameC = toCompanyname.toCharArray();
+//        if(companynameC.length!=toCompanynameC.length&&
+//                (companynameC.length>toCompanynameC.length&&)
+        if(companynameC.length!=toCompanynameC.length){
+            return false;
+        }
         for (int i = 0; i < companynameC.length; i++) {
             if (companynameC[i] != toCompanynameC[i]) {
                 denySimilarityLength--;

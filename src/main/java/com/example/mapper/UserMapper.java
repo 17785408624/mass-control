@@ -336,7 +336,7 @@ public interface UserMapper {
     /**
      * 查询专家数据中的公司信息
      *
-     * @param containMec 是否包含查询保存的相似公司数据
+     * @param containMec 是否查询保存的相似公司数据
      * @return
      */
     List selectExpertCompany(@Param("containMec") boolean containMec);
